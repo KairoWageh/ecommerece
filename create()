@@ -1,0 +1,7 @@
+Psy Shell v0.10.2 (PHP 7.3.3 — cli) by Justin Hileman
+PHP Warning:  include(factory(App/Admin::class,): failed to open stream: No such file or directory in C:/xampp/htdocs/ecommerce/vendor/psy/psysh/src/Shell.php on line 418
+PHP Warning:  include(): Failed opening 'factory(App/Admin::class,' for inclusion (include_path='C:/xampp/php/PEAR') in C:/xampp/htdocs/ecommerce/vendor/psy/psysh/src/Shell.php on line 418
+PHP Warning:  include(50)-;): failed to open stream: No such file or directory in C:/xampp/htdocs/ecommerce/vendor/psy/psysh/src/Shell.php on line 418
+PHP Warning:  include(): Failed opening '50)-;' for inclusion (include_path='C:/xampp/php/PEAR') in C:/xampp/htdocs/ecommerce/vendor/psy/psysh/src/Shell.php on line 418
+
+Exit:  Ctrl+D
