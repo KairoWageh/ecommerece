@@ -163,11 +163,15 @@ return [
     "uploadProductMedia"               => "Drop files here to upload",
 
 
-    "product_size_weight"              => "Size and weight",
+    "shippingInfo"                     => "Shipping info",
     "other_data"                       => "Other data",
     "create_products"                  => "Create",
     "save_and_continue"                => "Save and continue",
     "copy_product"                     => "Copy",
     "create_or_edit_product"           => "Create or edit product :title",
+    "size"                             => "Size",
+    "size_id"                          => "Size type", 
+    "weight"                           => "Weight",
+    "weight_id"                        => "Weight type",
 
 ];
