@@ -8,33 +8,41 @@
 	Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
 	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<link href="{{asset('design/adminpanel/css/bootstrap.css')}}" rel="stylesheet" type="text/css" media="all">
+	<link href="{{asset('public/design/adminpanel/css/bootstrap.css')}}" rel="stylesheet" type="text/css" media="all">
 	<!-- Custom Theme files -->
-	<link href="{{asset('design/adminpanel/css/style.css')}}" rel="stylesheet" type="text/css" media="all"/>
+	<link href="{{asset('public/design/adminpanel/css/style.css')}}" rel="stylesheet" type="text/css" media="all"/>
 	@if(direction() == 'rtl')
-	<link rel="stylesheet" href="{{ asset('design/site/css/bootstrap-rtl.css') }}">
-	<!-- <link href="{{asset('design/adminpanel/css/style-ar.css')}}" rel="stylesheet" type="text/css" media="all"/> -->
+	<link rel="stylesheet" href="{{ asset('public/design/site/css/bootstrap-rtl.css') }}">
+	<!-- <link href="{{asset('public/design/adminpanel/css/style-ar.css')}}" rel="stylesheet" type="text/css" media="all"/> -->
 	@endif
+
+	<!-- 21/8/2020 -->
+	<!-- @if(app()->getLocale() == 'ar')
+		<link rel="stylesheet" href="{{ asset('public/design/site/css/bootstrap-rtl.css') }}">
+		<link rel="stylesheet" href="{{ asset('public/design/site/css/custom-rtl.css') }}">
+		<link rel="stylesheet" href="{{ asset('public/design/site/css/plugins-rtl.min.css') }}">
+	 @endif -->
+	<!-- 21/8/2020 -->
 	<!-- datepicker -->
-	<link rel="stylesheet" type="text/css" href="{{asset('design/adminpanel/css/bootstrap-datepicker.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{asset('public/design/adminpanel/css/bootstrap-datepicker.min.css')}}">
 	<!--//datepicker -->
 	<!--js-->
-	<script src="{{asset('design/adminpanel/js/jquery-2.1.1.min.js')}}"></script> 
+	<script src="{{asset('public/design/adminpanel/js/jquery-2.1.1.min.js')}}"></script> 
 	<!--icons-css-->
-	<link href="{{asset('design/adminpanel/css/font-awesome.css')}}" rel="stylesheet"> 
+	<link href="{{asset('public/design/adminpanel/css/font-awesome.css')}}" rel="stylesheet"> 
 	<!--Google Fonts-->
 	<link href='//fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css'>
 	<link href='//fonts.googleapis.com/css?family=Work+Sans:400,500,600' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="{{asset('design\adminpanel\jstree\themes\default\style.css')}}" />
+	<link rel="stylesheet" href="{{asset('public/design\adminpanel\jstree\themes\default\style.css')}}" />
 	<!--static chart-->
-	<script src="{{asset('design/adminpanel/js/Chart.min.js')}}"></script>
+	<script src="{{asset('public/design/adminpanel/js/Chart.min.js')}}"></script>
 	<!--//charts-->
 	<!-- geo chart -->
 	<script src="//cdn.jsdelivr.net/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script>
 	<script>window.modernizr || document.write('<script src="lib/modernizr/modernizr-custom.js"><\/script>')</script>
 	<!--<script src="lib/html5shiv/html5shiv.js"></script>-->
 	<!-- Chartinator  -->
-	<script src="{{asset('design/adminpanel/js/chartinator.js')}}" ></script>
+	<script src="{{asset('public/design/adminpanel/js/chartinator.js')}}" ></script>
 	<script type="text/javascript">
 		jQuery(function ($) {
 
@@ -102,10 +110,10 @@
 	<!--geo chart-->
 
 	<!--skycons-icons-->
-	<script src="{{asset('design/adminpanel/js/skycons.js')}}"></script>
+	<script src="{{asset('public/design/adminpanel/js/skycons.js')}}"></script>
 	<!--//skycons-icons-->
 
 	<!--custom-js-->
-	<script src="{{asset('design/adminpanel/js/myFunctions.js')}}"></script>
+	<script src="{{asset('public/design/adminpanel/js/myFunctions.js')}}"></script>
 	<!--//custom-js-->
 </head>
