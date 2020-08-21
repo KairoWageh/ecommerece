@@ -163,10 +163,15 @@ return [
     "uploadProductMedia"               => "ضع الملفات هنا للتحميل",
 
 
-    "product_size_weight"              => "الحجم والوزن",
+    "shippingInfo"                     => "معلومات الشحن",
     "other_data"                       => "معلومات إضافية",
     "create_products"                  => "حفظ",
     "save_and_continue"                => "حفظ واستمرار",
     "copy_product"                     => "نسخ المنتج",
     "create_or_edit_product"           => "إضافة أو تعديل المنتج:title",
+
+    "size"                             => "المقاس",
+    "size_id"                          => "نوع المقاس", 
+    "weight"                           => "الحجم",
+    "weight_id"                        => "نوع الحجم",
 ];
