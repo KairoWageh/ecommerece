@@ -196,7 +196,7 @@
 										<ul class="dropdown-menu drp-mnu">
 											<li> <a href="{{route('admin.settings')}}"><i class="fa fa-cog"></i> {{__('admin.settings')}}</a> </li> 
 											<li> <a href="#"><i class="fa fa-user"></i> {{__('admin.profile')}}</a> </li> 
-											<li> <a href="{{adminURL('logout')}}"><i class="fa fa-sign-out"></i> {{__('admin.logout')}}</a> </li>
+											<li> <a href="{{adminURL('admin/logout')}}"><i class="fa fa-sign-out"></i> {{__('admin.logout')}}</a> </li>
 										</ul>
 									</li>
 								</ul>
