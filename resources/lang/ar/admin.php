@@ -2,6 +2,7 @@
 
 return [
 	"login"                            => "تسجيل الدخول",
+    "logout"                           => "تسجيل الخروج",
 	"adminpanel"                       => "لوحة التحكم",
     "dashboard"                        => "الرئيسية",
     "adminsAccounts"                   => "حسابات المشرفين",
@@ -68,6 +69,9 @@ return [
     "open"                             => "مفتوح",
     "close"                            => "مغلق",
     "message_maintenance"              => "رسالة الصيانة",
+
+    // profile
+    "profile"                          => "الملف الشخصي",
 
 
     // countries
