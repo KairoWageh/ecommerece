@@ -19,7 +19,7 @@ class AdminAuth extends Controller
 
     public function doLogin(){
     	$rememberme = request('rememberme') == 1 ?true:false;
-    	if(admin()->attempt(['email'=>request('email'), 'password'=>bcrypt(request('password'))], $rememberme)){
+    	if(admin()->attempt(['email'=>request('email'), 'password'=>request('password')], $rememberme)){
     		return redirect('admin');
     	}else{
     		session()->flash('error', __('admin.wrong_creditionals'));
