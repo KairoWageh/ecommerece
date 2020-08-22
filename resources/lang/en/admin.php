@@ -2,6 +2,7 @@
 
 return [
 	"login"                            => "Login",
+    "logout"                           => "Logout",
 	"adminpanel"                       => "Admin Panel",
     "dashboard"                        => "Dashboard",
     "adminsAccounts"                   => "Admins accounts",
@@ -68,6 +69,8 @@ return [
     "close"                            => "Close",
     "message_maintenance"              => "Maintenance message",
 
+    // profile
+    "profile"                          => "Profile",
 
 
     // countries 
