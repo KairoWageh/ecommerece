@@ -3,11 +3,16 @@
 return [
 	"login"                            => "Login",
     "logout"                           => "Logout",
+    "language"                         => "Language",
+    "email"                            => "Email",
+    "password"                         => "Password",
+    "wrong_creditionals"               => "Email or password is incorrect.",
+    "forgot_password"                  => "Forgot password?",
 	"adminpanel"                       => "Admin Panel",
     "dashboard"                        => "Dashboard",
     "adminsAccounts"                   => "Admins accounts",
     "usersAccounts"                    => "Users accounts",
-	"wrong_creditionals"               => "Email or password is incorrect.",
+	
 	"link_sent"                        => "Reset password link sent successfully.",
 	"all_record"                       => "All record",
 	"sProcessing"                      => "Processing",
@@ -42,8 +47,6 @@ return [
     "addNewAdmin"                      => "Add new admin",
     "addNewUser"                       => "Add new user",
     "name"                             => "Name",
-    "email"                            => "Email",
-    "password"                         => "Password",
     "record_added_successfully"        => "Record added successfully",
     "editAdmin"                        => "Edit admin",
     "updated_successfully"             => "Updated successfully",
@@ -95,6 +98,8 @@ return [
 
     // departments
     "departments"                      => "Departments",
+    "description_ar"                   => "Arabic description",
+    "description_en"                   => "English description",
 
     // trademarks
     "trademarks"                       => "Trade marks",
