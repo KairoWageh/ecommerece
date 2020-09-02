@@ -3,12 +3,16 @@
 return [
 	"login"                            => "تسجيل الدخول",
     "logout"                           => "تسجيل الخروج",
+    "language"                         => "اللغة",
+    "email"                            => "البريد الإلكتروني",
+    "password"                         => "كلمة المرور",
+    "wrong_creditionals"               => "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
+    "forgot_password"                  => "هل نسيت كلمة المرور؟",
+    "link_sent"                        => "تم إرسال رابط تعيين كلمة المرور بنجاح.",
 	"adminpanel"                       => "لوحة التحكم",
     "dashboard"                        => "الرئيسية",
     "adminsAccounts"                   => "حسابات المشرفين",
     "usersAccounts"                    => "حسابات الأعضاء",
-	"wrong_creditionals"               => "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
-	"link_sent"                        => "تم إرسال رابط تعيين كلمة المرور بنجاح.",
 	"all_record"                       => "كل السجلات",
 	"sProcessing"                      => "جاري التحميل",
     "sLengthMenu"                      => "عرض _MENU_ سجل",
@@ -42,9 +46,7 @@ return [
     "addNewAdmin"                      => "إضافة مشرف جديد",
     "addNewUser"                       => "إضافة عضو جديد",
     "name"                             => "الإسم",
-    "email"                            => "البريد الإلكتروني",
     "record_added_successfully"        => "تم إضافة السجل بنجاح",
-    "password"                         => "كلمة المرور",
     "editAdmin"                        => "تعديل مشرف",
     "updated_successfully"             => "تم التعديل بنجاح",
     "save"                             => "حفظ",
@@ -96,6 +98,8 @@ return [
 
     // departments
     "departments"                      => "الأقسام",
+    "description_ar"                   => "الوصف بالعربية",
+    "description_en"                   => "الوصف بالإنجليزية",
 
 
     // trademarks
