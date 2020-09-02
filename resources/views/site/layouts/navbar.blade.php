@@ -4,11 +4,17 @@
             <div class="col-md-8">
                 <div class="user-menu">
                     <ul>
-                        <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
-                        <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
-                        <li><a href="cart.html"><i class="fa fa-user"></i> My Cart</a></li>
-                        <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
-                        <li><a href="#"><i class="fa fa-user"></i> Login</a></li>
+                        @auth
+                            <li><a href="#"><i class="fa fa-user"></i> {{__('user.my_account')}}</a></li>
+                        @else
+                            <li><a href="{{ route('login') }}"><i class="fa fa-user"></i> {{__('user.login')}}</a></li>
+                        @endauth
+                        <li><a href="#"><i class="fa fa-heart"></i> {{__('user.wishlist')}}</a></li>
+                        <li><a href="cart.html"><i class="fa fa-user"></i> {{__('user.my_cart')}}</a></li>
+                        <li><a href="checkout.html"><i class="fa fa-user"></i> {{__('user.checkout')}}</a></li>
+                        @auth
+                            <li><a href="{{ route('logout') }}"><i class="fa fa-user-out"></i> {{ __('user.logout') }}</a></li>
+                        @endauth  
                     </ul>
                 </div>
             </div>
@@ -26,11 +32,10 @@
                         </li>
 
                         <li class="dropdown dropdown-small">
-                            <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key">language :</span><span class="value">English </span><b class="caret"></b></a>
+                            <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key">{{__('user.language')}} </span><b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">English</a></li>
-                                <li><a href="#">French</a></li>
-                                <li><a href="#">German</a></li>
+                                <li><a href="lang/en">English</a></li>
+                                <li><a href="lang/ar">العربية</a></li>
                             </ul>
                         </li>
                     </ul>
