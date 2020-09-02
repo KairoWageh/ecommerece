@@ -62,7 +62,9 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="copyright">
-                    <p>&copy; 2015 uCommerce. All Rights Reserved. <a href="http://www.freshdesignweb.com" target="_blank">freshDesignweb.com</a></p>
+                    <p>&copy; 2020. All rights reserved | Design by
+                        <a href="https://www.linkedin.com/in/kairo-wageh-591811b5/" target="_blank">Kairo Wageh</a>
+                    </p>
                 </div>
             </div>
 
@@ -79,23 +81,23 @@
 </div> <!-- End footer bottom area -->
 
 <!-- Latest jQuery form server -->
-<script src="https://code.jquery.com/jquery.min.js"></script>
+<script src="{{ asset('public/design/site/js/jquery.min.js') }}"></script>
 
 <!-- Bootstrap JS form CDN -->
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="{{ asset('public/design/site/js/bootstrap.min.js') }}"></script>
 
 <!-- jQuery sticky menu -->
-<script src="{{ asset('design/site/js/owl.carousel.min.js') }}"></script>
-<script src="{{ asset('design/site/js/jquery.sticky.js') }}"></script>
+<script src="{{ asset('public/design/site/js/owl.carousel.min.js') }}"></script>
+<script src="{{ asset('public/design/site/js/jquery.sticky.js') }}"></script>
 
 <!-- jQuery easing -->
-<script src="{{ asset('design/site/js/jquery.easing.1.3.min.js') }}"></script>
+<script src="{{ asset('public/design/site/js/jquery.easing.1.3.min.js') }}"></script>
 
 <!-- Main Script -->
-<script src="{{ asset('design/site/js/main.js') }}"></script>
+<script src="{{ asset('public/design/site/js/main.js') }}"></script>
 
 <!-- Slider -->
-<script type="text/javascript" src="{{ asset('design/site/js/bxslider.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('design/site/js/script.slider.js') }}"></script>
+<script type="text/javascript" src="{{ asset('public/design/site/js/bxslider.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('public/design/site/js/script.slider.js') }}"></script>
 </body>
 </html>
