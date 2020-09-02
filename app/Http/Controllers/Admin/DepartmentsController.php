@@ -55,12 +55,13 @@ class DepartmentsController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'department_name_ar'     => 'required|min:3|max:50',
-            'department_name_en'     => 'required|min:3|max:50',
-            'icon'                   => 'sometimes|nullable|'.validate_image(),   
-            'description'            => 'sometimes|nullable', 
-            'keywords'               => 'sometimes|nullable',  
-            'parent_id'              => 'sometimes|nullable|numeric',
+            'department_name_ar'                   => 'required|min:3|max:50',
+            'department_name_en'                   => 'required|min:3|max:50',
+            'icon'                                 => 'sometimes|nullable|'.validate_image(),   
+            'department_description_ar'            => 'sometimes|nullable', 
+            'department_description_en'            => 'sometimes|nullable', 
+            'keywords'                             => 'sometimes|nullable',  
+            'parent_id'                            => 'sometimes|nullable|numeric',
         ]);
         //return $request;
         if($validatedData){
@@ -116,12 +117,13 @@ class DepartmentsController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'department_name_ar'     => 'required|min:3|max:50',
-            'department_name_en'     => 'required|min:3|max:50',
-            'icon'                   => 'sometimes|nullable',   
-            'description'            => 'sometimes|nullable', 
-            'keywords'               => 'sometimes|nullable',  
-            'parent_id'              => 'sometimes|nullable|numeric',
+            'department_name_ar'                   => 'required|min:3|max:50',
+            'department_name_en'                   => 'required|min:3|max:50',
+            'icon'                                 => 'sometimes|nullable',   
+            'department_description_ar'            => 'sometimes|nullable', 
+            'department_description_en'            => 'sometimes|nullable', 
+            'keywords'                             => 'sometimes|nullable',  
+            'parent_id'                            => 'sometimes|nullable|numeric',
         ]);
 
         if($validatedData){
