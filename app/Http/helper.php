@@ -62,6 +62,12 @@ if(!function_exists('admin')){
 	}
 }
 
+if(!function_exists('user')){
+	function user(){
+		return auth()->guard('web');
+	}
+}
+
 if(!function_exists('lang')){
 	function lang(){
 		if(session()->has('lang')){
