@@ -9,6 +9,14 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
 	Route::post('forgot/password', 'AdminAuth@forgotPasswordPost');
 	Route::get('reset/password/{token}', 'AdminAuth@resetPassword');
 	Route::post('reset/password/{token}', 'AdminAuth@resetPasswordPost');
+
+	// change language of site using url
+	Route::get('lang/{lang}', function($lang){
+		session()->has('lang')? session()->forget('lang'): '';
+		$lang == 'ar'? session()->put('lang', 'ar'): session()->put('lang', 'en');
+		return back();
+	});
+	
 	//if and only if admin is authenticated
 	// admin:admin ====> middleware:guard
 	Route::group(['middleware' => 'admin:admin'], function(){
@@ -82,12 +90,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
 		Route::post('settings', 'SettingsController@settings_save');
 	});
 
-    // change language of site using url
-	Route::get('lang/{lang}', function($lang){
-		session()->has('lang')? session()->forget('lang'): '';
-		$lang == 'ar'? session()->put('lang', 'ar'): session()->put('lang', 'en');
-		return back();
-	});
+    
 
     /**
      * a way to include language translation of data table using route url
