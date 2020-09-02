@@ -45,8 +45,12 @@
                 <input type="hidden" name="parent_id" class="parent_id" value="{{ old('parent_id') }}">
                 <div class="clearfix"></div>
                 <div class="form-group">
-                    {!! Form::label('description', __('admin.description')) !!}
-                    {!! Form::textarea('description', old('description'), ['class' => 'form-control']) !!}
+                    {!! Form::label('department_description_ar', __('admin.description_ar')) !!}
+                    {!! Form::textarea('department_description_ar', old('department_description_ar'), ['class' => 'form-control']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('department_description_en', __('admin.description_en')) !!}
+                    {!! Form::textarea('department_description_en', old('department_description_en'), ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('keywords', __('admin.keywords')) !!}
