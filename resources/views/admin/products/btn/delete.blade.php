@@ -11,7 +11,7 @@
       <div class="modal-header">
         <h4 class="modal-title">{{__('admin.delete')}}</h4>
       </div>
-      {!! Form::open(['route' => ['colors.destroy', $id], 'method' => 'delete']) !!}
+      {!! Form::open(['route' => ['products.destroy', $id], 'method' => 'delete']) !!}
       <div class="modal-body">
       	<div class="alert alert-danger">
 	        <h4>
