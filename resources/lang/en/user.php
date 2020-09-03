@@ -14,7 +14,9 @@ return [
     "checkout"                         => "Checkout",
     "home"                             => "Home",
     "shop_page"                        => "Shop page",
-    "department"                       => "Department",
+    "departments"                      => "Departments",
+    "add_to_cart"                      => "Add to cart",
+    "see_datails"                      => "See datails",
     
 
 ];
