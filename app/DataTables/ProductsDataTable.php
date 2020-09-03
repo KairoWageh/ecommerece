@@ -2,7 +2,8 @@
 
 namespace App\DataTables;
 
-use App\Pro;
+use App\Product;
+use App\Department;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Fields;
@@ -20,10 +21,9 @@ class ProductsDatatable extends DataTable
     public function dataTable($query)
     {
         return datatables($query)
-            ->addColumn('checkbox', 'admin.colors.btn.checkbox')
-            ->addColumn('color', 'admin.colors.btn.color')
-            ->addColumn('edit', 'admin.colors.btn.edit')
-            ->addColumn('delete', 'admin.colors.btn.delete')
+            ->addColumn('checkbox', 'admin.products.btn.checkbox')
+            ->addColumn('edit', 'admin.products.btn.edit')
+            ->addColumn('delete', 'admin.products.btn.delete')
             ->editColumn('created_at', function ($contact){
                 return date('Y-m-d H:i', strtotime($contact->created_at) );
             })
@@ -31,7 +31,7 @@ class ProductsDatatable extends DataTable
                 return date('Y-m-d H:i', strtotime($contact->updated_at) );
             })
             ->rawColumns([
-                'checkbox', 'color', 'edit', 'delete'
+                'checkbox', 'edit', 'delete'
             ]);
     }
 
@@ -41,10 +41,10 @@ class ProductsDatatable extends DataTable
      * @param \App\ManufacturersDatatable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(ColorsDatatable $model)
+    public function query(ProductsDatatable $model)
     {
         //return $model->newQuery();
-        return Color::query()->whereNotIn('status', [-1]);
+        return Product::query()->with('department')->whereNotIn('status', [-1]);
     }
 
     /**
@@ -55,7 +55,7 @@ class ProductsDatatable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('colordatatable-table')
+                    ->setTableId('productdatatable-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Blfrtip')
@@ -142,21 +142,15 @@ class ProductsDatatable extends DataTable
               'title'       => '#'
             ],
             [
-              'name'        => 'name_ar',
-              'data'        => 'name_ar',
-              'title'       => __('admin.name_ar'),
+              'name'        => 'title',
+              'data'        => 'title',
+              'title'       => __('admin.product_title'),
               'class'       => 'text-center',
             ],
             [
-              'name'        => 'name_en',
-              'data'        => 'name_en',
-              'title'       => __('admin.name_en'),
-              'class'       => 'text-center',
-            ],
-            [
-              'name'        => 'color',
-              'data'        => 'color',
-              'title'       => __('admin.color'),
+              'name'        => 'department.department_name_'.session('lang'),
+              'data'        => 'department.department_name_'.session('lang'),
+              'title'       => __('admin.department'),
               'class'       => 'text-center',
             ],
             [
@@ -213,6 +207,6 @@ class ProductsDatatable extends DataTable
      */
     protected function filename()
     {
-        return 'Color_' . date('YmdHis');
+        return 'Product_' . date('YmdHis');
     }
 }
