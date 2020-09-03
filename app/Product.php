@@ -38,7 +38,6 @@ class Product extends Model
     public function department(){
         return $this->hasOne('App\Department', 'id', 'department_id');
     }
-
     public function files(){
     	return $this->hasMany('App\File', 'relation_id', 'id')->where('file_type', 'product');
     }
