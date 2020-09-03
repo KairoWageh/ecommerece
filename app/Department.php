@@ -26,6 +26,13 @@ class Department extends Model
     }
 
     /**
+     * relation between a department and its products.
+    */
+    public function products(){
+        return $this->hasMany('App\Product');
+    }
+
+    /**
     * 
     */
 
