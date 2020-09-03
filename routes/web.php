@@ -36,7 +36,8 @@ Route::group(['prefix' => '', 'namespace' => 'User'], function(){
 		Route::get('/', function () {
 		    return view('site.home');
 		});
-		Route::get('/departments', 'DepartmentsController@index')->name('user.departments');	
+		Route::get('/departments', 'DepartmentsController@index')->name('user.departments');
+		Route::get('/departments/{dep_name}', 'DepartmentsController@single_dep')->name('user.single_dep');	
 	});
 
 
