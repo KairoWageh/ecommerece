@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\File;
+use Image;
 
 class UploadController extends Controller
 {
@@ -13,11 +14,18 @@ class UploadController extends Controller
     		$new_name = $data['new_name'] === null?time():$data['new_name'];
     	}
     	if(request()->hasFile($data['file']) && $data['upload_type'] == 'single'){
+            $file      = request()->file($data['file']);
+            $size = Image::make($file->getRealPath());              
+            $size->resize(300, 300);
     		Storage::has($data['delete_file'])? Storage::delete($data['delete_file']): '';
-    		return request()->file($data['file'])->store($data['path']);    	
+    		// return request()->file($data['file'])->store($data['path']);    	
+            return $file->store($data['path']);
     	}elseif(request()->hasFile($data['file']) && 'files' == $data['upload_type']){
     		$file      = request()->file($data['file']);
-    		$size      = $file->getSize();
+    		// $size      = $file->getSize();
+            $size = Image::make($file->getRealPath());              
+            $size->resize(300, 300);
+
     		$mime_type = $file->getMimeType();
     		$name      = $file->getClientOriginalName();
     		$hash_name = $file->hashName();
