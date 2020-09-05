@@ -1,6 +1,6 @@
 @push('js')
-<link rel="stylesheet" type="text/css" href="{{asset('design/adminpanel/css/dropzone.min.css')}}">
-<script type="text/javascript" src="{{asset('design/adminpanel/js/dropzone.min.js')}}"></script>
+<link rel="stylesheet" type="text/css" href="{{asset('public/design/adminpanel/css/dropzone.min.css')}}">
+<script type="text/javascript" src="{{asset('public/design/adminpanel/js/dropzone.min.js')}}"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#mainPhoto').dropzone({
