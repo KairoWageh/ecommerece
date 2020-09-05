@@ -1,8 +1,8 @@
 @extends('admin.index')
 @section('content')
-<link rel="stylesheet" type="text/css" href="{{ asset('design/adminpanel/css/select2.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('public/design/adminpanel/css/select2.min.css') }}">
 @push('js')
-<script type="text/javascript" src="{{ asset('design/adminpanel/js/select2.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('public/design/adminpanel/js/select2.min.js') }}"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         $('.js-example-basic-single').select2();
@@ -25,7 +25,7 @@
                     <li><a data-toggle="tab" href="#department">{{__('admin.department')}}<i class="fa fa-list"></i></a></li>
                     <li><a data-toggle="tab" href="#product_setting">{{__('admin.product_setting')}}<i class="fa fa-cog"></i></a></li>
                     <li><a data-toggle="tab" href="#product_media">{{__('admin.product_media')}}<i class="fa fa-photo"></i></a></li>
-                    <li><a data-toggle="tab" href="#product_size_weight">{{__('admin.product_size_weight')}}<i class="fa fa-info-circle"></i></a></li>
+                    <li><a data-toggle="tab" href="#product_size_weight">{{__('admin.shippingInfo')}}<i class="fa fa-info-circle"></i></a></li>
                     <li><a data-toggle="tab" href="#other_data">{{__('admin.other_data')}}<i class="fa fa-database"></i></a></li>
                 </ul>
                 <div class="tab-content">
