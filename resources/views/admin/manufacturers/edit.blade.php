@@ -3,7 +3,7 @@
 @push('js')
 <!-- map --> 
 <script type="text/javascript" src='https://maps.google.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyCAwAe-4ZAkrazqIDfFUf8q58_yxulVy9Y'></script>
-<script type="text/javascript" src='{{asset("design/adminpanel/js/locationpicker.jquery.js")}}'></script>
+<script type="text/javascript" src='{{asset("public/design/adminpanel/js/locationpicker.jquery.js")}}'></script>
 <script>
     $('#us1').locationpicker({
         location: {
