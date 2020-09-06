@@ -39,6 +39,6 @@ class Country extends Model
     */
 
     public function malls(){
-        return $this->hasMany('App\Mall');
+        return $this->hasMany('App\Mall', 'country_id', 'id');
     }
 }
