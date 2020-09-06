@@ -2,7 +2,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $('#jstree').jstree({
-            'core' : {
+            "core" : {
                 'data' : {!! load_department($product->department_id) !!},
                 "themes" : {
                   "variant" : "large"
@@ -21,7 +21,21 @@
             r.push(data.instance.get_node(data.selected[i]).id);
             //name.push(data.instance.get_node(data.selected[i]).text);
         }
-        $('.department_id').val(r.join(', '));
+        var department_id = r.join(', ');
+        $('.department_id').val(department_id);
+
+        $.ajax({
+          url: "{{ adminURL('load/shippingInfo')}}",
+          dataType: "html",
+          type: "post",
+          data: {_token: '{{ csrf_token() }}', department_id: department_id},
+          success: function(data){
+            $('.shippingInfo').html(data);
+            $('.info_data').removeClass('hidden');
+          }, error: function(){
+            console.log('error');
+          }
+        });
    });
 </script>
 @endpush
