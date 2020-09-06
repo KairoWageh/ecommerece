@@ -1,4 +1,52 @@
+@push('js')
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('.mall_select2').select2();
+	});
+</script>
+@endpush
+
 <div id="product_size_weight" class="tab-pane fade">
-	<h3>Menu 1</h3>
-	<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+	<h3>{{__('admin.shippingInfo')}}</h3>
+	<div class="shippingInfo">
+		<center><h1>{{__('admin.please_choose_department')}}</h1></center>
+	</div>
+	<div class="info_data hidden col-md-12">
+		<div class="form-group col-sm-4 col-xs-12">
+		    {!! Form::label('color_id', __('admin.color')) !!}
+			{!! Form::select('color', App\Color::pluck('name_'.lang(), 'id'), $product->color_id, ['class' => 'form-control', 'placeholder' => __('admin.color')]) !!}
+		</div>
+		<div class="form-group col-sm-4 col-xs-12">
+		    {!! Form::label('trade_mark_id', __('admin.trademark')) !!}
+			{!! Form::select('trademark', App\TradeMark::pluck('name_'.lang(), 'id'), $product->trade_mark_id, ['class' => 'form-control', 'placeholder' => __('admin.trademark')]) !!}
+		</div>
+		<div class="form-group col-sm-4 col-xs-12">
+		    {!! Form::label('manu_id', __('admin.manufacture')) !!}
+			{!! Form::select('manufacture', App\Manufacturer::pluck('name_'.lang(), 'id'), $product->manu_id, ['class' => 'form-control', 'placeholder' => __('admin.manufacture')]) !!}
+		</div>
+		<div class="clearfix"></div>
+		<div class="col-sm-12">
+		    {!! Form::label('malls', __('admin.malls')) !!}
+			<select name="mall[]" class="form-control mall_select2" multiple="multiple" style="width:100%">
+				@foreach(App\Country::all() as $country)
+					<optgroup label="{{ $country->{'country_name_'.lang()} }}">
+						@foreach($country->malls()->get() as $mall)
+							<option value="{{ $mall->id }}">{{ $mall->{'name_'.lang()} }}</option>
+						@endforeach
+					</optgroup>
+				@endforeach
+			</select>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+
+	
+
+	<!-- <div class="info_data form-group hidden">
+		<div class="form-group col-sm-4 col-xs-12">
+			{!! Form::label('color_id', __('admin.color')) !!}
+			{!! Form::select('color', App\Color::pluck('name_'.lang(), 'id'), $product->color_id, ['class' => 'form-control', 'placeholder' => __('admin.color')]) !!}
+		</div>
+		<div class="clearfix"></div>
+	</div> -->
 </div>
