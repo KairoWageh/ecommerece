@@ -5,6 +5,19 @@ if(!function_exists('setting')){
 	}
 }
 
+if(!function_exists('get_parent')){
+	function get_parent($department_id){
+		$list_departments = [];
+		$department = \App\Department::find($department_id);
+		if(null !== $department->parent_id && $department->parent_id > 0){
+			array_push($list_departments, $department->parent_id);
+			return get_parent($department->parent_id).",".$department_id;
+		}else{
+			return $department_id;
+		}
+	}
+}
+
 if(!function_exists('load_department')){
 	function load_department($select = null, $department_hide = null){
 		$departments = \App\Department::selectRaw('department_name_'.session('lang').' as text')
