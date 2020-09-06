@@ -5,7 +5,7 @@
 	    	{!! Form::select('sizes',  $sizes,  ['class' => 'form-control', 'placeholder' => __('admin.size_id')]) !!}	
 	    </div>
 	</div>
-
+	<div class="clearfix"></div>
 	<div class="form-group">
 	    {!! Form::label('size', __('admin.size'), ['class' => 'col-md-3']) !!}
 	    <div class="col-md-9">
@@ -23,7 +23,7 @@
 	    	{!! Form::select('weight_id',  $weights,  ['class' => 'form-control', 'placeholder' => __('admin.weight_id')]) !!}	
 	    </div>
 	</div>
-
+	<div class="clearfix"></div>
 	<div class="form-group">
 	    {!! Form::label('weight', __('admin.weight'), ['class' => 'col-md-3']) !!}
 	    <div class="col-md-9">
