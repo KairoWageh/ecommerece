@@ -6,6 +6,38 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('.js-example-basic-single').select2();
+        $(document).on('click', '.save_and_continue', function(){
+            var form_data = $('#product_form').serialize();
+            // var url = '{{ adminURL("products/".$product->id) }}';
+            var url =  '{{ url("admin/products/".$product->id) }}';
+            $.ajax({
+                url: url,
+                dataType: 'json',
+                type: 'post',
+                data: form_data,
+                beforeSend: function(){
+                    $('.loading_save_continue').removeClass('hidden');
+                    $('.validate_message').html('');
+                    $('.error_message').addClass('hidden');
+                    $('.success_message').html('').addClass('hidden');
+                }, success: function(data){
+                    if(data.status == true){
+                        $('.loading_save_continue').addClass('hidden');
+                        $('.success_message').html('<h1>'+data.message+'</h1>').removeClass('hidden');    
+                    }
+                    
+                }, error(response){
+                    $('.loading_save_continue').addClass('hidden');
+                    var error_li = '';
+                    $.each(response.responseJSON.errors, function(index, value){
+                        error_li += '<li>' + value + '</li>';
+                    });
+                    $('.validate_message').html(error_li);
+                    $('.error_message').removeClass('hidden');
+                }
+            });
+            return false;
+        });
     });
 </script>
 @endpush
@@ -15,11 +47,21 @@
         </div>
         <div class="box-body">
             <!-- {!! Form::open(['url' => adminURL('admin')]) !!} -->
-            {!! Form::open(['route' => 'products.store', 'files' => true]) !!}
+            <!-- {!! Form::open(['route' => ['products.update', $product->id],  'method' => 'put', 'files' => true, 'id' => 'product_form']) !!} -->
+            {!! Form::open(['url' => adminURL('products'),  'method' => 'put', 'files' => true, 'id' => 'product_form']) !!}
+            <!-- @csrf -->
             <a href="#" class="btn btn-primary">{{__('admin.save')}}<i class="fa fa-floppy-o"></i></a>
-            <a href="#" class="btn btn-success">{{__('admin.save_and_continue')}}<i class="fa fa-floppy-o"></i></a>
+            <a href="#" class="btn btn-success save_and_continue">{{__('admin.save_and_continue')}}<i class="fa fa-floppy-o"></i><i class="fa fa-spin fa-spinner loading_save_continue hidden"></i></a>
             <a href="#" class="btn btn-info">{{__('admin.copy_product')}}<i class="fa fa-file"></i></a>
-            <a href="#" class="btn btn-danger">{{__('admin.delete')}}<i class="fa fa-trash"></i></a>
+            <a href="#" class="btn btn-danger delete" data-toggle="modal" data-target="#delete_admin{{ $product->id }}">{{__('admin.delete')}}<i class="fa fa-trash"></i></a>
+            <div class="alert alert-danger error_message hidden">
+                <ul class="validate_message">
+                    
+                </ul>
+            </div>
+            <div class="alert alert-success success_message hidden">
+                
+            </div>
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#product_info">{{__('admin.product_info')}}<i class="fa fa-info"></i></a></li>
                     <li><a data-toggle="tab" href="#department">{{__('admin.department')}}<i class="fa fa-list"></i></a></li>
@@ -38,21 +80,49 @@
                 </div>
                 <hr />
                 <a href="#" class="btn btn-primary">{{__('admin.save')}}<i class="fa fa-floppy-o"></i></a>
-                <a href="#" class="btn btn-success">{{__('admin.save_and_continue')}}<i class="fa fa-floppy-o"></i></a>
+                <a href="#" class="btn btn-success save_and_continue">{{__('admin.save_and_continue')}}<i class="fa fa-floppy-o"></i><i class="fa fa-spin fa-spinner loading_save_continue hidden"></i></a>
                 <a href="#" class="btn btn-info">{{__('admin.copy_product')}}<i class="fa fa-file"></i></a>
                 <a href="#" class="btn btn-danger">{{__('admin.delete')}}<i class="fa fa-trash"></i></a>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     {!! Form::label('name_ar', __('admin.name_ar')) !!}
                     {!! Form::text('name_ar', old('name_ar'), ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('name_en', __('admin.name_en')) !!}
                     {!! Form::text('name_en', old('name_en'), ['class' => 'form-control']) !!}
-                </div>
+                </div> -->
 
-                {!! Form::submit(__('admin.add'), ['class' => 'btn btn-primary']) !!}
+                <!-- {!! Form::submit(__('admin.add'), ['class' => 'btn btn-primary']) !!} -->
             {!! Form::close() !!}
         </div>
+        <!-- //box-body -->
+    </div>
+    <!-- //box -->
+    <!-- Modal -->
+    <div id="delete_admin{{ $product->id }}" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">{{__('admin.delete')}}</h4>
+          </div>
+          {!! Form::open(['route' => ['products.destroy', $product->id], 'method' => 'delete']) !!}
+          <div class="modal-body">
+            <div class="alert alert-danger">
+                <h4>
+                    {{__('admin.delete_record')}}
+                </h4>
+            </div>
+          </div>
+          <div class="modal-footer">
+            {!! Form::submit(__('admin.delete'), ['class' => 'btn btn-danger']) !!}
+            <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('admin.close') }}</button>
+          </div>
+          {!! Form::close() !!}
+        </div>
+
+      </div>
     </div>
         </div>
     </div>
