@@ -28,12 +28,14 @@
           url: "{{ adminURL('load/shippingInfo')}}",
           dataType: "html",
           type: "post",
-          data: {_token: '{{ csrf_token() }}', department_id: department_id},
+          data: {_token: '{{ csrf_token() }}', department_id: department_id, product_id: '{{ $product->id }}'},
           success: function(data){
             $('.shippingInfo').html(data);
             $('.info_data').removeClass('hidden');
-          }, error: function(){
-            console.log('error');
+          }, error: function(response){
+            $.each(response.responseJSON.errors, function(index, value){
+                  console.log('error::::::'+ value);
+              });
           }
         });
    });
