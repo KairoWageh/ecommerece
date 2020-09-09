@@ -4,17 +4,17 @@
         <div class="box-header">
         	<h3 class="box-title">{{ $title }}</h3>
         </div>
-            <div class="box-body">
-                {!! Form::open(['id' => 'form_data', 'url' => adminURL('admin/cities/destroy/all'), 'method' => 'delete']) !!}
-                <!-- {!! Form::hidden('_method', 'delete') !!} -->
-                {{ $dataTable->table([
-                	'class' => 'dataTable table '
-                	], true) }}
-                    {!! Form::close() !!}
-                </div>
+        <div class="box-body">
+            {!! Form::open(['id' => 'form_data', 'url' => adminURL('admin/cities/destroy/all'), 'method' => 'delete']) !!}
+            <!-- {!! Form::hidden('_method', 'delete') !!} -->
+            {{ $dataTable->table([
+            	'class' => 'dataTable table '
+            	], true) }}
+                {!! Form::close() !!}
             </div>
-        </div>
     </div>
+        <!-- </div>
+    </div> -->
 
     <div id="multipleDelete" class="modal fade" role="dialog">
       <div class="modal-dialog">
