@@ -13,6 +13,11 @@ use Illuminate\Http\Request;
 
 class AdminAuth extends Controller
 {
+    public function getToken()
+    {
+        return csrf_token(); 
+    }
+
     public function login(){
     	return view('admin.login');
     }
