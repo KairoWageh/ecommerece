@@ -58,6 +58,11 @@ return [
     "company"                          => "Company", 
     "vendor"                           => "Vendor",
 
+
+ 
+
+    
+
     // settings
     "settings"                         => "Settings",
     "sitename_ar"                      => "Arabic name",
@@ -72,11 +77,31 @@ return [
     "close"                            => "Close",
     "message_maintenance"              => "Maintenance message",
 
+
+    
+
+
     // profile
     "profile"                          => "Profile",
 
 
+    
+    // home
+    "admin"                            => "Administrator",
+    "registeredUsers"                 => "Registered users",
+
+
+    // admin
+    "adminController"                  => "Admin Controller",
+
+
+    // users
+    "usersController"                  => "Users Controller",
+    
+
+
     // countries 
+    "countriesController"              => "Countries Controller",
     "countries"                        => "Countries",
     "name_ar"                          => "Arabic name",
     "name_en"                          => "English name",
@@ -87,26 +112,31 @@ return [
 
 
     // cities
+    "citiesController"                 => "Cities Controller",
     "cities"                           => "Cities",
-    "country"                       => "Country",
+    "country"                          => "Country",
 
 
     // states
+    "statesController"                 => "States Controller",
     "states"                           => "States",
-    "city"                          => "City",
+    "city"                             => "City",
 
 
     // departments
+    "departmentsController"            => "Departments Controller",
     "departments"                      => "Departments",
     "description_ar"                   => "Arabic description",
     "description_en"                   => "English description",
 
     // trademarks
+    "trademarksController"             => "TradeMarks Controller",
     "trademarks"                       => "Trade marks",
     "trademarkIcon"                    => "TradeMark Icon",
 
 
     // manufacturers
+    "manufacturesController"           => "Manufacturers Controller",
     "manufacturers"                    => "Manufacturers",
     "contact_name"                     => "Contact name",
     "mobile"                           => "Mobile",
@@ -117,31 +147,37 @@ return [
 
 
     // shippingCompanies
+    "shippingCompaniesController"      => "ShippingCompanies Controller",
     "shippingCompanies"                => "Shipping Companies",
     "owner"                            => "Owner",
     "shipping_icon"                    => "Shipping icon",
 
 
     // malls
+    "mallsController"                  => "Malls Controller",
     "malls"                            => "Malls",
     "mall_icon"                        => "Mall icon",
 
 
     // colors
+    "colorsController"                 => "Colors Controller",
     "colors"                           => "Colors",
     "color"                            => "Color",
 
 
     // sizes
+    "sizesController"                  => "Sizes Controller",
     "sizes"                            => "Sizes",
     "is_public"                        => "Is public",
 
 
     // weights
+    "weightsController"                => "Weights Controller",
     "weights"                          => "Weights",
 
 
     // products
+    "productsController"                => "Products Controller",
     "products"                         => "Products",
 
     "product_info"                     => "Product info",
@@ -172,14 +208,29 @@ return [
 
 
     "shippingInfo"                     => "Shipping info",
-    "other_data"                       => "Other data",
-    "create_products"                  => "Create",
-    "save_and_continue"                => "Save and continue",
-    "copy_product"                     => "Copy",
-    "create_or_edit_product"           => "Create or edit product :title",
+    "please_choose_department"         => "Please, choose a department.",
     "size"                             => "Size",
     "size_id"                          => "Size type", 
     "weight"                           => "Weight",
     "weight_id"                        => "Weight type",
+    "trademark"                        => "Trade mark",
+    "manufacture"                      => "Manufacturer",
+
+
+
+
+    "other_data"                       => "Other data",
+    "input_key"                        => "Input key",
+    "input_value"                      => "Input value",
+
+
+    "create_products"                  => "Create",
+    "save_and_continue"                => "Save and continue",
+    "copy_product"                     => "Copy",
+    "create_or_edit_product"           => "Create or edit product :title",
+    
+
+
+    
 
 ];
