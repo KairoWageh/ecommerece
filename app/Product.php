@@ -15,6 +15,7 @@ class Product extends Model
     	'trade_id',
     	'manu_id',
     	'color_id',
+        'size',
     	'size_id',
     	'currency_id',
     	'price',
@@ -38,7 +39,16 @@ class Product extends Model
     public function department(){
         return $this->hasOne('App\Department', 'id', 'department_id');
     }
+
     public function files(){
     	return $this->hasMany('App\File', 'relation_id', 'id')->where('file_type', 'product');
+    }
+
+    public function other_data(){
+        return $this->hasMany('App\ProductOtherData', 'product_id', 'id');
+    }
+
+    public function malls(){
+        return $this->hasMany('App\ProductMall', 'product_id', 'id');
     }
 }
