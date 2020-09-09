@@ -11,9 +11,9 @@
                 	'class' => 'dataTable table '
                 	], true) }}
                     {!! Form::close() !!}
-                </div>
             </div>
-        </div>
+           <!--  </div>
+        </div> -->
     </div>
 
     <div id="multipleDelete" class="modal fade" role="dialog">
