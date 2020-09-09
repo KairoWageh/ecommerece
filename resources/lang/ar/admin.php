@@ -58,6 +58,9 @@ return [
     "vendor"                           => "متجر",
 
 
+
+
+
     // settings
     "settings"                         => "الإعدادات",
     "sitename_ar"                      => "إسم الموقع بالعربية",
@@ -72,11 +75,27 @@ return [
     "close"                            => "مغلق",
     "message_maintenance"              => "رسالة الصيانة",
 
+
+
     // profile
     "profile"                          => "الملف الشخصي",
 
 
+
+    // home
+    "admin"                            => "مشرف الموقع",
+    "registeredUsers"                  => "المستخدمين  المسجلين",
+
+    // admin
+    "adminController"                  => "التحكم بالمشرفين",
+
+
+    // users
+    "usersController"                  => "التحكم بالأعضاء",
+
+
     // countries
+    "countriesController"              => "التحكم بالدول",
     "countries"                        => "الدول",
     "name_ar"                          => "الإسم بالعربية",
     "name_en"                          => "الإسم بالإنجليزية",
@@ -87,27 +106,32 @@ return [
 
 
     // cities
+    "citiesController"                 => "التحكم بالمدن",
     "cities"                           => "المدن/ المحافظات" ,
     "country"                          => "الدولة",
 
 
     // states
+    "statesController"                 => "التحكم بالمناطق",
     "states"                           => "المناطق/ الأحياء",
     "city_id"                          => "المدينة",
 
 
     // departments
+    "departmentsController"            => "التحكم بالأقسام",
     "departments"                      => "الأقسام",
     "description_ar"                   => "الوصف بالعربية",
     "description_en"                   => "الوصف بالإنجليزية",
 
 
     // trademarks
+    "trademarksController"             => "التحكم بالعلامات التجارية",
     "trademarks"                       => "العلامات التجارية",
     "trademarkIcon"                    => "شعار العلامة التجارية",
 
 
     // manufacturers
+    "manufacturesController"           => "التحكم بالمصنعين",
     "manufacturers"                    => "المصنعين",
     "contact_name"                     => "المسئول ",
     "mobile"                           => "المحمول",
@@ -118,36 +142,42 @@ return [
 
 
     // shippingCompanies
+    "shippingCompaniesController"      => "التحكم بشركات الشحن",
     "shippingCompanies"                => "شركات الشحن",
     "owner"                            => "المالك",
     "shipping_icon"                    => "شعار الشركة",
 
 
     // malls
+    "mallsController"                  => "التحكم بالمجمعات التجارية",
     "malls"                            => "المجمعات التجارية",
     "mall_icon"                        => "شعار المول",
 
 
     // colors
+    "colorsController"                 => "التحكم بالألوان",
     "colors"                           => "الألوان",
     "color"                            => "اللون",
 
 
     // sizes
+    "sizesController"                  => "التحكم بالمقاسات",
     "sizes"                            => "المقاسات",
     "is_public"                        => "مقاس عام",
 
 
     // weights
+    "weightsController"                => "التحكم بالأوزان",
     "weights"                          => "الأوزان",
 
 
     // products
+    "productsController"               => "التحكم بالمنتجات",
     "products"                         => "المنتجات",
 
     "product_info"                     => "معلومات المنتج",
     "product_title"                    => "عنوان المنتج",
-    "product_content"                  => "تفاصيل المنج",
+    "product_content"                  => "تفاصيل المنتج",
 
     "department"                       => "القسم",
 
@@ -172,14 +202,26 @@ return [
 
 
     "shippingInfo"                     => "معلومات الشحن",
-    "other_data"                       => "معلومات إضافية",
-    "create_products"                  => "حفظ",
-    "save_and_continue"                => "حفظ واستمرار",
-    "copy_product"                     => "نسخ المنتج",
-    "create_or_edit_product"           => "إضافة أو تعديل المنتج:title",
-
+    "please_choose_department"         => "من فضلك قم باختيار قسم.",
     "size"                             => "المقاس",
     "size_id"                          => "نوع المقاس", 
     "weight"                           => "الحجم",
     "weight_id"                        => "نوع الحجم",
+    "trademark"                        => "العلامة التجارية",
+    "manufacture"                     => "المصنع",
+
+
+
+    "other_data"                       => "معلومات إضافية",
+    "input_key"                        => "عنوان الحقل",
+    "input_value"                      => "محتوى الحقل",
+
+
+    "create_products"                  => "حفظ",
+    "save_and_continue"                => "حفظ واستمرار",
+    "copy_product"                     => "نسخ المنتج",
+    "create_or_edit_product"           => "إضافة أو تعديل المنتج",
+
+    
+    
 ];
