@@ -126,7 +126,7 @@ class AdminDatatable extends DataTable
     protected function getColumns()
     {
         return [
-            [
+                  [
               'name'        => 'checkbox',
               'data'        => 'checkbox',
               'title'       => '<input type="checkbox" class="check_all" onclick="check_all()"/>',
@@ -136,21 +136,83 @@ class AdminDatatable extends DataTable
               'orderable'   => false,
 
             ],
-            Column::make('id'),
-            Column::make('name'),
-            Column::make('email'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
-            Column::computed('edit')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
-            Column::computed('delete')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
+            [
+              'name'        => 'id',
+              'data'        => 'id',
+              'title'       => '#'
+            ],
+            [
+              'name'        => 'name',
+              'data'        => 'name',
+              'title'       => __('admin.name'),
+              'class'       => 'text-center',
+            ],
+            [
+              'name'        => 'email',
+              'data'        => 'email',
+              'title'       => __('admin.email'),
+              'class'       => 'text-center',
+            ],
+            [
+              'name'        => 'created_at',
+              'data'        => 'created_at',
+              'title'       => __('admin.created_at'),
+              'class'       => 'text-center',
+            ],
+            [
+              'name'        => 'updated_at',
+              'data'        => 'updated_at',
+              'title'       => __('admin.updated_at'),
+              'class'       => 'text-center',
+            ],
+            [
+              'name'        => 'edit',
+              'data'        => 'edit',
+              'title'       => __('admin.edit'),
+              'class'       => 'text-center',
+              'exportable'  => false,
+              'printable'   => false,
+              'searchable'  => false,
+              'orderable'   => false,
+
+            ],
+            [
+              'name'        => 'delete',
+              'data'        => 'delete',
+              'title'       => __('admin.delete'),
+              'class'       => 'text-center',
+              'exportable'  => false,
+              'printable'   => false,
+              'searchable'  => false,
+              'orderable'   => false,
+
+            ],
+
+            // [
+            //   'name'        => 'checkbox',
+            //   'data'        => 'checkbox',
+            //   'title'       => '<input type="checkbox" class="check_all" onclick="check_all()"/>',
+            //   'exportable'  => false,
+            //   'printable'   => false,
+            //   'searchable'  => false,
+            //   'orderable'   => false,
+
+            // ],
+            // Column::make('id'),
+            // Column::make('name'),
+            // Column::make('email'),
+            // Column::make('created_at'),
+            // Column::make('updated_at'),
+            // Column::computed('edit')
+            //       ->exportable(false)
+            //       ->printable(false)
+            //       ->width(60)
+            //       ->addClass('text-center'),
+            // Column::computed('delete')
+            //       ->exportable(false)
+            //       ->printable(false)
+            //       ->width(60)
+            //       ->addClass('text-center'),
         ];
     }
 
