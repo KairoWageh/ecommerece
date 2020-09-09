@@ -3,6 +3,7 @@
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
 	// default guard is web but we need to use admin guard if url contains admin
 	Config::set('auth.default', 'admin');
+	Route::get('getToken', 'AdminAuth@getToken');
 	Route::get('login', 'AdminAuth@login')->name('adminLogin');
 	Route::post('login', 'AdminAuth@doLogin');
 	Route::get('forgot/password', 'AdminAuth@forgotPassword');
@@ -22,9 +23,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
 	Route::group(['middleware' => 'admin:admin'], function(){
 		Route::resource('admin', 'AdminController');
 		Route::delete('admin/destroy/all', 'AdminController@multi_delete');
-		Route::get('/', function(){
-			return view('admin.home');
-		})->name('home');
+		Route::get('/', 'HomeController@home')->name('home');
+		// Route::get('/', function(){
+		// 	return view('admin.home');
+		// })->name('home');
 		Route::any('logout', 'AdminAuth@logout');
 
 		// control users from admin panel
