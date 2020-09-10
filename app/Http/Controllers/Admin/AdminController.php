@@ -24,7 +24,7 @@ class AdminController extends Controller
 
         //$data = Admin::latest()->get();
         $data = Admin::select('*')->whereNotIn('status', [-1])->get();
-        return $admin->render('admin.admins.index', ['title' => 'Admin Controller']);
+        return $admin->render('admin.admins.index', ['title' => __('admin.adminController')]);
         // return Datatables::of($data)
         //         ->addIndexColumn()
         //         ->addColumn('action', function($row){
