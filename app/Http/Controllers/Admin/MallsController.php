@@ -25,7 +25,7 @@ class MallsController extends Controller
 
         //$data = User::latest()->get();
         $data = Mall::select('*')->whereNotIn('status', [-1])->get();
-        return $mall->render('admin.malls.index', ['title' => 'Malls Controller']);
+        return $mall->render('admin.malls.index', ['title' => __('admin.mallsController')]);
         // return Datatables::of($data)
         //         ->addIndexColumn()
         //         ->addColumn('action', function($row){
