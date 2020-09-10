@@ -24,7 +24,7 @@ class DepartmentsController extends Controller
 
         //$data = User::latest()->get();
         $data = Department::select('*')->whereNotIn('status', [-1])->get();
-        return $department->render('admin.departments.index', ['title' => 'Departments Controller']);
+        return $department->render('admin.departments.index', ['title' => __('admin.departmentsController')]);
         // return Datatables::of($data)
         //         ->addIndexColumn()
         //         ->addColumn('action', function($row){
