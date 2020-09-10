@@ -25,7 +25,7 @@ class StatesController extends Controller
 
         //$data = User::latest()->get();
         $data = State::select('*')->whereNotIn('status', [-1])->get();
-        return $state->render('admin.states.index', ['title' => 'States Controller']);
+        return $state->render('admin.states.index', ['title' => __('admin.statesController')]);
         // return Datatables::of($data)
         //         ->addIndexColumn()
         //         ->addColumn('action', function($row){
