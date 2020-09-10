@@ -175,6 +175,8 @@ return [
     "productsController"               => "التحكم بالمنتجات",
     "products"                         => "المنتجات",
 
+    "product_created"                  => "تم إنشاء بيانات المنتج.",
+
     "product_info"                     => "معلومات المنتج",
     "product_title"                    => "عنوان المنتج",
     "product_content"                  => "تفاصيل المنتج",
