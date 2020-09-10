@@ -24,7 +24,7 @@ class CitiesController extends Controller
 
         //$data = User::latest()->get();
         $data = City::select('*')->whereNotIn('status', [-1])->get();
-        return $city->render('admin.cities.index', ['title' => 'Cities Controller']);
+        return $city->render('admin.cities.index', ['title' => __('admin.citiesController')]);
         // return Datatables::of($data)
         //         ->addIndexColumn()
         //         ->addColumn('action', function($row){
