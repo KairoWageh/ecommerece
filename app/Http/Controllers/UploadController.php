@@ -45,12 +45,23 @@ class UploadController extends Controller
     	}
     }
 
+    // delete a specific file using its id
     public function delete($id){
         $file = File::find($id);
-        if(!empty($file)){
-            $file->delete(); 
+        if(!empty($file)){ 
             Storage::delete($file->full_file);
-               
+            $file->delete();
         }   
+    }
+
+    // delete multiple files using ids, then delete container directory
+    public function delete_files($product_id){
+        $files = File::where('file_type', 'product')->where('relation_id', $product_id)->get();
+        if(count($files) > 0){
+            foreach ($files as $file) {
+                $this->delete($file->id);
+                Storage::deleteDirectory($file->path);
+            }
+        }  
     }
 }
