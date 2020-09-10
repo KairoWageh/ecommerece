@@ -81,6 +81,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
 		// control products from admin panel
 		Route::resource('products', 'ProductsController');
 		Route::delete('products/destroy/all', 'ProductsController@multi_delete');
+		Route::post('products/copy/{pid}', 'ProductsController@copy_product');
 		Route::post('update/image/{pid}', 'ProductsController@update_product_image');
 		Route::post('delete/product/image/{pid}', 'ProductsController@delete_main_image');
 		Route::post('upload/image/{pid}', 'ProductsController@upload_file');
