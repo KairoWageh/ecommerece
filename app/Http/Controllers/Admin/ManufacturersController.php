@@ -24,7 +24,7 @@ class ManufacturersController extends Controller
 
         //$data = User::latest()->get();
         $data = Manufacturer::select('*')->whereNotIn('status', [-1])->get();
-        return $manufacturer->render('admin.manufacturers.index', ['title' => 'Manufacturers Controller']);
+        return $manufacturer->render('admin.manufacturers.index', ['title' => __('admin.manufacturesController')]);
         // return Datatables::of($data)
         //         ->addIndexColumn()
         //         ->addColumn('action', function($row){
