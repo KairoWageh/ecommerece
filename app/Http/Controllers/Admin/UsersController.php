@@ -24,7 +24,7 @@ class UsersController extends Controller
 
         //$data = User::latest()->get();
         $data = User::select('*')->whereNotIn('status', [-1])->get();
-        return $user->render('admin.users.index', ['title' => 'Users Controller']);
+        return $user->render('admin.users.index', ['title' => __('admin.usersController')]);
         // return Datatables::of($data)
         //         ->addIndexColumn()
         //         ->addColumn('action', function($row){
