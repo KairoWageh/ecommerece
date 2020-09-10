@@ -24,7 +24,7 @@ class TradeMarksController extends Controller
 
         //$data = User::latest()->get();
         $data = TradeMark::select('*')->whereNotIn('status', [-1])->get();
-        return $tradeMark->render('admin.trademarks.index', ['title' => 'TradeMarks Controller']);
+        return $tradeMark->render('admin.trademarks.index', ['title' => __('admin.trademarksController')]);
         // return Datatables::of($data)
         //         ->addIndexColumn()
         //         ->addColumn('action', function($row){
