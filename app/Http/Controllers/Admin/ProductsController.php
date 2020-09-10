@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\ProductMall;
 use App\ProductOtherData;
+use App\File as FileTbl;
 use App\Size;
 use App\Weight;
 use App\DataTables\ProductsDataTable;
@@ -146,9 +147,9 @@ class ProductsController extends Controller
         if($request->hasFile('file')){
 
             // resize image
-            $request->file('file')->resize(150, 100, function ($constraint) {
-                $constraint->aspectRatio();
-            });
+            // $request->file('file')->resize(150, 100, function ($constraint) {
+            //     $constraint->aspectRatio();
+            // });
 
 
 
@@ -280,11 +281,83 @@ class ProductsController extends Controller
         Product::where('id', $id)->update($validatedData);
 
         return response(['status' => true, 'message' => __('admin.updated_successfully')], 200);
-        session()->flash('success', __('admin.updated_successfully'));
-        return redirect(adminURL('products'));
+        // session()->flash('success', __('admin.updated_successfully'));
+        // return redirect(adminURL('products'));
         // if($validatedData){
 
         // }
+    }
+
+    // copy an existing product into new one with its all data and images
+    public function copy_product($id){
+        if(request()->ajax()){
+            $product_to_copy = Product::find($id);
+            $product_to_copy_array = $product_to_copy->toArray();
+            unset($product_to_copy_array['id']);
+            $copied_product = Product::create($product_to_copy_array);
+            if(!empty($product_to_copy_array['photo'])){
+                $ext = \File::extension($product_to_copy_array['photo']);
+                $new_path = 'products/'.$copied_product->id.'/'.\Str::random(30).'.'.$ext;
+                // copy main image and save it in new folder for the copied product
+                \Storage::copy($product_to_copy_array['photo'], $new_path);
+                $copied_product->photo = $new_path;
+                $copied_product->save();
+            }
+
+            // copy product malls 
+            $copy_malls = $product_to_copy->malls()->get();
+            foreach ($copy_malls as $mall) {
+                ProductMall::create([
+                    'product_id' => $copied_product->id,
+                    'mall_id'    => $mall->mall_id
+                ]);
+            }
+
+            // copy other data
+
+            $copy_other_data = $product_to_copy->other_data()->get();
+            foreach ($copy_other_data as $other_data) {
+                ProductOtherData::create([
+                    'product_id' => $copied_product->id,
+                    'data_key'   => $other_data->data_key,
+                    'data_value' => $other_data->data_value
+                ]);
+            }
+            // copy product images
+            $files = $product_to_copy->files()->get();
+            if(count($files) > 0){
+                foreach ($files as $file) {
+                    $hashName = \Str::random(30);
+                    $ext = \File::extension($file->full_file);
+                    $new_path = 'products/'.$copied_product->id.'/'.$hashName.'.'.$ext;
+                    \Storage::copy($file->full_file, $new_path);
+                    $add = FileTbl::create([
+                        'name'        => $file->name,
+                        'size'        => $file->size,
+                        'file'        => $hashName,
+                        'path'        => 'products/'.$copied_product->id,
+                        'full_file'   => 'products/'.$copied_product->id.'/'.$hashName.'.'.$ext,
+                        'mime_type'   => $file->mime_type,
+                        'file_type'   => 'product',
+                        'relation_id' => $copied_product->id
+                    ]);
+                }
+            }
+            
+            return response(['status' => true, 'message' => __('admin.product_created'), 'id' => $copied_product->id], 200);
+        }else{
+            return redirect(adminURL('/'));
+        }
+        
+    }
+
+    public function deleteProduct($id){
+        $product = Product::find($id);
+        Storage::delete($product->photo);
+        $product->status = -1;
+        $product->photo = null;
+        $product->save();
+        up()->delete_files($id);
     }
 
     /**
@@ -295,21 +368,7 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        $product = Product::find($id);
-        Storage::delete($product->photo);
-        $product->status = -1;
-        $product->photo = null;
-        $product->save();
-        // $cities = $country->cities;
-        // $states = $country->states;
-        // foreach ($cities as $city) {
-        //     $city->status = -1;
-        //     $city->save();
-        // }
-        // foreach ($states as $state) {
-        //     $state->status = -1;
-        //     $state->save();
-        // }
+        $this->deleteProduct($id);
         session()->flash('success', __('admin.delete_successfully'));
         return back();
     }
@@ -320,24 +379,10 @@ class ProductsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function multi_delete(Request $request){
-        $countriesIDs = $request->item;
-        foreach ($countriesIDs as $key => $countryID) {
-            $country = Country::find($countryID);
-            Storage::delete($country->country_flag);
-            $country->status = -1;
-            $country->country_flag = null;           
-            $country->save();
-            $cities = $country->cities;
-            $states = $country->states;
-            foreach ($cities as $city) {
-                $city->status = -1;
-                $city->save();
+        if(is_array(request('item')))
+            foreach (request('item') as $id) {
+                $this->deleteProduct($id);
             }
-            foreach ($states as $state) {
-                $state->status = -1;
-                $state->save();
-            }
-        }
         session()->flash('seccess', __('admin.delete_successfully'));
         return back();
     }
