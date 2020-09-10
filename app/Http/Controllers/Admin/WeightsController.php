@@ -25,7 +25,7 @@ class WeightsController extends Controller
 
         //$data = User::latest()->get();
         $data = Weight::select('*')->whereNotIn('status', [-1])->get();
-        return $weight->render('admin.weights.index', ['title' => 'Weights Controller']);
+        return $weight->render('admin.weights.index', ['title' => __('admin.weightsController')]);
         // return Datatables::of($data)
         //         ->addIndexColumn()
         //         ->addColumn('action', function($row){
