@@ -30,7 +30,7 @@
 				@if(!empty($product->photo))
 					var mock = {name: '{{ $product->title }}', size: '', type: ''};
 					this.emit('addedfile', mock);
-					this.options.thumbnail.call(this, mock, '{{ url("storage/".$product->photo) }}');
+					this.options.thumbnail.call(this, mock, '{{ Storage::url($product->photo) }}');
 					$('.dz-progress').remove();
 				@endif
 				this.on('sending', function(file, xhr, formData){
