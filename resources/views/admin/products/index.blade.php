@@ -5,7 +5,7 @@
         	<h3 class="box-title">{{ $title }}</h3>
         </div>
             <div class="box-body">
-                {!! Form::open(['id' => 'form_data', 'url' => adminURL('admin/colors/destroy/all'), 'method' => 'delete']) !!}
+                {!! Form::open(['id' => 'form_data', 'url' => adminURL('admin/products/destroy/all'), 'method' => 'delete']) !!}
                 <!-- {!! Form::hidden('_method', 'delete') !!} -->
                 {{ $dataTable->table([
                 	'class' => 'dataTable table '
