@@ -26,7 +26,7 @@ class SizesController extends Controller
 
         //$data = User::latest()->get();
         $data = Size::select('*')->whereNotIn('status', [-1])->get();
-        return $size->render('admin.sizes.index', ['title' => 'Sizes Controller']);
+        return $size->render('admin.sizes.index', ['title' => __('admin.sizesController')]);
         // return Datatables::of($data)
         //         ->addIndexColumn()
         //         ->addColumn('action', function($row){
