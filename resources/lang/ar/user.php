@@ -15,5 +15,7 @@ return [
     "home"                             => "الرئيسية",
     "shop_page"                        => "Shop page",
     "departments"                       => "الأقسام",
+    "add_to_cart"                      => "أضف إلى البطاقة",
+    "see_datails"                      => "مشاهدة التفاصيل",
     
 ];
