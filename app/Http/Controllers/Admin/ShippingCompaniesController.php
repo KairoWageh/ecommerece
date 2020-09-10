@@ -25,7 +25,7 @@ class ShippingCompaniesController extends Controller
 
         //$data = User::latest()->get();
         $data = ShippingCompany::select('*')->whereNotIn('status', [-1])->get();
-        return $shippingCompany->render('admin.shippingCompanies.index', ['title' => 'ShippingCompany Controller']);
+        return $shippingCompany->render('admin.shippingCompanies.index', ['title' => __('admin.shippingCompaniesController')]);
         // return Datatables::of($data)
         //         ->addIndexColumn()
         //         ->addColumn('action', function($row){
