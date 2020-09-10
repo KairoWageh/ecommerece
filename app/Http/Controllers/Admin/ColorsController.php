@@ -25,7 +25,7 @@ class ColorsController extends Controller
 
         //$data = User::latest()->get();
         $data = Color::select('*')->whereNotIn('status', [-1])->get();
-        return $color->render('admin.colors.index', ['title' => 'Colors Controller']);
+        return $color->render('admin.colors.index', ['title' => __('admin.colorsController')]);
         // return Datatables::of($data)
         //         ->addIndexColumn()
         //         ->addColumn('action', function($row){
