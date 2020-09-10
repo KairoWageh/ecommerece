@@ -38,6 +38,42 @@
             });
             return false;
         });
+
+        $(document).on('click', '.copy_product', function(){
+            var form_data = $('#product_form').serialize();
+            // var url = '{{ adminURL("products/".$product->id) }}';
+            var url =  '{{ url("admin/products/copy/".$product->id) }}';
+            $.ajax({
+                url: url,
+                dataType: 'json',
+                type: 'post',
+                data: {_token: '{{ csrf_token() }}'},
+                beforeSend: function(){
+                    $('.loading_copy').removeClass('hidden');
+                    $('.validate_message').html('');
+                    $('.error_message').addClass('hidden');
+                    $('.success_message').html('').addClass('hidden');
+                }, success: function(data){
+                    if(data.status == true){
+                        $('.loading_copy').addClass('hidden');
+                        $('.success_message').html('<h1>'+data.message+'</h1>').removeClass('hidden'); 
+                        setTimeout(function(){
+                            window.location.href = '{{ url("admin/products") }}' +'/'+ data.id + '/edit';
+                        }, 5000);   
+                    }
+                    
+                }, error(response){
+                    $('.loading_copy').addClass('hidden');
+                    var error_li = '';
+                    $.each(response.responseJSON.errors, function(index, value){
+                        error_li += '<li>' + value + '</li>';
+                    });
+                    $('.validate_message').html(error_li);
+                    $('.error_message').removeClass('hidden');
+                }
+            });
+            return false;
+        });
     });
 </script>
 @endpush
@@ -52,7 +88,7 @@
             <!-- @csrf -->
             <a href="#" class="btn btn-primary">{{__('admin.save')}}<i class="fa fa-floppy-o"></i></a>
             <a href="#" class="btn btn-success save_and_continue">{{__('admin.save_and_continue')}}<i class="fa fa-floppy-o"></i><i class="fa fa-spin fa-spinner loading_save_continue hidden"></i></a>
-            <a href="#" class="btn btn-info">{{__('admin.copy_product')}}<i class="fa fa-file"></i></a>
+            <a href="#" class="btn btn-info copy_product">{{__('admin.copy_product')}}<i class="fa fa-file"></i><i class="fa fa-spin fa-spinner loading_copy hidden"></i></a>
             <a href="#" class="btn btn-danger delete" data-toggle="modal" data-target="#delete_admin{{ $product->id }}">{{__('admin.delete')}}<i class="fa fa-trash"></i></a>
             <div class="alert alert-danger error_message hidden">
                 <ul class="validate_message">
@@ -81,7 +117,7 @@
                 <hr />
                 <a href="#" class="btn btn-primary">{{__('admin.save')}}<i class="fa fa-floppy-o"></i></a>
                 <a href="#" class="btn btn-success save_and_continue">{{__('admin.save_and_continue')}}<i class="fa fa-floppy-o"></i><i class="fa fa-spin fa-spinner loading_save_continue hidden"></i></a>
-                <a href="#" class="btn btn-info">{{__('admin.copy_product')}}<i class="fa fa-file"></i></a>
+                <a href="#" class="btn btn-info copy_product">{{__('admin.copy_product')}}<i class="fa fa-file"></i><i class="fa fa-spin fa-spinner loading_copy hidden"></i></a>
                 <a href="#" class="btn btn-danger">{{__('admin.delete')}}<i class="fa fa-trash"></i></a>
                 <!-- <div class="form-group">
                     {!! Form::label('name_ar', __('admin.name_ar')) !!}
