@@ -25,7 +25,7 @@ class CountriesController extends Controller
 
         //$data = User::latest()->get();
         $data = Country::select('*')->whereNotIn('status', [-1])->get();
-        return $country->render('admin.countries.index', ['title' => 'Countries Controller']);
+        return $country->render('admin.countries.index', ['title' => __('admin.countriesController')]);
         // return Datatables::of($data)
         //         ->addIndexColumn()
         //         ->addColumn('action', function($row){
