@@ -177,8 +177,10 @@ return [
 
 
     // products
-    "productsController"                => "Products Controller",
+    "productsController"               => "Products Controller",
     "products"                         => "Products",
+
+    "product_created"                  => "Product created.",
 
     "product_info"                     => "Product info",
     "product_title"                    => "Product title",
