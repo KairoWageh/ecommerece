@@ -180,6 +180,12 @@ return [
     "productsController"               => "Products Controller",
     "products"                         => "Products",
 
+
+    "create_products"                  => "Create",
+    "save_and_continue"                => "Save and continue",
+    "copy_product"                     => "Copy",
+    "create_or_edit_product"           => "Create or edit product :title",
+
     "product_created"                  => "Product created.",
 
     "product_info"                     => "Product info",
@@ -225,11 +231,10 @@ return [
     "input_key"                        => "Input key",
     "input_value"                      => "Input value",
 
+    "related_products"                 => "Related products",
 
-    "create_products"                  => "Create",
-    "save_and_continue"                => "Save and continue",
-    "copy_product"                     => "Copy",
-    "create_or_edit_product"           => "Create or edit product :title",
+
+    
     
 
 
