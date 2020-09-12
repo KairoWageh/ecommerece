@@ -10,6 +10,7 @@ use App\ProductOtherData;
 use App\File as FileTbl;
 use App\Size;
 use App\Weight;
+use App\RelatedProduct;
 use App\DataTables\ProductsDataTable;
 use Storage;
 // use Upload;
@@ -114,88 +115,6 @@ class ProductsController extends Controller
         return view('admin.products.product', ['title' => trans("admin.create_or_edit_product", ['title' => $product->title]), 'product' => $product]);
     }
 
-    /**
-    * product main photo
-    */
-    public function update_product_image($id){
-        $product = Product::where('id', $id)->update([
-            'photo' => up()->upload([
-                'file'        => 'file',
-                'path'        => 'products/' .$id,
-                'upload_type' => 'single',
-                'delete_file' => '',
-            ]),
-        ]);
-        return response(['status' => true], 200);
-    }
-
-    /**
-    * delete product main image
-    */
-    public function delete_main_image($id){
-        $product = Product::find($id);
-        Storage::delete($product->photo);
-        $product->photo = null;
-        $product->save();
-        return response(['status' => true], 200);
-    }
-
-    /**
-    * product iamges
-    */
-    public function upload_file(Request $request, $id){
-        if($request->hasFile('file')){
-
-            // resize image
-            // $request->file('file')->resize(150, 100, function ($constraint) {
-            //     $constraint->aspectRatio();
-            // });
-
-
-
-            $fid = up()->upload([
-                'file'        => 'file',
-                'path'        => 'products/'.$id,
-                'upload_type' => 'files',
-                'file_type'   => 'product',
-                'relation_id' => $id,
-            ]);
-            return response(['status' => true, 'id' => $fid], 200);
-        }
-    }
-
-    public function delete_file(Request $request){
-        if($request->has('id')){
-            up()->delete($request->id);
-        }
-    }
-
-    /**
-    * prepare shipping info
-    *
-    */
-    public function loadShippingInfo(){
-        if(request()->ajax() and request()->has('department_id')){
-            $department_list = array_diff(explode(',', get_parent(request('department_id'))), [request('department_id')]);
-            $sizes = Size::where('is_public', 'yes')
-                ->whereIn('department_id', $department_list)
-                ->orWhere('department_id', request('department_id'))
-                ->pluck('name_' .session('lang'), 'id');
-            // $size_2 = Size::where('department_id', request('department_id'))->pluck('name_' .session('lang'), 'id');
-
-
-            // $sizes = array_merge(json_decode($size_1, true), json_decode($size_2, true));
-            $weights = Weight::pluck('name_'.session('lang'), 'id');
-            return view('admin.products.ajax.shippingInfo', [
-                'sizes'   => $sizes, 
-                'weights' => $weights,
-                'product' => Product::find(request('product_id'))
-            ])->render();
-
-        }else{
-            return trans("admin.please_choose_department");
-        }
-    }
 
     /**
      * Update the specified resource in storage.
@@ -260,6 +179,16 @@ class ProductsController extends Controller
             }
         }
 
+        if(request()->has('related_products')){
+            RelatedProduct::where('product_id', $id)->delete();
+            foreach (request('related_products') as $relatedProductID) {
+                RelatedProduct::create([
+                    'product_id'          => $id,
+                    'related_product'     => $relatedProductID
+                ]);
+            }
+        }
+
         if(request()->has('input_value') && request()->has('input_key')){
             $count = 0;
             $other_data = '';
@@ -287,6 +216,7 @@ class ProductsController extends Controller
 
         // }
     }
+
 
     // copy an existing product into new one with its all data and images
     public function copy_product($id){
@@ -386,4 +316,111 @@ class ProductsController extends Controller
         session()->flash('seccess', __('admin.delete_successfully'));
         return back();
     }
+
+
+
+    /**
+    * product images 
+    */
+    public function upload_file(Request $request, $id){
+        if($request->hasFile('file')){
+
+            // resize image
+            // $request->file('file')->resize(150, 100, function ($constraint) {
+            //     $constraint->aspectRatio();
+            // });
+
+
+
+            $fid = up()->upload([
+                'file'        => 'file',
+                'path'        => 'products/'.$id,
+                'upload_type' => 'files',
+                'file_type'   => 'product',
+                'relation_id' => $id,
+            ]);
+            return response(['status' => true, 'id' => $fid], 200);
+        }
+    }
+
+    public function delete_file(Request $request){
+        if($request->has('id')){
+            up()->delete($request->id);
+        }
+    }
+
+
+    /**
+    * product main photo
+    */
+    public function update_product_image($id){
+        $product = Product::where('id', $id)->update([
+            'photo' => up()->upload([
+                'file'        => 'file',
+                'path'        => 'products/' .$id,
+                'upload_type' => 'single',
+                'delete_file' => '',
+            ]),
+        ]);
+        return response(['status' => true], 200);
+    }
+
+    /**
+    * delete product main image
+    */
+    public function delete_main_image($id){
+        $product = Product::find($id);
+        Storage::delete($product->photo);
+        $product->photo = null;
+        $product->save();
+        return response(['status' => true], 200);
+    }
+
+    
+
+    /**
+    * prepare shipping info
+    *
+    */
+    public function loadShippingInfo(){
+        if(request()->ajax() and request()->has('department_id')){
+            $department_list = array_diff(explode(',', get_parent(request('department_id'))), [request('department_id')]);
+            $sizes = Size::where('is_public', 'yes')
+                ->whereIn('department_id', $department_list)
+                ->orWhere('department_id', request('department_id'))
+                ->pluck('name_' .session('lang'), 'id');
+            // $size_2 = Size::where('department_id', request('department_id'))->pluck('name_' .session('lang'), 'id');
+
+
+            // $sizes = array_merge(json_decode($size_1, true), json_decode($size_2, true));
+            $weights = Weight::pluck('name_'.session('lang'), 'id');
+            return view('admin.products.ajax.shippingInfo', [
+                'sizes'   => $sizes, 
+                'weights' => $weights,
+                'product' => Product::find(request('product_id'))
+            ])->render();
+
+        }else{
+            return trans("admin.please_choose_department");
+        }
+    }
+
+    
+    public function search_product(){
+        if(request()->ajax()){
+            if(request()->has('search') && !empty(request('search'))){
+                $relatedProduct = RelatedProduct::where('product_id', request('id'))->get(['related_product']);
+                $products = Product::where('title', 'LIKE', '%'.request('search').'%')
+                                    ->where('id', '!=', request('id'))
+                                    ->whereNotIn('id', $relatedProduct)
+                                    ->limit(10)->orderBy('id', 'desc')->get();
+                return response(['status'         => true,
+                                 'result'         => count($products) > 0 ?$products:'',
+                                 'count'          => count($products),
+                               ], 200);
+            }
+        }
+    }
+
+    
 }
