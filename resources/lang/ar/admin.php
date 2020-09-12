@@ -175,6 +175,14 @@ return [
     "productsController"               => "التحكم بالمنتجات",
     "products"                         => "المنتجات",
 
+
+    "create_products"                  => "حفظ",
+    "save_and_continue"                => "حفظ واستمرار",
+    "copy_product"                     => "نسخ المنتج",
+    "create_or_edit_product"           => "إضافة أو تعديل المنتج",
+
+
+
     "product_created"                  => "تم إنشاء بيانات المنتج.",
 
     "product_info"                     => "معلومات المنتج",
@@ -218,11 +226,10 @@ return [
     "input_key"                        => "عنوان الحقل",
     "input_value"                      => "محتوى الحقل",
 
+    "related_products"                 => "منتجات ذات صلة",
 
-    "create_products"                  => "حفظ",
-    "save_and_continue"                => "حفظ واستمرار",
-    "copy_product"                     => "نسخ المنتج",
-    "create_or_edit_product"           => "إضافة أو تعديل المنتج",
+
+    
 
     
     
