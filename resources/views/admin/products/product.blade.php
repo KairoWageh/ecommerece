@@ -105,6 +105,7 @@
                     <li><a data-toggle="tab" href="#product_media">{{__('admin.product_media')}}<i class="fa fa-photo"></i></a></li>
                     <li><a data-toggle="tab" href="#product_size_weight">{{__('admin.shippingInfo')}}<i class="fa fa-info-circle"></i></a></li>
                     <li><a data-toggle="tab" href="#other_data">{{__('admin.other_data')}}<i class="fa fa-database"></i></a></li>
+                    <li><a data-toggle="tab" href="#related_products">{{__('admin.related_products')}}<i class="fa fa-list"></i></a></li>
                 </ul>
                 <div class="tab-content">
                     @include('admin.products.tabs.product_info')
@@ -113,6 +114,7 @@
                     @include('admin.products.tabs.product_media')
                     @include('admin.products.tabs.product_size_weight')
                     @include('admin.products.tabs.other_data')
+                    @include('admin.products.tabs.related_products')
                 </div>
                 <hr />
                 <a href="#" class="btn btn-primary">{{__('admin.save')}}<i class="fa fa-floppy-o"></i></a>
