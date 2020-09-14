@@ -135,16 +135,16 @@ class ProductsController extends Controller
             'size'                   => 'sometimes|nullable',
             'size_id'                => 'sometimes|nullable|numeric',
             'currency_id'            => 'sometimes|nullable|numeric',
-            'price'                  => 'required|numeric',
+            'price'                  => 'required|numeric|min:1',
             'stock'                  => 'required|numeric',
-            'start_at'               => 'required|date',
-            'end_at'                 => 'required|date',
-            'start_offer_at'         => 'sometimes|nullable|date',
-            'end_offer_at'           => 'sometimes|nullable|date',
-            'offer_price'            => 'sometimes|nullable|numeric',
+            'start_at'               => 'required|date|before:end_at',
+            'end_at'                 => 'required|date|after:start_at',
+            'start_offer_at'         => 'requiredWith:offer_price|sometimes|nullable|date|afterOrEqual:start_at|before:end_at|before:end_offer_at',
+            'end_offer_at'           => 'requiredWith:offer_price|sometimes|nullable|date|after:start_at|after:start_offer_at|beforeOrEqual:end_at',
+            'offer_price'            => 'sometimes|nullable|numeric|lt:price',
             'weight'                 => 'sometimes|nullable',
             'weight_id'              => 'sometimes|nullable|numeric',
-            'product_status'         => 'sometimes|nullable|in:pending, refused, active',
+            'product_status'         => 'sometimes|nullable|in:pending,refused,active',
             'reason'                 => 'sometimes|nullable|numeric',
         ], [], [
             'title'                  => __('admin.product_title'),
@@ -169,6 +169,7 @@ class ProductsController extends Controller
             'reason'                 => __('admin.reason'),
         ]);
 
+        if(request(''))
         if(request()->has('mall')){
             ProductMall::where('product_id', $id)->delete();
             foreach (request('mall') as $mall) {
