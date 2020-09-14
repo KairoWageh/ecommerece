@@ -2,7 +2,7 @@
 <!--inner block end here-->
 <!--copy rights start here-->
 <div class="copyrights">
-	 <p>© 2016 Shoppy. All Rights Reserved | Design by  <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
+	 <p>© 2020 Ecommerce. All Rights Reserved | Design by  <a href="https://www.linkedin.com/in/kairo-wageh-591811b5/" target="_blank">Kairo Wageh </a> </p>
 </div>	
 <!--COPY rights end here-->
 </div>
