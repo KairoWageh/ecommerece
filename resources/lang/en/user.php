@@ -17,6 +17,7 @@ return [
     "departments"                      => "Departments",
     "add_to_cart"                      => "Add to cart",
     "see_datails"                      => "See datails",
+    "latest_products"                  => "Latest Products",
     
 
 ];
