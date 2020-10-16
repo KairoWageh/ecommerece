@@ -5,10 +5,14 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Cashier\Billable;
+
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use Billable;
+    
 
     /**
      * The attributes that are mass assignable.
@@ -44,5 +48,11 @@ class User extends Authenticatable
     // to be used in social login
     public function profile(){
         return $this->hasOne('App\SocialAccount');
+    }
+
+    // one user can have many orders
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }
