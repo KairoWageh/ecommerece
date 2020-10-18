@@ -230,7 +230,9 @@ return [
 
 
     
-
+    // footer
+    "all_rights_reserved"              => "جميع الحقوق محفوظة.",
+    "design_by"                        => "تصميم",
     
     
 ];
