@@ -38,6 +38,10 @@
     <script src="{{asset('public/design/adminpanel/js/bootstrap-datepicker.ar.js')}}"></script>
     <!--//datepicker js-->
 
+    <!--select2 js-->
+    <script type="text/javascript" src="{{ asset('public/design/adminpanel/js/select2.min.js') }}"></script>
+    <!--//select2 js-->
+
   <!-- mother grid end here-->
   @stack('js')
   @stack('css')
