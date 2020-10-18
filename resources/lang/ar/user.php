@@ -18,5 +18,32 @@ return [
     "add_to_cart"                      => "أضف إلى البطاقة",
     "see_datails"                      => "مشاهدة التفاصيل",
     "latest_products"                  => "أحدث المنتجات",
-    
+
+    // cart page
+    "cart"                             => "البطاقة",
+    "shopping_cart"                    => "Shopping Cart",
+    "search_products"                  => "Search Products",
+    "product"                          => "Product",
+    "price"                            => "Price",
+    "quantity"                         => "Quantity",
+    "total"                            => "Total",
+    "cart_empty"                       => "Your shopping cart is empty.",
+
+
+    "first_name"                       => "الاسم الأول",
+    "last_name"                        => "الاسم الأخير",
+    "address"                          => "العنوان",
+    "city"                             => "المدينة",
+    "country"                          => "الدولة",
+    "post_code"                        => "الرمز البريدي",
+    "phone_number"                     => "Phone number",
+    "other_notes"                      => "ملاحظات أخرى",
+
+
+
+
+
+    // footer
+    "all_rights_reserved"              => "جميع الحقوق محفوظة.",
+    "design_by"                        => "تصميم",
 ];
