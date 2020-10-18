@@ -29,8 +29,12 @@
 			<img src="{{ Storage::url(setting()->icon) }}" width="30px" height="30px">
 		</div>
 		<div class="form-group">
-			{!! Form::label('description', __('admin.description')) !!}
-			{!! Form::textarea('description', setting()->description, ['class' => 'form-control']) !!}
+			{!! Form::label('description', __('admin.description_ar')) !!}
+			{!! Form::textarea('description_ar', setting()->description_ar, ['class' => 'form-control']) !!}
+		</div>
+		<div class="form-group">
+			{!! Form::label('description', __('admin.description_en')) !!}
+			{!! Form::textarea('description_en', setting()->description_en, ['class' => 'form-control']) !!}
 		</div>
 		<div class="form-group">
 			{!! Form::label('keywords', __('admin.keywords')) !!}
