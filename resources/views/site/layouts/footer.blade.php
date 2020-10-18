@@ -4,8 +4,22 @@
         <div class="row">
             <div class="col-md-3 col-sm-6">
                 <div class="footer-about-us">
-                    <h2>u<span>Stora</span></h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis sunt id doloribus vero quam laborum quas alias dolores blanditiis iusto consequatur, modi aliquid eveniet eligendi iure eaque ipsam iste, pariatur omnis sint! Suscipit, debitis, quisquam. Laborum commodi veritatis magni at?</p>
+                    <?php
+                        use App\Setting;
+                        $app = Setting::first();
+                    ?>
+                    @if(session('lang') == 'en')
+                        <h2>{{ $app->sitename_en }}</h2>
+                        <p>
+                            {{ $app->description_en }}
+                        </p>
+                    @elseif(session('lang') == 'ar')
+                        <h2>{{ $app->sitename_ar }}</h2>
+                        <p>
+                            {{ $app->description_ar }}
+                        </p>
+                    @endif
+                    
                     <div class="footer-social">
                         <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
                         <a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
@@ -30,13 +44,19 @@
 
             <div class="col-md-3 col-sm-6">
                 <div class="footer-menu">
-                    <h2 class="footer-wid-title">Categories</h2>
+                    <h2 class="footer-wid-title">{{ __('user.departments') }}</h2>
+                    <?php
+                        use App\Department;
+                        $departments = Department::all();
+                    ?>
                     <ul>
-                        <li><a href="#">Mobile Phone</a></li>
-                        <li><a href="#">Home accesseries</a></li>
-                        <li><a href="#">LED TV</a></li>
-                        <li><a href="#">Computer</a></li>
-                        <li><a href="#">Gadets</a></li>
+                        @foreach($departments as $department)
+                            @if(session('lang') == 'en')
+                                <li><a href="#">{{ $department->department_name_en }}</a></li>
+                            @elseif(session('lang') == 'ar')
+                                <li><a href="#">{{ $department->department_name_ar }}</a></li>
+                            @endif
+                        @endforeach
                     </ul>                        
                 </div>
             </div>
@@ -62,7 +82,12 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="copyright">
-                    <p>&copy; 2020. All rights reserved | Design by
+                    <p>&copy; 2020 
+                        @if(session('lang') == 'en')
+                            {{ $app->sitename_en }}
+                        @elseif(session('lang') == 'ar')
+                            {{ $app->sitename_ar }}
+                        @endif. {{ __('user.all_rights_reserved') }} | {{ __('user.design_by') }} 
                         <a href="https://www.linkedin.com/in/kairo-wageh-591811b5/" target="_blank">Kairo Wageh</a>
                     </p>
                 </div>
@@ -99,5 +124,11 @@
 <!-- Slider -->
 <script type="text/javascript" src="{{ asset('public/design/site/js/bxslider.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('public/design/site/js/script.slider.js') }}"></script>
+
+<!-- Payment -->
+<link rel="stylesheet" href="{{ asset('public/design/site/js/bluebird.min.js') }}">
+<link rel="stylesheet" href="{{ asset('public/design/site/js/tap.min.js') }}">
+@stack('js')
+@stack('css')
 </body>
 </html>
