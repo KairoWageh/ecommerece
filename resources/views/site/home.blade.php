@@ -93,8 +93,11 @@
 							<div class="product-f-image"  width="195px" height="243px">
 								<img src="{{ Storage::url($product->photo) }}" alt="">
 								<div class="product-hover">
-									<a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> {{__('user.add_to_cart')}}</a>
-									<a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> {{__('user.see_datails')}}</a>
+									<button class="add-to-cart-link" data-id="{{ $product->id }}"><i class="fa fa-shopping-cart"></i> 
+									{{__('user.add_to_cart')}}</button>
+									<!-- <a href="{{route('cart.add', $product->id)}}" class="add-to-cart-link">		<i class="fa fa-shopping-cart"></i> 
+									{{__('user.add_to_cart')}}</a> -->
+									<a href="{{route('user.single_product', $product->id)}}" class="view-details-link"><i class="fa fa-link"></i> {{__('user.see_datails')}}</a>
 								</div>
 							</div>
 							
@@ -124,14 +127,9 @@
 			<div class="col-md-12">
 				<div class="brand-wrapper">
 					<div class="brand-list">
-						<img src="{{ asset('public/design/site/img/brand1.png') }}" alt="">
-						<img src="{{ asset('public/design/site/img/brand2.png') }}" alt="">
-						<img src="{{ asset('public/design/site/img/brand3.png') }}" alt="">
-						<img src="{{ asset('public/design/site/img/brand4.png') }}" alt="">
-						<img src="{{ asset('public/design/site/img/brand5.png') }}" alt="">
-						<img src="{{ asset('public/design/site/img/brand6.png') }}" alt="">
-						<img src="{{ asset('public/design/site/img/brand1.png') }}" alt="">
-						<img src="{{ asset('public/design/site/img/brand2.png') }}" alt="">                            
+						@foreach($manufactures as $manufacture)
+							<img src="{{ Storage::url($manufacture->icon) }}" alt="">
+						@endforeach                            
 					</div>
 				</div>
 			</div>
@@ -291,4 +289,57 @@
 	</div>
 </div> <!-- End product widget area -->
 
+@endsection
+
+@section('scripts')
+<script type="text/javascript">
+ 
+	$(".add-to-cart-link").click(function (e) {
+		console.log('add to cart')
+    	e.preventDefault();
+       	var ele = $(this);
+
+        $.ajax({
+           url: '{{ url('update-cart') }}',
+           method: "patch",
+           data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id"), quantity: ele.parents("tr").find(".quantity").val()},
+           success: function (response) {
+               window.location.reload();
+           }
+        });
+    });
+        $(".update-cart").click(function (e) {
+           e.preventDefault();
+ 
+           var ele = $(this);
+ 
+            $.ajax({
+               url: '{{ url('update-cart') }}',
+               method: "patch",
+               data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id"), quantity: ele.parents("tr").find(".quantity").val()},
+               success: function (response) {
+                   window.location.reload();
+               }
+            });
+        });
+ 
+        $(".remove-from-cart").click(function (e) {
+            e.preventDefault();
+ 
+            var ele = $(this);
+ 
+            if(confirm("Are you sure")) {
+                $.ajax({
+                    url: '{{ url('remove-from-cart') }}',
+                    method: "DELETE",
+                    data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id")},
+                    success: function (response) {
+                        window.location.reload();
+                    }
+                });
+            }
+        });
+ 
+    </script>
+ 
 @endsection
