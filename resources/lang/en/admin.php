@@ -236,7 +236,9 @@ return [
 
     
     
-
+    // footer
+    "all_rights_reserved"              => "All rights reserved.",
+    "design_by"                        => "Design by",
 
     
 
