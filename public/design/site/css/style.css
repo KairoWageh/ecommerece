@@ -150,7 +150,7 @@ z-index: 999;}
 .mainmenu-area ul.navbar-nav li:hover a, .mainmenu-area ul.navbar-nav li.active a {background: #5a88ca; color:#FFF;}
 .mainmenu-area .nav > li > a:focus {color: #FFF;}
 
-.slider-area { width:80%; position:relative; margin:0 auto; padding:5px;}
+.slider-area { width:80%; position:relative; margin:0 auto; padding:5px; direction: ltr;}
 /*-------------------------
 [9. Block slider]
 ---------------------------*/
@@ -399,7 +399,7 @@ z-index: 999;}
   top: 0;
   width: 100%;transition: .4s;
 }
-.product-hover a {
+.product-hover a, .product-hover button {
     background: none repeat scroll 0 0 #5a88ca;
     border-radius: 5px;
     color: #fff;
@@ -414,7 +414,7 @@ z-index: 999;}
     border: 1px solid #5a88ca;
     width: 80%;z-index: 99;transition: .4s;
 }
-.product-hover a:hover {
+.product-hover a:hover, .product-hover button:hover {
   background: #000;
   text-decoration: none;border-color: #444;
 }
@@ -424,10 +424,10 @@ z-index: 999;}
   margin-right: 5px;
   text-decoration: none;
 }
-.product-hover a i.fa {
+.product-hover a i.fa, .product-hover button i.fa {
     margin-right: 5px;
 }
-.product-hover a.add-to-cart-link {top: -25%;}
+.product-hover a.add-to-cart-link, .product-hover button.add-to-cart-link {top: -25%;}
 .product-hover a.view-details-link { bottom: -25%;}
 .single-product h2 {
     font-size: 18px;
@@ -449,7 +449,8 @@ z-index: 999;}
   overflow: hidden;
 }
 .single-product:hover {}
-.single-product:hover .product-hover a.add-to-cart-link {top: 32%;}
+.single-product:hover .product-hover button.add-to-cart-link,
+ .single-product:hover .product-hover a.add-to-cart-link {top: 32%;}
 .single-product:hover .product-hover a.view-details-link {bottom: 32%;}
 .single-product:hover .product-hover:after{left: 0}
 
@@ -1125,4 +1126,142 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 
 .pagination > li > a, .pagination > li > span {
   color: #5a88ca;
+}
+
+
+/*my account page*/
+
+.profile-section{
+    width: 38%;
+    height: auto;
+    padding: 2em 2em;
+    background-color: #f5f5f5;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    -o-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    -moz-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    border: 1px solid #E7E7E8;
+    margin:2% auto 4%;
+}
+.profile-widget {
+    margin: 0 auto;
+    text-align: center;
+    border-bottom: 1px solid #5a88ca;
+    padding: 43px 0 24px 0;
+    background: #5a88ca;
+}
+.profile-widget img {
+    border-radius:50%;
+   -o-border-radius:50%;
+    -webkit-border-radius:50%;
+     -moz-border-radius:50%;
+         border: 4px solid #119BA7;
+}
+.profile-widget  h2{
+    margin: 7px 0;
+    color: #fff;
+    font-size: 21px;
+    font-weight: normal;
+}
+.profile-widget p{
+      font-size: 14px;
+    color:#00204f;
+}
+.skills {
+  width:88%;
+    margin: 0 0 15px 0;
+    height: 10px;
+      background: #052963;
+}
+.profile-info {
+ /*float: left;*/
+  width: 49%;
+  margin-right: 2%;
+}
+.profile-info.two {
+  /*float:right;*/
+  margin-right:0%;
+    padding: 0;
+}
+.main-grid3 {
+    background: #fff;
+    padding: 2em 2em;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    -o-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    -moz-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    border: 1px solid #E7E7E8;
+}
+.bar p{ 
+    color: #333;
+    font-size: 16px;
+       font-size: 16px;
+    margin: 6px 0 5px 0;
+  }
+  .main-grid3 p,.main-grid3 p a {
+    font-size: 0.95em;
+    color: #777;
+    line-height: 1.9em;
+}
+p.time {
+    font-size: 0.8em;
+  color: #C2C7C7;
+}
+.map iframe {
+    width: 100%;
+   min-height: 236px!important;
+    border: none;
+  }
+p.para {
+    font-size: 1em;
+    font-weight: 500;
+}
+i.fa.fa-picture-o {
+    color: #00C6D7;
+    margin-left: 10px;
+}
+.gmap-info p {
+    line-height: 25px;
+}
+.gmap-info a {
+    color: #00C6D7;
+}
+.skill1,.skill2 ,.skill3,.skill4{
+      height: 100%;
+    display: block;
+    background-color: #00C6D7;
+}
+
+.profile-section-inner {
+    margin: 1em 0 2em 0;
+}
+th {
+   color: #00C6D7!important;
+   font-weight: 400;
+}
+.graph-visual.tables-main {
+    margin-bottom:3em;
+}
+.block-page p {
+    font-size: 0.95em;
+    line-height: 2em;
+    color: #777;
+}
+.table-hover>tbody>tr:hover {
+    background-color: #93E9F1;
+    color: #fff;
+}
+.link {
+  border-bottom: 2px dotted #55acee;
+  text-decoration: none;
+  color: #55acee;
+  transition: .3s;
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -o-transition: .3s;
+}
+
+.link:hover {
+  color: #2ecc71;
+  border-bottom: 2px dotted #2ecc71;
 }
