@@ -18,12 +18,12 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="<?php if ($first_part=="") {echo "active"; }?>"><a href="{{ url('/') }}">{{__('user.home')}}</a></li>
-                    <li><a href="shop.html">Shop page</a></li>
+                    <li class="<?php if ($first_part=="shop") {echo "active"; }?>"><a href="{{ route('shop') }}">{{ __('user.shop') }}</a></li>
 
                     <li class="<?php if ($first_part=="cart") {echo "active"; }?>">
                         <a href="{{ url('/cart') }}" >{{__('user.cart')}}</a>
                     </li>
-                    <li><a href="checkout.html">Checkout</a></li>
+                    <!-- <li class="<?php if ($first_part=="cart") {echo "active"; }?>"><a href="{{ route('cart.checkOut') }}">Checkout</a></li> -->
                     <li class="<?php if ($first_part=="departments") {echo "active"; }?>"><a href="{{ route('user.departments') }}">{{__('user.departments')}}</a></li>
                     <li><a href="#">Others</a></li>
                     <li><a href="#">Contact</a></li>
@@ -31,4 +31,4 @@
             </div>  
         </div>
     </div>
-    </div> <!-- End mainmenu area -->
+</div> <!-- End mainmenu area -->
