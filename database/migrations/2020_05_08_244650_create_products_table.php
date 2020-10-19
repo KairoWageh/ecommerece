@@ -16,7 +16,8 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title')->nullable();
-            $table->string('photo')->nullable();
+            // $table->string('photo')->nullable();
+            $table->string('photo');
             $table->longtext('content')->nullable();
             $table->decimal('price', 5, 2)->default(0);
             $table->integer('stock')->default(0);
@@ -45,6 +46,7 @@ class CreateProductsTable extends Migration
             $table->integer('color_id')->unsigned()->nullable();
             $table->foreign('color_id')->references('id')->on('colors')->onDelete('cascade');
 
+            $table->string('size')->nullable();
             $table->integer('size_id')->unsigned()->nullable();
             $table->foreign('size_id')->references('id')->on('sizes')->onDelete('cascade');
 
