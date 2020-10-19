@@ -9,15 +9,20 @@ return [
     "wrong_creditionals"               => "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
     "forgot_password"                  => "هل نسيت كلمة المرور؟",
     "my_account"                       => "حسابي",
-    "wishlist"                         => "Wishlist",
+    "wishlist"                         => "المفضلة",
     "my_cart"                          => "بطاقتي",
-    "checkout"                         => "Checkout",
+    "checkout"                         => "دفع",
     "home"                             => "الرئيسية",
     "shop_page"                        => "Shop page",
     "departments"                       => "الأقسام",
     "add_to_cart"                      => "أضف إلى البطاقة",
     "see_datails"                      => "مشاهدة التفاصيل",
     "latest_products"                  => "أحدث المنتجات",
+
+
+    // shop page
+    "shop"                             => "متجر",
+
 
     // cart page
     "cart"                             => "البطاقة",
@@ -40,6 +45,10 @@ return [
     "other_notes"                      => "ملاحظات أخرى",
 
 
+
+    // my account page
+    "personal_information"             => "المعلومات الشخصية",
+    "full_name"                        => "الاسم كاملا",
 
 
 
