@@ -20,6 +20,9 @@ return [
     "latest_products"                  => "Latest Products",
 
 
+    // shop page
+    "shop"                             => "Shop",
+
     // cart page
     "cart"                             => "Cart",
     "shopping_cart"                    => "Shopping Cart",
@@ -43,6 +46,9 @@ return [
 
 
 
+    // my account page
+    "personal_information"             => "Personal information",
+    "full_name"                        => "Full name",
 
 
     // footer
