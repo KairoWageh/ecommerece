@@ -124,6 +124,17 @@ class CitiesController extends Controller
         }
     }
 
+    public function delete_city($id){
+        $city = City::find($id);
+        $city->status = -1;
+        $city->save();
+        $states = $city->states;     
+        foreach ($states as $state) {
+            $state->status = -1;
+            $state->save();
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -132,7 +143,7 @@ class CitiesController extends Controller
      */
     public function destroy($id)
     {
-        delete_city($id);
+        self::delete_city($id);
         session()->flash('success', __('admin.delete_successfully'));
         return back();
     }
@@ -145,7 +156,7 @@ class CitiesController extends Controller
     public function multi_delete(Request $request){
         $citiesIDs = $request->item;
         foreach ($citiesIDs as $key => $cityID) {
-            delete_city($cityID);
+            self::delete_city($cityID);
         }
         session()->flash('seccess', __('admin.delete_successfully'));
         return back();
