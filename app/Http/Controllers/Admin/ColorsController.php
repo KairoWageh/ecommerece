@@ -22,18 +22,8 @@ class ColorsController extends Controller
             data in datatable comes from ColorsDatatable query method
             not this method
         */
-
-        //$data = User::latest()->get();
         $data = Color::select('*')->whereNotIn('status', [-1])->get();
         return $color->render('admin.colors.index', ['title' => __('admin.colorsController')]);
-        // return Datatables::of($data)
-        //         ->addIndexColumn()
-        //         ->addColumn('action', function($row){
-        //             $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-        //             return $btn;
-        //         })
-        //         ->rawColumns(['action'])
-        //         ->make(true);
     }
 
     /**
@@ -59,7 +49,6 @@ class ColorsController extends Controller
             'name_en'     => 'required',
             'color'       => 'required|string',
         ]);
-        //return $request;
         if($validatedData){
             $validatedData['status'] = 1;
             Color::create($validatedData);
@@ -106,12 +95,17 @@ class ColorsController extends Controller
             'name_en'     => 'required',
             'color'       => 'required|string',
         ]);
-
         if($validatedData){
             Color::where('id', $id)->update($validatedData);
             session()->flash('success', __('admin.updated_successfully'));
             return redirect(adminURL('admin/colors'));
         }
+    }
+
+    public function delete_color($id){
+        $color = Color::find($id);
+        $color->status = -1;
+        $color->save();
     }
 
     /**
@@ -122,9 +116,7 @@ class ColorsController extends Controller
      */
     public function destroy($id)
     {
-        $color = Color::find($id);
-        $color->status = -1;
-        $color->save();
+        self::delete_color($id);
         session()->flash('success', __('admin.delete_successfully'));
         return back();
     }
@@ -137,9 +129,7 @@ class ColorsController extends Controller
     public function multi_delete(Request $request){
         $colorsIDs = $request->item;
         foreach ($colorsIDs as $key => $colorId) {
-            $color = Color::find($colorId);
-            $color->status = -1;
-            $color->save();
+            self::delete_color($colorId);
         }
         session()->flash('seccess', __('admin.delete_successfully'));
         return back();
