@@ -21,18 +21,8 @@ class CitiesController extends Controller
             data in datatable comes from CitiesDatatable query method
             not this method
         */
-
-        //$data = User::latest()->get();
         $data = City::select('*')->whereNotIn('status', [-1])->get();
         return $city->render('admin.cities.index', ['title' => __('admin.citiesController')]);
-        // return Datatables::of($data)
-        //         ->addIndexColumn()
-        //         ->addColumn('action', function($row){
-        //             $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-        //             return $btn;
-        //         })
-        //         ->rawColumns(['action'])
-        //         ->make(true);
     }
 
     /**
@@ -126,9 +116,7 @@ class CitiesController extends Controller
             'city_name_en'     => 'required|min:3|max:50',
             'country_id'       => 'required|numeric',
         ]);
-
         if($validatedData){
-
             $city = City::find($id);
             City::where('id', $id)->update($validatedData);
             session()->flash('success', __('admin.updated_successfully'));
@@ -144,15 +132,7 @@ class CitiesController extends Controller
      */
     public function destroy($id)
     {
-        $city = City::find($id);
-        $city->status = -1;
-        $city->save();
-        $states = $city->states;
-        
-        foreach ($states as $state) {
-            $state->status = -1;
-            $state->save();
-        }
+        delete_city($id);
         session()->flash('success', __('admin.delete_successfully'));
         return back();
     }
@@ -165,17 +145,11 @@ class CitiesController extends Controller
     public function multi_delete(Request $request){
         $citiesIDs = $request->item;
         foreach ($citiesIDs as $key => $cityID) {
-            $city = City::find($cityID);
-            $city->status = -1;
-            $city->save();
-            $states = $city->states;
-        
-            foreach ($states as $state) {
-                $state->status = -1;
-                $state->save();
-            }
+            delete_city($cityID);
         }
         session()->flash('seccess', __('admin.delete_successfully'));
         return back();
     }
+
+    
 }
