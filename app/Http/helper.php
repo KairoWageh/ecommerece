@@ -1,4 +1,6 @@
 <?php
+use App\City;
+
 if(!function_exists('setting')){
 	function setting(){
 		return \App\Setting::orderBy('id', 'desc')->first();
@@ -17,6 +19,15 @@ if(!function_exists('get_parent')){
 		}
 	}
 }
+
+// scan mall for products
+
+if(!function_exists('check_mall')){
+	function check_mall($product_id, $mall_id){
+		return App\ProductMall::where('product_id', $product_id)->where('mall_id', $mall_id)->count()>0?true:false;
+	}
+}
+
 
 if(!function_exists('load_department')){
 	function load_department($select = null, $department_hide = null){
@@ -115,4 +126,17 @@ if(!function_exists('validate_image')){
 			return 'image|mimes:'.$extention;
 		}
 	}
+}
+
+if(!function_exists('delete_city')){
+	function delete_city($id){
+        $city = City::find($id);
+        $city->status = -1;
+        $city->save();
+        $states = $city->states;     
+        foreach ($states as $state) {
+            $state->status = -1;
+            $state->save();
+        }
+    }
 }
