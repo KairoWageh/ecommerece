@@ -1,6 +1,4 @@
 <?php
-use App\City;
-
 if(!function_exists('setting')){
 	function setting(){
 		return \App\Setting::orderBy('id', 'desc')->first();
@@ -126,17 +124,4 @@ if(!function_exists('validate_image')){
 			return 'image|mimes:'.$extention;
 		}
 	}
-}
-
-if(!function_exists('delete_city')){
-	function delete_city($id){
-        $city = City::find($id);
-        $city->status = -1;
-        $city->save();
-        $states = $city->states;     
-        foreach ($states as $state) {
-            $state->status = -1;
-            $state->save();
-        }
-    }
 }
