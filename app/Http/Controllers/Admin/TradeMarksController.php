@@ -21,18 +21,8 @@ class TradeMarksController extends Controller
             data in datatable comes from CountriesDatatable query method
             not this method
         */
-
-        //$data = User::latest()->get();
         $data = TradeMark::select('*')->whereNotIn('status', [-1])->get();
         return $tradeMark->render('admin.trademarks.index', ['title' => __('admin.trademarksController')]);
-        // return Datatables::of($data)
-        //         ->addIndexColumn()
-        //         ->addColumn('action', function($row){
-        //             $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-        //             return $btn;
-        //         })
-        //         ->rawColumns(['action'])
-        //         ->make(true);
     }
 
     /**
@@ -58,7 +48,6 @@ class TradeMarksController extends Controller
             'name_en'    		   => 'required|min:3|max:50',
             'trademarkIcon'        => 'required|max:10000|'.validate_image(),
         ]);
-        //return $request;
         if($validatedData){
             if($request->hasFile('trademarkIcon')){
                 $validatedData['trademarkIcon'] = up()->upload([
@@ -132,6 +121,17 @@ class TradeMarksController extends Controller
     }
 
     /**
+    * Remove the specified resourse from storage.
+    */
+    public function delete_trade_mark($id){
+        $tradeMark = TradeMark::find($id);
+        Storage::delete($tradeMark->trademarkIcon);
+        $tradeMark->status = -1;
+        $tradeMark->trademarkIcon = null;
+        $tradeMark->save();
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -139,13 +139,7 @@ class TradeMarksController extends Controller
      */
     public function destroy($id)
     {
-        $tradeMark = TradeMark::find($id);
-        Storage::delete($tradeMark->trademarkIcon);
-        $tradeMark->status = -1;
-        $tradeMark->trademarkIcon = null;
-        $tradeMark->save();
-
-        
+        self::delete_trade_mark($id);
         session()->flash('success', __('admin.delete_successfully'));
         return back();
     }
@@ -158,12 +152,7 @@ class TradeMarksController extends Controller
     public function multi_delete(Request $request){
         $tradeMarksIDs = $request->item;
         foreach ($tradeMarksIDs as $key => $tradeMarkID) {
-            $tradeMark = TradeMark::find($tradeMarkID);
-            Storage::delete($tradeMark->trademarkIcon);
-            $tradeMark->status = -1;
-            $tradeMark->trademarkIcon = null;
-            $tradeMark->save();
-            
+            self::delete_trade_mark($tradeMarkID);
         }
         session()->flash('seccess', __('admin.delete_successfully'));
         return back();
