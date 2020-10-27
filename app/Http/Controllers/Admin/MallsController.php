@@ -22,18 +22,8 @@ class MallsController extends Controller
             data in datatable comes from MallsDatatable query method
             not this method
         */
-
-        //$data = User::latest()->get();
         $data = Mall::select('*')->whereNotIn('status', [-1])->get();
         return $mall->render('admin.malls.index', ['title' => __('admin.mallsController')]);
-        // return Datatables::of($data)
-        //         ->addIndexColumn()
-        //         ->addColumn('action', function($row){
-        //             $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-        //             return $btn;
-        //         })
-        //         ->rawColumns(['action'])
-        //         ->make(true);
     }
 
     /**
@@ -78,7 +68,6 @@ class MallsController extends Controller
             'icon'                 => 'required|max:10000|'.validate_image(),
             'country_id'           => 'required|numeric',
         ]);
-        //return $request;
         if($validatedData){
             if($request->hasFile('icon')){
                 $validatedData['icon'] = up()->upload([
@@ -170,6 +159,17 @@ class MallsController extends Controller
     }
 
     /**
+    * Remove the specified resourse from storage.
+    */
+    public function delete_mall($id){
+        $mall = Mall::find($id);
+        Storage::delete($mall->icon);
+        $mall->status = -1;
+        $mall->icon = null;
+        $mall->save();
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -177,13 +177,7 @@ class MallsController extends Controller
      */
     public function destroy($id)
     {
-        $mall = Mall::find($id);
-        Storage::delete($mall->icon);
-        $mall->status = -1;
-        $mall->icon = null;
-        $mall->save();
-
-        
+        self::delete_mall($id);
         session()->flash('success', __('admin.delete_successfully'));
         return back();
     }
@@ -196,12 +190,7 @@ class MallsController extends Controller
     public function multi_delete(Request $request){
         $mallsIDs = $request->item;
         foreach ($mallsIDs as $key => $mallId) {
-            $mall = Mall::find($mallId);
-            Storage::delete($mall->icon);
-            $mall->status = -1;
-            $mall->icon = null;
-            $mall->save();
-            
+            self::delete_mall($mallId);
         }
         session()->flash('seccess', __('admin.delete_successfully'));
         return back();
