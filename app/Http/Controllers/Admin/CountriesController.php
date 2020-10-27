@@ -23,17 +23,8 @@ class CountriesController extends Controller
             not this method
         */
 
-        //$data = User::latest()->get();
         $data = Country::select('*')->whereNotIn('status', [-1])->get();
         return $country->render('admin.countries.index', ['title' => __('admin.countriesController')]);
-        // return Datatables::of($data)
-        //         ->addIndexColumn()
-        //         ->addColumn('action', function($row){
-        //             $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-        //             return $btn;
-        //         })
-        //         ->rawColumns(['action'])
-        //         ->make(true);
     }
 
     /**
@@ -62,7 +53,6 @@ class CountriesController extends Controller
             'country_currency'    => 'required',
             'country_flag'        => 'required|max:10000|'.validate_image(),
         ]);
-        //return $request;
         if($validatedData){
             if($request->hasFile('country_flag')){
                 $validatedData['country_flag'] = up()->upload([
@@ -120,9 +110,7 @@ class CountriesController extends Controller
             'country_currency'    => 'required',
             'country_flag'        => 'max:10000|'.validate_image(),
         ]);
-
         if($validatedData){
-
             $country = Country::find($id);
             if($request->hasFile('country_flag')){
                 $validatedData['country_flag'] = up()->upload([
@@ -138,14 +126,9 @@ class CountriesController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
+    // Remove the specified country and its cities and states from storage.
+
+    public function delete_country($id){
         $country = Country::find($id);
         Storage::delete($country->country_flag);
         $country->status = -1;
@@ -161,6 +144,17 @@ class CountriesController extends Controller
             $state->status = -1;
             $state->save();
         }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        self::delete_country($id);
         session()->flash('success', __('admin.delete_successfully'));
         return back();
     }
@@ -173,21 +167,7 @@ class CountriesController extends Controller
     public function multi_delete(Request $request){
         $countriesIDs = $request->item;
         foreach ($countriesIDs as $key => $countryID) {
-            $country = Country::find($countryID);
-            Storage::delete($country->country_flag);
-            $country->status = -1;
-            $country->country_flag = null;           
-            $country->save();
-            $cities = $country->cities;
-            $states = $country->states;
-            foreach ($cities as $city) {
-                $city->status = -1;
-                $city->save();
-            }
-            foreach ($states as $state) {
-                $state->status = -1;
-                $state->save();
-            }
+            self::delete_country($countryID);
         }
         session()->flash('seccess', __('admin.delete_successfully'));
         return back();
