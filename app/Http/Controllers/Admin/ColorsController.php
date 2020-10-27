@@ -102,6 +102,13 @@ class ColorsController extends Controller
         }
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    
     public function delete_color($id){
         $color = Color::find($id);
         $color->status = -1;
