@@ -57,7 +57,6 @@ class CitiesController extends Controller
             'city_name_en'     => 'required|min:3|max:50',
             'country_id'       => 'required|numeric',         
         ]);
-        //return $request;
         if($validatedData){
             $validatedData['status'] = 1;
             City::create($validatedData);
