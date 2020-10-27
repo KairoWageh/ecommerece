@@ -24,17 +24,8 @@ class SizesController extends Controller
             not this method
         */
 
-        //$data = User::latest()->get();
         $data = Size::select('*')->whereNotIn('status', [-1])->get();
         return $size->render('admin.sizes.index', ['title' => __('admin.sizesController')]);
-        // return Datatables::of($data)
-        //         ->addIndexColumn()
-        //         ->addColumn('action', function($row){
-        //             $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-        //             return $btn;
-        //         })
-        //         ->rawColumns(['action'])
-        //         ->make(true);
     }
 
     /**
@@ -70,7 +61,6 @@ class SizesController extends Controller
             'department_id'   => 'required|numeric',
             'is_public'       => 'required|in:yes,no',
         ]);
-        //return $request;
         if($validatedData){
             $validatedData['status'] = 1;
             Size::create($validatedData);
@@ -127,6 +117,15 @@ class SizesController extends Controller
     }
 
     /**
+    * Remove the specified resourse from storage.
+    */
+    public function delete_size($id){
+        $size = Size::find($id);
+        $size->status = -1;
+        $size->save();
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -134,9 +133,7 @@ class SizesController extends Controller
      */
     public function destroy($id)
     {
-        $size = Size::find($id);
-        $size->status = -1;
-        $size->save();
+        self::delete_size($id);
         session()->flash('success', __('admin.delete_successfully'));
         return back();
     }
@@ -149,9 +146,7 @@ class SizesController extends Controller
     public function multi_delete(Request $request){
         $sizesIDs = $request->item;
         foreach ($sizesIDs as $key => $sizeId) {
-            $size = Size::find($sizeId);
-            $size->status = -1;
-            $size->save();
+            self::delete_size($sizeId);
         }
         session()->flash('seccess', __('admin.delete_successfully'));
         return back();
