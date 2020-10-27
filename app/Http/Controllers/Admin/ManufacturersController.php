@@ -22,17 +22,8 @@ class ManufacturersController extends Controller
             not this method
         */
 
-        //$data = User::latest()->get();
         $data = Manufacturer::select('*')->whereNotIn('status', [-1])->get();
         return $manufacturer->render('admin.manufacturers.index', ['title' => __('admin.manufacturesController')]);
-        // return Datatables::of($data)
-        //         ->addIndexColumn()
-        //         ->addColumn('action', function($row){
-        //             $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-        //             return $btn;
-        //         })
-        //         ->rawColumns(['action'])
-        //         ->make(true);
     }
 
     /**
@@ -67,7 +58,6 @@ class ManufacturersController extends Controller
             'long'                 => 'sometimes|nullable',
             'icon'                 => 'required|max:10000|'.validate_image(),
         ]);
-        //return $request;
         if($validatedData){
             if($request->hasFile('icon')){
                 $validatedData['icon'] = up()->upload([
@@ -147,6 +137,17 @@ class ManufacturersController extends Controller
     }
 
     /**
+    * Remove the specified resourse from storage.
+    */
+    public function delete_manufacture($id){
+        $manufacturer = Manufacturer::find($id);
+        Storage::delete($manufacturer->icon);
+        $manufacturer->status = -1;
+        $manufacturer->icon = null;
+        $manufacturer->save();
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -154,13 +155,7 @@ class ManufacturersController extends Controller
      */
     public function destroy($id)
     {
-        $manufacturer = Manufacturer::find($id);
-        Storage::delete($manufacturer->icon);
-        $manufacturer->status = -1;
-        $manufacturer->icon = null;
-        $manufacturer->save();
-
-        
+        self::delete_manufacture($id);
         session()->flash('success', __('admin.delete_successfully'));
         return back();
     }
@@ -171,14 +166,9 @@ class ManufacturersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function multi_delete(Request $request){
-        $manufacturersIDs = $request->item;
-        foreach ($manufacturersIDs as $key => $manufacturersID) {
-            $manufacturer = Manufacturer::find($manufacturersID);
-            Storage::delete($manufacturer->icon);
-            $manufacturer->status = -1;
-            $manufacturer->icon = null;
-            $manufacturer->save();
-            
+        $manufacturesIDs = $request->item;
+        foreach ($manufacturesIDs as $key => $manufactureID) {
+            self::delete_manufacture($manufactureID);
         }
         session()->flash('seccess', __('admin.delete_successfully'));
         return back();
