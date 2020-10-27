@@ -22,18 +22,8 @@ class ShippingCompaniesController extends Controller
             data in datatable comes from ShippingCompaniesDataTable query method
             not this method
         */
-
-        //$data = User::latest()->get();
         $data = ShippingCompany::select('*')->whereNotIn('status', [-1])->get();
         return $shippingCompany->render('admin.shippingCompanies.index', ['title' => __('admin.shippingCompaniesController')]);
-        // return Datatables::of($data)
-        //         ->addIndexColumn()
-        //         ->addColumn('action', function($row){
-        //             $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-        //             return $btn;
-        //         })
-        //         ->rawColumns(['action'])
-        //         ->make(true);
     }
 
     /**
@@ -45,13 +35,10 @@ class ShippingCompaniesController extends Controller
     {
         $companies = User::select('*')->where('level', 'company')
                                       ->whereNotIn('status', [-1])->get();
-
         $companies_select = [];
-        
         foreach($companies as $company){
             $companies_select[$company->id] = $company->name;
         }
-
         return view('admin.shippingCompanies.create', ['title'=> trans("admin.add"), 'companies' => $companies_select]);
     }
 
@@ -71,7 +58,6 @@ class ShippingCompaniesController extends Controller
             'long'                 => 'sometimes|nullable',
             'icon'                 => 'required|max:10000|'.validate_image(),
         ]);
-        //return $request;
         if($validatedData){
             if($request->hasFile('icon')){
                 $validatedData['icon'] = up()->upload([
@@ -110,9 +96,7 @@ class ShippingCompaniesController extends Controller
         $shippingCompany = ShippingCompany::find($id);
         $companies = User::select('*')->where('level', 'company')
                                       ->whereNotIn('status', [-1])->get();
-
         $companies_select = [];
-        
         foreach($companies as $company){
             $companies_select[$company->id] = $company->name;
         }
@@ -156,6 +140,17 @@ class ShippingCompaniesController extends Controller
     }
 
     /**
+    * Remove the specified resourse from storage.
+    */
+    public function delete_shipping_company($id){
+        $shippingCompany = ShippingCompany::find($id);
+        Storage::delete($shippingCompany->icon);
+        $shippingCompany->status = -1;
+        $shippingCompany->icon = null;
+        $shippingCompany->save();
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -163,13 +158,7 @@ class ShippingCompaniesController extends Controller
      */
     public function destroy($id)
     {
-        $shippingCompany = ShippingCompany::find($id);
-        Storage::delete($shippingCompany->icon);
-        $shippingCompany->status = -1;
-        $shippingCompany->icon = null;
-        $shippingCompany->save();
-
-        
+        self::delete_shipping_company($id);
         session()->flash('success', __('admin.delete_successfully'));
         return back();
     }
@@ -182,12 +171,7 @@ class ShippingCompaniesController extends Controller
     public function multi_delete(Request $request){
         $shippingCompaniesIDs = $request->item;
         foreach ($shippingCompaniesIDs as $key => $shippingCompanyID) {
-            $shippingCompany = ShippingCompany::find($shippingCompanyID);
-            Storage::delete($shippingCompany->icon);
-            $shippingCompany->status = -1;
-            $shippingCompany->icon = null;
-            $shippingCompany->save();
-            
+            self::delete_shipping_company($shippingCompanyID);
         }
         session()->flash('seccess', __('admin.delete_successfully'));
         return back();
