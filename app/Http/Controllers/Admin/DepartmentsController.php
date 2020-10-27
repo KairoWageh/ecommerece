@@ -21,18 +21,8 @@ class DepartmentsController extends Controller
             data in datatable comes from StatesDatatable query method
             not this method
         */
-
-        //$data = User::latest()->get();
         $data = Department::select('*')->whereNotIn('status', [-1])->get();
         return $department->render('admin.departments.index', ['title' => __('admin.departmentsController')]);
-        // return Datatables::of($data)
-        //         ->addIndexColumn()
-        //         ->addColumn('action', function($row){
-        //             $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-        //             return $btn;
-        //         })
-        //         ->rawColumns(['action'])
-        //         ->make(true);
     }
 
     /**
@@ -63,7 +53,6 @@ class DepartmentsController extends Controller
             'keywords'                             => 'sometimes|nullable',  
             'parent_id'                            => 'sometimes|nullable|numeric',
         ]);
-        //return $request;
         if($validatedData){
             if($request->hasFile('icon')){
                 $validatedData['icon'] = up()->upload([
