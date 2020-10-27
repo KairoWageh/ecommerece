@@ -23,17 +23,8 @@ class WeightsController extends Controller
             not this method
         */
 
-        //$data = User::latest()->get();
         $data = Weight::select('*')->whereNotIn('status', [-1])->get();
         return $weight->render('admin.weights.index', ['title' => __('admin.weightsController')]);
-        // return Datatables::of($data)
-        //         ->addIndexColumn()
-        //         ->addColumn('action', function($row){
-        //             $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-        //             return $btn;
-        //         })
-        //         ->rawColumns(['action'])
-        //         ->make(true);
     }
 
     /**
@@ -58,7 +49,6 @@ class WeightsController extends Controller
             'name_ar'     => 'required',
             'name_en'     => 'required',
         ]);
-        //return $request;
         if($validatedData){
             $validatedData['status'] = 1;
             Weight::create($validatedData);
@@ -113,6 +103,15 @@ class WeightsController extends Controller
     }
 
     /**
+    * Remove the specified resourse from storage.
+    */
+    public function delete_weight($id){
+        $weight = Weight::find($id);
+        $weight->status = -1;
+        $weight->save();
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -120,9 +119,7 @@ class WeightsController extends Controller
      */
     public function destroy($id)
     {
-        $weight = Weight::find($id);
-        $weight->status = -1;
-        $weight->save();
+        self::delete_weight($id);
         session()->flash('success', __('admin.delete_successfully'));
         return back();
     }
@@ -135,9 +132,7 @@ class WeightsController extends Controller
     public function multi_delete(Request $request){
         $weightsIDs = $request->item;
         foreach ($weightsIDs as $key => $weightId) {
-            $weight = Weight::find($weightId);
-            $weight->status = -1;
-            $weight->save();
+            self::delete_weight($weightId);
         }
         session()->flash('seccess', __('admin.delete_successfully'));
         return back();
