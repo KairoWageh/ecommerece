@@ -13,6 +13,8 @@ use App\Weight;
 use App\RelatedProduct;
 use App\DataTables\ProductsDataTable;
 use Storage;
+use Cart;
+use App\CartStorageModel;
 // use Upload;
 
 class ProductsController extends Controller
@@ -28,18 +30,8 @@ class ProductsController extends Controller
             data in datatable comes from CountriesDatatable query method
             not this method
         */
-
-        //$data = User::latest()->get();
         $data = Product::select('*')->whereNotIn('status', [-1])->get();
         return $product->render('admin.products.index', ['title' => __('admin.productsController')]);
-        // return Datatables::of($data)
-        //         ->addIndexColumn()
-        //         ->addColumn('action', function($row){
-        //             $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-        //             return $btn;
-        //         })
-        //         ->rawColumns(['action'])
-        //         ->make(true);
     }
 
     /**
@@ -207,7 +199,6 @@ class ProductsController extends Controller
             $validatedData['other_data'] = rtrim($other_data, '|');
         }
 
-        //return $validatedData;
         Product::where('id', $id)->update($validatedData);
 
         return response(['status' => true, 'message' => __('admin.updated_successfully')], 200);
@@ -288,7 +279,12 @@ class ProductsController extends Controller
         $product->status = -1;
         $product->photo = null;
         $product->save();
+        // search by cart_product_id as the form productId_productTitle
+        // $found = CartStorageModel::find($product->id.'_'.$product->title);
+        // Cart::remove($found);
         up()->delete_files($id);
+
+        
     }
 
     /**
@@ -299,9 +295,63 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
+        /* get all cart data and search if product is found in order not to delete 
+         if it is found in any user's cart
+         * if not found, delete it
+        */
+        $product = Product::find($id);
+        $product_id = $product->id;
+        $product_title = $product->title;
+        $item_id = $product_id.'_'.$product_title;
+
+        $all_cart_data = CartStorageModel::select('cart_data')->get();
+
+
+        //return $all_cart_data;
+        if($all_cart_data){
+            foreach ($all_cart_data as $user_cart_data) {
+                echo $user_cart_data.'<br><br><br>';
+                foreach ($user_cart_data->cart_data as $key=>$user_cart_data_item) {
+                    $user_cart_data_item_id = $user_cart_data_item->id;
+                    $item_product_id_array = explode('_', $user_cart_data_item_id);
+                    $item_product_id = $item_product_id_array[0];
+                    if($item_product_id == $id){
+                        // if item_product_id equals product id ==> delete $user_cart_data_item from cart
+                        $cart_data = $user_cart_data->cart_data;
+                        // echo 'user_cart_data before::: <br>'.$user_cart_data.'<br><br><br>';
+                        // echo 'cart_data before::::::<br>'.$cart_data.'<br><br>'; 
+                        unset($cart_data[$key]); 
+                        unset($user_cart_data['cart_data']);   
+                        
+                        // echo 'user_cart_data after::::::: <br>'.$user_cart_data.'<br><br><br>';   
+                        // echo 'cart_data after::::::<br>'.$cart_data.'<br><br>'; 
+                        
+                    }
+                    $user_cart_data->save();
+                    echo $user_cart_data;
+                }
+                // echo $user_cart_data.'<br><br><br><br><br>';
+                // echo gettype($user_cart_data).'<br><br><br><br><br>';
+                // echo '<pre>'.$user_cart_data->cart_data.'<br><br><br><br><br><br><br><br></pre>';
+                // $flight = CartStorageModel::find('cart_data')->get();
+
+                // $flight->name = 'New Flight Name';
+
+                // $flight->save();
+                // $all_cart_data->update();
+                $all_cart_data = CartStorageModel::select('cart_data')->get();
+                echo $all_cart_data;
+                //return $all_cart_data;
+            }
+
+        }else{
+            return null;
+        }
+
         $this->deleteProduct($id);
+        
         session()->flash('success', __('admin.delete_successfully'));
-        return back();
+        // return back();
     }
 
     /**
@@ -325,14 +375,6 @@ class ProductsController extends Controller
     */
     public function upload_file(Request $request, $id){
         if($request->hasFile('file')){
-
-            // resize image
-            // $request->file('file')->resize(150, 100, function ($constraint) {
-            //     $constraint->aspectRatio();
-            // });
-
-
-
             $fid = up()->upload([
                 'file'        => 'file',
                 'path'        => 'products/'.$id,
@@ -349,8 +391,6 @@ class ProductsController extends Controller
             up()->delete($request->id);
         }
     }
-
-
     /**
     * product main photo
     */
@@ -372,12 +412,12 @@ class ProductsController extends Controller
     public function delete_main_image($id){
         $product = Product::find($id);
         Storage::delete($product->photo);
-        $product->photo = null;
+        //$product->photo = null;
+        $product->photo = "";
         $product->save();
         return response(['status' => true], 200);
     }
 
-    
 
     /**
     * prepare shipping info
