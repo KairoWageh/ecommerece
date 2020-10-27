@@ -22,18 +22,8 @@ class StatesController extends Controller
             data in datatable comes from StatesDatatable query method
             not this method
         */
-
-        //$data = User::latest()->get();
         $data = State::select('*')->whereNotIn('status', [-1])->get();
         return $state->render('admin.states.index', ['title' => __('admin.statesController')]);
-        // return Datatables::of($data)
-        //         ->addIndexColumn()
-        //         ->addColumn('action', function($row){
-        //             $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-        //             return $btn;
-        //         })
-        //         ->rawColumns(['action'])
-        //         ->make(true);
     }
 
     /**
@@ -110,7 +100,6 @@ class StatesController extends Controller
             'country_id'        => 'required|numeric',   
             'city_id'           => 'required|numeric',      
         ]);
-        //return $request;
         if($validatedData){
             $validatedData['status'] = 1;
             State::create($validatedData);
@@ -202,6 +191,15 @@ class StatesController extends Controller
     }
 
     /**
+    * Remove the specified resourse from storage.
+    */
+    public function delete_state($id){
+        $state = State::find($id);
+        $state->status = -1;
+        $state->save();
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -209,9 +207,7 @@ class StatesController extends Controller
      */
     public function destroy($id)
     {
-        $state = State::find($id);
-        $state->status = -1;
-        $state->save();
+        self::delete_state($id);
         session()->flash('success', __('admin.delete_successfully'));
         return back();
     }
@@ -224,9 +220,7 @@ class StatesController extends Controller
     public function multi_delete(Request $request){
         $statesIDs = $request->item;
         foreach ($statesIDs as $key => $stateID) {
-            $state = State::find($stateID);
-            $state->status = -1;
-            $state->save();
+            self::delete_state($stateID);
         }
         session()->flash('seccess', __('admin.delete_successfully'));
         return back();
