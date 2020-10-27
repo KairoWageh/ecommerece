@@ -21,18 +21,8 @@ class UsersController extends Controller
             data in datatable comes from UsersDatatable query method
             not this method
         */
-
-        //$data = User::latest()->get();
         $data = User::select('*')->whereNotIn('status', [-1])->get();
         return $user->render('admin.users.index', ['title' => __('admin.usersController')]);
-        // return Datatables::of($data)
-        //         ->addIndexColumn()
-        //         ->addColumn('action', function($row){
-        //             $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-        //             return $btn;
-        //         })
-        //         ->rawColumns(['action'])
-        //         ->make(true);
     }
 
     /**
@@ -126,6 +116,15 @@ class UsersController extends Controller
     }
 
     /**
+    * Remove the specified resourse from storage.
+    */
+    public function delete_user($id){
+        $user = User::find($id);
+        $user->status = -1;
+        $user->save();
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -133,9 +132,7 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
-        $user->status = -1;
-        $user->save();
+        self::delete_user($id);
         session()->flash('success', __('admin.delete_successfully'));
         return back();
     }
@@ -148,9 +145,7 @@ class UsersController extends Controller
     public function multi_delete(Request $request){
         $usersIDs = $request->item;
         foreach ($usersIDs as $key => $userID) {
-            $user = User::find($userID);
-            $user->status = -1;
-            $user->save();
+            self::delete_user($userID);
         }
         session()->flash('seccess', __('admin.delete_successfully'));
         return back();
