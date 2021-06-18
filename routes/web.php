@@ -53,7 +53,7 @@ Route::group(['prefix' => '', 'namespace' => 'User'], function(){
 		// Route::get('checkout/payment/complete', 'Site\CheckoutController@complete')->name('checkout.payment.complete');
 		Route::get('cart/payment/complete', 'CartController@complete')->name('cart.payment.complete');
 
-		Route::get('account/orders', 'Site\AccountController@getOrders')->name('account.orders');
+		// Route::get('account/orders', 'Site\AccountController@getOrders')->name('account.orders');
 
 
 		// Route::get('/plans', 'PlanController@index')->name('plans.index');

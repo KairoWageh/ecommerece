@@ -83,7 +83,26 @@ jQuery(document).ready(function($){
     $('body').scrollspy({ 
         target: '.navbar-collapse',
         offset: 95
-    })      
+    });
+
+
+    // handle cart logic
+
+    $(".add-to-cart-link").click(function (e) {
+        e.preventDefault();
+        var ele = $(this);
+        var id = ele.attr("data-id");
+        $.ajax({  
+           url: "cart/item/"+id+"/add",
+           method: "get",
+           //data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id"), quantity: ele.parents("tr").find(".quantity").val()},
+           success: function (response) {
+               //window.location.reload();
+           }, error: function(){
+                console.log('error');
+           }
+        });
+    });      
 });
 
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

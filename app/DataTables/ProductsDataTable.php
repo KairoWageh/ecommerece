@@ -55,67 +55,66 @@ class ProductsDatatable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('productdatatable-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->dom('Blfrtip')
-                    ->lengthMenu([[10, 25, 50, 100], [10, 25, 50, __('admin.all_record')]])
-                    ->orderBy(1)
-                    ->buttons(
-                        Button::make('create')->className('btn btn-info'),
-                        //Button::make('remove'),
-                        Button::make('print')->className('btn btn-primary'),
-                        Button::make('csv')->className('btn btn-info'),
-                        Button::make('excel')->className('btn btn-success'),
-                        //Button::make('reset')->className('btn btn-default'),
-                        Button::make('reload')->className('btn btn-default'),
-                        Button::make('delete')->className('btn btn-danger deleteBtn'),
+          ->setTableId('productdatatable-table')
+          ->columns($this->getColumns())
+          ->minifiedAjax()
+          ->dom('Blfrtip')
+          ->lengthMenu([[10, 25, 50, 100], [10, 25, 50, __('admin.all_record')]])
+          ->orderBy(1)
+          ->buttons(
+              Button::make('create')->className('btn btn-info'),
+              //Button::make('remove'),
+              Button::make('print')->className('btn btn-primary'),
+              Button::make('csv')->className('btn btn-info'),
+              Button::make('excel')->className('btn btn-success'),
+              //Button::make('reset')->className('btn btn-default'),
+              Button::make('reload')->className('btn btn-default'),
+              Button::make('delete')->className('btn btn-danger deleteBtn'),
 
-                    )
-                    ->parameters([
-                        'initComplete' => 'function () {
-                            this.api().columns([2, 3]).every(function () {
-                                var column = this;
-                                var input = document.createElement("input");
-                                $(input).appendTo($(column.footer()).empty())
-                                .on(\'keyup\', function () {
-                                    column.search($(this).val(), false, false, true).draw();
-                                });
-                            });
-                        }',
-                        // include language translation of data table 
-                        'language' => [
-                          "sProcessing" => __("admin.sProcessing"),
-                          "sLengthMenu" => __("admin.sLengthMenu"),
-                          "sZeroRecords" => __("admin.sZeroRecords"),
-                          "sEmptyTable" => __("admin.sEmptyTable"),
-                          "sInfo" => __("admin.sInfo"),
-                          "sInfoEmpty" => __("admin.sInfoEmpty"),
-                          "sInfoFiltered" => __("admin.sInfoFiltered"),
-                          "sInfoPostFix" => __("admin.sInfoPostFix"),
-                          "sSearch" => __("admin.sSearch"),
-                          "sUrl" => __("admin.sUrl"),
-                          "sInfoThousands" => __("admin.sInfoThousands"),
-                          "sLoadingRecords" => __("admin.sLoadingRecords"),
-                          "oPaginate" => [
-                              "sFirst" => __("admin.sFirst"),
-                              "sLast" => __("admin.sLast"),
-                              "sNext" => __("admin.sNext"),
-                              "sPrevious" => __("admin.sPrevious")
-                          ],
-                          "oAria" => [
-                              "sSortAscending" => __("admin.sSortAscending"),
-                              "sSortDescending" => __("admin.sSortDescending")
-                          ]
-                        ]
-                        /**
-                        * another way to include language translation of data table using route url
-                        */
-                        // 'language' => [
-                        //     "url" => url(adminURL("dataTable/lang"))
-                        // ]
-                    ])
-                    ;
+          )
+          ->parameters([
+              'initComplete' => 'function () {
+                  this.api().columns([2, 3]).every(function () {
+                      var column = this;
+                      var input = document.createElement("input");
+                      $(input).appendTo($(column.footer()).empty())
+                      .on(\'keyup\', function () {
+                          column.search($(this).val(), false, false, true).draw();
+                      });
+                  });
+              }',
+              // include language translation of data table 
+              'language' => [
+                "sProcessing" => __("admin.sProcessing"),
+                "sLengthMenu" => __("admin.sLengthMenu"),
+                "sZeroRecords" => __("admin.sZeroRecords"),
+                "sEmptyTable" => __("admin.sEmptyTable"),
+                "sInfo" => __("admin.sInfo"),
+                "sInfoEmpty" => __("admin.sInfoEmpty"),
+                "sInfoFiltered" => __("admin.sInfoFiltered"),
+                "sInfoPostFix" => __("admin.sInfoPostFix"),
+                "sSearch" => __("admin.sSearch"),
+                "sUrl" => __("admin.sUrl"),
+                "sInfoThousands" => __("admin.sInfoThousands"),
+                "sLoadingRecords" => __("admin.sLoadingRecords"),
+                "oPaginate" => [
+                    "sFirst" => __("admin.sFirst"),
+                    "sLast" => __("admin.sLast"),
+                    "sNext" => __("admin.sNext"),
+                    "sPrevious" => __("admin.sPrevious")
+                ],
+                "oAria" => [
+                    "sSortAscending" => __("admin.sSortAscending"),
+                    "sSortDescending" => __("admin.sSortDescending")
+                ]
+              ]
+              /**
+              * another way to include language translation of data table using route url
+              */
+              // 'language' => [
+              //     "url" => url(adminURL("dataTable/lang"))
+              // ]
+          ]);
     }
 
     /**

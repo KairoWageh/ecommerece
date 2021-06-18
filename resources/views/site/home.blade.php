@@ -87,7 +87,6 @@
 				<div class="latest-product">
 					<h2 class="section-title">{{__('user.latest_products')}}</h2>
 					<div class="product-carousel">
-
 						@foreach($latest_products as $product)
 						<div class="single-product">
 							<div class="product-f-image"  width="195px" height="243px">
@@ -95,8 +94,13 @@
 								<div class="product-hover">
 									<button class="add-to-cart-link" data-id="{{ $product->id }}"><i class="fa fa-shopping-cart"></i> 
 									{{__('user.add_to_cart')}}</button>
-									<!-- <a href="{{route('cart.add', $product->id)}}" class="add-to-cart-link">		<i class="fa fa-shopping-cart"></i> 
-									{{__('user.add_to_cart')}}</a> -->
+									<!-- <a href="{{route('cart.add', $product->id)}}" class="add_to_cart_button">
+	                        	<i class="fa fa-shopping-cart"></i> 
+								{{__('user.add_to_cart')}}
+							</a> -->
+
+
+
 									<a href="{{route('user.single_product', $product->id)}}" class="view-details-link"><i class="fa fa-link"></i> {{__('user.see_datails')}}</a>
 								</div>
 							</div>
@@ -295,7 +299,6 @@
 <script type="text/javascript">
  
 	$(".add-to-cart-link").click(function (e) {
-		console.log('add to cart')
     	e.preventDefault();
        	var ele = $(this);
 
@@ -308,38 +311,38 @@
            }
         });
     });
-        $(".update-cart").click(function (e) {
-           e.preventDefault();
+    $(".update-cart").click(function (e) {
+       e.preventDefault();
+
+       var ele = $(this);
+
+        $.ajax({
+           url: '{{ url('update-cart') }}',
+           method: "patch",
+           data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id"), quantity: ele.parents("tr").find(".quantity").val()},
+           success: function (response) {
+               window.location.reload();
+           }
+        });
+    });
  
-           var ele = $(this);
- 
+    $(".remove-from-cart").click(function (e) {
+        e.preventDefault();
+
+        var ele = $(this);
+
+        if(confirm("Are you sure")) {
             $.ajax({
-               url: '{{ url('update-cart') }}',
-               method: "patch",
-               data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id"), quantity: ele.parents("tr").find(".quantity").val()},
-               success: function (response) {
-                   window.location.reload();
-               }
+                url: '{{ url('remove-from-cart') }}',
+                method: "DELETE",
+                data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id")},
+                success: function (response) {
+                    window.location.reload();
+                }
             });
-        });
- 
-        $(".remove-from-cart").click(function (e) {
-            e.preventDefault();
- 
-            var ele = $(this);
- 
-            if(confirm("Are you sure")) {
-                $.ajax({
-                    url: '{{ url('remove-from-cart') }}',
-                    method: "DELETE",
-                    data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id")},
-                    success: function (response) {
-                        window.location.reload();
-                    }
-                });
-            }
-        });
- 
+        }
+    });
+
     </script>
  
 @endsection

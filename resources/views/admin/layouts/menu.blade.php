@@ -2,7 +2,17 @@
 <!--inner block end here-->
 <!--copy rights start here-->
 <div class="copyrights">
-	 <p>© 2020 Ecommerce. All Rights Reserved | Design by  <a href="https://www.linkedin.com/in/kairo-wageh-591811b5/" target="_blank">Kairo Wageh </a> </p>
+	<?php
+        use App\Setting;
+        $app = Setting::first();
+    ?>	<p>&copy; 2020 
+        @if(session('lang') == 'en')
+            {{ $app->sitename_en }}
+        @elseif(session('lang') == 'ar')
+            {{ $app->sitename_ar }}
+        @endif. {{ __('user.all_rights_reserved') }} | {{ __('user.design_by') }} 
+        <a href="https://www.linkedin.com/in/kairo-wageh-591811b5/" target="_blank">Kairo Wageh</a>
+    </p>
 </div>	
 <!--COPY rights end here-->
 </div>

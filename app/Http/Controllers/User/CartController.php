@@ -87,8 +87,6 @@ class CartController extends Controller
             'phone_number'       => __('user.phone_number'),
             'notes'              => __('user.notes')
         ]);
-
-//return $validatedData;
         $order = Order::create([
             'order_number'      =>  'ORD-'.strtoupper(uniqid()),
             'user_id'           =>  auth()->user()->id,

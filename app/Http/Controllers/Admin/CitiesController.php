@@ -97,7 +97,6 @@ class CitiesController extends Controller
         $city = City::find($id);
         $country_id = $city->country->id;
         $title = __('admin.edit');
-        //return $country_id;
         return view('admin.cities.edit', ['city' => $city, 'title' => $title, 'countries' =>$select, 'country_id' => $country_id]);
     }
 
@@ -128,7 +127,6 @@ class CitiesController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     
     public function delete_city($id){

@@ -15,6 +15,24 @@ class UploadController extends Controller
     	}
     	if(request()->hasFile($data['file']) && $data['upload_type'] == 'single'){
             $file      = request()->file($data['file']);
+            // $sourceProperties = getimagesize($file);
+            // $imageType = $sourceProperties['mime'];
+            // switch ($imageType) {
+            //     case 'image/png':
+            //         $imageSrc = imagecreatefrompng($file);
+            //         $tmp = imageResize($imageSrc,$sourceProperties[0],$sourceProperties[1]);
+            //         imagepng($tmp,$dirPath. $newFileName. $ext);
+            //         break; 
+            //     case 'image/jpeg':
+            //         $imageSrc = imagecreatefromjpeg($file);
+            //         $tmp = $this->imageResize($imageSrc,$sourceProperties[0],$sourceProperties[1]);
+            //         // return $tmp->store($data['path']);
+            //         //return imagepng($tmp,$data['path']);
+            //         //return $file->store($data['path']);
+            //         return imagejpeg($tmp)->store($data['path']);
+            //         break;
+            // }
+      //       return $imageType;
             $size = Image::make($file->getRealPath());              
             $size->resize(300, 300);
     		Storage::has($data['delete_file'])? Storage::delete($data['delete_file']): '';
@@ -45,14 +63,26 @@ class UploadController extends Controller
     	}
     }
 
-    // delete a specific file using its id
-    public function delete($id){
-        $file = File::find($id);
-        if(!empty($file)){ 
-            Storage::delete($file->full_file);
-            $file->delete();
-        }   
-    }
+
+    // function imageResize($imageSrc,$imageWidth,$imageHeight) {
+
+    //     $newImageWidth =200;
+    //     $newImageHeight =200;
+
+    //     $newImageLayer=imagecreatetruecolor($newImageWidth,$newImageHeight);
+    //     imagecopyresampled($newImageLayer,$imageSrc,0,0,0,0,$newImageWidth,$newImageHeight,$imageWidth,$imageHeight);
+
+    //     return $newImageLayer;
+    // }
+
+    // // delete a specific file using its id
+    // public function delete($id){
+    //     $file = File::find($id);
+    //     if(!empty($file)){ 
+    //         Storage::delete($file->full_file);
+    //         $file->delete();
+    //     }   
+    // }
 
     // delete multiple files using ids, then delete container directory
     public function delete_files($product_id){

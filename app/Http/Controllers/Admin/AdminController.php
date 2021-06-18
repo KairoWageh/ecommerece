@@ -59,16 +59,20 @@ class AdminController extends Controller
             'password' => 'required'
         ]);
         if($validatedData){
-            $request->password = bcrypt($request->password);
-            Admin::create([
-                'name'     => $request['name'],
-                'email'    => $request['email'],
-                'password' => $request->password,
-                'status'   => 1
-            ]);
+            self::adminCreate($request);
             session()->flash('success', __('admin.record_added_successfully'));
             return redirect(adminURL('admin/admin'));
         }
+    }
+
+    public function adminCreate($request){
+        $request->password = bcrypt($request->password);
+        Admin::create([
+            'name'     => $request['name'],
+            'email'    => $request['email'],
+            'password' => $request->password,
+            'status'   => 1
+        ]);
     }
 
     /**
@@ -112,7 +116,6 @@ class AdminController extends Controller
 
         if($validatedData){
             $admin = Admin::find($id);
-            //return gettype($validatedData);
             $validatedData['password'] = bcrypt($request->password);
             Admin::where('id', $id)->update($validatedData);
             session()->flash('success', __('admin.updated_successfully'));
@@ -124,13 +127,23 @@ class AdminController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
+     */
+    
+    public function delete_admin($id){
+        $admin = Admin::find($id);
+        $admin->status = -1;
+        $admin->save();
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $admin = Admin::find($id);
-        $admin->status = -1;
-        $admin->save();
+        self::delete_admin($id);
         session()->flash('success', __('admin.delete_successfully'));
         return back();
     }
@@ -143,9 +156,7 @@ class AdminController extends Controller
     public function multi_delete(Request $request){
         $adminsIDs = $request->item;
         foreach ($adminsIDs as $key => $adminID) {
-            $admin = Admin::find($adminID);
-            $admin->status = -1;
-            $admin->save();
+            self::delete_admin($adminID);
         }
         session()->flash('seccess', __('admin.delete_successfully'));
         return back();

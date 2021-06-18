@@ -186,7 +186,7 @@
 												<span class="prfil-img"><img src="images/p1.png" alt=""> </span> 
 												<div class="user-name">
 													<p>{{admin()->user()->name}}</p>
-													<span>Administrator</span>
+													<span>{{__('admin.admin')}}</span>
 												</div>
 												<i class="fa fa-angle-down lnr"></i>
 												<i class="fa fa-angle-up lnr"></i>
@@ -207,20 +207,20 @@
 				</div>
 <!--heder end here-->
 <!-- script-for sticky-nav -->
-		<script>
-		$(document).ready(function() {
-			 var navoffeset=$(".header-main").offset().top;
-			 $(window).scroll(function(){
-				var scrollpos=$(window).scrollTop(); 
-				if(scrollpos >=navoffeset){
-					$(".header-main").addClass("fixed");
-				}else{
-					$(".header-main").removeClass("fixed");
-				}
-			 });
-			 
-		});
-		</script>
+<script>
+$(document).ready(function() {
+	 var navoffeset=$(".header-main").offset().top;
+	 $(window).scroll(function(){
+		var scrollpos=$(window).scrollTop(); 
+		if(scrollpos >=navoffeset){
+			$(".header-main").addClass("fixed");
+		}else{
+			$(".header-main").removeClass("fixed");
+		}
+	 });
+	 
+});
+</script>
 		<!-- /script-for sticky-nav -->
 		<!--inner block start here-->
 <div class="inner-block">

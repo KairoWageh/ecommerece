@@ -116,12 +116,19 @@
 	  </header><!-- End Header -->
 	<div class="login-page">
 	    <div class="login-main"> 
+	    	@if(session()->has('success'))
+				<div class="alert alert-success">
+					<h4>{{ session()->get('success') }}</h4>
+				</div>
+			@endif
 
-	    	@if(session('error'))
-	    		<div class="alert alert-danger">
-		    		{!! session('error') !!}
-		    	</div>
-	    	@endif
+			@if(session()->has('error'))
+				<div class="alert alert-danger">
+					<h4>
+						{{ session()->get('error') }}
+					</h4>
+				</div>
+			@endif
 	    	@if(count($errors->all()) > 0) 
 				<div class="alert alert-danger">
 					@foreach($errors->all() as $error)

@@ -13,16 +13,12 @@
 	<link href="{{asset('public/design/adminpanel/css/style.css')}}" rel="stylesheet" type="text/css" media="all"/>
 	@if(direction() == 'rtl')
 	<link rel="stylesheet" href="{{ asset('public/design/site/css/bootstrap-rtl.css') }}">
-	<!-- <link href="{{asset('public/design/adminpanel/css/style-ar.css')}}" rel="stylesheet" type="text/css" media="all"/> -->
+	<link href="{{asset('public/design/adminpanel/css/style-ar.css')}}" rel="stylesheet" type="text/css" media="all"/>
 	@endif
 
-	<!-- 21/8/2020 -->
-	<!-- @if(app()->getLocale() == 'ar')
-		<link rel="stylesheet" href="{{ asset('public/design/site/css/bootstrap-rtl.css') }}">
-		<link rel="stylesheet" href="{{ asset('public/design/site/css/custom-rtl.css') }}">
-		<link rel="stylesheet" href="{{ asset('public/design/site/css/plugins-rtl.min.css') }}">
-	 @endif -->
-	<!-- 21/8/2020 -->
+	<!-- select2 -->
+	<link rel="stylesheet" type="text/css" href="{{ asset('public/design/adminpanel/css/select2.min.css') }}">
+
 	<!-- datepicker -->
 	<link rel="stylesheet" type="text/css" href="{{asset('public/design/adminpanel/css/bootstrap-datepicker.min.css')}}">
 	<!--//datepicker -->
@@ -38,7 +34,7 @@
 	<script src="{{asset('public/design/adminpanel/js/Chart.min.js')}}"></script>
 	<!--//charts-->
 	<!-- geo chart -->
-	<script src="//cdn.jsdelivr.net/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script>
+	<script src="{{asset('public/design/adminpanel/js/modernizr.min.js')}}" type="text/javascript"></script>
 	<script>window.modernizr || document.write('<script src="lib/modernizr/modernizr-custom.js"><\/script>')</script>
 	<!--<script src="lib/html5shiv/html5shiv.js"></script>-->
 	<!-- Chartinator  -->

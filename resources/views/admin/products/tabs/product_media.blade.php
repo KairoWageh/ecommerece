@@ -32,6 +32,8 @@
 					this.emit('addedfile', mock);
 					this.options.thumbnail.call(this, mock, '{{ Storage::url($product->photo) }}');
 					$('.dz-progress').remove();
+				@else
+					console.log('empty product photo')
 				@endif
 				this.on('sending', function(file, xhr, formData){
 					formData.append('fid', '');

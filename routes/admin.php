@@ -87,6 +87,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
 		Route::post('upload/image/{pid}', 'ProductsController@upload_file');
 		Route::post('delete/image', 'ProductsController@delete_file');
 		Route::post('products/{id}/load/shippingInfo', 'ProductsController@loadShippingInfo');
+		Route::post('products/search', 'ProductsController@search_product');
 
 		// site settings
 		Route::get('settings', 'SettingsController@settings')->name('admin.settings');
