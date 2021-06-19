@@ -31,7 +31,7 @@ class ProductsController extends Controller
             not this method
         */
         $data = Product::select('*')->whereNotIn('status', [-1])->get();
-        return $product->render('admin.products.index', ['title' => __('admin.productsController')]);
+        return $product->render('admin.products.index', ['title' => __('productsController')]);
     }
 
     /**
@@ -104,7 +104,7 @@ class ProductsController extends Controller
         $product = Product::find($id);
         // $title = __('admin.edit');
         // return view('admin.countries.edit', compact('country', 'title'));
-        return view('admin.products.product', ['title' => trans("admin.create_or_edit_product", ['title' => $product->title]), 'product' => $product]);
+        return view('admin.products.product', ['title' => trans("create_or_edit_product", ['title' => $product->title]), 'product' => $product]);
     }
 
 
@@ -139,26 +139,26 @@ class ProductsController extends Controller
             'product_status'         => 'sometimes|nullable|in:pending,refused,active',
             'reason'                 => 'sometimes|nullable|numeric',
         ], [], [
-            'title'                  => __('admin.product_title'),
-            'content'                => __('admin.product_content'),
-            'department_id'          => __('admin.department'),
-            'trade_mark_id'          => __('admin.trademark'),
-            'manu_id'                => __('admin.manufacture'),
-            'color_id'               => __('admin.color'),
-            'size'                   => __('admin.size'),
-            'size_id'                => __('admin.size_id'),
-            'currency_id'            => __('admin.currency'),
-            'price'                  => __('admin.price'),
-            'stock'                  => __('admin.stock'),
-            'start_at'               => __('admin.start_at'),
-            'end_at'                 => __('admin.end_at'),
-            'start_offer_at'         => __('admin.start_offer_at'),
-            'end_offer_at'           => __('admin.end_offer_at'),
-            'offer_price'            => __('admin.offer_price'),
-            'weight'                 => __('admin.weight'),
-            'weight_id'              => __('admin.weight_id'),
-            'product_status'         => __('admin.product_status'),
-            'reason'                 => __('admin.reason'),
+            'title'                  => __('product_title'),
+            'content'                => __('product_content'),
+            'department_id'          => __('department'),
+            'trade_mark_id'          => __('trademark'),
+            'manu_id'                => __('manufacture'),
+            'color_id'               => __('color'),
+            'size'                   => __('size'),
+            'size_id'                => __('size_id'),
+            'currency_id'            => __('currency'),
+            'price'                  => __('price'),
+            'stock'                  => __('stock'),
+            'start_at'               => __('start_at'),
+            'end_at'                 => __('end_at'),
+            'start_offer_at'         => __('start_offer_at'),
+            'end_offer_at'           => __('end_offer_at'),
+            'offer_price'            => __('offer_price'),
+            'weight'                 => __('weight'),
+            'weight_id'              => __('weight_id'),
+            'product_status'         => __('product_status'),
+            'reason'                 => __('reason'),
         ]);
 
         if(request(''))
@@ -226,7 +226,7 @@ class ProductsController extends Controller
                 $copied_product->save();
             }
 
-            // copy product malls 
+            // copy product malls
             $copy_malls = $product_to_copy->malls()->get();
             foreach ($copy_malls as $mall) {
                 ProductMall::create([
@@ -265,12 +265,12 @@ class ProductsController extends Controller
                     ]);
                 }
             }
-            
+
             return response(['status' => true, 'message' => __('admin.product_created'), 'id' => $copied_product->id], 200);
         }else{
             return redirect(adminURL('/'));
         }
-        
+
     }
 
     public function deleteProduct($id){
@@ -284,7 +284,7 @@ class ProductsController extends Controller
         // Cart::remove($found);
         up()->delete_files($id);
 
-        
+
     }
 
     /**
@@ -295,7 +295,7 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        /* get all cart data and search if product is found in order not to delete 
+        /* get all cart data and search if product is found in order not to delete
          if it is found in any user's cart
          * if not found, delete it
         */
@@ -319,13 +319,13 @@ class ProductsController extends Controller
                         // if item_product_id equals product id ==> delete $user_cart_data_item from cart
                         $cart_data = $user_cart_data->cart_data;
                         // echo 'user_cart_data before::: <br>'.$user_cart_data.'<br><br><br>';
-                        // echo 'cart_data before::::::<br>'.$cart_data.'<br><br>'; 
-                        unset($cart_data[$key]); 
-                        unset($user_cart_data['cart_data']);   
-                        
-                        // echo 'user_cart_data after::::::: <br>'.$user_cart_data.'<br><br><br>';   
-                        // echo 'cart_data after::::::<br>'.$cart_data.'<br><br>'; 
-                        
+                        // echo 'cart_data before::::::<br>'.$cart_data.'<br><br>';
+                        unset($cart_data[$key]);
+                        unset($user_cart_data['cart_data']);
+
+                        // echo 'user_cart_data after::::::: <br>'.$user_cart_data.'<br><br><br>';
+                        // echo 'cart_data after::::::<br>'.$cart_data.'<br><br>';
+
                     }
                     $user_cart_data->save();
                     echo $user_cart_data;
@@ -349,7 +349,7 @@ class ProductsController extends Controller
         }
 
         $this->deleteProduct($id);
-        
+
         session()->flash('success', __('admin.delete_successfully'));
         // return back();
     }
@@ -371,7 +371,7 @@ class ProductsController extends Controller
 
 
     /**
-    * product images 
+    * product images
     */
     public function upload_file(Request $request, $id){
         if($request->hasFile('file')){
@@ -436,7 +436,7 @@ class ProductsController extends Controller
             // $sizes = array_merge(json_decode($size_1, true), json_decode($size_2, true));
             $weights = Weight::pluck('name_'.session('lang'), 'id');
             return view('admin.products.ajax.shippingInfo', [
-                'sizes'   => $sizes, 
+                'sizes'   => $sizes,
                 'weights' => $weights,
                 'product' => Product::find(request('product_id'))
             ])->render();
@@ -446,7 +446,7 @@ class ProductsController extends Controller
         }
     }
 
-    
+
     public function search_product(){
         if(request()->ajax()){
             if(request()->has('search') && !empty(request('search'))){
@@ -463,5 +463,5 @@ class ProductsController extends Controller
         }
     }
 
-    
+
 }

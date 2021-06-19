@@ -8,7 +8,7 @@
 		<div class="market-update-block clr-block-1">
 			<div class="col-md-8 market-update-left">
 				<h3>{{$registeredUsers}}</h3>
-				<h4>{{__('admin.registeredUsers')}}</h4>
+				<h4>{{__('registeredUsers')}}</h4>
 				<p>Other hand, we denounce</p>
 			</div>
 			<div class="col-md-4 market-update-right">
@@ -59,8 +59,8 @@
                                     <tr>
                                       <th>#</th>
                                       <th>Project</th>
-                                      <th>Manager</th>                                   
-                                                                        
+                                      <th>Manager</th>
+
                                       <th>Status</th>
                                       <th>Progress</th>
                                   </tr>
@@ -69,48 +69,48 @@
                                 <tr>
                                   <td>1</td>
                                   <td>Face book</td>
-                                  <td>Malorum</td>                                 
-                                                             
+                                  <td>Malorum</td>
+
                                   <td><span class="label label-danger">in progress</span></td>
                                   <td><span class="badge badge-info">50%</span></td>
                               </tr>
                               <tr>
                                   <td>2</td>
                                   <td>Twitter</td>
-                                  <td>Evan</td>                               
-                                                                  
+                                  <td>Evan</td>
+
                                   <td><span class="label label-success">completed</span></td>
                                   <td><span class="badge badge-success">100%</span></td>
                               </tr>
                               <tr>
                                   <td>3</td>
                                   <td>Google</td>
-                                  <td>John</td>                                
-                                  
+                                  <td>John</td>
+
                                   <td><span class="label label-warning">in progress</span></td>
                                   <td><span class="badge badge-warning">75%</span></td>
                               </tr>
                               <tr>
                                   <td>4</td>
                                   <td>LinkedIn</td>
-                                  <td>Danial</td>                                 
-                                                             
+                                  <td>Danial</td>
+
                                   <td><span class="label label-info">in progress</span></td>
                                   <td><span class="badge badge-info">65%</span></td>
                               </tr>
                               <tr>
                                   <td>5</td>
                                   <td>Tumblr</td>
-                                  <td>David</td>                                
-                                                                 
+                                  <td>David</td>
+
                                   <td><span class="label label-warning">in progress</span></td>
                                   <td><span class="badge badge-danger">95%</span></td>
                               </tr>
                               <tr>
                                   <td>6</td>
                                   <td>Tesla</td>
-                                  <td>Mickey</td>                                  
-                                                             
+                                  <td>Mickey</td>
+
                                   <td><span class="label label-info">in progress</span></td>
                                   <td><span class="badge badge-success">95%</span></td>
                               </tr>
@@ -119,11 +119,11 @@
                   </div>
              </div>
       </div>
-      <div class="col-md-6 chit-chat-layer1-rit">    	
+      <div class="col-md-6 chit-chat-layer1-rit">
       	  <div class="geo-chart">
 					<section id="charts1" class="charts">
 				<div class="wrapper-flex">
-				
+
 				    <table id="myTable" class="geoChart tableChart data-table col-table" style="display:none;">
 				        <caption>Student Nationalities Table</caption>
 				        <tr>
@@ -191,17 +191,17 @@
 				            <td align="right">2</td>
 				            <td align="right">2</td>
 				        </tr>
-				
+
 				    </table>
-				
+
 				    <div class="col geo_main">
 				         <h3 id="geoChartTitle">World Market</h3>
 				        <div id="geoChart" class="chart"> </div>
 				    </div>
-				
-				
+
+
 				</div><!-- .wrapper-flex -->
-				</section>				
+				</section>
 			</div>
       </div>
      <div class="clearfix"> </div>
@@ -210,9 +210,9 @@
 <!--main page chart start here-->
 <div class="main-page-charts">
     <div class="main-page-chart-layer1">
-		<div class="col-md-6 chart-layer1-left"> 
+		<div class="col-md-6 chart-layer1-left">
 			<div class="glocy-chart">
-				<div class="span-2c">  
+				<div class="span-2c">
                         <h3 class="tlt">Sales Analytics</h3>
                         <canvas id="bar" height="300" width="400" style="width: 400px; height: 300px;"></canvas>
                         <script>
@@ -233,12 +233,12 @@
                             new Chart(document.getElementById("bar").getContext("2d")).Bar(barChartData);
 
                         </script>
-                </div> 			  		   			
+                </div>
 			</div>
 		</div>
-		<div class="col-md-6 chart-layer1-right"> 
+		<div class="col-md-6 chart-layer1-right">
 			<div class="user-marorm">
-				<div class="malorum-top">				
+				<div class="malorum-top">
 				</div>
 				<div class="malorm-bottom">
 					<span class="malorum-pro"> </span>
@@ -282,7 +282,7 @@
 	      </div>
 	</div>
 	<div class="col-md-6 chart-layer2-left">
-		<div class="content-main revenue">			
+		<div class="content-main revenue">
 					<h3>Total Revenue</h3>
 					<canvas id="radar" height="300" width="300" style="width: 300px; height: 300px;"></canvas>
 						<script>
@@ -304,7 +304,7 @@
 										data : [28,48,40,19,96,27,100]
 									}
 								]
-								
+
 							};
 							new Chart(document.getElementById("radar").getContext("2d")).Radar(radarChartData);
 						</script>
@@ -319,13 +319,13 @@
 			<div class="climate-gd1-top">
 				<div class="col-md-6 climate-gd1top-left">
 					<h4>{{rtrim(date('M d l'), 'day')}}</h4>
-					<h3>{{date('h:m')}}<span class="timein-pms">{{date('a')}}</span></h3>				
-					<p>{{__('admin.humidity')}}:</p>					
-					<p>{{__('admin.sunset')}}:</p>
-					<p>{{__('admin.sunrise')}}:</p>
+					<h3>{{date('h:m')}}<span class="timein-pms">{{date('a')}}</span></h3>
+					<p>{{__('humidity')}}:</p>
+					<p>{{__('sunset')}}:</p>
+					<p>{{__('sunrise')}}:</p>
 				</div>
 				<div class="col-md-6 climate-gd1top-right">
-					<span class="clime-icon"> 
+					<span class="clime-icon">
 					  	<figure class="icons">
 							<canvas id="partly-cloudy-day" width="64" height="64">
 							</canvas>
@@ -343,9 +343,9 @@
 								icons.set(list[i], list[i]);
 
 							    icons.play();
-						</script>					  
-				    </span>					
-					<p>88%</p>					
+						</script>
+				    </span>
+					<p>88%</p>
 					<p>5:40PM</p>
 					<p>6:30AM</p>
 				</div>
@@ -377,7 +377,7 @@
 					<h4>UK</h4>
 					<figure class="icons">
 						<canvas id="cloudy" width="58" height="58"></canvas>
-					</figure>					
+					</figure>
 					<script>
 						var icons = new Skycons({"color": "#fff"}),
 						list  = [

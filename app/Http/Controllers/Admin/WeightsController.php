@@ -24,7 +24,7 @@ class WeightsController extends Controller
         */
 
         $data = Weight::select('*')->whereNotIn('status', [-1])->get();
-        return $weight->render('admin.weights.index', ['title' => __('admin.weightsController')]);
+        return $weight->render('admin.weights.index', ['title' => __('weightsController')]);
     }
 
     /**
@@ -34,7 +34,7 @@ class WeightsController extends Controller
      */
     public function create()
     {
-        return view('admin.weights.create', ['title'=> trans("admin.add")]);
+        return view('admin.weights.create', ['title'=> trans("add")]);
     }
 
     /**
@@ -77,7 +77,7 @@ class WeightsController extends Controller
     public function edit($id)
     {
         $weight = Weight::find($id);
-        $title = __('admin.edit');
+        $title = __('edit');
         return view('admin.weights.edit', compact('weight', 'title'));
     }
 

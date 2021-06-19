@@ -22,7 +22,7 @@ class DepartmentsController extends Controller
             not this method
         */
         $data = Department::select('*')->whereNotIn('status', [-1])->get();
-        return $department->render('admin.departments.index', ['title' => __('admin.departmentsController')]);
+        return $department->render('admin.departments.index', ['title' => __('departmentsController')]);
     }
 
     /**
@@ -32,8 +32,8 @@ class DepartmentsController extends Controller
      */
     public function create()
     {
-		
-        return view('admin.departments.create', ['title'=> trans("admin.add")]);
+
+        return view('admin.departments.create', ['title'=> trans("add")]);
     }
 
     /**
@@ -47,10 +47,10 @@ class DepartmentsController extends Controller
         $validatedData = $request->validate([
             'department_name_ar'                   => 'required|min:3|max:50',
             'department_name_en'                   => 'required|min:3|max:50',
-            'icon'                                 => 'sometimes|nullable|'.validate_image(),   
-            'department_description_ar'            => 'sometimes|nullable', 
-            'department_description_en'            => 'sometimes|nullable', 
-            'keywords'                             => 'sometimes|nullable',  
+            'icon'                                 => 'sometimes|nullable|'.validate_image(),
+            'department_description_ar'            => 'sometimes|nullable',
+            'department_description_en'            => 'sometimes|nullable',
+            'keywords'                             => 'sometimes|nullable',
             'parent_id'                            => 'sometimes|nullable|numeric',
         ]);
         if($validatedData){
@@ -90,9 +90,9 @@ class DepartmentsController extends Controller
     {
         $department = Department::find($id);
 
-        $title = __('admin.edit');
+        $title = __('edit');
         //return $country_id;
-        return view('admin.departments.edit', 
+        return view('admin.departments.edit',
                     ['department' => $department, 'title' => $title]);
     }
 
@@ -108,10 +108,10 @@ class DepartmentsController extends Controller
         $validatedData = $request->validate([
             'department_name_ar'                   => 'required|min:3|max:50',
             'department_name_en'                   => 'required|min:3|max:50',
-            'icon'                                 => 'sometimes|nullable',   
-            'department_description_ar'            => 'sometimes|nullable', 
-            'department_description_en'            => 'sometimes|nullable', 
-            'keywords'                             => 'sometimes|nullable',  
+            'icon'                                 => 'sometimes|nullable',
+            'department_description_ar'            => 'sometimes|nullable',
+            'department_description_en'            => 'sometimes|nullable',
+            'keywords'                             => 'sometimes|nullable',
             'parent_id'                            => 'sometimes|nullable|numeric',
         ]);
 
@@ -150,7 +150,7 @@ class DepartmentsController extends Controller
                 Storage::has($sub->icon)?Storage::delete($sub->icon):'';
                 $sub->icon = null;
             }
-            // change status of sub department 
+            // change status of sub department
             $sub_department = Department::find($sub->id);
             if(!empty($sub_department)){
                 $sub_department->status = -1;

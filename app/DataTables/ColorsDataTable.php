@@ -59,7 +59,7 @@ class ColorsDatatable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Blfrtip')
-                    ->lengthMenu([[10, 25, 50, 100], [10, 25, 50, __('admin.all_record')]])
+                    ->lengthMenu([[10, 25, 50, 100], [10, 25, 50, __('all_record')]])
                     ->orderBy(1)
                     ->buttons(
                         Button::make('create')->className('btn btn-info'),
@@ -69,8 +69,7 @@ class ColorsDatatable extends DataTable
                         Button::make('excel')->className('btn btn-success'),
                         //Button::make('reset')->className('btn btn-default'),
                         Button::make('reload')->className('btn btn-default'),
-                        Button::make('delete')->className('btn btn-danger deleteBtn'),
-
+                        Button::make('delete')->className('btn btn-danger deleteBtn')
                     )
                     ->parameters([
                         'initComplete' => 'function () {
@@ -83,29 +82,29 @@ class ColorsDatatable extends DataTable
                                 });
                             });
                         }',
-                        // include language translation of data table 
+                        // include language translation of data table
                         'language' => [
-                          "sProcessing" => __("admin.sProcessing"),
-                          "sLengthMenu" => __("admin.sLengthMenu"),
-                          "sZeroRecords" => __("admin.sZeroRecords"),
-                          "sEmptyTable" => __("admin.sEmptyTable"),
-                          "sInfo" => __("admin.sInfo"),
-                          "sInfoEmpty" => __("admin.sInfoEmpty"),
-                          "sInfoFiltered" => __("admin.sInfoFiltered"),
-                          "sInfoPostFix" => __("admin.sInfoPostFix"),
-                          "sSearch" => __("admin.sSearch"),
+                          "sProcessing" => __("sProcessing"),
+                          "sLengthMenu" => __("sLengthMenu"),
+                          "sZeroRecords" => __("sZeroRecords"),
+                          "sEmptyTable" => __("sEmptyTable"),
+                          "sInfo" => __("sInfo"),
+                          "sInfoEmpty" => __("sInfoEmpty"),
+                          "sInfoFiltered" => __("sInfoFiltered"),
+                          "sInfoPostFix" => __("sInfoPostFix"),
+                          "sSearch" => __("sSearch"),
                           "sUrl" => __("admin.sUrl"),
-                          "sInfoThousands" => __("admin.sInfoThousands"),
-                          "sLoadingRecords" => __("admin.sLoadingRecords"),
+                          "sInfoThousands" => __("sInfoThousands"),
+                          "sLoadingRecords" => __("sLoadingRecords"),
                           "oPaginate" => [
-                              "sFirst" => __("admin.sFirst"),
-                              "sLast" => __("admin.sLast"),
-                              "sNext" => __("admin.sNext"),
-                              "sPrevious" => __("admin.sPrevious")
+                              "sFirst" => __("sFirst"),
+                              "sLast" => __("sLast"),
+                              "sNext" => __("sNext"),
+                              "sPrevious" => __("sPrevious")
                           ],
                           "oAria" => [
-                              "sSortAscending" => __("admin.sSortAscending"),
-                              "sSortDescending" => __("admin.sSortDescending")
+                              "sSortAscending" => __("sSortAscending"),
+                              "sSortDescending" => __("sSortDescending")
                           ]
                         ]
                         /**
@@ -144,37 +143,37 @@ class ColorsDatatable extends DataTable
             [
               'name'        => 'name_ar',
               'data'        => 'name_ar',
-              'title'       => __('admin.name_ar'),
+              'title'       => __('name_ar'),
               'class'       => 'text-center',
             ],
             [
               'name'        => 'name_en',
               'data'        => 'name_en',
-              'title'       => __('admin.name_en'),
+              'title'       => __('name_en'),
               'class'       => 'text-center',
             ],
             [
               'name'        => 'color',
               'data'        => 'color',
-              'title'       => __('admin.color'),
+              'title'       => __('color'),
               'class'       => 'text-center',
             ],
             [
               'name'        => 'created_at',
               'data'        => 'created_at',
-              'title'       => __('admin.created_at'),
+              'title'       => __('created_at'),
               'class'       => 'text-center',
             ],
             [
               'name'        => 'updated_at',
               'data'        => 'updated_at',
-              'title'       => __('admin.updated_at'),
+              'title'       => __('updated_at'),
               'class'       => 'text-center',
             ],
             [
               'name'        => 'edit',
               'data'        => 'edit',
-              'title'       => __('admin.edit'),
+              'title'       => __('edit'),
               'class'       => 'text-center',
               'exportable'  => false,
               'printable'   => false,
@@ -185,7 +184,7 @@ class ColorsDatatable extends DataTable
             [
               'name'        => 'delete',
               'data'        => 'delete',
-              'title'       => __('admin.delete'),
+              'title'       => __('delete'),
               'class'       => 'text-center',
               'exportable'  => false,
               'printable'   => false,

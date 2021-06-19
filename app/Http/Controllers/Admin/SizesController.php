@@ -25,7 +25,7 @@ class SizesController extends Controller
         */
 
         $data = Size::select('*')->whereNotIn('status', [-1])->get();
-        return $size->render('admin.sizes.index', ['title' => __('admin.sizesController')]);
+        return $size->render('admin.sizes.index', ['title' => __('sizesController')]);
     }
 
     /**
@@ -44,7 +44,7 @@ class SizesController extends Controller
                 $select_department[$department->id] = $department->department_name_en;
             }
         }
-        return view('admin.sizes.create', ['title'=> trans("admin.add"), 'departments' => $select_department]);
+        return view('admin.sizes.create', ['title'=> trans("add"), 'departments' => $select_department]);
     }
 
     /**
@@ -89,7 +89,7 @@ class SizesController extends Controller
     public function edit($id)
     {
         $size = Size::find($id);
-        $title = __('admin.edit');
+        $title = __('edit');
         return view('admin.sizes.edit', compact('size', 'title'));
     }
 

@@ -23,7 +23,7 @@ class MallsController extends Controller
             not this method
         */
         $data = Mall::select('*')->whereNotIn('status', [-1])->get();
-        return $mall->render('admin.malls.index', ['title' => __('admin.mallsController')]);
+        return $mall->render('admin.malls.index', ['title' => __('mallsController')]);
     }
 
     /**
@@ -42,7 +42,7 @@ class MallsController extends Controller
 				$select_country[$country->id] = $country->country_name_en;
 			}
 		}
-        return view('admin.malls.create', ['title'=> trans("admin.add"), 'countries' => $select_country]);
+        return view('admin.malls.create', ['title'=> trans("add"), 'countries' => $select_country]);
     }
 
     /**
@@ -115,7 +115,7 @@ class MallsController extends Controller
 
         $mall = Mall::find($id);
         $country_id = $mall->country->id;
-        $title = __('admin.edit');
+        $title = __('edit');
         return view('admin.malls.edit', ['mall' => $mall, 'title' => $title, 'countries' =>$select_country, 'country_id' => $country_id]);
     }
 

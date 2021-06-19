@@ -1,25 +1,25 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>{{__('admin.login')}}</title>
+		<title>{{__('login')}}</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="keywords" content="Shoppy Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+		<meta name="keywords" content="Shoppy Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
 		Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<link href="{{asset('public/design/adminpanel/css/bootstrap.css')}}" rel="stylesheet" type="text/css" media="all">
 
 	    @if(app()->getLocale() == 'ar')
-	    	<link href="{{asset('public/design/adminpanel/css/bootstrap-rtl.css') }}" rel="stylesheet" type="text/css" media="all">   
+	    	<link href="{{asset('public/design/adminpanel/css/bootstrap-rtl.css') }}" rel="stylesheet" type="text/css" media="all">
 	    @endif
 
 		<!-- Custom Theme files -->
 		<link href="{{asset('public/design/adminpanel/css/style.css')}}" rel="stylesheet" type="text/css" media="all"/>
 		<!--js-->
-		<script src="{{asset('public/design/adminpanel/js/jquery-2.1.1.min.js')}}"></script> 
+		<script src="{{asset('public/design/adminpanel/js/jquery-2.1.1.min.js')}}"></script>
 		<!--icons-css-->
-		<link href="{{asset('public/design/adminpanel/css/font-awesome.css')}}" rel="stylesheet"> 
+		<link href="{{asset('public/design/adminpanel/css/font-awesome.css')}}" rel="stylesheet">
 		<!--Google Fonts-->
 		<link href='//fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css'>
 		<link href='//fonts.googleapis.com/css?family=Work+Sans:400,500,600' rel='stylesheet' type='text/css'>
@@ -89,7 +89,7 @@
 			.dropdown:hover .dropbtn {background-color: #3e8e41;}
 		</style>
 	</head>
-	<body>	
+	<body>
 
 	<header id="header" class="fixed-top ">
 	    <div class="container d-flex align-items-center">
@@ -97,7 +97,7 @@
 	        <ul style="float: left;">
 	          <li>
 	            <div class="dropdown">
-	              <span>{{__('admin.language')}}</span>
+	              <span>{{__('language')}}</span>
 	              <div class="dropdown-content" style="left:0;">
 	                <ul>
 	                  <li>
@@ -115,7 +115,7 @@
 	    </div>
 	  </header><!-- End Header -->
 	<div class="login-page">
-	    <div class="login-main"> 
+	    <div class="login-main">
 	    	@if(session()->has('success'))
 				<div class="alert alert-success">
 					<h4>{{ session()->get('success') }}</h4>
@@ -129,7 +129,7 @@
 					</h4>
 				</div>
 			@endif
-	    	@if(count($errors->all()) > 0) 
+	    	@if(count($errors->all()) > 0)
 				<div class="alert alert-danger">
 					@foreach($errors->all() as $error)
 						<li>{{$error}}</li>
@@ -146,15 +146,15 @@
 		<?php
 	        use App\Setting;
 	        $app = Setting::first();
-	    ?>	<p>&copy; 2020 
+	    ?>	<p>&copy; 2020
 	        @if(session('lang') == 'en')
 	            {{ $app->sitename_en }}
 	        @elseif(session('lang') == 'ar')
 	            {{ $app->sitename_ar }}
-	        @endif. {{ __('user.all_rights_reserved') }} | {{ __('user.design_by') }} 
+	        @endif. {{ __('all_rights_reserved') }} | {{ __('design_by') }}
 	        <a href="https://www.linkedin.com/in/kairo-wageh-591811b5/" target="_blank">Kairo Wageh</a>
 	    </p>
-	</div>	
+	</div>
 	<!--COPY rights end here-->
 
 	<!--scrolling js-->

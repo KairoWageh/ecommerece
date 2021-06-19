@@ -23,7 +23,7 @@ class StatesController extends Controller
             not this method
         */
         $data = State::select('*')->whereNotIn('status', [-1])->get();
-        return $state->render('admin.states.index', ['title' => __('admin.statesController')]);
+        return $state->render('admin.states.index', ['title' => __('statesController')]);
     }
 
     /**
@@ -38,7 +38,7 @@ class StatesController extends Controller
         //         $select = request()->has('select')?request('select'):'';
         //         $cities = City::select('*')
         //           ->where('country_id', '=', $country_id)
-        //           ->whereNotIn('status', [-1])->get(); 
+        //           ->whereNotIn('status', [-1])->get();
         //         return Form::select('city_id', $cities, null, ['class' => 'form-control', 'city_id', 'placeholder' => '.........']);
         //     }
         // }
@@ -47,7 +47,7 @@ class StatesController extends Controller
 
     	$countries_select = [];
         //$cities_select = [];
-    	
+
 		foreach($countries as $country){
 			if(session('lang') == 'ar'){
 				$countries_select[$country->id] = $country->country_name_ar;
@@ -63,8 +63,8 @@ class StatesController extends Controller
         //         $cities_select[$city->id] = $city->city_name_en;
         //     }
         // }
-		
-        return view('admin.states.create', ['title'=> trans("admin.add"), 'countries' => $countries_select]);
+
+        return view('admin.states.create', ['title'=> trans("add"), 'countries' => $countries_select]);
     }
 
     /**
@@ -74,7 +74,7 @@ class StatesController extends Controller
     public function get_country_cities($country_id){
         $cities = City::select('*')
                   ->where('country_id', '=', $country_id)
-                  ->whereNotIn('status', [-1])->get(); 
+                  ->whereNotIn('status', [-1])->get();
         $cities_select = [];
         foreach($cities as $city){
             if(session('lang') == 'ar'){
@@ -97,8 +97,8 @@ class StatesController extends Controller
         $validatedData = $request->validate([
             'state_name_ar'     => 'required|min:3|max:50',
             'state_name_en'     => 'required|min:3|max:50',
-            'country_id'        => 'required|numeric',   
-            'city_id'           => 'required|numeric',      
+            'country_id'        => 'required|numeric',
+            'city_id'           => 'required|numeric',
         ]);
         if($validatedData){
             $validatedData['status'] = 1;
@@ -155,13 +155,13 @@ class StatesController extends Controller
             }
         }
 
-        $title = __('admin.edit');
+        $title = __('edit');
         //return $country_id;
-        return view('admin.states.edit', 
-                    ['state' => $state, 'title' => $title, 
+        return view('admin.states.edit',
+                    ['state' => $state, 'title' => $title,
                     'country_id' => $country_id,
                     'city_id' => $city_id,
-                    'countries' =>$countries_select, 
+                    'countries' =>$countries_select,
                     'cities' => $cities_select]);
     }
 

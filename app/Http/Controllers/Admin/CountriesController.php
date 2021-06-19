@@ -24,7 +24,7 @@ class CountriesController extends Controller
         */
 
         $data = Country::select('*')->whereNotIn('status', [-1])->get();
-        return $country->render('admin.countries.index', ['title' => __('admin.countriesController')]);
+        return $country->render('admin.countries.index', ['title' => __('countriesController')]);
     }
 
     /**
@@ -34,7 +34,7 @@ class CountriesController extends Controller
      */
     public function create()
     {
-        return view('admin.countries.create', ['title'=> trans("admin.add")]);
+        return view('admin.countries.create', ['title'=> trans("add")]);
     }
 
     /**
@@ -89,7 +89,7 @@ class CountriesController extends Controller
     public function edit($id)
     {
         $country = Country::find($id);
-        $title = __('admin.edit');
+        $title = __('edit');
         return view('admin.countries.edit', compact('country', 'title'));
     }
 

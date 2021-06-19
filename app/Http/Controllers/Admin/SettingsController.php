@@ -14,7 +14,7 @@ class SettingsController extends Controller
     * return view of settings page
     */
     public function settings(){
-    	return view('admin.settings', ['title' => __('admin.settings')]);
+    	return view('admin.settings', ['title' => __('settings')]);
     }
 
     /**
@@ -27,7 +27,7 @@ class SettingsController extends Controller
     		'sitename_en' 			 => 'required|min:3|max:50',
     		'email'       			 => 'required|email',
     		'logo'        			 => 'max:10000|'.validate_image(),
-    		'icon'        			 => 'max:10000|'.validate_image(),      
+    		'icon'        			 => 'max:10000|'.validate_image(),
             'main_lang'              => 'required',
     		'description_ar' 	     => 'required|min:20|max:500',
             'description_en'         => 'required|min:20|max:500',
@@ -50,7 +50,7 @@ class SettingsController extends Controller
             }
             if($request->hasFile('icon')){
                 // if(!empty(setting()->icon)){
-                //    Storage::delete(settings()->icon); 
+                //    Storage::delete(settings()->icon);
                 // }
                 // $validateData['icon'] = $request->file('icon')->store('settings');
                 $validateData['icon'] = up()->upload([
@@ -61,8 +61,8 @@ class SettingsController extends Controller
                 ]);
             }
             $settings = Setting::orderBy('id', 'desc')->update($validateData);
-            session()->flash('success', __('admin.updated_successfully'));
+            session()->flash('success', __('updated_successfully'));
             return back();
         }
-    } 
+    }
 }

@@ -23,7 +23,7 @@ class ShippingCompaniesController extends Controller
             not this method
         */
         $data = ShippingCompany::select('*')->whereNotIn('status', [-1])->get();
-        return $shippingCompany->render('admin.shippingCompanies.index', ['title' => __('admin.shippingCompaniesController')]);
+        return $shippingCompany->render('admin.shippingCompanies.index', ['title' => __('shippingCompaniesController')]);
     }
 
     /**
@@ -39,7 +39,7 @@ class ShippingCompaniesController extends Controller
         foreach($companies as $company){
             $companies_select[$company->id] = $company->name;
         }
-        return view('admin.shippingCompanies.create', ['title'=> trans("admin.add"), 'companies' => $companies_select]);
+        return view('admin.shippingCompanies.create', ['title'=> trans("add"), 'companies' => $companies_select]);
     }
 
     /**
@@ -100,7 +100,7 @@ class ShippingCompaniesController extends Controller
         foreach($companies as $company){
             $companies_select[$company->id] = $company->name;
         }
-        $title = __('admin.edit');
+        $title = __('edit');
         return view('admin.shippingCompanies.edit', ['shippingCompany' => $shippingCompany,
                     'companies' => $companies_select, 'title' => $title]);
     }

@@ -23,7 +23,7 @@ class ColorsController extends Controller
             not this method
         */
         $data = Color::select('*')->whereNotIn('status', [-1])->get();
-        return $color->render('admin.colors.index', ['title' => __('admin.colorsController')]);
+        return $color->render('admin.colors.index', ['title' => __('colorsController')]);
     }
 
     /**
@@ -33,7 +33,7 @@ class ColorsController extends Controller
      */
     public function create()
     {
-        return view('admin.colors.create', ['title'=> trans("admin.add")]);
+        return view('admin.colors.create', ['title'=> trans("add")]);
     }
 
     /**
@@ -77,7 +77,7 @@ class ColorsController extends Controller
     public function edit($id)
     {
         $color = Color::find($id);
-        $title = __('admin.edit');
+        $title = __('edit');
         return view('admin.colors.edit', compact('color', 'title'));
     }
 
@@ -107,7 +107,7 @@ class ColorsController extends Controller
      *
      * @param  int  $id
      */
-    
+
     public function delete_color($id){
         $color = Color::find($id);
         $color->status = -1;

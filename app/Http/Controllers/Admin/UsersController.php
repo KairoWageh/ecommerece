@@ -22,7 +22,7 @@ class UsersController extends Controller
             not this method
         */
         $data = User::select('*')->whereNotIn('status', [-1])->get();
-        return $user->render('admin.users.index', ['title' => __('admin.usersController')]);
+        return $user->render('admin.users.index', ['title' => __('usersController')]);
     }
 
     /**
@@ -33,7 +33,7 @@ class UsersController extends Controller
     public function create()
     {
         $user_levels = ["user" => __('admin.user'), "company" => __('admin.company'), "vendor" => __('admin.vendor')];
-        return view('admin.users.create', ['title'=> trans("admin.add"), 'user_levels' => $user_levels]);
+        return view('admin.users.create', ['title'=> trans("add"), 'user_levels' => $user_levels]);
     }
 
     /**
@@ -84,7 +84,7 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        $title = __('admin.edit');
+        $title = __('edit');
         $user_levels = ["user" => __('admin.user'), "company" => __('admin.company'), "vendor" => __('admin.vendor')];
         return view('admin.users.edit', compact('user', 'title', 'user_levels'));
     }

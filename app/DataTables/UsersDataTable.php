@@ -62,7 +62,7 @@ class UsersDatatable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Blfrtip')
-                    ->lengthMenu([[10, 25, 50, 100], [10, 25, 50, __('admin.all_record')]])
+                    ->lengthMenu([[10, 25, 50, 100], [10, 25, 50, __('all_record')]])
                     ->orderBy(1)
                     ->buttons(
                         Button::make('create')->className('btn btn-info'),
@@ -72,7 +72,7 @@ class UsersDatatable extends DataTable
                         Button::make('excel')->className('btn btn-success'),
                         //Button::make('reset')->className('btn btn-default'),
                         Button::make('reload')->className('btn btn-default'),
-                        Button::make('delete')->className('btn btn-danger deleteBtn'),
+                        Button::make('delete')->className('btn btn-danger deleteBtn')
 
                     )
                     ->parameters([
@@ -86,29 +86,29 @@ class UsersDatatable extends DataTable
                                 });
                             });
                         }',
-                        // include language translation of data table 
+                        // include language translation of data table
                         'language' => [
-                          "sProcessing" => __("admin.sProcessing"),
-                          "sLengthMenu" => __("admin.sLengthMenu"),
-                          "sZeroRecords" => __("admin.sZeroRecords"),
-                          "sEmptyTable" => __("admin.sEmptyTable"),
-                          "sInfo" => __("admin.sInfo"),
-                          "sInfoEmpty" => __("admin.sInfoEmpty"),
-                          "sInfoFiltered" => __("admin.sInfoFiltered"),
-                          "sInfoPostFix" => __("admin.sInfoPostFix"),
-                          "sSearch" => __("admin.sSearch"),
-                          "sUrl" => __("admin.sUrl"),
-                          "sInfoThousands" => __("admin.sInfoThousands"),
-                          "sLoadingRecords" => __("admin.sLoadingRecords"),
+                          "sProcessing" => __("sProcessing"),
+                          "sLengthMenu" => __("sLengthMenu"),
+                          "sZeroRecords" => __("sZeroRecords"),
+                          "sEmptyTable" => __("sEmptyTable"),
+                          "sInfo" => __("sInfo"),
+                          "sInfoEmpty" => __("sInfoEmpty"),
+                          "sInfoFiltered" => __("sInfoFiltered"),
+                          "sInfoPostFix" => __("sInfoPostFix"),
+                          "sSearch" => __("sSearch"),
+                          "sUrl" => __("sUrl"),
+                          "sInfoThousands" => __("sInfoThousands"),
+                          "sLoadingRecords" => __("sLoadingRecords"),
                           "oPaginate" => [
-                              "sFirst" => __("admin.sFirst"),
-                              "sLast" => __("admin.sLast"),
-                              "sNext" => __("admin.sNext"),
-                              "sPrevious" => __("admin.sPrevious")
+                              "sFirst" => __("sFirst"),
+                              "sLast" => __("sLast"),
+                              "sNext" => __("sNext"),
+                              "sPrevious" => __("sPrevious")
                           ],
                           "oAria" => [
-                              "sSortAscending" => __("admin.sSortAscending"),
-                              "sSortDescending" => __("admin.sSortDescending")
+                              "sSortAscending" => __("sSortAscending"),
+                              "sSortDescending" => __("sSortDescending")
                           ]
                         ]
                         /**
@@ -147,37 +147,37 @@ class UsersDatatable extends DataTable
             [
               'name'        => 'name',
               'data'        => 'name',
-              'title'       => __('admin.name'),
+              'title'       => __('name'),
               'class'       => 'text-center',
             ],
             [
               'name'        => 'email',
               'data'        => 'email',
-              'title'       => __('admin.email'),
+              'title'       => __('email'),
               'class'       => 'text-center',
             ],
             [
               'name'        => 'level',
               'data'        => 'level',
-              'title'       => __('admin.level'),
+              'title'       => __('level'),
               'class'       => 'text-center',
             ],
             [
               'name'        => 'created_at',
               'data'        => 'created_at',
-              'title'       => __('admin.created_at'),
+              'title'       => __('created_at'),
               'class'       => 'text-center',
             ],
             [
               'name'        => 'updated_at',
               'data'        => 'updated_at',
-              'title'       => __('admin.updated_at'),
+              'title'       => __('updated_at'),
               'class'       => 'text-center',
             ],
             [
               'name'        => 'edit',
               'data'        => 'edit',
-              'title'       => __('admin.edit'),
+              'title'       => __('edit'),
               'class'       => 'text-center',
               'exportable'  => false,
               'printable'   => false,
@@ -188,7 +188,7 @@ class UsersDatatable extends DataTable
             [
               'name'        => 'delete',
               'data'        => 'delete',
-              'title'       => __('admin.delete'),
+              'title'       => __('delete'),
               'class'       => 'text-center',
               'exportable'  => false,
               'printable'   => false,

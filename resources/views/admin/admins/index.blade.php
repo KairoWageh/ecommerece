@@ -23,26 +23,26 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">{{__('admin.delete')}}</h4>
+            <h4 class="modal-title">{{__('delete')}}</h4>
           </div>
           <div class="modal-body">
             <div class="alert alert-danger">
                 <div class="empty_record hidden">
-                    <h4>{{__('admin.please_check_some_records')}}</h4>    
+                    <h4>{{__('please_check_some_records')}}</h4>
                 </div>
                 <div class="not_empty_record hidden">
-                    <h4>{{__('admin.ask_delete_item')}}<span class="record_count"></span> </h4>
+                    <h4>{{__('ask_delete_item')}}<span class="record_count"></span> </h4>
                 </div>
-                
+
             </div>
           </div>
           <div class="modal-footer">
             <div class="empty_record hidden">
-                <button type="button" class="btn btn-default" data-dismiss="modal">{{__('admin.close')}}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{__('close')}}</button>
             </div>
             <div class="not_empty_record hidden">
-                <input type="submit" name="delete_all" value="{{__('admin.yes')}}" class="btn btn-danger delete_all">
-                <button type="button" class="btn btn-default" data-dismiss="modal">{{__('admin.no')}}</button>
+                <input type="submit" name="delete_all" value="{{__('yes')}}" class="btn btn-danger delete_all">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{__('no')}}</button>
             </div>
           </div>
         </div>

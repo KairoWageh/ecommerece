@@ -23,7 +23,7 @@ class ManufacturersController extends Controller
         */
 
         $data = Manufacturer::select('*')->whereNotIn('status', [-1])->get();
-        return $manufacturer->render('admin.manufacturers.index', ['title' => __('admin.manufacturesController')]);
+        return $manufacturer->render('admin.manufacturers.index', ['title' => __('manufacturesController')]);
     }
 
     /**
@@ -33,7 +33,7 @@ class ManufacturersController extends Controller
      */
     public function create()
     {
-        return view('admin.manufacturers.create', ['title'=> trans("admin.add")]);
+        return view('admin.manufacturers.create', ['title'=> trans("add")]);
     }
 
     /**
@@ -94,7 +94,7 @@ class ManufacturersController extends Controller
     public function edit($id)
     {
         $manufacturer = Manufacturer::find($id);
-        $title = __('admin.edit');
+        $title = __('edit');
         return view('admin.manufacturers.edit', compact('manufacturer', 'title'));
     }
 

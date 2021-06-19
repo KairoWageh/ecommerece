@@ -22,7 +22,7 @@ class CitiesController extends Controller
             not this method
         */
         $data = City::select('*')->whereNotIn('status', [-1])->get();
-        return $city->render('admin.cities.index', ['title' => __('admin.citiesController')]);
+        return $city->render('admin.cities.index', ['title' => __('citiesController')]);
     }
 
     /**
@@ -41,7 +41,7 @@ class CitiesController extends Controller
 				$select[$country->id] = $country->country_name_en;
 			}
 		}
-        return view('admin.cities.create', ['title'=> trans("admin.add"), 'countries' => $select]);
+        return view('admin.cities.create', ['title'=> trans("add"), 'countries' => $select]);
     }
 
     /**
@@ -55,7 +55,7 @@ class CitiesController extends Controller
         $validatedData = $request->validate([
             'city_name_ar'     => 'required|min:3|max:50',
             'city_name_en'     => 'required|min:3|max:50',
-            'country_id'       => 'required|numeric',         
+            'country_id'       => 'required|numeric',
         ]);
         if($validatedData){
             $validatedData['status'] = 1;
@@ -96,7 +96,7 @@ class CitiesController extends Controller
 
         $city = City::find($id);
         $country_id = $city->country->id;
-        $title = __('admin.edit');
+        $title = __('edit');
         return view('admin.cities.edit', ['city' => $city, 'title' => $title, 'countries' =>$select, 'country_id' => $country_id]);
     }
 
@@ -128,12 +128,12 @@ class CitiesController extends Controller
      *
      * @param  int  $id
      */
-    
+
     public function delete_city($id){
         $city = City::find($id);
         $city->status = -1;
         $city->save();
-        $states = $city->states;     
+        $states = $city->states;
         foreach ($states as $state) {
             $state->status = -1;
             $state->save();
@@ -167,5 +167,5 @@ class CitiesController extends Controller
         return back();
     }
 
-    
+
 }

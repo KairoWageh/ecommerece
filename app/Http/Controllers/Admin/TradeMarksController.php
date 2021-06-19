@@ -22,7 +22,7 @@ class TradeMarksController extends Controller
             not this method
         */
         $data = TradeMark::select('*')->whereNotIn('status', [-1])->get();
-        return $tradeMark->render('admin.trademarks.index', ['title' => __('admin.trademarksController')]);
+        return $tradeMark->render('admin.trademarks.index', ['title' => __('trademarksController')]);
     }
 
     /**
@@ -32,7 +32,7 @@ class TradeMarksController extends Controller
      */
     public function create()
     {
-        return view('admin.trademarks.create', ['title'=> trans("admin.add")]);
+        return view('admin.trademarks.create', ['title'=> trans("add")]);
     }
 
     /**
@@ -84,7 +84,7 @@ class TradeMarksController extends Controller
     public function edit($id)
     {
         $tradeMark = TradeMark::find($id);
-        $title = __('admin.edit');
+        $title = __('edit');
         return view('admin.trademarks.edit', compact('tradeMark', 'title'));
     }
 

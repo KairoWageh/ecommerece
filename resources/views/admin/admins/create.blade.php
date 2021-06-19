@@ -8,18 +8,18 @@
             <!-- {!! Form::open(['url' => adminURL('admin')]) !!} -->
             {!! Form::open(['route' => 'admin.store']) !!}
                 <div class="form-group">
-                    {!! Form::label('name', __('admin.name')) !!}
+                    {!! Form::label('name', __('name')) !!}
                     {!! Form::text('name', old('name'), ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
-                    {!! Form::label('email', __('admin.email')) !!}
+                    {!! Form::label('email', __('email')) !!}
                     {!! Form::email('email', old('email'), ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
-                    {!! Form::label('password', __('admin.password')) !!}
+                    {!! Form::label('password', __('password')) !!}
                     {!! Form::password('password', ['class' => 'form-control']) !!}
                 </div>
-                {!! Form::submit(__('admin.addNewAdmin'), ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit(__('addNewAdmin'), ['class' => 'btn btn-primary']) !!}
             {!! Form::close() !!}
         </div>
     </div>

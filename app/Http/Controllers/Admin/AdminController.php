@@ -24,7 +24,7 @@ class AdminController extends Controller
 
         //$data = Admin::latest()->get();
         $data = Admin::select('*')->whereNotIn('status', [-1])->get();
-        return $admin->render('admin.admins.index', ['title' => __('admin.adminController')]);
+        return $admin->render('admin.admins.index', ['title' => __('adminController')]);
         // return Datatables::of($data)
         //         ->addIndexColumn()
         //         ->addColumn('action', function($row){
@@ -42,7 +42,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('admin.admins.create', ['title'=> trans("admin.addNewAdmin")]);
+        return view('admin.admins.create', ['title'=> trans("addNewAdmin")]);
     }
 
     /**
@@ -95,7 +95,7 @@ class AdminController extends Controller
     public function edit($id)
     {
         $admin = Admin::find($id);
-        $title = __('admin.editAdmin');
+        $title = __('editAdmin');
         return view('admin.admins.edit', compact('admin', 'title'));
     }
 
@@ -128,7 +128,7 @@ class AdminController extends Controller
      *
      * @param  int  $id
      */
-    
+
     public function delete_admin($id){
         $admin = Admin::find($id);
         $admin->status = -1;
