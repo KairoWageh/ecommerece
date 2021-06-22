@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Repository\contracts\CityRepositoryInterface;
 use Illuminate\Http\Request;
 use App\City;
 use App\Country;
@@ -10,6 +11,21 @@ use App\DataTables\CitiesDataTable;
 
 class CitiesController extends Controller
 {
+
+    protected $city;
+    protected $model;
+
+    /**
+     * CitiesController constructor.
+     * @param CityRepositoryInterface $cityRepository
+     * @param City $cityModel
+     */
+    public function __construct(CityRepositoryInterface $cityRepository, City $cityModel)
+    {
+        $this->city = $cityRepository;
+        $this->model = $cityModel;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -21,8 +37,9 @@ class CitiesController extends Controller
             data in datatable comes from CitiesDatatable query method
             not this method
         */
-        $data = City::select('*')->whereNotIn('status', [-1])->get();
-        return $city->render('admin.cities.index', ['title' => __('citiesController')]);
+
+        $data = $this->city->allCities($this->model);
+        return $city->render('admin.cities', ['title' => __('citiesController')]);
     }
 
     /**

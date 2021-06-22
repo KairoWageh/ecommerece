@@ -23,7 +23,7 @@ class ManufacturersController extends Controller
         */
 
         $data = Manufacturer::select('*')->whereNotIn('status', [-1])->get();
-        return $manufacturer->render('admin.manufacturers.index', ['title' => __('manufacturesController')]);
+        return $manufacturer->render('admin.manufacturers', ['title' => __('manufacturesController')]);
     }
 
     /**

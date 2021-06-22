@@ -17,12 +17,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
 		$lang == 'ar'? session()->put('lang', 'ar'): session()->put('lang', 'en');
 		return back();
 	});
-	
+
 	//if and only if admin is authenticated
 	// admin:admin ====> middleware:guard
 	Route::group(['middleware' => 'admin:admin'], function(){
-		Route::resource('admin', 'AdminController');
-		Route::delete('admin/destroy/all', 'AdminController@multi_delete');
+		Route::resource('admins', 'AdminController');
+		Route::delete('admins/destroy/all', 'AdminController@multi_delete');
 		Route::get('/', 'HomeController@home')->name('home');
 		// Route::get('/', function(){
 		// 	return view('admin.home');
@@ -94,7 +94,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
 		Route::post('settings', 'SettingsController@settings_save');
 	});
 
-    
+
 
     /**
      * a way to include language translation of data table using route url

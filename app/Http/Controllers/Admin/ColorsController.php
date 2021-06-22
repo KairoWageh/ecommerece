@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Repository\contracts\ColorRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Color;
 use App\DataTables\ColorsDataTable;
@@ -11,6 +12,15 @@ use Storage;
 
 class ColorsController extends Controller
 {
+    protected $color;
+    protected $model;
+
+    public function __construct(ColorRepositoryInterface $colorRepository, Color $colorModel)
+    {
+        $this->color = $colorRepository;
+        $this->model = $colorModel;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -22,8 +32,8 @@ class ColorsController extends Controller
             data in datatable comes from ColorsDatatable query method
             not this method
         */
-        $data = Color::select('*')->whereNotIn('status', [-1])->get();
-        return $color->render('admin.colors.index', ['title' => __('colorsController')]);
+        $data = $this->color->all($this->model);
+        return $color->render('admin.colors', ['title' => __('colorsController')]);
     }
 
     /**

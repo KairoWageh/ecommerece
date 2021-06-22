@@ -3,21 +3,35 @@
 namespace App\DataTables;
 
 use App\Country;
+use App\Repository\contracts\CountryRepositoryInterface;
+use Yajra\DataTables\DataTableAbstract;
+use Yajra\DataTables\Html\Builder;
 use Yajra\DataTables\Html\Button;
-use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Fields;
-use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Services\DataTable;
 
-class CountriesDatatable extends DataTable
+class CountriesDataTable extends DataTable
 {
+    protected $country;
+    protected $model;
+
+    /**
+     * CountriesDatatable constructor.
+     * @param CountryRepositoryInterface $countryRepository
+     * @param Country $countryModel
+     */
+    public function __construct(CountryRepositoryInterface $countryRepository, Country $countryModel)
+    {
+        $this->country = $countryRepository;
+        $this->model = $countryModel;
+    }
+
     /**
      * Build DataTable class.
      *
      * @param mixed $query Results from query() method.
-     * @return \Yajra\DataTables\DataTableAbstract
+     * @return DataTableAbstract
      */
-    public function dataTable($query)
+    public function dataTable($query): DataTableAbstract
     {
         return datatables($query)
             ->addColumn('checkbox', 'admin.countries.btn.checkbox')
@@ -36,22 +50,19 @@ class CountriesDatatable extends DataTable
 
     /**
      * Get query source of dataTable.
-     *
-     * @param \App\AdminDatatable $model
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return mixed
      */
-    public function query(CountriesDatatable $model)
+    public function query()
     {
-        //return $model->newQuery();
-        return Country::query()->whereNotIn('status', [-1]);
+        return $this->country->all($this->model);
     }
 
     /**
      * Optional method if you want to use html builder.
      *
-     * @return \Yajra\DataTables\Html\Builder
+     * @return Builder
      */
-    public function html()
+    public function html(): Builder
     {
         return $this->builder()
                     ->setTableId('countrydatatable-table')
@@ -121,7 +132,7 @@ class CountriesDatatable extends DataTable
      *
      * @return array
      */
-    protected function getColumns()
+    protected function getColumns(): array
     {
         return [
             [
@@ -134,11 +145,11 @@ class CountriesDatatable extends DataTable
               'orderable'   => false,
 
             ],
-            [
-              'name'        => 'id',
-              'data'        => 'id',
-              'title'       => '#'
-            ],
+//            [
+//              'name'        => 'id',
+//              'data'        => 'id',
+//              'title'       => '#'
+//            ],
             [
               'name'        => 'country_name_ar',
               'data'        => 'country_name_ar',
@@ -215,7 +226,7 @@ class CountriesDatatable extends DataTable
      *
      * @return string
      */
-    protected function filename()
+    protected function filename(): string
     {
         return 'Country_' . date('YmdHis');
     }

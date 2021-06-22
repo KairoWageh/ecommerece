@@ -1,4 +1,4 @@
-@extends('admin.index')
+@extends('admin.layouts.index')
 @section('content')
 <link rel="stylesheet" type="text/css" href="{{ asset('public/design/adminpanel/css/select2.min.css') }}">
 @push('js')
@@ -23,9 +23,9 @@
                 }, success: function(data){
                     if(data.status == true){
                         $('.loading_save_continue').addClass('hidden');
-                        $('.success_message').html('<h1>'+data.message+'</h1>').removeClass('hidden');    
+                        $('.success_message').html('<h1>'+data.message+'</h1>').removeClass('hidden');
                     }
-                    
+
                 }, error(response){
                     $('.loading_save_continue').addClass('hidden');
                     var error_li = '';
@@ -56,12 +56,12 @@
                 }, success: function(data){
                     if(data.status == true){
                         $('.loading_copy').addClass('hidden');
-                        $('.success_message').html('<h1>'+data.message+'</h1>').removeClass('hidden'); 
+                        $('.success_message').html('<h1>'+data.message+'</h1>').removeClass('hidden');
                         setTimeout(function(){
                             window.location.href = '{{ url("admin/products") }}' +'/'+ data.id + '/edit';
-                        }, 5000);   
+                        }, 5000);
                     }
-                    
+
                 }, error(response){
                     $('.loading_copy').addClass('hidden');
                     var error_li = '';
@@ -92,11 +92,11 @@
             <a href="#" class="btn btn-danger delete" data-toggle="modal" data-target="#delete_admin{{ $product->id }}">{{__('admin.delete')}}<i class="fa fa-trash"></i></a>
             <div class="alert alert-danger error_message hidden">
                 <ul class="validate_message">
-                    
+
                 </ul>
             </div>
             <div class="alert alert-success success_message hidden">
-                
+
             </div>
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#product_info">{{__('admin.product_info')}}<i class="fa fa-info"></i></a></li>

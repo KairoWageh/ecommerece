@@ -2,27 +2,37 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Repository\contracts\DepartmentRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Department;
-use App\DataTables\DepartmentsDatatable;
+use App\DataTables\DepartmentsDataTable;
 use Storage;
 
 class DepartmentsController extends Controller
 {
+    protected $department;
+    protected $model;
+
+    public function __construct(DepartmentRepositoryInterface $departmentRepository, Department $departmentModel)
+    {
+        $this->department = $departmentRepository;
+        $this->model = $departmentModel;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(DepartmentsDatatable $department)
+    public function index(DepartmentsDataTable $department)
     {
         /*
             data in datatable comes from StatesDatatable query method
             not this method
         */
-        $data = Department::select('*')->whereNotIn('status', [-1])->get();
-        return $department->render('admin.departments.index', ['title' => __('departmentsController')]);
+        $data = $this->department->all($this->model);
+        return $department->render('admin.departments', ['title' => __('departmentsController')]);
     }
 
     /**

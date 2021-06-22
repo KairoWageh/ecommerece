@@ -22,7 +22,7 @@ class TradeMarksController extends Controller
             not this method
         */
         $data = TradeMark::select('*')->whereNotIn('status', [-1])->get();
-        return $tradeMark->render('admin.trademarks.index', ['title' => __('trademarksController')]);
+        return $tradeMark->render('admin.trademarks', ['title' => __('trademarksController')]);
     }
 
     /**

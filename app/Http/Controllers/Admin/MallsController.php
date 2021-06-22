@@ -23,7 +23,7 @@ class MallsController extends Controller
             not this method
         */
         $data = Mall::select('*')->whereNotIn('status', [-1])->get();
-        return $mall->render('admin.malls.index', ['title' => __('mallsController')]);
+        return $mall->render('admin.malls', ['title' => __('mallsController')]);
     }
 
     /**

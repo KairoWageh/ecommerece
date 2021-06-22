@@ -2,15 +2,27 @@
 
 namespace App\DataTables;
 
+use App\Repository\contracts\UserRepositoryInterface;
 use App\User;
 use Yajra\DataTables\Html\Button;
-use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Fields;
-use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Services\DataTable;
 
 class UsersDatatable extends DataTable
 {
+    protected $user;
+    protected $model;
+
+    /**
+     * UsersDatatable constructor.
+     * @param UserRepositoryInterface $userRepository
+     * @param User $userModel
+     */
+    public function __construct(UserRepositoryInterface $userRepository, User $userModel)
+    {
+        $this->user = $userRepository;
+        $this->model = $userModel;
+    }
+
     /**
      * Build DataTable class.
      *
@@ -29,25 +41,20 @@ class UsersDatatable extends DataTable
             ->editColumn('updated_at', function ($contact){
                 return date('Y-m-d H:i', strtotime($contact->updated_at) );
             })
+            ->setRowId(function($contact){
+                return $contact->id;
+            })
             ->rawColumns([
                 'checkbox', 'edit', 'delete'
             ]);
     }
 
     /**
-     * Get query source of dataTable.
-     *
-     * @param \App\AdminDatatable $model
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return mixed
      */
-    public function query(AdminDatatable $model)
+    public function query()
     {
-        //return $model->newQuery();
-        return User::query()->where(function($query){
-          if(request()->has('level')){
-            return $query->where('level', request('level'));
-          }
-        })->whereNotIn('status', [-1]);
+        return $this->user->all($this->model);
     }
 
     /**
@@ -65,7 +72,7 @@ class UsersDatatable extends DataTable
                     ->lengthMenu([[10, 25, 50, 100], [10, 25, 50, __('all_record')]])
                     ->orderBy(1)
                     ->buttons(
-                        Button::make('create')->className('btn btn-info'),
+//                        Button::make('create')->className('btn btn-info'),
                         //Button::make('remove'),
                         Button::make('print')->className('btn btn-primary'),
                         Button::make('csv')->className('btn btn-info'),
@@ -139,11 +146,11 @@ class UsersDatatable extends DataTable
               'orderable'   => false,
 
             ],
-            [
-              'name'        => 'id',
-              'data'        => 'id',
-              'title'       => '#'
-            ],
+//            [
+//              'name'        => 'id',
+//              'data'        => 'id',
+//              'title'       => '#'
+//            ],
             [
               'name'        => 'name',
               'data'        => 'name',

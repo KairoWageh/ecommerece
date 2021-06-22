@@ -23,7 +23,7 @@ class ShippingCompaniesController extends Controller
             not this method
         */
         $data = ShippingCompany::select('*')->whereNotIn('status', [-1])->get();
-        return $shippingCompany->render('admin.shippingCompanies.index', ['title' => __('shippingCompaniesController')]);
+        return $shippingCompany->render('admin.shippingCompanies', ['title' => __('shippingCompaniesController')]);
     }
 
     /**

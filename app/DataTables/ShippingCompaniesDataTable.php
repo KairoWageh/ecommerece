@@ -134,11 +134,11 @@ class ShippingCompaniesDataTable extends DataTable
               'orderable'   => false,
 
             ],
-            [
-              'name'        => 'id',
-              'data'        => 'id',
-              'title'       => '#'
-            ],
+//            [
+//              'name'        => 'id',
+//              'data'        => 'id',
+//              'title'       => '#'
+//            ],
             [
               'name'        => 'name_ar',
               'data'        => 'name_ar',

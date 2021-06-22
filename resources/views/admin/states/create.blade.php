@@ -1,4 +1,4 @@
-@extends('admin.index')
+@extends('admin.layouts.index')
 @section('content')
 <!-- @push('js')
 <script type="text/javascript">
@@ -29,7 +29,7 @@
                     {
                         $('.city').html(data);
                     }
-                });  
+                });
             }else{
                 $('.city').html('');
             }
@@ -92,5 +92,5 @@
                }
             });
     });
-        
+
 </script>

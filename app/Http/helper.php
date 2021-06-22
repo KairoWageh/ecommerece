@@ -32,7 +32,6 @@ if(!function_exists('load_department')){
 		$departments = \App\Department::selectRaw('department_name_'.session('lang').' as text')
 		->selectRaw('id as id')
 		->selectRaw('parent_id as parent')
-		->whereNotIn('status', [-1])
 		->get(['text', 'parent', 'id']);
 		$departments_array = [];
 		foreach ($departments as $department) {

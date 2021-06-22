@@ -1,4 +1,4 @@
-@extends('admin.index')
+@extends('admin.layouts.index')
 @section('content')
     <div class="box">
         <div class="box-header">
@@ -55,5 +55,5 @@
                }
             });
     });
-        
+
 </script>

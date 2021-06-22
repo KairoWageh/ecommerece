@@ -24,7 +24,7 @@ class WeightsController extends Controller
         */
 
         $data = Weight::select('*')->whereNotIn('status', [-1])->get();
-        return $weight->render('admin.weights.index', ['title' => __('weightsController')]);
+        return $weight->render('admin.weights', ['title' => __('weightsController')]);
     }
 
     /**

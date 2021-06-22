@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Repository\contracts\CountryRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Country;
 use App\DataTables\CountriesDataTable;
@@ -11,6 +12,15 @@ use Storage;
 
 class CountriesController extends Controller
 {
+    protected $country;
+    protected $model;
+
+    public function __construct(CountryRepositoryInterface $countryRepository, Country $countryModel)
+    {
+        $this->country = $countryRepository;
+        $this->model = $countryModel;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -23,8 +33,8 @@ class CountriesController extends Controller
             not this method
         */
 
-        $data = Country::select('*')->whereNotIn('status', [-1])->get();
-        return $country->render('admin.countries.index', ['title' => __('countriesController')]);
+        $data = $this->country->all($this->model);
+        return $country->render('admin.countries', ['title' => __('countriesController')]);
     }
 
     /**

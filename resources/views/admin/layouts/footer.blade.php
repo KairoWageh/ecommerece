@@ -1,8 +1,8 @@
     </div>
     <!--slide bar menu end here-->
     <script>
-    var toggle = true;               
-    $(".sidebar-icon").click(function() {                
+    var toggle = true;
+    $(".sidebar-icon").click(function() {
       if (toggle)
       {
         $(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
@@ -14,7 +14,7 @@
         setTimeout(function() {
           $("#menu span").css({"position":"relative"});
         }, 400);
-      }               
+      }
       toggle = !toggle;
     });
     </script>
@@ -42,8 +42,10 @@
     <script type="text/javascript" src="{{ asset('public/design/adminpanel/js/select2.min.js') }}"></script>
     <!--//select2 js-->
 
+    <!-- Toastr -->
+    <script src="{{ asset('public/design/adminpanel/js/toastr.min.js') }}"></script>
   <!-- mother grid end here-->
   @stack('js')
   @stack('css')
   </body>
-</html>  
+</html>

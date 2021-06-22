@@ -2,23 +2,31 @@
 
 namespace App\DataTables;
 
-use App\Country;
 use App\City;
+use App\Repository\contracts\CityRepositoryInterface;
+use Yajra\DataTables\DataTableAbstract;
+use Yajra\DataTables\Html\Builder;
 use Yajra\DataTables\Html\Button;
-use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Fields;
-use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Services\DataTable;
 
-class CitiesDatatable extends DataTable
+class CitiesDataTable extends DataTable
 {
+    protected $city;
+    protected $model;
+
+    public function __construct(CityRepositoryInterface $cityRepository, City $cityModel)
+    {
+        $this->city = $cityRepository;
+        $this->model = $cityModel;
+    }
+
     /**
      * Build DataTable class.
      *
      * @param mixed $query Results from query() method.
-     * @return \Yajra\DataTables\DataTableAbstract
+     * @return DataTableAbstract
      */
-    public function dataTable($query)
+    public function dataTable($query): DataTableAbstract
     {
         return datatables($query)
             ->addColumn('checkbox', 'admin.cities.btn.checkbox')
@@ -37,22 +45,19 @@ class CitiesDatatable extends DataTable
 
     /**
      * Get query source of dataTable.
-     *
-     * @param \App\AdminDatatable $model
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return mixed
      */
-    public function query(CitiesDatatable $model)
+    public function query()
     {
-        //return $model->newQuery();
-        return City::query()->with('country')->whereNotIn('status', [-1]);
+        return $this->city->allCities($this->model);
     }
 
     /**
      * Optional method if you want to use html builder.
      *
-     * @return \Yajra\DataTables\Html\Builder
+     * @return Builder
      */
-    public function html()
+    public function html(): Builder
     {
         return $this->builder()
                     ->setTableId('citydatatable-table')
@@ -123,7 +128,7 @@ class CitiesDatatable extends DataTable
      *
      * @return array
      */
-    protected function getColumns()
+    protected function getColumns(): array
     {
         return [
             [
@@ -136,11 +141,11 @@ class CitiesDatatable extends DataTable
               'orderable'   => false,
 
             ],
-            [
-              'name'        => 'id',
-              'data'        => 'id',
-              'title'       => '#'
-            ],
+//            [
+//              'name'        => 'id',
+//              'data'        => 'id',
+//              'title'       => '#'
+//            ],
             [
               'name'        => 'city_name_ar',
               'data'        => 'city_name_ar',
@@ -211,7 +216,7 @@ class CitiesDatatable extends DataTable
      *
      * @return string
      */
-    protected function filename()
+    protected function filename(): string
     {
         return 'City_' . date('YmdHis');
     }

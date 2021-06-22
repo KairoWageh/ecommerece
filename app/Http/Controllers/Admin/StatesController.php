@@ -23,7 +23,7 @@ class StatesController extends Controller
             not this method
         */
         $data = State::select('*')->whereNotIn('status', [-1])->get();
-        return $state->render('admin.states.index', ['title' => __('statesController')]);
+        return $state->render('admin.states', ['title' => __('statesController')]);
     }
 
     /**

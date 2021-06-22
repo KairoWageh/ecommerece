@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Repository\contracts\AdminRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DataTables\AdminDatatable;
@@ -10,6 +11,17 @@ use App\Admin;
 
 class AdminController extends Controller
 {
+    protected $admin;
+    protected $model;
+
+    /**
+     * AdminController constructor.
+     * @param AdminRepositoryInterface $admin
+     */
+    public function __construct(AdminRepositoryInterface $adminRepository, Admin $adminModel){
+        $this->admin = $adminRepository;
+        $this->model = $adminModel;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -21,18 +33,8 @@ class AdminController extends Controller
             data in datatable comes from AdminDatatable query method
             not this method
         */
-
-        //$data = Admin::latest()->get();
-        $data = Admin::select('*')->whereNotIn('status', [-1])->get();
-        return $admin->render('admin.admins.index', ['title' => __('adminController')]);
-        // return Datatables::of($data)
-        //         ->addIndexColumn()
-        //         ->addColumn('action', function($row){
-        //             $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-        //             return $btn;
-        //         })
-        //         ->rawColumns(['action'])
-        //         ->make(true);
+        $this->admin->all($this->model);
+        return $admin->render('admin.admins', ['title' => __('adminController')]);
     }
 
     /**
@@ -42,7 +44,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('admin.admins.create', ['title'=> trans("addNewAdmin")]);
+
     }
 
     /**
@@ -58,21 +60,9 @@ class AdminController extends Controller
             'email'    => 'required|email|unique:admins',
             'password' => 'required'
         ]);
-        if($validatedData){
-            self::adminCreate($request);
-            session()->flash('success', __('admin.record_added_successfully'));
-            return redirect(adminURL('admin/admin'));
+        if($validatedData == true){;
+            return $this->admin->store($request, $this->model);
         }
-    }
-
-    public function adminCreate($request){
-        $request->password = bcrypt($request->password);
-        Admin::create([
-            'name'     => $request['name'],
-            'email'    => $request['email'],
-            'password' => $request->password,
-            'status'   => 1
-        ]);
     }
 
     /**
@@ -94,9 +84,8 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        $admin = Admin::find($id);
-        $title = __('editAdmin');
-        return view('admin.admins.edit', compact('admin', 'title'));
+        $admin = $this->admin->find($this->model, $id);
+        return $admin;
     }
 
     /**
@@ -109,30 +98,31 @@ class AdminController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'name'     => 'required|min:3|max:50',
-            'email'    => 'required|email|unique:admins,email,'.$id,
-            'password' => 'required'
+            'edit_name'     => 'required|min:3|max:50',
+            'edit_email'    => 'required|email|unique:admins,email,'.$id,
         ]);
 
         if($validatedData){
-            $admin = Admin::find($id);
-            $validatedData['password'] = bcrypt($request->password);
-            Admin::where('id', $id)->update($validatedData);
-            session()->flash('success', __('admin.updated_successfully'));
-            return redirect(adminURL('admin/admin'));
+            $update_admin_data = [
+                'name' => $request->edit_name,
+                'email' => $request->edit_email
+            ];
+            $updated = Admin::where('id', $id)->update($update_admin_data);
+            if($updated == 1){
+                $admin = $this->admin->find($this->model, $id);
+                $data = [
+                    'admin'  => $admin,
+                    'toast'    => 'success',
+                    'message'  => __('updated')
+                ] ;
+            }else{
+                $data = [
+                    'toast'    => 'error',
+                    'message'  => __('not_updated')
+                ] ;
+            }
+            return $data;
         }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     */
-
-    public function delete_admin($id){
-        $admin = Admin::find($id);
-        $admin->status = -1;
-        $admin->save();
     }
 
     /**
@@ -143,9 +133,20 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        self::delete_admin($id);
-        session()->flash('success', __('admin.delete_successfully'));
-        return back();
+        $admin = $this->admin->find($this->model, $id);
+        if($admin){
+            $admin->delete();
+            $data = [
+                'toast'    => 'success',
+                'message' => __('deleted')
+            ];
+        }else{
+            $data = [
+                'toast'    => 'error',
+                'message' => __('admin.not_deleted')
+            ];
+        }
+        return $data;
     }
 
     /**

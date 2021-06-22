@@ -31,7 +31,7 @@ class ProductsController extends Controller
             not this method
         */
         $data = Product::select('*')->whereNotIn('status', [-1])->get();
-        return $product->render('admin.products.index', ['title' => __('productsController')]);
+        return $product->render('admin.products', ['title' => __('productsController')]);
     }
 
     /**

@@ -4,13 +4,14 @@ namespace App\DataTables;
 
 use App\Mall;
 use Yajra\DataTables\Html\Button;
-use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Fields;
-use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Services\DataTable;
 
-class MallsDatatable extends DataTable
+class MallsDataTable extends DataTable
 {
+    public function __construct()
+    {
+    }
+
     /**
      * Build DataTable class.
      *
@@ -36,13 +37,10 @@ class MallsDatatable extends DataTable
 
     /**
      * Get query source of dataTable.
-     *
-     * @param \App\ManufacturersDatatable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(MallsDatatable $model)
+    public function query()
     {
-        //return $model->newQuery();
         return Mall::query()->with('country')->whereNotIn('status', [-1]);
     }
 
@@ -134,11 +132,11 @@ class MallsDatatable extends DataTable
               'orderable'   => false,
 
             ],
-            [
-              'name'        => 'id',
-              'data'        => 'id',
-              'title'       => '#'
-            ],
+//            [
+//              'name'        => 'id',
+//              'data'        => 'id',
+//              'title'       => '#'
+//            ],
             [
               'name'        => 'name_ar',
               'data'        => 'name_ar',

@@ -15,11 +15,11 @@ class AdminAuth extends Controller
 {
     public function getToken()
     {
-        return csrf_token(); 
+        return csrf_token();
     }
 
     public function login(){
-    	return view('admin.login');
+    	return view('admin.auth.login');
     }
 
     public function doLogin(){
@@ -27,7 +27,7 @@ class AdminAuth extends Controller
     	if(admin()->attempt(['email'=>request('email'), 'password'=>request('password')], $rememberme)){
     		return redirect('admin');
     	}else{
-    		session()->flash('error', __('admin.wrong_creditionals'));
+    		session()->flash('error', __('wrong_creditionals'));
     		return redirect('admin/login');
     	}
     }
@@ -38,7 +38,7 @@ class AdminAuth extends Controller
     }
 
     public function forgotPassword(){
-    	return view('admin.forgot_password');
+    	return view('admin.auth.forgot_password');
     }
 
     public function forgotPasswordPost(){
@@ -46,7 +46,7 @@ class AdminAuth extends Controller
         self::checkIfAdmin($admin);
         return back();
     }
-    
+
     public function checkIfAdmin($admin){
         if(!empty($admin)){
             $token = app('auth.password.broker')->createToken($admin);
@@ -56,16 +56,16 @@ class AdminAuth extends Controller
                     'created_at' => Carbon::now()
             ]);
             Mail::to($admin->email)->send(new AdminResetPassword(['data' => $admin, 'token' => $token]));
-            session()->flash('success', __('admin.linkSent'));
+            session()->flash('success', __('linkSent'));
         }else{
-            session()->flash('error', __('admin.notAdmin'));
+            session()->flash('error', __('notAdmin'));
         }
     }
 
     public function resetPassword($token){
         $check_token = DB::table('password_resets')->where('token', $token)->where('created_at', '>', Carbon::now()->subHours(2))->first();
         if(!empty($check_token)){
-            return view('admin.reset_password', ['data' => $check_token]);
+            return view('admin.auth.reset_password', ['data' => $check_token]);
         }else{
             return redirect(adminURL('forgot/password'));
         }
@@ -77,17 +77,7 @@ class AdminAuth extends Controller
             'password_confirmation' => 'required'
         ]);
         $check_token = DB::table('password_resets')->where('token', $token)->where('created_at', '>', Carbon::now()->subHours(2))->first();
-        self::updatePasswordAfterReseting($check_token);
-        // if(!empty($check_token)){
-        //     $admin = Admin::where('email', $check_token->email)->update(['email' => $check_token->email, 'password'=> bcrypt(request('password'))
-
-        //     ]);
-        //     DB::table('password_resets')->where('email', request('email'))->delete();
-        //     admin()->attempt(['email' => request('email'), 'password' => request('password')], true);
-        //     return redirect(adminURL());
-        // }else{
-        //     return redirect(adminURL('forgot/password'));
-        // }
+        return self::updatePasswordAfterReseting($check_token);
     }
 
     public function updatePasswordAfterReseting($check_token){
@@ -97,9 +87,9 @@ class AdminAuth extends Controller
             ]);
             DB::table('password_resets')->where('email', request('email'))->delete();
             admin()->attempt(['email' => request('email'), 'password' => request('password')], true);
-            return redirect(adminURL());
+            return redirect(adminURL('admin/login'));
         }else{
-            return redirect(adminURL('forgot/password'));
+            return redirect(adminURL('admin/forgot/password'));
         }
     }
 }

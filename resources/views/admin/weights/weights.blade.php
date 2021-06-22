@@ -1,4 +1,4 @@
-@extends('admin.index')
+@extends('admin.layouts.index')
 @section('content')
     <div class="box">
         <div class="box-header">
@@ -28,12 +28,12 @@
           <div class="modal-body">
             <div class="alert alert-danger">
                 <div class="empty_record hidden">
-                    <h4>{{__('admin.please_check_some_records')}}</h4>    
+                    <h4>{{__('admin.please_check_some_records')}}</h4>
                 </div>
                 <div class="not_empty_record hidden">
                     <h4>{{__('admin.ask_delete_item')}}<span class="record_count"></span> </h4>
                 </div>
-                
+
             </div>
           </div>
           <div class="modal-footer">

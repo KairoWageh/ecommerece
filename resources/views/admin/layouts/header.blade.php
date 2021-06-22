@@ -24,8 +24,11 @@
 	<!--//datepicker -->
 	<!--js-->
 	<script src="{{asset('public/design/adminpanel/js/jquery-2.1.1.min.js')}}"></script>
+    <script src="{{asset('public/design/adminpanel/js/bootstrap.js')}}"></script>
 	<!--icons-css-->
 	<link href="{{asset('public/design/adminpanel/css/font-awesome.css')}}" rel="stylesheet">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="{{ asset('public/design/adminpanel/css/toastr.min.css') }}">
 	<!--Google Fonts-->
 	<link href='//fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css'>
 	<link href='//fonts.googleapis.com/css?family=Work+Sans:400,500,600' rel='stylesheet' type='text/css'>
@@ -112,4 +115,6 @@
 	<!--custom-js-->
 	<script src="{{asset('public/design/adminpanel/js/myFunctions.js')}}"></script>
 	<!--//custom-js-->
+
+
 </head>

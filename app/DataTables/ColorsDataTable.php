@@ -3,21 +3,30 @@
 namespace App\DataTables;
 
 use App\Color;
+use App\Repository\contracts\ColorRepositoryInterface;
+use Yajra\DataTables\DataTableAbstract;
+use Yajra\DataTables\Html\Builder;
 use Yajra\DataTables\Html\Button;
-use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Fields;
-use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Services\DataTable;
 
-class ColorsDatatable extends DataTable
+class ColorsDataTable extends DataTable
 {
+    protected $color;
+    protected $model;
+
+    public function __construct(ColorRepositoryInterface $colorRepository, Color $colorModel)
+    {
+        $this->color = $colorRepository;
+        $this->model = $colorModel;
+    }
+
     /**
      * Build DataTable class.
      *
      * @param mixed $query Results from query() method.
-     * @return \Yajra\DataTables\DataTableAbstract
+     * @return DataTableAbstract
      */
-    public function dataTable($query)
+    public function dataTable($query): DataTableAbstract
     {
         return datatables($query)
             ->addColumn('checkbox', 'admin.colors.btn.checkbox')
@@ -37,22 +46,19 @@ class ColorsDatatable extends DataTable
 
     /**
      * Get query source of dataTable.
-     *
-     * @param \App\ManufacturersDatatable $model
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return mixed
      */
-    public function query(ColorsDatatable $model)
+    public function query()
     {
-        //return $model->newQuery();
-        return Color::query()->whereNotIn('status', [-1]);
+        return $this->color->all($this->model);
     }
 
     /**
      * Optional method if you want to use html builder.
      *
-     * @return \Yajra\DataTables\Html\Builder
+     * @return Builder
      */
-    public function html()
+    public function html(): Builder
     {
         return $this->builder()
                     ->setTableId('colordatatable-table')
@@ -122,7 +128,7 @@ class ColorsDatatable extends DataTable
      *
      * @return array
      */
-    protected function getColumns()
+    protected function getColumns(): array
     {
         return [
             [
@@ -135,11 +141,11 @@ class ColorsDatatable extends DataTable
               'orderable'   => false,
 
             ],
-            [
-              'name'        => 'id',
-              'data'        => 'id',
-              'title'       => '#'
-            ],
+//            [
+//              'name'        => 'id',
+//              'data'        => 'id',
+//              'title'       => '#'
+//            ],
             [
               'name'        => 'name_ar',
               'data'        => 'name_ar',
@@ -210,7 +216,7 @@ class ColorsDatatable extends DataTable
      *
      * @return string
      */
-    protected function filename()
+    protected function filename(): string
     {
         return 'Color_' . date('YmdHis');
     }

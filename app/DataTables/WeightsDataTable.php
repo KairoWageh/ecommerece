@@ -3,10 +3,9 @@
 namespace App\DataTables;
 
 use App\Weight;
+use Yajra\DataTables\DataTableAbstract;
+use Yajra\DataTables\Html\Builder;
 use Yajra\DataTables\Html\Button;
-use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Fields;
-use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Services\DataTable;
 
 class WeightsDataTable extends DataTable
@@ -15,9 +14,9 @@ class WeightsDataTable extends DataTable
      * Build DataTable class.
      *
      * @param mixed $query Results from query() method.
-     * @return \Yajra\DataTables\DataTableAbstract
+     * @return DataTableAbstract
      */
-    public function dataTable($query)
+    public function dataTable($query): DataTableAbstract
     {
         return datatables($query)
             ->addColumn('checkbox', 'admin.weights.btn.checkbox')
@@ -35,23 +34,19 @@ class WeightsDataTable extends DataTable
     }
 
     /**
-     * Get query source of dataTable.
-     *
-     * @param \App\ManufacturersDatatable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(WeightsDatatable $model)
+    public function query(): \Illuminate\Database\Eloquent\Builder
     {
-        //return $model->newQuery();
         return Weight::query()->whereNotIn('status', [-1]);
     }
 
     /**
      * Optional method if you want to use html builder.
      *
-     * @return \Yajra\DataTables\Html\Builder
+     * @return Builder
      */
-    public function html()
+    public function html(): Builder
     {
         return $this->builder()
                     ->setTableId('weightdatatable-table')
@@ -121,7 +116,7 @@ class WeightsDataTable extends DataTable
      *
      * @return array
      */
-    protected function getColumns()
+    protected function getColumns(): array
     {
         return [
             [
@@ -134,11 +129,11 @@ class WeightsDataTable extends DataTable
               'orderable'   => false,
 
             ],
-            [
-              'name'        => 'id',
-              'data'        => 'id',
-              'title'       => '#'
-            ],
+//            [
+//              'name'        => 'id',
+//              'data'        => 'id',
+//              'title'       => '#'
+//            ],
             [
               'name'        => 'name_ar',
               'data'        => 'name_ar',
@@ -203,7 +198,7 @@ class WeightsDataTable extends DataTable
      *
      * @return string
      */
-    protected function filename()
+    protected function filename(): string
     {
         return 'Weight_' . date('YmdHis');
     }

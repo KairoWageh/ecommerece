@@ -43,3 +43,7 @@ li.dropdown.head-dpdn{
 #menu li ul {
     left: -60% !important;
 }
+
+.dt-buttons{
+    margin-right: 61px;
+}

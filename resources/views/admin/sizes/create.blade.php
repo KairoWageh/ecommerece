@@ -1,4 +1,4 @@
-@extends('admin.index')
+@extends('admin.layouts.index')
 @section('content')
 @push('js')
 <script type="text/javascript">
@@ -26,7 +26,7 @@
         // $('#form_delete_department').attr('action', '{{adminURL('departments')}}/'+r.join(', '));
         // $('.parent_id').val(r.join(', '));
         if(r.join(', ') != ''){
-            $('.department_id').val(r.join(', ')); 
+            $('.department_id').val(r.join(', '));
         }
    });
 </script>

@@ -1,4 +1,4 @@
-@extends('admin.index')
+@extends('admin.layouts.index')
 @section('content')
 @push('js')
 <script type="text/javascript">
@@ -23,7 +23,7 @@
             r.push(data.instance.get_node(data.selected[i]).id);
         }
         if(r.join(', ') != ''){
-            $('.department_id').val(r.join(', ')); 
+            $('.department_id').val(r.join(', '));
         }
    });
 </script>
