@@ -23,7 +23,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
 	Route::group(['middleware' => 'admin:admin'], function(){
 		Route::resource('admins', 'AdminController');
 		Route::delete('admins/destroy/all', 'AdminController@multi_delete');
-		Route::get('/', 'HomeController@home')->name('home');
+		Route::get('/home', 'HomeController@home')->name('home');
 		// Route::get('/', function(){
 		// 	return view('admin.home');
 		// })->name('home');

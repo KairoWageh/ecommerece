@@ -28,12 +28,11 @@ class CountriesController extends Controller
      */
     public function index(CountriesDataTable $country)
     {
-        /*
-            data in datatable comes from CountriesDatatable query method
-            not this method
-        */
+        /**
+         * data in datatable comes from CountriesDatatable query method not this method
+         */
 
-        $data = $this->country->all($this->model);
+        $this->country->all($this->model);
         return $country->render('admin.countries', ['title' => __('countriesController')]);
     }
 

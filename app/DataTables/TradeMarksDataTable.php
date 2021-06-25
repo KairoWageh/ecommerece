@@ -29,6 +29,9 @@ class TradeMarksDatatable extends DataTable
             ->editColumn('updated_at', function ($contact){
                 return date('Y-m-d H:i', strtotime($contact->updated_at) );
             })
+            ->setRowId(function($contact){
+                return $contact->id;
+            })
             ->rawColumns([
                 'checkbox', 'edit', 'delete'
             ]);
@@ -42,8 +45,7 @@ class TradeMarksDatatable extends DataTable
      */
     public function query(TradeMarksDatatable $model)
     {
-        //return $model->newQuery();
-        return TradeMark::query()->whereNotIn('status', [-1]);
+        return TradeMark::query();
     }
 
     /**
@@ -61,7 +63,7 @@ class TradeMarksDatatable extends DataTable
                     ->lengthMenu([[10, 25, 50, 100], [10, 25, 50, __('all_record')]])
                     ->orderBy(1)
                     ->buttons(
-                        Button::make('create')->className('btn btn-info'),
+//                        Button::make('create')->className('btn btn-info'),
                         //Button::make('remove'),
                         Button::make('print')->className('btn btn-primary'),
                         Button::make('csv')->className('btn btn-info'),
@@ -134,11 +136,6 @@ class TradeMarksDatatable extends DataTable
               'orderable'   => false,
 
             ],
-//            [
-//              'name'        => 'id',
-//              'data'        => 'id',
-//              'title'       => '#'
-//            ],
             [
               'name'        => 'name_ar',
               'data'        => 'name_ar',

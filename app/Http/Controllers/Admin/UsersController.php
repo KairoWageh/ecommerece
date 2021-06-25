@@ -6,12 +6,10 @@ use App\Repository\contracts\UserRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DataTables\UsersDatatable;
-use DataTables;
 use App\User;
 
 class UsersController extends Controller
 {
-
     protected $user;
     protected $model;
 
@@ -37,23 +35,10 @@ class UsersController extends Controller
             data in datatable comes from UsersDatatable query method
             not this method
         */
-//        $data = User::select('*')->whereNotIn('status', [-1])->get();
         $data = $this->user->all($this->model);
         $user_levels = ["user" => __('user'), "company" => __('company'), "vendor" => __('vendor')];
         return $user->render('admin.users', ['title' => __('usersController'), 'user_levels' => $user_levels]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $user_levels = ["user" => __('user'), "company" => __('company'), "vendor" => __('vendor')];
-        return view('admin.users.create', ['title'=> trans("add"), 'user_levels' => $user_levels]);
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -74,17 +59,6 @@ class UsersController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -92,8 +66,8 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $user = $this->user->find($this->model, $id);
-        return $user;
+        return $this->user->find($this->model, $id);
+
     }
 
     /**
@@ -113,36 +87,8 @@ class UsersController extends Controller
         ]);
 
         if($validatedData){
-//            $validatedData['password'] = bcrypt($request->password);
-            $update_user_data = [
-                'name' => $request->edit_name,
-                'email' => $request->edit_email
-            ];
-            $updated = User::where('id', $id)->update($update_user_data);
-            if($updated == 1){
-                $updated_user = $this->user->find($this->model, $id);
-                $data = [
-                    'user'  => $updated_user,
-                    'toast'    => 'success',
-                    'message'  => __('updated')
-                ] ;
-            }else{
-                $data = [
-                    'toast'    => 'error',
-                    'message'  => __('not_updated')
-                ] ;
-            }
-            return $data;
+            return $this->user->update($request, $this->model, $id);
         }
-    }
-
-    /**
-    * Remove the specified resourse from storage.
-    */
-    public function delete_user($id){
-        $user = User::find($id);
-        $user->status = -1;
-        $user->save();
     }
 
     /**
@@ -153,20 +99,7 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        $user = $this->user->find($this->model, $id);
-        if($user){
-            $user->delete();
-            $data = [
-                'toast'    => 'success',
-                'message' => __('deleted')
-            ];
-        }else{
-            $data = [
-                'toast'    => 'error',
-                'message' => __('admin.not_deleted')
-            ];
-        }
-        return $data;
+        return $this->user->delete($this->model, $id);
     }
 
     /**
@@ -177,7 +110,7 @@ class UsersController extends Controller
     public function multi_delete(Request $request){
         $usersIDs = $request->item;
         foreach ($usersIDs as $key => $userID) {
-            self::delete_user($userID);
+            self::destroy($userID);
         }
         session()->flash('seccess', __('admin.delete_successfully'));
         return back();

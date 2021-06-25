@@ -19,7 +19,7 @@
                             {{ $app->description_ar }}
                         </p>
                     @endif
-                    
+
                     <div class="footer-social">
                         <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
                         <a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
@@ -38,7 +38,7 @@
                         <li><a href="#">Wishlist</a></li>
                         <li><a href="#">Vendor contact</a></li>
                         <li><a href="#">Front page</a></li>
-                    </ul>                        
+                    </ul>
                 </div>
             </div>
 
@@ -57,7 +57,7 @@
                                 <li><a href="#">{{ $department->department_name_ar }}</a></li>
                             @endif
                         @endforeach
-                    </ul>                        
+                    </ul>
                 </div>
             </div>
 
@@ -82,12 +82,12 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="copyright">
-                    <p>&copy; 2020 
+                    <p>&copy; 2020
                         @if(session('lang') == 'en')
                             {{ $app->sitename_en }}
                         @elseif(session('lang') == 'ar')
                             {{ $app->sitename_ar }}
-                        @endif. {{ __('user.all_rights_reserved') }} | {{ __('user.design_by') }} 
+                        @endif. {{ __('user.all_rights_reserved') }} | {{ __('user.design_by') }}
                         <a href="https://www.linkedin.com/in/kairo-wageh-591811b5/" target="_blank">Kairo Wageh</a>
                     </p>
                 </div>
@@ -108,8 +108,8 @@
 <!-- Latest jQuery form server -->
 <script src="{{ asset('public/design/site/js/jquery.min.js') }}"></script>
 
-<!-- Bootstrap JS form CDN -->
-<script src="{{ asset('public/design/site/js/bootstrap.min.js') }}"></script>
+{{--<!-- Bootstrap JS form CDN -->--}}
+{{--<script src="{{ asset('public/design/site/js/bootstrap.min.js') }}"></script>--}}
 
 <!-- jQuery sticky menu -->
 <script src="{{ asset('public/design/site/js/owl.carousel.min.js') }}"></script>

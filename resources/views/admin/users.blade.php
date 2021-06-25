@@ -61,6 +61,7 @@
     <script>
         var users_table = $('#users_table');
         $(document).on('click', 'button.add_user',function(event) {
+            $('.validation-errors').html('');
             $('#add_user_modal').modal('show');
         });
 
@@ -118,6 +119,7 @@
         });
 
         $(document).on('click', 'button.edit_user',function(event) {
+            $('.validation-errors').html('');
             var user_id = parseInt($(this).attr("data-id"));
             var url = "{{url('admin/users/:user/edit')}}";
             url = url.replace(':user', user_id);

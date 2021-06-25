@@ -22,7 +22,7 @@ class ManufacturersController extends Controller
             not this method
         */
 
-        $data = Manufacturer::select('*')->whereNotIn('status', [-1])->get();
+        $data = Manufacturer::select('*')->get();
         return $manufacturer->render('admin.manufacturers', ['title' => __('manufacturesController')]);
     }
 

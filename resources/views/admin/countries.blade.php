@@ -5,6 +5,9 @@
         	<h3 class="box-title">{{ $title }}</h3>
         </div>
             <div class="box-body">
+                <button type="button" class="btn btn-info add_country" data-toggle="modal"  name="add_admin">
+                    <i class="fa fa-plus" style="color: #fff">{{__('add')}}</i>
+                </button>
                 {!! Form::open(['id' => 'form_data', 'url' => adminURL('admin/countries/destroy/all'), 'method' => 'delete']) !!}
                 <!-- {!! Form::hidden('_method', 'delete') !!} -->
                 {{ $dataTable->table([
@@ -50,7 +53,7 @@
 
       </div>
     </div>
-
+@include('admin.countries._create')
 @push('js')
 {{ $dataTable->scripts() }}
 @endpush
@@ -58,25 +61,23 @@
     <script>
         var countries_table = $('#countries_table');
 
-        $(document).on('click', 'button.add_admin',function(event) {
-            // event.preventDefault();
-            // document.getElementById('add_admin_form').reset();
-            $('#add_admin_modal').modal('show');
+        $(document).on('click', 'button.add_country',function(event) {
+            $('#add_country_modal').modal('show');
         });
 
-        // add admin form submition
-        $('#add_admin_form').on('submit',function(event){
+        // add country form submition
+        $('#add_country_form').on('submit',function(event){
             event.preventDefault();
             // get form submitted data
             let formData = new FormData(this);
             $.ajax({
-                url: "admin/admins",
+                url: "countries",
                 type:"POST",
                 data: formData,
                 contentType: false,
                 processData: false,
                 success:function(response){
-                    if(response.admin){
+                    if(response.country){
                         // admins_table.append('<tr id ="'+response.admin.id+'">'+
                         //     '<td>'+response.admin.name+'</td>'+
                         //     '<td>'+response.admin.email+'</td>'+
@@ -98,8 +99,8 @@
                         //     .html('<i class="fa fa-trash"></i>');;
                         // $('.actions_'+response.admin.id).append(delete_btn);
                         toastr.success(response.message);
-                        $('#add_admin_modal').modal('hide');
-                        document.getElementById('add_admin_form').reset();
+                        $('#add_country_modal').modal('hide');
+                        document.getElementById('add_country_form').reset();
                     }else{
                         toastr.error(response.message);
                     }

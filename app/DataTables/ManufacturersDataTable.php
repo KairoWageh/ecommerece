@@ -43,7 +43,7 @@ class ManufacturersDatatable extends DataTable
     public function query(ManufacturersDatatable $model)
     {
         //return $model->newQuery();
-        return Manufacturer::query()->whereNotIn('status', [-1]);
+        return Manufacturer::query();
     }
 
     /**

@@ -38,4 +38,51 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface{
         }
         return $data;
     }
+
+    /**
+     * @param $attributes
+     * @param $model
+     * @param $id
+     * @return array
+     */
+    public function update($attributes, $model, $id)
+    {
+        $update_user_data = [
+            'name' => $attributes->edit_name,
+            'email' => $attributes->edit_email
+        ];
+        $updated = User::where('id', $id)->update($update_user_data);
+        if($updated == 1){
+            $updated_user = self::find($model, $id);
+            $data = [
+                'user'  => $updated_user,
+                'toast'    => 'success',
+                'message'  => __('updated')
+            ] ;
+        }else{
+            $data = [
+                'toast'    => 'error',
+                'message'  => __('not_updated')
+            ] ;
+        }
+        return $data;
+    }
+
+    public function delete($model, $id)
+    {
+        $user = self::find($model, $id);
+        if($user != null){
+            $user->delete();
+            $data = [
+                'toast'    => 'success',
+                'message' => __('deleted')
+            ];
+        }else{
+            $data = [
+                'toast'    => 'error',
+                'message' => __('admin.not_deleted')
+            ];
+        }
+        return $data;
+    }
 }

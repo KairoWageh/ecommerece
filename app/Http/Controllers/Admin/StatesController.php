@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Repository\contracts\StateRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Country;
@@ -11,19 +12,30 @@ use App\DataTables\StatesDataTable;
 
 class StatesController extends Controller
 {
+    protected $state;
+    protected $model;
+
+    public function __construct(StateRepositoryInterface $stateRepository, State $stateModel)
+    {
+        $this->state = $stateRepository;
+        $this->model = $stateModel;
+    }
+
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param StatesDataTable $state
+     * @return mixed
      */
     public function index(StatesDataTable $state)
     {
-        /*
-            data in datatable comes from StatesDatatable query method
-            not this method
-        */
-        $data = State::select('*')->whereNotIn('status', [-1])->get();
-        return $state->render('admin.states', ['title' => __('statesController')]);
+        /**
+         * data in datatable comes from StatesDatatable query method not this method
+         */
+        $data = State::select('*')->get();
+        $lang = app()->getLocale();
+        $name = 'country_name_'.$lang;
+        $countries = Country::select($name)->get();
+        return $state->render('admin.states', ['title' => __('statesController'), 'countries' => $countries]);
     }
 
     /**
@@ -101,10 +113,7 @@ class StatesController extends Controller
             'city_id'           => 'required|numeric',
         ]);
         if($validatedData){
-            $validatedData['status'] = 1;
-            State::create($validatedData);
-            session()->flash('success', __('admin.record_added_successfully'));
-            return redirect(adminURL('admin/states'));
+            return $this->state->store($request, $this->model);
         }
     }
 

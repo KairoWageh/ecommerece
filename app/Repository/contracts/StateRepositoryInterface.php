@@ -3,10 +3,10 @@
 namespace App\Repository\contracts;
 
 /**
- * Interface UserRepositoryInterface
+ * Interface StateRepositoryInterface
  * @package App\Repository\contracts
  */
-interface UserRepositoryInterface{
+interface StateRepositoryInterface{
     /**
      * @param $attributes
      * @param $model

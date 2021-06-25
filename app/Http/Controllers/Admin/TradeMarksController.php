@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Repository\contracts\TrademarkRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DataTables\TradeMarksDatatable;
@@ -10,6 +11,20 @@ use Storage;
 
 class TradeMarksController extends Controller
 {
+    protected $tradeMark;
+    protected $model;
+
+    /**
+     * TradeMarksController constructor.
+     * @param TrademarkRepositoryInterface $trademarkRepository
+     * @param TradeMark $trademarkModel
+     */
+    public function __construct(TrademarkRepositoryInterface $trademarkRepository, TradeMark $trademarkModel)
+    {
+        $this->tradeMark = $trademarkRepository;
+        $this->model = $trademarkModel;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,22 +32,11 @@ class TradeMarksController extends Controller
      */
     public function index(TradeMarksDatatable $tradeMark)
     {
-        /*
-            data in datatable comes from CountriesDatatable query method
-            not this method
-        */
-        $data = TradeMark::select('*')->whereNotIn('status', [-1])->get();
+        /**
+         * data in datatable comes from CountriesDatatable query method not this method
+         */
+        TradeMark::select('*')->get();
         return $tradeMark->render('admin.trademarks', ['title' => __('trademarksController')]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('admin.trademarks.create', ['title'=> trans("add")]);
     }
 
     /**
@@ -49,18 +53,15 @@ class TradeMarksController extends Controller
             'trademarkIcon'        => 'required|max:10000|'.validate_image(),
         ]);
         if($validatedData){
-            if($request->hasFile('trademarkIcon')){
+//            if($validatedData->hasFile('trademarkIcon')){
                 $validatedData['trademarkIcon'] = up()->upload([
                     'file'        => 'trademarkIcon',
                     'path'        => 'tradeMarks',
                     'upload_type' => 'single',
                     'delete_file' => '',
                 ]);
-            }
-            $validatedData['status'] = 1;
-            TradeMark::create($validatedData);
-            session()->flash('success', __('admin.record_added_successfully'));
-            return redirect(adminURL('admin/trademarks'));
+//            }
+            return $this->tradeMark->store($request, $this->model);
         }
     }
 

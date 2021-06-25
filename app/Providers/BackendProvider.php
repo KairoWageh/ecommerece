@@ -38,6 +38,14 @@ class BackendProvider extends ServiceProvider
             'App\Repository\sql\DepartmentRepository'
         );
         $this->app->bind(
+            'App\Repository\contracts\StateRepositoryInterface',
+            'App\Repository\sql\StateRepository'
+        );
+        $this->app->bind(
+            'App\Repository\contracts\TrademarkRepositoryInterface',
+            'App\Repository\sql\TrademarkRepository'
+        );
+        $this->app->bind(
             'App\Repository\contracts\UserRepositoryInterface',
             'App\Repository\sql\UserRepository'
         );

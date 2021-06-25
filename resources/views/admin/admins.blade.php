@@ -64,8 +64,7 @@
         var admins_table = $('#admins_table');
 
         $(document).on('click', 'button.add_admin',function(event) {
-            // event.preventDefault();
-            // document.getElementById('add_admin_form').reset();
+            $('.validation-errors').html('');
             $('#add_admin_modal').modal('show');
         });
 
@@ -123,6 +122,7 @@
 
 
         $(document).on('click', 'button.edit_admin',function(event) {
+            $('.validation-errors').html('');
             var admin_id = parseInt($(this).attr("data-id"));
             var url = "{{url('admin/admins/:admin/edit')}}";
             url = url.replace(':admin', admin_id);

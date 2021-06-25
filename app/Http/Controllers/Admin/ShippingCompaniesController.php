@@ -22,7 +22,7 @@ class ShippingCompaniesController extends Controller
             data in datatable comes from ShippingCompaniesDataTable query method
             not this method
         */
-        $data = ShippingCompany::select('*')->whereNotIn('status', [-1])->get();
+        $data = ShippingCompany::select('*')->get();
         return $shippingCompany->render('admin.shippingCompanies', ['title' => __('shippingCompaniesController')]);
     }
 

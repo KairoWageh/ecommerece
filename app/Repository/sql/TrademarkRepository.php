@@ -2,30 +2,21 @@
 
 namespace App\Repository\sql;
 
-use App\Admin;
-use App\Repository\contracts\AdminRepositoryInterface;
+use App\Repository\contracts\TrademarkRepositoryInterface;
 
-class AdminRepository extends BaseRepository implements AdminRepositoryInterface {
-
+class TrademarkRepository extends BaseRepository implements TrademarkRepositoryInterface{
     /**
      * @param $attributes
      * @param $model
      * @return mixed|void
      */
-    public function store($attributes, $model)
-    {
-        $attributes->password = bcrypt($attributes->password);
-        $admin = $model->create([
-            'name'     => $attributes['name'],
-            'email'    => $attributes['email'],
-            'password' => $attributes->password,
-        ]);
-
-        if($admin != null){
-            $admin->created_at = date('Y-m-d H:i', strtotime($admin->created_at) );
-            $admin->updated_at = date('Y-m-d H:i', strtotime($admin->updated_at) );
+    public function store($attributes, $model){
+        $tradeMark = $model->create($attributes);
+        if($tradeMark != null){
+            $tradeMark->created_at = date('Y-m-d H:i', strtotime($tradeMark->created_at) );
+            $tradeMark->updated_at = date('Y-m-d H:i', strtotime($tradeMark->updated_at) );
             $data = [
-                'admin'  => $admin,
+                'tradeMark'  => $tradeMark,
                 'toast'    => 'success',
                 'message'  => __('created')
             ] ;
@@ -46,15 +37,15 @@ class AdminRepository extends BaseRepository implements AdminRepositoryInterface
      */
     public function update($attributes, $model, $id)
     {
-        $update_admin_data = [
+        $update_user_data = [
             'name' => $attributes->edit_name,
             'email' => $attributes->edit_email
         ];
-        $updated = Admin::where('id', $id)->update($update_admin_data);
+        $updated = User::where('id', $id)->update($update_user_data);
         if($updated == 1){
-            $admin = self::find($model, $id);
+            $updated_user = self::find($model, $id);
             $data = [
-                'admin'  => $admin,
+                'user'  => $updated_user,
                 'toast'    => 'success',
                 'message'  => __('updated')
             ] ;
@@ -69,18 +60,18 @@ class AdminRepository extends BaseRepository implements AdminRepositoryInterface
 
     public function delete($model, $id)
     {
-        $admin = self::find($model, $id);
-        $deleted = $admin->delete();
-        if($deleted == 1){
+        $user = self::find($model, $id);
+        if($user != null){
+            $user->delete();
             $data = [
                 'toast'    => 'success',
-                'message'  => __('deleted')
-            ] ;
+                'message' => __('deleted')
+            ];
         }else{
             $data = [
                 'toast'    => 'error',
-                'message'  => __('not_deleted')
-            ] ;
+                'message' => __('admin.not_deleted')
+            ];
         }
         return $data;
     }

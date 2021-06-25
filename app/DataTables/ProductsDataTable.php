@@ -44,7 +44,7 @@ class ProductsDatatable extends DataTable
     public function query(ProductsDatatable $model)
     {
         //return $model->newQuery();
-        return Product::query()->with('department')->whereNotIn('status', [-1]);
+        return Product::query()->with('department');
     }
 
     /**

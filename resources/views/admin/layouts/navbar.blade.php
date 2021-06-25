@@ -1,3 +1,4 @@
+
 <body>
 <div class="page-container">
    <div class="left-content">
@@ -31,7 +32,7 @@
 												</div>
 											</li>
 											<li><a href="#">
-											   <div class="user_img"><img src="images/p4.png" alt=""></div>
+											   <div class="user_img"><img src="" alt=""></div>
 											   <div class="notification_desc">
 												<p>Lorem ipsum dolor</p>
 												<p><span>1 hour ago</span></p>
@@ -39,7 +40,7 @@
 											   <div class="clearfix"></div>
 											</a></li>
 											<li class="odd"><a href="#">
-												<div class="user_img"><img src="images/p2.png" alt=""></div>
+												<div class="user_img"><img src="" alt=""></div>
 											   <div class="notification_desc">
 												<p>Lorem ipsum dolor </p>
 												<p><span>1 hour ago</span></p>
@@ -47,7 +48,7 @@
 											  <div class="clearfix"></div>
 											</a></li>
 											<li><a href="#">
-											   <div class="user_img"><img src="images/p3.png" alt=""></div>
+											   <div class="user_img"><img src="" alt=""></div>
 											   <div class="notification_desc">
 												<p>Lorem ipsum dolor</p>
 												<p><span>1 hour ago</span></p>
@@ -70,7 +71,7 @@
 												</div>
 											</li>
 											<li><a href="#">
-												<div class="user_img"><img src="images/p5.png" alt=""></div>
+												<div class="user_img"><img src="" alt=""></div>
 											   <div class="notification_desc">
 												<p>Lorem ipsum dolor</p>
 												<p><span>1 hour ago</span></p>
@@ -78,7 +79,7 @@
 											  <div class="clearfix"></div>
 											 </a></li>
 											 <li class="odd"><a href="#">
-												<div class="user_img"><img src="images/p6.png" alt=""></div>
+												<div class="user_img"><img src="" alt=""></div>
 											   <div class="notification_desc">
 												<p>Lorem ipsum dolor</p>
 												<p><span>1 hour ago</span></p>
@@ -86,7 +87,7 @@
 											   <div class="clearfix"></div>
 											 </a></li>
 											 <li><a href="#">
-												<div class="user_img"><img src="images/p7.png" alt=""></div>
+												<div class="user_img"><img src="" alt=""></div>
 											   <div class="notification_desc">
 												<p>Lorem ipsum dolor</p>
 												<p><span>1 hour ago</span></p>
@@ -156,7 +157,7 @@
 										<ul class="dropdown-menu">
 											<li>
 												<a href="{{url(adminURL('admin/lang/ar'))}}">
-													<div class="user_img"><img src="images/p5.png" alt=""></div>
+													<div class="user_img"><img src="" alt=""></div>
 											   		<div class="notification_desc">
 														<p><span class="fa fa-flag"></span> العربية</p>
 													</div>
@@ -165,7 +166,7 @@
 											</li>
 											<li>
 												<a href="{{url(adminURL('admin/lang/en'))}}">
-													<div class="user_img"><img src="images/p5.png" alt=""></div>
+													<div class="user_img"><img src="" alt=""></div>
 											   		<div class="notification_desc">
 											   			<p><span class="fa fa-flag"></span> English</p>
 													</div>
@@ -183,7 +184,7 @@
 									<li class="dropdown profile_details_drop">
 										<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 											<div class="profile_img">
-												<span class="prfil-img"><img src="images/p1.png" alt=""> </span>
+												<span class="prfil-img"><img src="" alt=""> </span>
 												<div class="user-name">
 													<p>{{admin()->user()->name}}</p>
 													<span>{{__('admin')}}</span>

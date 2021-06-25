@@ -43,7 +43,7 @@ class ShippingCompaniesDataTable extends DataTable
     public function query(ShippingCompaniesDataTable $model)
     {
         //return $model->newQuery();
-        return ShippingCompany::query()->with('user')->whereNotIn('status', [-1]);
+        return ShippingCompany::query()->with('user');
     }
 
     /**

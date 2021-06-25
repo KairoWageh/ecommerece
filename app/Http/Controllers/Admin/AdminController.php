@@ -6,8 +6,8 @@ use App\Repository\contracts\AdminRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DataTables\AdminDatatable;
-use DataTables;
 use App\Admin;
+use Illuminate\Http\Response;
 
 class AdminController extends Controller
 {
@@ -16,42 +16,34 @@ class AdminController extends Controller
 
     /**
      * AdminController constructor.
-     * @param AdminRepositoryInterface $admin
+     * @param AdminRepositoryInterface $adminRepository
+     * @param Admin $adminModel
      */
     public function __construct(AdminRepositoryInterface $adminRepository, Admin $adminModel){
         $this->admin = $adminRepository;
         $this->model = $adminModel;
     }
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param AdminDatatable $admin
+     * @return Response
      */
     public function index(AdminDatatable $admin)
     {
-        /*
-            data in datatable comes from AdminDatatable query method
-            not this method
-        */
+        /**
+         * data in datatable comes from AdminDatatable query method not this method
+         */
         $this->admin->all($this->model);
         return $admin->render('admin.admins', ['title' => __('adminController')]);
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -60,40 +52,28 @@ class AdminController extends Controller
             'email'    => 'required|email|unique:admins',
             'password' => 'required'
         ]);
-        if($validatedData == true){;
+        if($validatedData == true){
             return $this->admin->store($request, $this->model);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit($id)
     {
-        $admin = $this->admin->find($this->model, $id);
-        return $admin;
+        return $this->admin->find($this->model, $id);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(Request $request, $id)
     {
@@ -103,25 +83,7 @@ class AdminController extends Controller
         ]);
 
         if($validatedData){
-            $update_admin_data = [
-                'name' => $request->edit_name,
-                'email' => $request->edit_email
-            ];
-            $updated = Admin::where('id', $id)->update($update_admin_data);
-            if($updated == 1){
-                $admin = $this->admin->find($this->model, $id);
-                $data = [
-                    'admin'  => $admin,
-                    'toast'    => 'success',
-                    'message'  => __('updated')
-                ] ;
-            }else{
-                $data = [
-                    'toast'    => 'error',
-                    'message'  => __('not_updated')
-                ] ;
-            }
-            return $data;
+            return $this->admin->update($request, $this->model, $id);
         }
     }
 
@@ -129,35 +91,22 @@ class AdminController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function destroy($id)
     {
-        $admin = $this->admin->find($this->model, $id);
-        if($admin){
-            $admin->delete();
-            $data = [
-                'toast'    => 'success',
-                'message' => __('deleted')
-            ];
-        }else{
-            $data = [
-                'toast'    => 'error',
-                'message' => __('admin.not_deleted')
-            ];
-        }
-        return $data;
+        return $this->admin->delete($this->model, $id);
     }
 
     /**
      * Remove the selected resource/ resources from storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function multi_delete(Request $request){
         $adminsIDs = $request->item;
         foreach ($adminsIDs as $key => $adminID) {
-            self::delete_admin($adminID);
+            self::destroy($adminID);
         }
         session()->flash('seccess', __('admin.delete_successfully'));
         return back();

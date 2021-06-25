@@ -24,7 +24,7 @@ class SizesController extends Controller
             not this method
         */
 
-        $data = Size::select('*')->whereNotIn('status', [-1])->get();
+        $data = Size::select('*')->get();
         return $size->render('admin.sizes', ['title' => __('sizesController')]);
     }
 

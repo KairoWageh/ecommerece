@@ -22,7 +22,7 @@ class MallsController extends Controller
             data in datatable comes from MallsDatatable query method
             not this method
         */
-        $data = Mall::select('*')->whereNotIn('status', [-1])->get();
+        $data = Mall::select('*')->get();
         return $mall->render('admin.malls', ['title' => __('mallsController')]);
     }
 

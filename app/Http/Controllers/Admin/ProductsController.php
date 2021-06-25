@@ -30,7 +30,7 @@ class ProductsController extends Controller
             data in datatable comes from CountriesDatatable query method
             not this method
         */
-        $data = Product::select('*')->whereNotIn('status', [-1])->get();
+        $data = Product::select('*')->get();
         return $product->render('admin.products', ['title' => __('productsController')]);
     }
 

@@ -38,7 +38,7 @@ class WeightsDataTable extends DataTable
      */
     public function query(): \Illuminate\Database\Eloquent\Builder
     {
-        return Weight::query()->whereNotIn('status', [-1]);
+        return Weight::query();
     }
 
     /**

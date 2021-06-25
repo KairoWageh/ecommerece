@@ -19,7 +19,7 @@
     });
     </script>
     <!--dataTables-->
-    <script src="{{asset('public/design/adminpanel/css/dataTables.bootstrap.min.css')}}"></script>
+
     <script src="{{asset('public/design/adminpanel/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('public/design/adminpanel/js/dataTables.bootstrap.min.js')}}"></script>
     <!--//dataTables-->

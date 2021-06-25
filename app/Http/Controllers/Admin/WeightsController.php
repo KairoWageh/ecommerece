@@ -23,7 +23,7 @@ class WeightsController extends Controller
             not this method
         */
 
-        $data = Weight::select('*')->whereNotIn('status', [-1])->get();
+        $data = Weight::select('*')->get();
         return $weight->render('admin.weights', ['title' => __('weightsController')]);
     }
 

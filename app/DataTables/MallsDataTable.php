@@ -41,7 +41,7 @@ class MallsDataTable extends DataTable
      */
     public function query()
     {
-        return Mall::query()->with('country')->whereNotIn('status', [-1]);
+        return Mall::query()->with('country');
     }
 
     /**

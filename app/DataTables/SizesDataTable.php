@@ -44,7 +44,7 @@ class SizesDataTable extends DataTable
     public function query(SizesDatatable $model)
     {
         //return $model->newQuery();
-        return Size::query()->with('department')->whereNotIn('status', [-1]);
+        return Size::query()->with('department');
     }
 
     /**
