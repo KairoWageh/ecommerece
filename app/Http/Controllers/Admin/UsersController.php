@@ -47,15 +47,27 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'name'     => 'required|min:3|max:50',
-            'email'    => 'required|email|unique:users',
-            'level'    => 'required|in:user,company,vendor',
-            'password' => 'required'
-        ]);
-        if($validatedData){
-            return $this->user->store($request, $this->model);
+        $attributes = [
+            'name'                  => $request->name,
+            'email'                 => $request->email,
+            'level'                 => $request->level,
+            'password'              => $request->password
+
+        ];
+        $user = $this->user->store($attributes, $this->model);
+        if($user == true){
+            $data = [
+                'user'  => $user,
+                'toast'    => 'success',
+                'message'  => __('created')
+            ] ;
+        }else{
+            $data = [
+                'toast'    => 'error',
+                'message'  => __('not_created')
+            ] ;
         }
+        return $data;
     }
 
     /**
@@ -79,16 +91,26 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            'edit_name'     => 'required|min:3|max:50',
-            'edit_email'    => 'required|email|unique:users,email,'.$id,
-//            'password' => 'required',
-//            'level'    => 'required|in:user,company,vendor'
-        ]);
+        $attributes = [
+            'edit_name'         => $request->edit_name,
+            'edit_email'        => $request->edit_email,
+            'password'          => $request->edit_password,
 
-        if($validatedData){
-            return $this->user->update($request, $this->model, $id);
+        ];
+        $user = $this->user->update($attributes, $this->model, $id);
+        if($user == true){
+            $data = [
+                'user'  => $user,
+                'toast'    => 'success',
+                'message'  => __('updated')
+            ] ;
+        }else{
+            $data = [
+                'toast'    => 'error',
+                'message'  => __('not_updated')
+            ] ;
         }
+        return $data;
     }
 
     /**
@@ -112,7 +134,7 @@ class UsersController extends Controller
         foreach ($usersIDs as $key => $userID) {
             self::destroy($userID);
         }
-        session()->flash('seccess', __('admin.delete_successfully'));
+        session()->flash('seccess', __('delete_successfully'));
         return back();
     }
 }

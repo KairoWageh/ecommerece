@@ -8,7 +8,7 @@
             <button type="button" class="btn btn-info add_admin" data-toggle="modal"  name="add_admin">
                 <i class="fa fa-plus" style="color: #fff">{{__('add')}}</i>
             </button>
-            {!! Form::open(['id' => 'form_data', 'url' => adminURL('admin/admin/destroy/all'), 'method' => 'delete']) !!}
+            {!! Form::open(['id' => 'form_data', 'url' => adminURL('admin/admins/destroy/all'), 'method' => 'delete']) !!}
             <!-- {!! Form::hidden('_method', 'delete') !!} -->
             {{ $dataTable->table([
             	'class' => 'dataTable table ',
@@ -81,6 +81,7 @@
                 processData: false,
                 success:function(response){
                     if(response.admin){
+                        console.log('created_at::'+response.admin.created_at);
                         admins_table.prepend('<tr id ="'+response.admin.id+'">'+
                             '<td><input type="checkbox" class="item_checkbox" name="item[]" value="'+response.admin.id+'"></td>'+
                             '<td class="text-center sorting_1">'+response.admin.name+'</td>'+
@@ -173,6 +174,7 @@
                             if($(this).attr('id') == admin_id){
                                 // $(this).remove();
                                 $(this).find('td').each (function(index, tr) {
+                                    console.log('index:::'+index);
                                     if(index == 1){
                                         $(this).html(response.admin.name);
                                     }

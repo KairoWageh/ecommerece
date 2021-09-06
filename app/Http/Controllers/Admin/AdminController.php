@@ -47,14 +47,27 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'name'     => 'required|min:3|max:50',
-            'email'    => 'required|email|unique:admins',
-            'password' => 'required'
-        ]);
-        if($validatedData == true){
-            return $this->admin->store($request, $this->model);
+        $attributes = [
+            'name'                  => $request->name,
+            'email'                 => $request->email,
+            'password'              => $request->password,
+            'password_confirmation'              => $request->password_confirmation
+
+        ];
+        $admin = $this->admin->store($attributes, $this->model);
+        if($admin == true){
+            $data = [
+                'admin'  => $admin,
+                'toast'    => 'success',
+                'message'  => __('created')
+            ] ;
+        }else{
+            $data = [
+                'toast'    => 'error',
+                'message'  => __('not_created')
+            ] ;
         }
+        return $data;
     }
 
     /**
@@ -77,14 +90,26 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            'edit_name'     => 'required|min:3|max:50',
-            'edit_email'    => 'required|email|unique:admins,email,'.$id,
-        ]);
+        $attributes = [
+            'name'                  => $request->edit_name,
+            'email'                 => $request->edit_email,
+            'password'              => $request->edit_password,
 
-        if($validatedData){
-            return $this->admin->update($request, $this->model, $id);
+        ];
+        $admin = $this->admin->update($attributes, $this->model, $id);
+        if($admin == true){
+            $data = [
+                'admin'  => $admin,
+                'toast'    => 'success',
+                'message'  => __('updated')
+            ] ;
+        }else{
+            $data = [
+                'toast'    => 'error',
+                'message'  => __('not_updated')
+            ] ;
         }
+        return $data;
     }
 
     /**

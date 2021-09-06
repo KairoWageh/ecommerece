@@ -9,7 +9,6 @@
                     <i class="fa fa-plus" style="color: #fff">{{__('add')}}</i>
                 </button>
                 {!! Form::open(['id' => 'form_data', 'url' => adminURL('admin/states/destroy/all'), 'method' => 'delete']) !!}
-                <!-- {!! Form::hidden('_method', 'delete') !!} -->
                 {{ $dataTable->table([
                 	'class' => 'dataTable table ',
                 	'id' => 'states_table'
@@ -37,7 +36,6 @@
                 <div class="not_empty_record hidden">
                     <h4>{{__('admin.ask_delete_item')}}<span class="record_count"></span> </h4>
                 </div>
-
             </div>
           </div>
           <div class="modal-footer">
@@ -50,10 +48,10 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
 @include('admin.states._create')
+@include('admin.states._no_cities')
 @push('js')
 {{ $dataTable->scripts() }}
 @endpush
@@ -62,6 +60,31 @@
         $(document).on('click', 'button.add_state',function(event) {
             $('.validation-errors').html('');
             $('#add_state_modal').modal('show');
+            $(document).on("change", '#country_id', function () {
+                var country_id = $(this).val();
+                var url = "{{url('admin/country_cities/:country')}}";
+                url = url.replace(':country', country_id);
+                var city_select = $('#city_id');
+                $.ajax({
+                    url: url,
+                    type:"GET",
+                    data: {country_id: country_id},
+                    contentType: 'application/json; charset=utf-8',
+                    success:function(response){
+                        if(response.cities != 'no cities'){
+                            city_select.empty();
+                            $.each(response, function (index, element) {
+                                $.each(element, function (key, value) {
+                                    city_select.append("<option value='" + value.id + "'>" + value.city_name + "</option>");
+                                });
+                            });
+                        }else{
+                            city_select.empty();
+                            $('#no_cities_modal').modal('show');
+                        }
+                    }
+                });
+            });
         });
 
         // add state form submition
@@ -100,7 +123,7 @@
                             .addClass('btn btn-danger delete_user')
                             // .attr('onclick', 'delete_user('+response.admin.id+')')
                             .attr('type', 'button')
-                            .html('<i class="fa fa-trash"></i>');;
+                            .html('<i class="fa fa-trash"></i>');
                         $('.delete_'+response.user.id).append(delete_btn);
                         toastr.success(response.message);
                         $('#add_user_modal').modal('hide');
@@ -118,7 +141,7 @@
             });
         });
 
-        $(document).on('click', 'button.edit_user',function(event) {
+        $(document).on('click', 'button.edit_user',function() {
             $('.validation-errors').html('');
             var user_id = parseInt($(this).attr("data-id"));
             var url = "{{url('admin/users/:user/edit')}}";

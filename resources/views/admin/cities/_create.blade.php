@@ -3,7 +3,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-primary">
-                <h4 class="modal-title">{{__('add_city')}}</h4>
+                <h4 class="modal-title">{{__('add')}}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -21,7 +21,7 @@
                     </div>
                     <div class="form-group">
                         {!! Form::label('country_id', __('admin.country')) !!}
-                        {!! Form::select('country_id', $countries, null, ['class' => 'form-control']) !!}
+                        {!! Form::select('country_id', $countries, null, ['class' => 'form-control', 'placeholder' => '.........']) !!}
                     </div>
 {{--                {!! Form::submit(__('admin.add'), ['class' => 'btn btn-primary']) !!}--}}
                 </div>

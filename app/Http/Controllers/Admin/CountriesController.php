@@ -37,16 +37,6 @@ class CountriesController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('admin.countries.create', ['title'=> trans("add")]);
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -79,14 +69,12 @@ class CountriesController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return mixed
      */
-    public function show($id)
+    public function get_country_cities($id)
     {
-        //
+        return $this->country->get_country_cities($this->model, $id);
     }
 
     /**

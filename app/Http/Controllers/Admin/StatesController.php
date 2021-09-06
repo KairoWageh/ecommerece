@@ -32,10 +32,16 @@ class StatesController extends Controller
          * data in datatable comes from StatesDatatable query method not this method
          */
         $data = State::select('*')->get();
-        $lang = app()->getLocale();
-        $name = 'country_name_'.$lang;
-        $countries = Country::select($name)->get();
-        return $state->render('admin.states', ['title' => __('statesController'), 'countries' => $countries]);
+        $countries = Country::select('*')->get();
+        $select = [];
+        foreach($countries as $country) {
+            if (session('lang') == 'ar') {
+                $select[$country->id] = $country->country_name_ar;
+            } else {
+                $select[$country->id] = $country->country_name_en;
+            }
+        }
+        return $state->render('admin.states', ['title' => __('statesController'), 'countries' => $select]);
     }
 
     /**

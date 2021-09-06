@@ -8,4 +8,5 @@ namespace App\Repository\contracts;
  */
 interface CountryRepositoryInterface{
 
+public function get_country_cities($model, $id);
 }

@@ -4,6 +4,7 @@
     "language": "اللغة",
     "email": "البريد الإلكتروني",
     "password": "كلمة المرور",
+    "password_confirmation": "تأكيد كلمة المرور",
     "wrong_creditionals": "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
     "forgot_password": "هل نسيت كلمة المرور؟",
     "remember_me": "تذكرني",

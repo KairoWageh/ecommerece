@@ -4,6 +4,7 @@
     "language": "Language",
     "email": "Email",
     "password": "Password",
+    "password_confirmation": "Password confirmation",
     "wrong_creditionals": "Email or password is incorrect.",
     "forgot_password": "Forgot password?",
     "remember_me": "Remember me",

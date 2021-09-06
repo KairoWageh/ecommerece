@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 // access User folder in controller  ===> using namespace User
 Route::group(['prefix' => '', 'namespace' => 'User'], function(){
-	
+
 	Route::get('/login', 'UserAuth@login')->name('login');
 	Route::post('/login', 'UserAuth@doLogin');
 	Route::get('/logout', 'UserAuth@logout')->name('logout');
@@ -46,7 +46,7 @@ Route::group(['prefix' => '', 'namespace' => 'User'], function(){
 		Route::get('/cart', 'CartController@getCart')->name('cart');
 		Route::get('/cart/item/{id}/add', 'CartController@addToCart')->name('cart.add');
 		Route::get('/cart/item/{id}/remove', 'CartController@removeFromCart')->name('cart.remove');
-		Route::get('/cart/clear', 'CartController@clearCart')->name('cart.clear');	
+		Route::get('/cart/clear', 'CartController@clearCart')->name('cart.clear');
 		// Route::post('/cart/checkOut', 'CartController@checkOut')->name('cart.checkOut');
 		Route::get('/cart/checkOut', 'CartController@checkOut')->name('cart.checkOut');
 		Route::post('/cart/pay', 'CartController@pay')->name('cart.pay');
@@ -66,7 +66,7 @@ Route::group(['prefix' => '', 'namespace' => 'User'], function(){
 });
 
 
-// un logged in users can see home page 
+// un logged in users can see home page
 Route::group(['middleware' => 'maintenance'], function(){
 	Route::get('/', 'User\HomeController@home');
 });
