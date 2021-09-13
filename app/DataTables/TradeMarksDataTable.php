@@ -57,6 +57,7 @@ class TradeMarksDatatable extends DataTable
     {
         return $this->builder()
                     ->setTableId('trademarkdatatable-table')
+                     ->rowId('id')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Blfrtip')

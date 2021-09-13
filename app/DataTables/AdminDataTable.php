@@ -69,6 +69,7 @@ class AdminDataTable extends DataTable
     {
         return $this->builder()
                     ->setTableId('admindatatable-table')
+                    ->rowId('id')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Blfrtip')

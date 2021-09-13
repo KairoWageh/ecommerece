@@ -3081,7 +3081,7 @@ p.bottom {
 }
 /*--prices end here--*/
 
-.add_admin, .add_user, .add_country, .add_state, .add_tradeMark{
+.add_admin, .add_user, .add_country, .add_state, .add_tradeMark, .add_city{
     margin-bottom: -54px;
 }
 .dt-buttons{

@@ -9,42 +9,57 @@
                 </button>
             </div>
             <div class ="validation-errors"></div>
-            {!! Form::open(["id"=>"edit_country_form", "method"=>"POST", "enctype"=>"multipart/form-data"]) !!}
-            {{ csrf_field() }}
-            {{ method_field('PATCH') }}
-            <div class="modal-body">
-                <div class="form-group">
-                    {!! Form::label('country_name_ar', __('admin.name_ar')) !!}
-                    {!! Form::text('country_name_ar', old('country_name_ar', $country->country_name_ar), ['class' => 'form-control']) !!}
+
+
+            <form id="edit_country_form" method="POST" enctype="multipart/form-data">
+                {{ csrf_field() }}
+                {{ method_field('PATCH') }}
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="hidden" name="country_id" class="form-control country_id_to_edit" id="country_id" value="">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_country_name_ar">{{__('name_ar')}}</label>
+                        <input type="text" name="edit_country_name_ar" class="form-control @error('edit_country_name_ar') is-invalid @enderror" id="edit_country_name_ar" placeholder="{{__('name_ar')}}">
+                        @error('edit_country_name_ar')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_country_name_en">{{__('name_en')}}</label>
+                        <input type="text" name="edit_country_name_en" class="form-control @error('edit_country_name_en') is-invalid @enderror" id="edit_country_name_en" placeholder="{{__('name_en')}}">
+                        @error('edit_country_name_en')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_country_code">{{__('country_code')}}</label>
+                        <input type="text" name="edit_country_code" class="form-control @error('edit_country_code') is-invalid @enderror" id="edit_country_code" placeholder="{{__('country_code')}}">
+                        @error('edit_country_code')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_country_iso_code">{{__('country_iso_code')}}</label>
+                        <input type="text" name="edit_country_iso_code" class="form-control @error('edit_country_iso_code') is-invalid @enderror" id="edit_country_iso_code" placeholder="{{__('country_iso_code')}}">
+                        @error('edit_country_iso_code')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_country_currency">{{__('country_currency')}}</label>
+                        <input type="text" name="edit_country_currency" class="form-control @error('edit_country_currency') is-invalid @enderror" id="edit_country_currency" placeholder="{{__('country_currency')}}">
+                        @error('edit_country_currency')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                 </div>
-                <div class="form-group">
-                    {!! Form::label('country_name_en', __('admin.name_en')) !!}
-                    {!! Form::text('country_name_en', old('country_name_en', $country->country_name_en), ['class' => 'form-control']) !!}
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{__('close')}}</button>
+                    <button type="submit" class="btn btn-primary">{{__('edit')}}</button>
                 </div>
-                <div class="form-group">
-                    {!! Form::label('country_code', __('admin.country_code')) !!}
-                    {!! Form::text('country_code', old('country_code', $country->country_code), ['class' => 'form-control']) !!}
-                </div>
-                <div class="form-group">
-                    {!! Form::label('country_iso_code', __('admin.country_iso_code')) !!}
-                    {!! Form::text('country_iso_code',  old('country_iso_code', $country->country_iso_code), ['class' => 'form-control']) !!}
-                </div>
-                <div class="form-group">
-                    {!! Form::label('country_currency', __('admin.country_currency')) !!}
-                    {!! Form::text('country_currency',  old('country_currency', $country->country_currency), ['class' => 'form-control']) !!}
-                </div>
-                <div class="form-group">
-                    {!! Form::label('country_flag', __('admin.country_flag')) !!}
-                    {!! Form::file('country_flag', ['class' => 'form-control']) !!}
-                    <img src="{{Storage::url($country->country_flag)}}" width="30px" height="30px">
-                </div>
-            </div>
-{{--                {!! Form::submit(__('admin.edit'), ['class' => 'btn btn-primary']) !!}--}}
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">{{__('close')}}</button>
-                <button type="submit" class="btn btn-primary">{{__('edit')}}</button>
-            </div>
-            {!! Form::close() !!}
+            </form>
         </div>
 
     </div>

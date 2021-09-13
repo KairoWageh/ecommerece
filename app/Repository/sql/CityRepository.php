@@ -4,7 +4,9 @@ namespace App\Repository\sql;
 
 use App\City;
 use App\Country;
+use App\Http\Requests\CityRequest;
 use App\Repository\contracts\CityRepositoryInterface;
+use Illuminate\Support\Facades\Validator;
 
 class CityRepository extends BaseRepository implements CityRepositoryInterface{
 
@@ -23,10 +25,22 @@ class CityRepository extends BaseRepository implements CityRepositoryInterface{
     }
 
     public function store($attributes, $model){
+        $messages = [
+            'city_name_ar.required'   => __('name_required'),
+            'city_name_ar.min'        => __('name_min'),
+            'city_name_ar.max'        => __('max'),
+            'city_name_en.required'   => __('name_required'),
+            'city_name_en.min'        => __('name_min'),
+            'city_name_en.max'        => __('max'),
+            'country_id.required'     => __('required'),
+            'country_id.numeric'      => __('numeric')
+        ];
+        $cityRequest = new CityRequest();
+        $validator = Validator::make($attributes, $cityRequest->rules(), $messages)->validate();
         $city = $model->create([
-            'city_name_ar'     => $attributes['city_name_ar'],
-            'city_name_en'    => $attributes['city_name_en'],
-            'country_id' => $attributes['country_id'],
+            'city_name_ar' => $attributes['city_name_ar'],
+            'city_name_en' => $attributes['city_name_en'],
+            'country_id'   => $attributes['country_id'],
         ]);
         if($city != null){
             // get country name according to the current app language
@@ -37,18 +51,8 @@ class CityRepository extends BaseRepository implements CityRepositoryInterface{
             $city->country_name = $country->$name;
             $city->created_at = date('Y-m-d H:i', strtotime($city->created_at) );
             $city->updated_at = date('Y-m-d H:i', strtotime($city->updated_at) );
-            $data = [
-                'city'  => $city,
-                'toast'    => 'success',
-                'message'  => __('created')
-            ] ;
-        }else{
-            $data = [
-                'toast'    => 'error',
-                'message'  => __('not_created')
-            ] ;
         }
-        return $data;
+        return $city;
     }
 
     /**
@@ -59,10 +63,22 @@ class CityRepository extends BaseRepository implements CityRepositoryInterface{
      */
     public function update($attributes, $model, $id)
     {
+        $messages = [
+            'city_name_ar.required'   => __('name_required'),
+            'city_name_ar.min'        => __('name_min'),
+            'city_name_ar.max'        => __('max'),
+            'city_name_en.required'   => __('name_required'),
+            'city_name_en.min'        => __('name_min'),
+            'city_name_en.max'        => __('max'),
+            'country_id.required'     => __('required'),
+            'country_id.numeric'      => __('numeric')
+        ];
+        $cityRequest = new CityRequest();
+        $validator = Validator::make($attributes, $cityRequest->rules(), $messages)->validate();
         $update_city_data = [
-            'city_name_ar' => $attributes['edit_city_name_ar'],
-            'city_name_en' => $attributes['edit_city_name_en'],
-            'country_id'   => $attributes['edit_country_id'],
+            'city_name_ar'  => $attributes['city_name_ar'],
+            'city_name_en'  => $attributes['city_name_en'],
+            'country_id'    => $attributes['country_id'],
         ];
         $updated = City::where('id', $id)->update($update_city_data);
         if($updated == 1){
@@ -71,18 +87,8 @@ class CityRepository extends BaseRepository implements CityRepositoryInterface{
             $lang = app()->getLocale();
             $name = 'country_name_'.$lang;
             $city->country_name = $country->$name;
-            $data = [
-                'city'  => $city,
-                'toast'    => 'success',
-                'message'  => __('updated')
-            ] ;
-        }else{
-            $data = [
-                'toast'    => 'error',
-                'message'  => __('not_updated')
-            ] ;
         }
-        return $data;
+        return $city;
     }
 
     public function delete($model, $id){
@@ -92,17 +98,6 @@ class CityRepository extends BaseRepository implements CityRepositoryInterface{
             $state->delete();
         }
         $deleted = $city->delete();
-        if($deleted == 1){
-            $data = [
-                'toast'    => 'success',
-                'message'  => __('deleted')
-            ] ;
-        }else{
-            $data = [
-                'toast'    => 'error',
-                'message'  => __('not_deleted')
-            ] ;
-        }
-        return $data;
+        return $deleted;
     }
 }

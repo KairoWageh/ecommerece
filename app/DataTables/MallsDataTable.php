@@ -53,6 +53,7 @@ class MallsDataTable extends DataTable
     {
         return $this->builder()
                     ->setTableId('malldatatable-table')
+                    ->rowId('id')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Blfrtip')

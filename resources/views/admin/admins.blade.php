@@ -81,7 +81,6 @@
                 processData: false,
                 success:function(response){
                     if(response.admin){
-                        console.log('created_at::'+response.admin.created_at);
                         admins_table.prepend('<tr id ="'+response.admin.id+'">'+
                             '<td><input type="checkbox" class="item_checkbox" name="item[]" value="'+response.admin.id+'"></td>'+
                             '<td class="text-center sorting_1">'+response.admin.name+'</td>'+

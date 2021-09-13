@@ -55,6 +55,7 @@ class ManufacturersDatatable extends DataTable
     {
         return $this->builder()
                     ->setTableId('manufacturerdatatable-table')
+                    ->rowId('id')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Blfrtip')

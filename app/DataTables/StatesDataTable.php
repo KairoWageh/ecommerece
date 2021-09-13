@@ -59,6 +59,7 @@ class StatesDatatable extends DataTable
     {
         return $this->builder()
                     ->setTableId('statedatatable-table')
+                    ->rowId('id')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Blfrtip')

@@ -12,18 +12,17 @@
             {!! Form::open(["id"=>"add_city_form", "method"=>"POST", "enctype"=>"multipart/form-data"]) !!}
                 <div class="modal-body">
                     <div class="form-group">
-                        {!! Form::label('city_name_ar', __('admin.name_ar')) !!}
+                        {!! Form::label('city_name_ar', __('name_ar')) !!}
                         {!! Form::text('city_name_ar', old('city_name_ar'), ['class' => 'form-control']) !!}
                     </div>
                     <div class="form-group">
-                        {!! Form::label('city_name_en', __('admin.name_en')) !!}
+                        {!! Form::label('city_name_en', __('name_en')) !!}
                         {!! Form::text('city_name_en', old('city_name_en'), ['class' => 'form-control']) !!}
                     </div>
                     <div class="form-group">
-                        {!! Form::label('country_id', __('admin.country')) !!}
+                        {!! Form::label('country_id', __('country')) !!}
                         {!! Form::select('country_id', $countries, null, ['class' => 'form-control', 'placeholder' => '.........']) !!}
                     </div>
-{{--                {!! Form::submit(__('admin.add'), ['class' => 'btn btn-primary']) !!}--}}
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">{{__('close')}}</button>

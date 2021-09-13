@@ -8,7 +8,6 @@ use App\Repository\contracts\AdminRepositoryInterface;
 use Illuminate\Support\Facades\Validator;
 
 class AdminRepository extends BaseRepository implements AdminRepositoryInterface {
-
     /**
      * @param $attributes
      * @param $model
@@ -27,7 +26,6 @@ class AdminRepository extends BaseRepository implements AdminRepositoryInterface
             'password_confirmation.required' => __('password_confirmation_required'),
             'password_confirmation.same' => __('password_confirmation_same'),
         ];
-
         $adminRequest = new AdminRequest(null, 'store');
         $validator = Validator::make($attributes, $adminRequest->rules(), $messages)->validate();
         $attributes['password'] = bcrypt($attributes['password']);
@@ -36,15 +34,12 @@ class AdminRepository extends BaseRepository implements AdminRepositoryInterface
             'email'    => $attributes['email'],
             'password' => $attributes['password'],
         ]);
-
         if(isset($admin)){
             $admin->created_at = date('H:i Y-m-d', strtotime($admin->created_at) );
             $admin->updated_at = date('H:i Y-m-d', strtotime($admin->updated_at) );
         }
         return $admin;
-
     }
-
     /**
      * @param $attributes
      * @param $model
@@ -85,7 +80,11 @@ class AdminRepository extends BaseRepository implements AdminRepositoryInterface
         }
         return $data;
     }
-
+    /**
+     * @param $model
+     * @param $id
+     * @return array
+     */
     public function delete($model, $id)
     {
         $admin = self::find($model, $id);

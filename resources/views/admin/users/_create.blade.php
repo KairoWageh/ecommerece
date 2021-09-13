@@ -27,7 +27,6 @@
                     {!! Form::label('level', __('level')) !!}
                      {!! Form::select('level',  $user_levels, old('level'), ['class' => 'form-control', 'placeholder' => '..............']) !!}
                 </div>
-{{--                {!! Form::submit(__('admin.add'), ['class' => 'btn btn-primary']) !!}--}}
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">{{__('close')}}</button>

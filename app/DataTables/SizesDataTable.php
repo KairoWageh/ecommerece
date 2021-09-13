@@ -56,6 +56,7 @@ class SizesDataTable extends DataTable
     {
         return $this->builder()
                     ->setTableId('sizedatatable-table')
+                    ->rowId('id')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Blfrtip')

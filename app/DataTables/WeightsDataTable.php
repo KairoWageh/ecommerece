@@ -50,6 +50,7 @@ class WeightsDataTable extends DataTable
     {
         return $this->builder()
                     ->setTableId('weightdatatable-table')
+                    ->rowId('id')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Blfrtip')

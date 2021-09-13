@@ -11,7 +11,6 @@ use App\DataTables\CitiesDataTable;
 
 class CitiesController extends Controller
 {
-
     protected $city;
     protected $model;
 
@@ -28,8 +27,8 @@ class CitiesController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param CitiesDataTable $city
+     * @return mixed
      */
     public function index(CitiesDataTable $city)
     {
@@ -52,12 +51,32 @@ class CitiesController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return array
      */
     public function store(Request $request)
     {
+        $attributes = [
+            'city_name_ar'   => $request->city_name_ar,
+            'city_name_en'   => $request->city_name_en,
+            'country_id'     => $request->country_id,
+        ];
+        $city = $this->city->store($attributes, $this->model);
+        if($city == true){
+            $data = [
+                'city'  => $city,
+                'toast'    => 'success',
+                'message'  => __('created')
+            ] ;
+        }else{
+            $data = [
+                'toast'    => 'error',
+                'message'  => __('not_created')
+            ] ;
+        }
+        return $data;
+
+
         $validatedData = $request->validate([
             'city_name_ar'     => 'required|min:3|max:50',
             'city_name_en'     => 'required|min:3|max:50',
@@ -87,14 +106,25 @@ class CitiesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            'edit_city_name_ar'     => 'required|min:3|max:50',
-            'edit_city_name_en'     => 'required|min:3|max:50',
-            'edit_country_id'       => 'required|numeric',
-        ]);
-        if($validatedData){
-            return $this->city->update($request, $this->model, $id);
+        $attributes = [
+            'city_name_ar'   => $request->edit_city_name_ar,
+            'city_name_en'   => $request->edit_city_name_en,
+            'country_id'      => $request->edit_country_id,
+        ];
+        $city = $this->city->update($attributes, $this->model, $id);
+        if($city == true){
+            $data = [
+                'city'  => $city,
+                'toast'    => 'success',
+                'message'  => __('updated')
+            ] ;
+        }else{
+            $data = [
+                'toast'    => 'error',
+                'message'  => __('not_updated')
+            ] ;
         }
+        return $data;
     }
 
     /**
@@ -104,21 +134,33 @@ class CitiesController extends Controller
      */
     public function destroy($id)
     {
-        return $this->city->delete($this->model, $id);
+        $deleted = $this->city->delete($this->model, $id);
+        if($deleted == 1){
+            $data = [
+                'toast'    => 'success',
+                'message'  => __('deleted')
+            ] ;
+        }else{
+            $data = [
+                'toast'    => 'error',
+                'message'  => __('not_deleted')
+            ] ;
+        }
+        return $data;
     }
 
     /**
      * Remove the selected resource/ resources from storage.
-     *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function multi_delete(Request $request){
         $citiesIDs = $request->item;
         foreach ($citiesIDs as $key => $cityID) {
             self::destroy($cityID);
         }
-//        session()->flash('seccess', __('admin.delete_successfully'));
-//        return back();
+        session()->flash('seccess', __('delete_successfully'));
+        return back();
     }
 
 

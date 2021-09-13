@@ -64,6 +64,7 @@ class CitiesDataTable extends DataTable
     {
         return $this->builder()
                     ->setTableId('citydatatable-table')
+                    ->rowId('id')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Blfrtip')

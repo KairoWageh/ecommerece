@@ -27,26 +27,26 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">{{__('admin.delete')}}</h4>
+            <h4 class="modal-title">{{__('delete')}}</h4>
           </div>
           <div class="modal-body">
             <div class="alert alert-danger">
                 <div class="empty_record hidden">
-                    <h4>{{__('admin.please_check_some_records')}}</h4>
+                    <h4>{{__('please_check_some_records')}}</h4>
                 </div>
                 <div class="not_empty_record hidden">
-                    <h4>{{__('admin.ask_delete_item')}}<span class="record_count"></span> </h4>
+                    <h4>{{__('ask_delete_item')}}<span class="record_count"></span> </h4>
                 </div>
 
             </div>
           </div>
           <div class="modal-footer">
             <div class="empty_record hidden">
-                <button type="button" class="btn btn-default" data-dismiss="modal">{{__('admin.close')}}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{__('close')}}</button>
             </div>
             <div class="not_empty_record hidden">
-                <input type="submit" name="delete_all" value="{{__('admin.yes')}}" class="btn btn-danger delete_all">
-                <button type="button" class="btn btn-default" data-dismiss="modal">{{__('admin.no')}}</button>
+                <input type="submit" name="delete_all" value="{{__('yes')}}" class="btn btn-danger delete_all">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{__('no')}}</button>
             </div>
           </div>
         </div>
@@ -61,12 +61,10 @@
 @endpush
     <script>
         var cities_table = $('#cities_table');
-
         $(document).on('click', 'button.add_city',function(event) {
             $('.validation-errors').html('');
             $('#add_city_modal').modal('show');
         });
-
         // add city form submition
         $('#add_city_form').on('submit',function(event){
             event.preventDefault();
@@ -79,6 +77,7 @@
                 contentType: false,
                 processData: false,
                 success:function(response){
+
                     if(response.city){
                         cities_table.prepend('<tr id ="'+response.city.id+'">'+
                             '<td><input type="checkbox" class="item_checkbox" name="item[]" value="'+response.city.id+'"></td>'+
@@ -148,14 +147,11 @@
         // edit city form submition
         $('#edit_city_form').on('submit',function(event){
             event.preventDefault();
-
             // get form submitted data
             var city_id = $(".city_id_to_edit").attr("value");
             let formData = new FormData(this);
-
             var url = "{{url('admin/cities/:city_id')}}";
             url = url.replace(":city_id", city_id);
-
             $.ajax({
                 url: url,
                 type:"POST",
@@ -169,7 +165,6 @@
                         // get tr by id and refresh
                         cities_table.find('tr').each(function(){
                             if($(this).attr('id') == city_id){
-                                // $(this).remove();
                                 $(this).find('td').each (function(index, tr) {
                                     if(index == 1){
                                         $(this).html(response.city.city_name_ar);

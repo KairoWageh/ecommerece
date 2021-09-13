@@ -56,6 +56,7 @@ class ProductsDatatable extends DataTable
     {
         return $this->builder()
           ->setTableId('productdatatable-table')
+            ->rowId('id')
           ->columns($this->getColumns())
           ->minifiedAjax()
           ->dom('Blfrtip')

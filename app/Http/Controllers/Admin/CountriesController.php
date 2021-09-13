@@ -44,28 +44,28 @@ class CountriesController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'country_name_ar'     => 'required|min:3|max:50',
-            'country_name_en'     => 'required|min:3|max:50',
-            'country_code'        => 'required',
-            'country_iso_code'    => 'required',
-            'country_currency'    => 'required',
-            'country_flag'        => 'required|max:10000|'.validate_image(),
-        ]);
-        if($validatedData){
-            if($request->hasFile('country_flag')){
-                $validatedData['country_flag'] = up()->upload([
-                    'file'        => 'country_flag',
-                    'path'        => 'countries_flags',
-                    'upload_type' => 'single',
-                    'delete_file' => '',
-                ]);
-            }
-            $validatedData['status'] = 1;
-            Country::create($validatedData);
-            session()->flash('success', __('admin.record_added_successfully'));
-            return redirect(adminURL('admin/countries'));
+        $attributes = [
+            'country_name_ar'   => $request->country_name_ar,
+            'country_name_en'   => $request->country_name_en,
+            'country_code'      => $request->country_code,
+            'country_iso_code'  => $request->country_iso_code,
+            'country_currency'  => $request->country_currency,
+            'country_flag'      => $request->country_flag
+        ];
+        $country = $this->country->store($attributes, $this->model);
+        if($country == true){
+            $data = [
+                'country'  => $country,
+                'toast'    => 'success',
+                'message'  => __('created')
+            ] ;
+        }else{
+            $data = [
+                'toast'    => 'error',
+                'message'  => __('not_created')
+            ] ;
         }
+        return $data;
     }
 
     /**
@@ -85,42 +85,41 @@ class CountriesController extends Controller
      */
     public function edit($id)
     {
-        $country = Country::find($id);
-        $title = __('edit');
-        return view('admin.countries.edit', compact('country', 'title'));
+        return $this->country->find($this->model, $id);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param $id
+     * @return array
      */
     public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            'country_name_ar'     => 'required|min:3|max:50',
-            'country_name_en'     => 'required|min:3|max:50',
-            'country_code'        => 'required',
-            'country_iso_code'    => 'required',
-            'country_currency'    => 'required',
-            'country_flag'        => 'max:10000|'.validate_image(),
-        ]);
-        if($validatedData){
-            $country = Country::find($id);
-            if($request->hasFile('country_flag')){
-                $validatedData['country_flag'] = up()->upload([
-                    'file'        => 'country_flag',
-                    'path'        => 'countries_flags',
-                    'upload_type' => 'single',
-                    'delete_file' => $country->country_flag,
-                ]);
-            }
-            Country::where('id', $id)->update($validatedData);
-            session()->flash('success', __('admin.updated_successfully'));
-            return redirect(adminURL('admin/countries'));
+        $attributes = [
+            'country_name_ar'   => $request->edit_country_name_ar,
+            'country_name_en'   => $request->edit_country_name_en,
+            'country_code'      => $request->edit_country_code,
+            'country_iso_code'  => $request->edit_country_iso_code,
+            'country_currency'  => $request->edit_country_currency,
+            'country_flag'      => $request->edit_country_flag
+
+        ];
+        $country = $this->country->update($attributes, $this->model, $id);
+        if($country == true){
+            $data = [
+                'country'  => $country,
+                'toast'    => 'success',
+                'message'  => __('updated')
+            ] ;
+        }else{
+            $data = [
+                'toast'    => 'error',
+                'message'  => __('not_updated')
+            ] ;
         }
+        return $data;
     }
 
     // Remove the specified country and its cities and states from storage.
@@ -128,9 +127,6 @@ class CountriesController extends Controller
     public function delete_country($id){
         $country = Country::find($id);
         Storage::delete($country->country_flag);
-        $country->status = -1;
-        $country->country_flag = null;
-        $country->save();
         $cities = $country->cities;
         $states = $country->states;
         foreach ($cities as $city) {
@@ -141,6 +137,7 @@ class CountriesController extends Controller
             $state->status = -1;
             $state->save();
         }
+        return $this->country->delete($this->model, $id);
     }
 
     /**
@@ -151,9 +148,7 @@ class CountriesController extends Controller
      */
     public function destroy($id)
     {
-        self::delete_country($id);
-        session()->flash('success', __('admin.delete_successfully'));
-        return back();
+        return $this->country->delete($this->model, $id);
     }
 
     /**
@@ -166,7 +161,7 @@ class CountriesController extends Controller
         foreach ($countriesIDs as $key => $countryID) {
             self::delete_country($countryID);
         }
-        session()->flash('seccess', __('admin.delete_successfully'));
+        session()->flash('seccess', __('delete_successfully'));
         return back();
     }
 }

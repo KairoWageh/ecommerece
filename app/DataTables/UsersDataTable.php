@@ -66,6 +66,7 @@ class UsersDatatable extends DataTable
     {
         return $this->builder()
                     ->setTableId('userdatatable-table')
+                    ->rowId('id')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Blfrtip')

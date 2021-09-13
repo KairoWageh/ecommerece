@@ -55,6 +55,7 @@ class ShippingCompaniesDataTable extends DataTable
     {
         return $this->builder()
                     ->setTableId('shippingCompanydatatable-table')
+                     ->rowId('id')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Blfrtip')

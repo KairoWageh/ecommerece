@@ -66,6 +66,7 @@ class CountriesDataTable extends DataTable
     {
         return $this->builder()
                     ->setTableId('countrydatatable-table')
+                    ->rowId('id')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Blfrtip')

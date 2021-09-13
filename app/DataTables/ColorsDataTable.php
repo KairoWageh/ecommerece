@@ -62,6 +62,7 @@ class ColorsDataTable extends DataTable
     {
         return $this->builder()
                     ->setTableId('colordatatable-table')
+                     ->rowId('id')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Blfrtip')
