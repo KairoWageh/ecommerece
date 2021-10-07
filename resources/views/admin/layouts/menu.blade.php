@@ -42,7 +42,7 @@
 		        	</a>
 		        </li>
 		        <li>
-		        	<a href="#">
+                    <a href="#">
 		        		<i class="fa fa-users"></i>
 		        		<span>{{__('usersAccounts')}}</span>
 		        		@if(Session::get('lang') == 'en')
@@ -51,13 +51,13 @@
 		        			<span class="fa fa-angle-left" style="float: left"></span>
 		        		@endif
 		        	</a>
-		          <ul>
-		            <li><a href="{{ route('users.index') }}">{{__('usersAccounts')}}</a></li>
-		            <li><a href="{{ route('users.index', ['level' => 'user']) }}">{{__('user')}}</a></li>
-		            <li><a href="{{ route('users.index', ['level' => 'vendor']) }}">{{__('vendor')}}</a></li>
-		            <li><a href="{{ route('users.index', ['level' => 'company']) }}">{{__('company')}}</a></li>
-		            <li><a href="{{ route('users.create') }}">{{__('addNewUser')}}</a></li>
-		          </ul>
+                      <ul>
+                        <li><a href="{{ route('users.index') }}">{{__('usersAccounts')}}</a></li>
+                        <li><a href="{{ route('users.index', ['level' => 'user']) }}">{{__('user')}}</a></li>
+                        <li><a href="{{ route('users.index', ['level' => 'vendor']) }}">{{__('vendor')}}</a></li>
+                        <li><a href="{{ route('users.index', ['level' => 'company']) }}">{{__('company')}}</a></li>
+                        <li><a href="{{ route('users.create') }}">{{__('addNewUser')}}</a></li>
+                      </ul>
 		        </li>
 		        <!-- countries li -->
 		        <li>
@@ -85,10 +85,23 @@
 		        <!--// states li -->
 		        <!-- departments li -->
 		        <li>
-		        	<a href="{{ route('departments.index') }}">
-		        		<i class="fa fa-list-alt"></i>
-		        		<span>{{__('departments')}}</span>
-		        	</a>
+{{--		        	<a href="{{ route('departments.index') }}">--}}
+{{--		        		<i class="fa fa-list-alt"></i>--}}
+{{--		        		<span>{{__('departments')}}</span>--}}
+{{--		        	</a>--}}
+                    <a href="#">
+                        <i class="fa fa-list-alt"></i>
+                        <span>{{__('departments')}}</span>
+                        @if(Session::get('lang') == 'en')
+                            <span class="fa fa-angle-right" style="float: right"></span>
+                        @else
+                            <span class="fa fa-angle-left" style="float: left"></span>
+                        @endif
+                    </a>
+                    <ul>
+                        <li><a href="{{ route('departments.index') }}">{{__('departments')}}</a></li>
+                        <li><a href="{{ route('departments.create') }}">{{__('add')}}</a></li>
+                    </ul>
 		        </li>
 		        <!--// departments li -->
 		        <!-- trademarks li -->

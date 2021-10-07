@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="zxx">
 	<head>
-		<title>{{__('user.login')}}</title>
+		<title>{{__('login')}}</title>
 		<!-- Meta tag Keywords -->
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta charset="UTF-8" />
@@ -22,7 +22,7 @@
 		<link href="{{asset('public/design/site/css/bootstrap.css')}}" rel="stylesheet" type="text/css" media="all">
 
 	    @if(app()->getLocale() == 'ar')
-	    	<link href="{{asset('public/design/site/css/bootstrap-rtl.css') }}" rel="stylesheet" type="text/css" media="all">   
+	    	<link href="{{asset('public/design/site/css/bootstrap-rtl.css') }}" rel="stylesheet" type="text/css" media="all">
 	    @endif
 		<!-- Style-CSS -->
 		<link rel="stylesheet" href="{{ asset('public/design/site/css/font-awesome.min.css') }}" type="text/css" media="all" >
@@ -32,9 +32,6 @@
 		<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese"
 		 rel="stylesheet">
 		<!-- //web-fonts -->
-
-		
-
 		<style type="text/css">
 			.nav-menu ul {
 			    margin: 0;
@@ -104,7 +101,7 @@
 			        <ul style="float: left;">
 			          <li>
 			            <div class="dropdown">
-			              <span>{{__('user.language')}}</span>
+			              <span>{{__('language')}}</span>
 			              <div class="dropdown-content" style="left:0;">
 			                <ul>
 			                  <li>
@@ -117,6 +114,7 @@
 			              </div>
 			            </div>
 			          </li>
+                        <li><a href="{{route('user_home')}}">{{__('back')}}</a></li>
 			        </ul>
 			      </nav><!-- .nav-menu -->
 			    </div>
@@ -129,12 +127,12 @@
 			        use App\Setting;
 			        $app = Setting::first();
 			    ?>
-                <p>&copy; 2020 
+                <p>&copy; 2020
                     @if(session('lang') == 'en')
                         {{ $app->sitename_en }}
                     @elseif(session('lang') == 'ar')
                         {{ $app->sitename_ar }}
-                    @endif. {{ __('user.all_rights_reserved') }} | {{ __('user.design_by') }} 
+                    @endif. {{ __('all_rights_reserved') }} | {{ __('design_by') }}
                     <a href="https://www.linkedin.com/in/kairo-wageh-591811b5/" target="_blank">Kairo Wageh</a>
                 </p>
             </div>

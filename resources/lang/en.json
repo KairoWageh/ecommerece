@@ -194,5 +194,11 @@
     "other_notes": "Other notes",
     "never_share": "We'll never share your email with anyone else.",
     "personal_information": "Personal information",
-    "full_name": "Full name"
+    "full_name": "Full name",
+    "name_ar_required": "Arabic name is required",
+    "name_ar_min": "Arabic name must be 3 letters at least",
+    "name_ar_max": "Arabic name can't be longer than 50 letters",
+    "name_en_required": "English name is required",
+    "name_en_min": "English name must be 3 letters at least",
+    "name_en_max": "English name can't be longer than 50 letters"
 }

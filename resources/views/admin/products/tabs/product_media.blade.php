@@ -10,8 +10,8 @@
 			maxFiles: 1,
 			maxFilessize: 3, //MB
 			acceptedFiles: 'image/*',
-			dictDefaultMessage: "{{__('admin.mainPhoto')}}",
-			dictRemoveFile: "{{__('admin.delete')}}",
+			dictDefaultMessage: "{{__('mainPhoto')}}",
+			dictRemoveFile: "{{__('delete')}}",
 			params: {
 				_token: '{{ csrf_token() }}'
 			},
@@ -54,8 +54,8 @@
 			maxFiles: 15,
 			maxFilessize: 2, //MB
 			acceptedFiles: 'image/*',
-			dictDefaultMessage: "{{__('admin.uploadProductMedia')}}",
-			dictRemoveFile: "{{__('admin.delete')}}",
+			dictDefaultMessage: "{{__('uploadProductMedia')}}",
+			dictRemoveFile: "{{__('delete')}}",
 			params: {
 				_token: '{{ csrf_token() }}'
 			},
@@ -98,11 +98,11 @@
 </style>
 @endpush
 <div id="product_media" class="tab-pane fade">
-	<h3>{{ __('admin.product_media') }}</h3>
+	<h3>{{ __('product_media') }}</h3>
 	<hr />
-	<center><h3>{{__('admin.mainPhoto')}}</h3></center>
+	<center><h3>{{__('mainPhoto')}}</h3></center>
 	<div class="dropzone" id="mainPhoto"></div>
 	<hr />
-	<center><h3>{{__('admin.photos')}}</h3></center>
+	<center><h3>{{__('photos')}}</h3></center>
 	<div class="dropzone" id="dropzonefileupload"></div>
 </div>

@@ -55,13 +55,20 @@ class DepartmentsController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'department_name_ar'                   => 'required|min:3|max:50',
-            'department_name_en'                   => 'required|min:3|max:50',
-            'icon'                                 => 'sometimes|nullable|'.validate_image(),
-            'department_description_ar'            => 'sometimes|nullable',
-            'department_description_en'            => 'sometimes|nullable',
-            'keywords'                             => 'sometimes|nullable',
-            'parent_id'                            => 'sometimes|nullable|numeric',
+            'department_name_ar'         => 'required|min:3|max:50',
+            'department_name_en'         => 'required|min:3|max:50',
+            'icon'                       => 'sometimes|nullable|'.validate_image(),
+            'department_description_ar'  => 'sometimes|nullable',
+            'department_description_en'  => 'sometimes|nullable',
+            'keywords'                   => 'sometimes|nullable',
+            'parent_id'                  => 'sometimes|nullable|numeric',
+        ], [
+            'department_name_ar.required' => __('name_ar_required'),
+            'department_name_ar.min'      => __('name_ar_min'),
+            'department_name_ar.max'      => __('name_ar_max'),
+            'department_name_en.required' => __('name_en_required'),
+            'department_name_en.min'      => __('name_en_min'),
+            'department_name_en.max'      => __('name_en_max'),
         ]);
         if($validatedData){
             if($request->hasFile('icon')){
@@ -72,9 +79,8 @@ class DepartmentsController extends Controller
                     'delete_file' => '',
                 ]);
             }
-            $validatedData['status'] = 1;
             Department::create($validatedData);
-            session()->flash('success', __('admin.record_added_successfully'));
+            session()->flash('success', __('record_added_successfully'));
             return redirect(adminURL('admin/departments'));
         }
     }

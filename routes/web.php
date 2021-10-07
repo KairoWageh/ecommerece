@@ -33,8 +33,7 @@ Route::group(['prefix' => '', 'namespace' => 'User'], function(){
 	//if and only if user is authenticated
 	// user:web ====> middleware:guard
 	Route::group(['middleware' => 'user:web'], function(){
-
-		Route::get('/', 'HomeController@home');
+		Route::get('/', 'HomeController@home')->name('user_home');
 		Route::get('account', 'AccountController@index')->name('account');
 		Route::get('shop', 'ShopController@index')->name('shop');
 		Route::get('product/{product}', 'ProductsController@single_product')->name('user.single_product');

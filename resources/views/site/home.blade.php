@@ -85,28 +85,28 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="latest-product">
-					<h2 class="section-title">{{__('user.latest_products')}}</h2>
+					<h2 class="section-title">{{__('latest_products')}}</h2>
 					<div class="product-carousel">
 						@foreach($latest_products as $product)
 						<div class="single-product">
 							<div class="product-f-image"  width="195px" height="243px">
 								<img src="{{ Storage::url($product->photo) }}" alt="">
 								<div class="product-hover">
-									<button class="add-to-cart-link" data-id="{{ $product->id }}"><i class="fa fa-shopping-cart"></i> 
-									{{__('user.add_to_cart')}}</button>
+									<button class="add-to-cart-link" data-id="{{ $product->id }}"><i class="fa fa-shopping-cart"></i>
+									{{__('add_to_cart')}}</button>
 									<!-- <a href="{{route('cart.add', $product->id)}}" class="add_to_cart_button">
-	                        	<i class="fa fa-shopping-cart"></i> 
-								{{__('user.add_to_cart')}}
+	                        	<i class="fa fa-shopping-cart"></i>
+								{{__('add_to_cart')}}
 							</a> -->
 
 
 
-									<a href="{{route('user.single_product', $product->id)}}" class="view-details-link"><i class="fa fa-link"></i> {{__('user.see_datails')}}</a>
+									<a href="{{route('single_product', $product->id)}}" class="view-details-link"><i class="fa fa-link"></i> {{__('see_datails')}}</a>
 								</div>
 							</div>
-							
+
 							<h2><a href="single-product.html">{{$product->title}}</a></h2>
-							
+
 							<div class="product-carousel-price">
 								@if($product->offer_price != 0)
 									<ins>${{$product->offer_price}}</ins>
@@ -114,7 +114,7 @@
 								@else
 									<ins>${{$product->price}}</ins>
 								@endif
-							</div> 
+							</div>
 						</div>
 						@endforeach
 					</div>
@@ -133,7 +133,7 @@
 					<div class="brand-list">
 						@foreach($manufactures as $manufacture)
 							<img src="{{ Storage::url($manufacture->icon) }}" alt="">
-						@endforeach                            
+						@endforeach
 					</div>
 				</div>
 			</div>
@@ -161,7 +161,7 @@
 						</div>
 						<div class="product-wid-price">
 							<ins>$400.00</ins> <del>$425.00</del>
-						</div>                            
+						</div>
 					</div>
 					<div class="single-wid-product">
 						<a href="single-product.html"><img src="{{ asset('public/design/site/img/product-thumb-2.jpg') }}" alt="" class="product-thumb"></a>
@@ -175,7 +175,7 @@
 						</div>
 						<div class="product-wid-price">
 							<ins>$400.00</ins> <del>$425.00</del>
-						</div>                            
+						</div>
 					</div>
 					<div class="single-wid-product">
 						<a href="single-product.html"><img src="{{ asset('public/design/site/img/product-thumb-3.jpg') }}" alt="" class="product-thumb"></a>
@@ -189,7 +189,7 @@
 						</div>
 						<div class="product-wid-price">
 							<ins>$400.00</ins> <del>$425.00</del>
-						</div>                            
+						</div>
 					</div>
 				</div>
 			</div>
@@ -209,7 +209,7 @@
 						</div>
 						<div class="product-wid-price">
 							<ins>$400.00</ins> <del>$425.00</del>
-						</div>                            
+						</div>
 					</div>
 					<div class="single-wid-product">
 						<a href="single-product.html"><img src="{{ asset('public/design/site/img/product-thumb-1.jpg') }}" alt="" class="product-thumb"></a>
@@ -223,7 +223,7 @@
 						</div>
 						<div class="product-wid-price">
 							<ins>$400.00</ins> <del>$425.00</del>
-						</div>                            
+						</div>
 					</div>
 					<div class="single-wid-product">
 						<a href="single-product.html"><img src="{{ asset('public/design/site/img/product-thumb-2.jpg') }}" alt="" class="product-thumb"></a>
@@ -237,7 +237,7 @@
 						</div>
 						<div class="product-wid-price">
 							<ins>$400.00</ins> <del>$425.00</del>
-						</div>                            
+						</div>
 					</div>
 				</div>
 			</div>
@@ -257,7 +257,7 @@
 						</div>
 						<div class="product-wid-price">
 							<ins>$400.00</ins> <del>$425.00</del>
-						</div>                            
+						</div>
 					</div>
 					<div class="single-wid-product">
 						<a href="single-product.html"><img src="{{ asset('public/design/site/img/product-thumb-4.jpg') }}" alt="" class="product-thumb"></a>
@@ -271,7 +271,7 @@
 						</div>
 						<div class="product-wid-price">
 							<ins>$400.00</ins> <del>$425.00</del>
-						</div>                            
+						</div>
 					</div>
 					<div class="single-wid-product">
 						<a href="single-product.html"><img src="{{ asset('public/design/site/img/product-thumb-1.jpg') }}" alt="" class="product-thumb"></a>
@@ -285,7 +285,7 @@
 						</div>
 						<div class="product-wid-price">
 							<ins>$400.00</ins> <del>$425.00</del>
-						</div>                            
+						</div>
 					</div>
 				</div>
 			</div>
@@ -297,7 +297,7 @@
 
 @section('scripts')
 <script type="text/javascript">
- 
+
 	$(".add-to-cart-link").click(function (e) {
     	e.preventDefault();
        	var ele = $(this);
@@ -325,7 +325,7 @@
            }
         });
     });
- 
+
     $(".remove-from-cart").click(function (e) {
         e.preventDefault();
 
@@ -344,5 +344,5 @@
     });
 
     </script>
- 
+
 @endsection

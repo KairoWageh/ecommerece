@@ -44,7 +44,7 @@
 
             <div class="col-md-3 col-sm-6">
                 <div class="footer-menu">
-                    <h2 class="footer-wid-title">{{ __('user.departments') }}</h2>
+                    <h2 class="footer-wid-title">{{ __('departments') }}</h2>
                     <?php
                         use App\Department;
                         $departments = Department::all();
@@ -87,7 +87,7 @@
                             {{ $app->sitename_en }}
                         @elseif(session('lang') == 'ar')
                             {{ $app->sitename_ar }}
-                        @endif. {{ __('user.all_rights_reserved') }} | {{ __('user.design_by') }}
+                        @endif. {{ __('all_rights_reserved') }} | {{ __('design_by') }}
                         <a href="https://www.linkedin.com/in/kairo-wageh-591811b5/" target="_blank">Kairo Wageh</a>
                     </p>
                 </div>

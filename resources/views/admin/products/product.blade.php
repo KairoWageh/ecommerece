@@ -86,26 +86,25 @@
             <!-- {!! Form::open(['route' => ['products.update', $product->id],  'method' => 'put', 'files' => true, 'id' => 'product_form']) !!} -->
             {!! Form::open(['url' => adminURL('products'),  'method' => 'put', 'files' => true, 'id' => 'product_form']) !!}
             <!-- @csrf -->
-            <a href="#" class="btn btn-primary">{{__('admin.save')}}<i class="fa fa-floppy-o"></i></a>
-            <a href="#" class="btn btn-success save_and_continue">{{__('admin.save_and_continue')}}<i class="fa fa-floppy-o"></i><i class="fa fa-spin fa-spinner loading_save_continue hidden"></i></a>
-            <a href="#" class="btn btn-info copy_product">{{__('admin.copy_product')}}<i class="fa fa-file"></i><i class="fa fa-spin fa-spinner loading_copy hidden"></i></a>
-            <a href="#" class="btn btn-danger delete" data-toggle="modal" data-target="#delete_admin{{ $product->id }}">{{__('admin.delete')}}<i class="fa fa-trash"></i></a>
+            <a href="#" class="btn btn-primary">{{__('save')}}<i class="fa fa-floppy-o"></i></a>
+            <a href="#" class="btn btn-success save_and_continue">{{__('save_and_continue')}}<i class="fa fa-floppy-o"></i><i class="fa fa-spin fa-spinner loading_save_continue hidden"></i></a>
+            <a href="#" class="btn btn-info copy_product">{{__('copy_product')}}<i class="fa fa-file"></i><i class="fa fa-spin fa-spinner loading_copy hidden"></i></a>
+            <a href="#" class="btn btn-danger delete" data-toggle="modal" data-target="#delete_admin{{ $product->id }}">{{__('delete')}}<i class="fa fa-trash"></i></a>
             <div class="alert alert-danger error_message hidden">
                 <ul class="validate_message">
-
                 </ul>
             </div>
             <div class="alert alert-success success_message hidden">
 
             </div>
                 <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#product_info">{{__('admin.product_info')}}<i class="fa fa-info"></i></a></li>
-                    <li><a data-toggle="tab" href="#department">{{__('admin.department')}}<i class="fa fa-list"></i></a></li>
-                    <li><a data-toggle="tab" href="#product_setting">{{__('admin.product_setting')}}<i class="fa fa-cog"></i></a></li>
-                    <li><a data-toggle="tab" href="#product_media">{{__('admin.product_media')}}<i class="fa fa-photo"></i></a></li>
-                    <li><a data-toggle="tab" href="#product_size_weight">{{__('admin.shippingInfo')}}<i class="fa fa-info-circle"></i></a></li>
-                    <li><a data-toggle="tab" href="#other_data">{{__('admin.other_data')}}<i class="fa fa-database"></i></a></li>
-                    <li><a data-toggle="tab" href="#related_products">{{__('admin.related_products')}}<i class="fa fa-list"></i></a></li>
+                    <li class="active"><a data-toggle="tab" href="#product_info">{{__('product_info')}}<i class="fa fa-info"></i></a></li>
+                    <li><a data-toggle="tab" href="#department">{{__('department')}}<i class="fa fa-list"></i></a></li>
+                    <li><a data-toggle="tab" href="#product_setting">{{__('product_setting')}}<i class="fa fa-cog"></i></a></li>
+                    <li><a data-toggle="tab" href="#product_media">{{__('product_media')}}<i class="fa fa-photo"></i></a></li>
+                    <li><a data-toggle="tab" href="#product_size_weight">{{__('shippingInfo')}}<i class="fa fa-info-circle"></i></a></li>
+                    <li><a data-toggle="tab" href="#other_data">{{__('other_data')}}<i class="fa fa-database"></i></a></li>
+                    <li><a data-toggle="tab" href="#related_products">{{__('related_products')}}<i class="fa fa-list"></i></a></li>
                 </ul>
                 <div class="tab-content">
                     @include('admin.products.tabs.product_info')
@@ -117,20 +116,20 @@
                     @include('admin.products.tabs.related_products')
                 </div>
                 <hr />
-                <a href="#" class="btn btn-primary">{{__('admin.save')}}<i class="fa fa-floppy-o"></i></a>
-                <a href="#" class="btn btn-success save_and_continue">{{__('admin.save_and_continue')}}<i class="fa fa-floppy-o"></i><i class="fa fa-spin fa-spinner loading_save_continue hidden"></i></a>
-                <a href="#" class="btn btn-info copy_product">{{__('admin.copy_product')}}<i class="fa fa-file"></i><i class="fa fa-spin fa-spinner loading_copy hidden"></i></a>
-                <a href="#" class="btn btn-danger">{{__('admin.delete')}}<i class="fa fa-trash"></i></a>
+                <a href="#" class="btn btn-primary">{{__('save')}}<i class="fa fa-floppy-o"></i></a>
+                <a href="#" class="btn btn-success save_and_continue">{{__('save_and_continue')}}<i class="fa fa-floppy-o"></i><i class="fa fa-spin fa-spinner loading_save_continue hidden"></i></a>
+                <a href="#" class="btn btn-info copy_product">{{__('copy_product')}}<i class="fa fa-file"></i><i class="fa fa-spin fa-spinner loading_copy hidden"></i></a>
+                <a href="#" class="btn btn-danger">{{__('delete')}}<i class="fa fa-trash"></i></a>
                 <!-- <div class="form-group">
-                    {!! Form::label('name_ar', __('admin.name_ar')) !!}
+                    {!! Form::label('name_ar', __('name_ar')) !!}
                     {!! Form::text('name_ar', old('name_ar'), ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
-                    {!! Form::label('name_en', __('admin.name_en')) !!}
+                    {!! Form::label('name_en', __('name_en')) !!}
                     {!! Form::text('name_en', old('name_en'), ['class' => 'form-control']) !!}
                 </div> -->
 
-                <!-- {!! Form::submit(__('admin.add'), ['class' => 'btn btn-primary']) !!} -->
+                <!-- {!! Form::submit(__('add'), ['class' => 'btn btn-primary']) !!} -->
             {!! Form::close() !!}
         </div>
         <!-- //box-body -->
@@ -143,19 +142,19 @@
         <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title">{{__('admin.delete')}}</h4>
+            <h4 class="modal-title">{{__('delete')}}</h4>
           </div>
           {!! Form::open(['route' => ['products.destroy', $product->id], 'method' => 'delete']) !!}
           <div class="modal-body">
             <div class="alert alert-danger">
                 <h4>
-                    {{__('admin.delete_record')}}
+                    {{__('delete_record')}}
                 </h4>
             </div>
           </div>
           <div class="modal-footer">
-            {!! Form::submit(__('admin.delete'), ['class' => 'btn btn-danger']) !!}
-            <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('admin.close') }}</button>
+            {!! Form::submit(__('delete'), ['class' => 'btn btn-danger']) !!}
+            <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('close') }}</button>
           </div>
           {!! Form::close() !!}
         </div>

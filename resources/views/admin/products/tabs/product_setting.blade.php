@@ -19,54 +19,54 @@
 </script>
 @endpush
 <div id="product_setting" class="tab-pane fade">
-	<h3>{{__('admin.product_setting')}}</h3>
+	<h3>{{__('product_setting')}}</h3>
 
 	<div class="form-group col-md-6 col-lg-3 col-sm-6 col-xs-12">
-		{!! Form::label('price', __('admin.price')) !!}
- 		{!! Form::text('price', $product->price, ['class' => 'form-control', 'placeholder' => __('admin.price')]) !!}
+		{!! Form::label('price', __('price')) !!}
+ 		{!! Form::text('price', $product->price, ['class' => 'form-control', 'placeholder' => __('price')]) !!}
 	</div>
 
 	<div class="form-group col-md-6 col-lg-3 col-sm-6 col-xs-12">
 		{!! Form::label('stock', __('admin.stock')) !!}
- 		{!! Form::text('stock', $product->stock, ['class' => 'form-control', 'placeholder' => __('admin.stock')]) !!}
+ 		{!! Form::text('stock', $product->stock, ['class' => 'form-control', 'placeholder' => __('stock')]) !!}
 	</div>
 
 	<div class="form-group col-md-6 col-lg-3 col-sm-6 col-xs-12">
-		{!! Form::label('start_at', __('admin.start_at')) !!}
- 		{!! Form::text('start_at', $product->start_at, ['class' => 'form-control datepicker', 'placeholder' => __('admin.start_at')]) !!}
+		{!! Form::label('start_at', __('start_at')) !!}
+ 		{!! Form::text('start_at', $product->start_at, ['class' => 'form-control datepicker', 'placeholder' => __('start_at')]) !!}
 	</div>
 
 	<div class="form-group col-md-6 col-lg-3 col-sm-6 col-xs-12">
-		{!! Form::label('end_at', __('admin.end_at')) !!}
- 		{!! Form::text('end_at', $product->end_at, ['class' => 'form-control datepicker', 'placeholder' => __('admin.end_at')]) !!}
+		{!! Form::label('end_at', __('end_at')) !!}
+ 		{!! Form::text('end_at', $product->end_at, ['class' => 'form-control datepicker', 'placeholder' => __('end_at')]) !!}
 	</div>
 
 	<div class="clearfix"></div>
 	<hr>
 	<div class="form-group col-md-6 col-lg-4 col-sm-6 col-xs-12">
-		{!! Form::label('offer_price', __('admin.offer_price')) !!}
- 		{!! Form::text('offer_price', $product->offer_price, ['class' => 'form-control', 'placeholder' => __('admin.offer_price')]) !!}
+		{!! Form::label('offer_price', __('offer_price')) !!}
+ 		{!! Form::text('offer_price', $product->offer_price, ['class' => 'form-control', 'placeholder' => __('offer_price')]) !!}
 	</div>
 
 	<div class="form-group col-md-6 col-lg-4 col-sm-6 col-xs-12">
-		{!! Form::label('start_offer_at', __('admin.start_offer_at')) !!}
- 		{!! Form::text('start_offer_at', $product->start_offer_at, ['class' => 'form-control datepicker', 'placeholder' => __('admin.start_offer_at')]) !!}
+		{!! Form::label('start_offer_at', __('start_offer_at')) !!}
+ 		{!! Form::text('start_offer_at', $product->start_offer_at, ['class' => 'form-control datepicker', 'placeholder' => __('start_offer_at')]) !!}
 	</div>
 
 	<div class="form-group col-md-6 col-lg-4 col-sm-6 col-xs-12">
-		{!! Form::label('end_offer_at', __('admin.end_offer_at')) !!}
- 		{!! Form::text('end_offer_at', $product->end_offer_at, ['class' => 'form-control datepicker', 'placeholder' => __('admin.end_offer_at')]) !!}
+		{!! Form::label('end_offer_at', __('end_offer_at')) !!}
+ 		{!! Form::text('end_offer_at', $product->end_offer_at, ['class' => 'form-control datepicker', 'placeholder' => __('end_offer_at')]) !!}
 	</div>
 
 	<div class="clearfix"></div>
 	<hr>
 	<div class="form-group">
-		{!! Form::label('product_status', __('admin.product_status')) !!}
- 		{!! Form::select('product_status', ['pending' => __('admin.pending'), 'refused' => __('admin.refused'), 'active' => __('admin.active')], $product->product_status, ['class' => 'form-control status', 'placeholder' => __('admin.product_status')]) !!}
+		{!! Form::label('product_status', __('product_status')) !!}
+ 		{!! Form::select('product_status', ['pending' => __('pending'), 'refused' => __('refused'), 'active' => __('active')], $product->product_status, ['class' => 'form-control status', 'placeholder' => __('admin.product_status')]) !!}
 	</div>
 
 	<div class="form-group reason {{ $product->status != 'refused'?'hidden':'' }}">
-		{!! Form::label('reason', __('admin.refused_reason')) !!}
- 		{!! Form::textarea('reason', $product->reason, ['class' => 'form-control', 'placeholder' => __('admin.refused_reason')]) !!}
+		{!! Form::label('reason', __('refused_reason')) !!}
+ 		{!! Form::textarea('reason', $product->reason, ['class' => 'form-control', 'placeholder' => __('refused_reason')]) !!}
 	</div>
 </div>

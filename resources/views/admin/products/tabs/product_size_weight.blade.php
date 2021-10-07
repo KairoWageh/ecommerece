@@ -25,22 +25,22 @@
 @endpush
 
 <div id="product_size_weight" class="tab-pane fade">
-	<h3>{{__('admin.shippingInfo')}}</h3>
+	<h3>{{__('shippingInfo')}}</h3>
 	<div class="shippingInfo">
-		<center><h1>{{__('admin.please_choose_department')}}</h1></center>
+		<center><h1>{{__('please_choose_department')}}</h1></center>
 	</div>
 	<div class="info_data hidden col-md-12">
 		<div class="form-group col-sm-4 col-xs-12">
-		    {!! Form::label('color_id', __('admin.color')) !!}
-			{!! Form::select('color_id', App\Color::pluck('name_'.lang(), 'id'), $product->color_id, ['class' => 'form-control', 'placeholder' => __('admin.color')]) !!}
+		    {!! Form::label('color_id', __('color')) !!}
+			{!! Form::select('color_id', App\Color::pluck('name_'.lang(), 'id'), $product->color_id, ['class' => 'form-control', 'placeholder' => __('color')]) !!}
 		</div>
 		<div class="form-group col-sm-4 col-xs-12">
-		    {!! Form::label('trade_mark_id', __('admin.trademark')) !!}
-			{!! Form::select('trade_mark_id', App\TradeMark::pluck('name_'.lang(), 'id'), $product->trade_mark_id, ['class' => 'form-control', 'placeholder' => __('admin.trademark')]) !!}
+		    {!! Form::label('trade_mark_id', __('trademark')) !!}
+			{!! Form::select('trade_mark_id', App\TradeMark::pluck('name_'.lang(), 'id'), $product->trade_mark_id, ['class' => 'form-control', 'placeholder' => __('trademark')]) !!}
 		</div>
 		<div class="form-group col-sm-4 col-xs-12">
-		    {!! Form::label('manu_id', __('admin.manufacture')) !!}
-			{!! Form::select('manu_id', App\Manufacturer::pluck('name_'.lang(), 'id'), $product->manu_id, ['class' => 'form-control', 'placeholder' => __('admin.manufacture')]) !!}
+		    {!! Form::label('manu_id', __('manufacture')) !!}
+			{!! Form::select('manu_id', App\Manufacturer::pluck('name_'.lang(), 'id'), $product->manu_id, ['class' => 'form-control', 'placeholder' => __('manufacture')]) !!}
 		</div>
 		<div class="clearfix"></div>
 		<div class="col-sm-12">
@@ -58,12 +58,12 @@
 		<div class="clearfix"></div>
 	</div>
 
-	
+
 
 	<!-- <div class="info_data form-group hidden">
 		<div class="form-group col-sm-4 col-xs-12">
-			{!! Form::label('color_id', __('admin.color')) !!}
-			{!! Form::select('color', App\Color::pluck('name_'.lang(), 'id'), $product->color_id, ['class' => 'form-control', 'placeholder' => __('admin.color')]) !!}
+			{!! Form::label('color_id', __('olor')) !!}
+			{!! Form::select('color', App\Color::pluck('name_'.lang(), 'id'), $product->color_id, ['class' => 'form-control', 'placeholder' => __('color')]) !!}
 		</div>
 		<div class="clearfix"></div>
 	</div> -->

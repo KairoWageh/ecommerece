@@ -17,11 +17,11 @@ class UserAuth extends Controller
     	if(user()->attempt(['email'=>request('email'), 'password'=>request('password')], $rememberme)){
     		return redirect('/');
     	}else{
-    		session()->flash('error', __('user.wrong_creditionals'));
+    		session()->flash('error', __('wrong_creditionals'));
     		return redirect('/login');
     	}
     }
-  
+
 
     public function logout(){
     	auth()->guard('web')->logout();
@@ -48,7 +48,7 @@ class UserAuth extends Controller
     //     }
     //     return back();
     // }
-    
+
     // public function resetPassword($token){
     //     $check_token = DB::table('password_resets')->where('token', $token)->where('created_at', '>', Carbon::now()->subHours(2))->first();
     //     if(!empty($check_token)){

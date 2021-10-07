@@ -7,11 +7,11 @@
 			$('.div_inputs').append(
 				'<div>'+
 					'<div class="col-sm-6">'+
-						'{!! Form::label('input_key', __('admin.input_key')) !!}'+
+						'{!! Form::label('input_key', __('input_key')) !!}'+
 						'{!! Form::text('input_key[]', '', ['class' => 'form-control']) !!}'+
 					'</div>'+
 					'<div class="col-sm-6">'+
-						'{!! Form::label('input_value', __('admin.input_value')) !!}'+
+						'{!! Form::label('input_value', __('input_value')) !!}'+
 						'{!! Form::text('input_value[]', '', ['class' => 'form-control']) !!}'+
 					'</div>'+
 					'<div class="clearfix"></div>'+
@@ -22,7 +22,7 @@
 			input_count++;
 			console.log('count after adding:::'+input_count);
 		}
-		
+
 		return false;
 	});
 
@@ -36,16 +36,16 @@
 @endpush
 
 <div id="other_data" class="tab-pane fade">
-	<h3>{{__('admin.other_data')}}</h3>
+	<h3>{{__('other_data')}}</h3>
 	<div class="div_inputs col-sm-12">
 		@foreach($product->other_data()->get() as $other_data)
 		<div>
 			<div class="col-sm-6">
-				{!! Form::label('input_key', __('admin.input_key')) !!}
+				{!! Form::label('input_key', __('input_key')) !!}
 				{!! Form::text('input_key[]', $other_data->data_key, ['class' => 'form-control']) !!}
 			</div>
 			<div class="col-sm-6">
-				{!! Form::label('input_value', __('admin.input_value')) !!}
+				{!! Form::label('input_value', __('input_value')) !!}
 				{!! Form::text('input_value[]', $other_data->data_value, ['class' => 'form-control']) !!}
 			</div>
 			<div class="clearfix"></div>

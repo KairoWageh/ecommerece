@@ -38,7 +38,7 @@ class ProductsDatatable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\ManufacturersDatatable $model
+     * @param ProductsDatatable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(ProductsDatatable $model)

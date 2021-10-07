@@ -29,15 +29,22 @@
         <div class="box-header">
             <h3 class="box-title">{{ $title }}</h3>
         </div>
+            @if ($errors->any())
+            <ul class="alert alert-danger error_message">
+                @foreach ($errors->all() as $error)
+                    <li>{{$error}}</li>
+                @endforeach
+            </ul>
+            @endif
         <div class="box-body">
             <!-- {!! Form::open(['url' => adminURL('admin')]) !!} -->
-            {!! Form::open(['route' => 'departments.store', 'files' => true]) !!}
+            {!! Form::open(['id' => 'add_department', 'route' => 'departments.store', 'files' => true]) !!}
                 <div class="form-group">
-                    {!! Form::label('department_name_ar', __('admin.name_ar')) !!}
+                    {!! Form::label('department_name_ar', __('name_ar')) !!}
                     {!! Form::text('department_name_ar', old('department_name_ar'), ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
-                    {!! Form::label('department_name_en', __('admin.name_en')) !!}
+                    {!! Form::label('department_name_en', __('name_en')) !!}
                     {!! Form::text('department_name_en', old('department_name_en'), ['class' => 'form-control']) !!}
                 </div>
                 <div class="clearfix"></div>
@@ -45,22 +52,22 @@
                 <input type="hidden" name="parent_id" class="parent_id" value="{{ old('parent_id') }}">
                 <div class="clearfix"></div>
                 <div class="form-group">
-                    {!! Form::label('department_description_ar', __('admin.description_ar')) !!}
+                    {!! Form::label('department_description_ar', __('description_ar')) !!}
                     {!! Form::textarea('department_description_ar', old('department_description_ar'), ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
-                    {!! Form::label('department_description_en', __('admin.description_en')) !!}
+                    {!! Form::label('department_description_en', __('description_en')) !!}
                     {!! Form::textarea('department_description_en', old('department_description_en'), ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
-                    {!! Form::label('keywords', __('admin.keywords')) !!}
+                    {!! Form::label('keywords', __('keywords')) !!}
                     {!! Form::textarea('keywords', old('keywords'), ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
-                    {!! Form::label('icon', __('admin.icon')) !!}
+                    {!! Form::label('icon', __('icon')) !!}
                     {!! Form::file('icon', ['class' => 'form-control']) !!}
                 </div>
-                {!! Form::submit(__('admin.add'), ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit(__('add'), ['class' => 'btn btn-primary']) !!}
             {!! Form::close() !!}
         </div>
     </div>

@@ -42,7 +42,7 @@
 </script>
 @endpush
 <div id="department" class="tab-pane fade">
-	<h3>{{__('admin.department')}}</h3>
+	<h3>{{__('department')}}</h3>
 	<div id="jstree"></div>
   <input type="hidden" name="department_id" class="department_id">
 </div>
