@@ -1,9 +1,18 @@
 @push('js')
 <script type="text/javascript">
     $(document).ready(function(){
+        var data = '';
+        var product_id = '';
+        <?php
+            if(isset($product)){
+                ?>
+            data = <?php load_department($product->department_id) ?>
+            product_id = <?php $product->id?>
+            <?php }
+        ?>
         $('#jstree').jstree({
             "core" : {
-                'data' : {!! load_department($product->department_id) !!},
+                'data' : data,
                 "themes" : {
                   "variant" : "large"
                 }
@@ -28,7 +37,7 @@
           url: "{{ adminURL('load/shippingInfo')}}",
           dataType: "html",
           type: "post",
-          data: {_token: '{{ csrf_token() }}', department_id: department_id, product_id: '{{ $product->id }}'},
+          data: {_token: '{{ csrf_token() }}', department_id: department_id, product_id: product_id},
           success: function(data){
             $('.shippingInfo').html(data);
             $('.info_data').removeClass('hidden');

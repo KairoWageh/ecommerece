@@ -1,38 +1,68 @@
 @extends('admin.layouts.auth_app')
 @section('content')
-	<div class="login-head">
-		<h1>{{__('login')}}</h1>
-	</div>
-	<div class="login-block">
-		<form method="post">
-			{!! csrf_field() !!}
-			<input type="text" name="email" placeholder="{{__('email')}}" required="">
-			<input type="password" name="password" class="lock" placeholder="{{__('password')}}">
-			<div class="forgot-top-grids">
-				<div class="forgot-grid">
-					<ul>
-						<li>
-							<input type="checkbox" id="brand1" name="rememberme" value="1">
-							<label for="brand1"><span></span>{{__('remember_me')}}</label>
-						</li>
-					</ul>
-				</div>
-				<div class="forgot">
-					<a href="{{url('admin/forgot/password')}}">{{__('forgot_password')}}</a>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-			<input type="submit" name="Sign In" value="{{__('login')}}">
-			<!-- <h3>Not a member?<a href="signup.html"> Sign up now</a></h3>				 -->
-			<h2>{{__('or_login_with')}}</h2>
-			<div class="login-icons">
-				<ul>
-					<li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
-					<li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-					<li><a href="#" class="google"><i class="fa fa-google-plus"></i></a></li>
-				</ul>
-			</div>
-		</form>
-		<!-- <h5><a href="{{ route('home') }}">Go Back to Home</a></h5> -->
-	</div>
+    <div class="login-box">
+        <!-- /.login-logo -->
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <a href="../../index2.html" class="h1"><b>Admin</b>LTE</a>
+            </div>
+            <div class="card-body">
+                <p class="login-box-msg">Sign in to start your session</p>
+
+                <form method="post">
+                    {!! csrf_field() !!}
+                    <div class="input-group mb-3">
+                        <input type="email" name="email"  class="form-control" placeholder="{{__('email')}}"  required="">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" name="password" class="form-control lock" placeholder="{{__('password')}}">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="remember"  name="rememberme" value="1">
+                                <label for="remember">
+                                    {{__('remember_me')}}
+                                </label>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-4">
+                            <input type="submit" name="Sign In" value="{{__('login')}}" class="btn btn-primary btn-block">
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+
+
+
+                <div class="social-auth-links text-center mt-2 mb-3">
+                    <a href="#" class="btn btn-block btn-primary">
+                        <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
+                    </a>
+                    <a href="#" class="btn btn-block btn-danger">
+                        <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
+                    </a>
+                </div>
+                <!-- /.social-auth-links -->
+
+                <p class="mb-1">
+                    <a href="{{url('admin/forgot/password')}}">{{__('forgot_password')}}</a>
+                </p>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+    <!-- /.login-box -->
 @endsection

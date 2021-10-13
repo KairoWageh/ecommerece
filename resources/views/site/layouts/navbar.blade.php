@@ -31,11 +31,11 @@
                 <div class="user-menu">
                     <ul>
                         @auth
-                            <li><a href="{{ route('account') }}"><i class="fa fa-user"></i> {{__('user.my_account')}}</a></li>
-                            <li><a href="#"><i class="fa fa-heart"></i> {{__('user.wishlist')}}</a></li>
-                            <li><a href="{{ url('/cart') }}"><i class="fa fa-user"></i> {{__('user.my_cart')}}</a></li>
-                            <li><a href="{{ route('cart.checkOut') }}"><i class="fa fa-user"></i> {{__('user.checkout')}}</a></li>
-                            <li><a href="{{ route('logout') }}"><i class="fa fa-sign-out"></i> {{ __('user.logout') }}</a></li>
+                            <li><a href="{{ route('account') }}"><i class="fa fa-user"></i> {{__('my_account')}}</a></li>
+                            <li><a href="#"><i class="fa fa-heart"></i> {{__('wishlist')}}</a></li>
+                            <li><a href="{{ url('/cart') }}"><i class="fa fa-user"></i> {{__('my_cart')}}</a></li>
+                            <li><a href="{{ route('cart.checkOut') }}"><i class="fa fa-user"></i> {{__('checkout')}}</a></li>
+                            <li><a href="{{ route('logout') }}"><i class="fa fa-sign-out"></i> {{ __('logout') }}</a></li>
                         @else
                             <li><a href="{{ route('login') }}"><i class="fa fa-user"></i> {{__('login')}}</a></li>
                         @endauth
@@ -83,7 +83,7 @@
 
             <div class="col-sm-6">
                 <div class="shopping-item">
-                    <a href="{{ route('cart') }}">{{ __('user.cart') }} - <span class="cart-amunt">$100</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
+                    <a href="{{ route('cart') }}">{{ __('cart') }} - <span class="cart-amunt">$100</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
                 </div>
             </div>
         </div>

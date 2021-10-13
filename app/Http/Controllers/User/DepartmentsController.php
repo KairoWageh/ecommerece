@@ -11,14 +11,14 @@ class DepartmentsController extends Controller
 {
     public function index()
     {
-        $departments = Department::select('*')->whereNotIn('status', [-1])->get();
+        $departments = Department::select('*')->get();
         return view('site.departments', compact('departments'));
     }
 
     public function single_dep($dep_name){
     	$department = Department::where('department_name_ar', $dep_name)->orWhere('department_name_en', $dep_name)->get();
     	$department_id = $department[0]->id;
-    	$products = Product::select('*')->where('department_id', $department_id)->whereNotIn('status', [-1])->get();
+    	$products = Product::select('*')->where('department_id', $department_id)->get();
     	return view('site.single_dep', compact('products'));
     }
 }

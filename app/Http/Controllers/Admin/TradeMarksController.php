@@ -47,22 +47,26 @@ class TradeMarksController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'name_ar'              => 'required|min:3|max:50',
-            'name_en'    		   => 'required|min:3|max:50',
-            'trademarkIcon'        => 'required|max:10000|'.validate_image(),
-        ]);
-        if($validatedData){
-//            if($validatedData->hasFile('trademarkIcon')){
-                $validatedData['trademarkIcon'] = up()->upload([
-                    'file'        => 'trademarkIcon',
-                    'path'        => 'tradeMarks',
-                    'upload_type' => 'single',
-                    'delete_file' => '',
-                ]);
-//            }
-            return $this->tradeMark->store($request, $this->model);
+        $attributes = [
+            'name_ar'        => $request->name_ar,
+            'name_en'        => $request->name_en,
+            'trademarkIcon'  => $request->trademarkIcon,
+
+        ];
+        $tradeMark = $this->tradeMark->store($attributes, $this->model);
+        if($tradeMark == true){
+            $data = [
+                'tradeMark'  => $tradeMark,
+                'toast'    => 'success',
+                'message'  => __('created')
+            ] ;
+        }else{
+            $data = [
+                'toast'    => 'error',
+                'message'  => __('not_created')
+            ] ;
         }
+        return $data;
     }
 
     /**

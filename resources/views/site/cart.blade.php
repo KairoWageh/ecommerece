@@ -1,33 +1,28 @@
 @extends('site.index')
-
 @section('content')
-
 <div class="product-big-title-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="product-bit-title text-center">
-                        <h2>{{__('user.shopping_cart')}}</h2>
-                    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-bit-title text-center">
+                    <h2>{{__('shopping_cart')}}</h2>
                 </div>
             </div>
         </div>
+    </div>
 </div> <!-- End Page title area -->
-    
-    
 <div class="single-product-area">
     <div class="zigzag-bottom"></div>
     <div class="container">
         <div class="row">
             <div class="col-md-4">
                 <div class="single-sidebar">
-                    <h2 class="sidebar-title">{{__('user.search_products')}}</h2>
+                    <h2 class="sidebar-title">{{__('search_products')}}</h2>
                     <form action="#">
                         <input type="text" placeholder="Search products...">
                         <input type="submit" value="Search">
                     </form>
                 </div>
-                
                 <div class="single-sidebar">
                     <h2 class="sidebar-title">Products</h2>
                     <div class="thubmnail-recent">
@@ -35,31 +30,30 @@
                         <h2><a href="single-product.html">Sony Smart TV - 2015</a></h2>
                         <div class="product-sidebar-price">
                             <ins>$700.00</ins> <del>$800.00</del>
-                        </div>                             
+                        </div>
                     </div>
                     <div class="thubmnail-recent">
                         <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
                         <h2><a href="single-product.html">Sony Smart TV - 2015</a></h2>
                         <div class="product-sidebar-price">
                             <ins>$700.00</ins> <del>$800.00</del>
-                        </div>                             
+                        </div>
                     </div>
                     <div class="thubmnail-recent">
                         <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
                         <h2><a href="single-product.html">Sony Smart TV - 2015</a></h2>
                         <div class="product-sidebar-price">
                             <ins>$700.00</ins> <del>$800.00</del>
-                        </div>                             
+                        </div>
                     </div>
                     <div class="thubmnail-recent">
                         <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
                         <h2><a href="single-product.html">Sony Smart TV - 2015</a></h2>
                         <div class="product-sidebar-price">
                             <ins>$700.00</ins> <del>$800.00</del>
-                        </div>                             
+                        </div>
                     </div>
                 </div>
-                
                 <div class="single-sidebar">
                     <h2 class="sidebar-title">Recent Posts</h2>
                     <ul>
@@ -71,7 +65,6 @@
                     </ul>
                 </div>
             </div>
-            
             <div class="col-md-8">
                 <div class="product-content-right">
                     <div class="woocommerce">
@@ -82,35 +75,31 @@
                                     <tr>
                                         <th class="product-remove">&nbsp;</th>
                                         <th class="product-thumbnail">&nbsp;</th>
-                                        <th class="product-name">{{__('user.product')}}</th>
-                                        <th class="product-price">{{__('user.price')}}</th>
-                                        <th class="product-quantity">{{__('user.quantity')}}</th>
-                                        <th class="product-subtotal">{{__('user.total')}}</th>
+                                        <th class="product-name">{{__('product')}}</th>
+                                        <th class="product-price">{{__('price')}}</th>
+                                        <th class="product-quantity">{{__('quantity')}}</th>
+                                        <th class="product-subtotal">{{__('total')}}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @if (\Cart::isEmpty())
-                                        <p class="alert alert-warning">{{__('user.cart_empty')}}</p>
+                                        <p class="alert alert-warning">{{__('cart_empty')}}</p>
                                     @else
                                         @foreach(\Cart::getContent() as $item)
                                         <br>
                                             <tr class="cart_item">
                                                 <td class="product-remove">
-                                                    <a title="Remove this item" class="remove" href="{{ route('cart.remove', $item->id) }}">×</a> 
-                                                    
+                                                    <a title="Remove this item" class="remove" href="{{ route('cart.remove', $item->id) }}">×</a>
                                                 </td>
                                                 <td class="product-thumbnail">
                                                     <a href="single-product.html"><img width="145" height="145" alt="poster_1_up" class="shop_thumbnail" src="{{ Storage::url($item['attributes']['photo'])}}"></a>
                                                 </td>
-
                                                 <td class="product-name">
-                                                    <a href="single-product.html">{{ $item['name'] }}</a> 
+                                                    <a href="single-product.html">{{ $item['name'] }}</a>
                                                 </td>
-
                                                 <td class="product-price">
-                                                    <span class="amount">${{ $item['price'] }}</span> 
+                                                    <span class="amount">${{ $item['price'] }}</span>
                                                 </td>
-
                                                 <td class="product-quantity">
                                                     <div class="quantity buttons_added">
                                                         <input type="button" class="minus" value="-">
@@ -118,9 +107,8 @@
                                                         <input type="button" class="plus" value="+">
                                                     </div>
                                                 </td>
-
                                                 <td class="product-subtotal">
-                                                    <span class="amount">${{ $item['attributes']['total_price'] }}</span> 
+                                                    <span class="amount">${{ $item['attributes']['total_price'] }}</span>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -135,20 +123,14 @@
                                             </div>
                                             <!-- <input type="submit" value="Update Cart" name="update_cart" class="button"> -->
                                             <a href=""name="update_cart"  class="btn btn-primary btn-md">Update Cart</a>
-
-
                                             <!-- <input type="submit" value="Checkout" name="proceed" class="checkout-button button alt wc-forward"> -->
-
                                             <a href="{{ route('cart.checkOut') }}"name="proceed"  class="btn btn-primary btn-md">Checkout</a>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </form>
-
                         <div class="cart-collaterals">
-
-
                         <div class="cross-sells">
                             <h2>You may be interested in...</h2>
                             <ul class="products">
@@ -158,38 +140,30 @@
                                         <h3>Ship Your Idea</h3>
                                         <span class="price"><span class="amount">£20.00</span></span>
                                     </a>
-
                                     <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="22" rel="nofollow" href="single-product.html">Select options</a>
                                 </li>
-
                                 <li class="product">
                                     <a href="single-product.html">
                                         <img width="325" height="325" alt="T_4_front" class="attachment-shop_catalog wp-post-image" src="img/product-4.jpg">
                                         <h3>Ship Your Idea</h3>
                                         <span class="price"><span class="amount">£20.00</span></span>
                                     </a>
-
                                     <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="22" rel="nofollow" href="single-product.html">Select options</a>
                                 </li>
                             </ul>
                         </div>
-
-
                         <div class="cart_totals ">
                             <h2>Cart Totals</h2>
-
                             <table cellspacing="0">
                                 <tbody>
                                     <tr class="cart-subtotal">
                                         <th>Cart Subtotal</th>
                                         <td><span class="amount">£15.00</span></td>
                                     </tr>
-
                                     <tr class="shipping">
                                         <th>Shipping and Handling</th>
                                         <td>Free Shipping</td>
                                     </tr>
-
                                     <tr class="order-total">
                                         <th>Order Total</th>
                                         <td><strong><span class="amount">£15.00</span></strong> </td>
@@ -197,13 +171,9 @@
                                 </tbody>
                             </table>
                         </div>
-
-
                         <form method="post" action="#" class="shipping_calculator">
                             <h2><a class="shipping-calculator-button" data-toggle="collapse" href="#calcalute-shipping-wrap" aria-expanded="false" aria-controls="calcalute-shipping-wrap">Calculate Shipping</a></h2>
-
                             <section id="calcalute-shipping-wrap" class="shipping-calculator-form collapse">
-
                             <p class="form-row form-row-wide">
                             <select rel="calc_shipping_state" class="country_to_state" id="calc_shipping_country" name="calc_shipping_country">
                                 <option value="">Select a country…</option>
@@ -453,28 +423,19 @@
                                 <option value="ZW">Zimbabwe</option>
                             </select>
                             </p>
-
                             <p class="form-row form-row-wide"><input type="text" id="calc_shipping_state" name="calc_shipping_state" placeholder="State / county" value="" class="input-text"> </p>
-
                             <p class="form-row form-row-wide"><input type="text" id="calc_shipping_postcode" name="calc_shipping_postcode" placeholder="Postcode / Zip" value="" class="input-text"></p>
-
-
                             <p><button class="button" value="1" name="calc_shipping" type="submit">Update Totals</button></p>
-
                             </section>
                         </form>
-
-
                         </div>
-                    </div>                        
-                </div>                    
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 @endsection
-
 @section('scripts')
     <script type="text/javascript">
         $(".update-cart").click(function (e) {
@@ -489,9 +450,8 @@
                }
             });
         });
- 
         $(".remove-from-cart").click(function (e) {
-            e.preventDefault(); 
+            e.preventDefault();
             var ele = $(this);
             if(confirm("Are you sure")) {
                 $.ajax({
@@ -504,7 +464,5 @@
                 });
             }
         });
- 
     </script>
- 
 @endsection

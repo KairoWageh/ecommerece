@@ -77,6 +77,8 @@
     "profile": "Profile",
     "admin": "Administrator",
     "registeredUsers": "Registered users",
+    "registeredVendors": "Registered vendors",
+    "registeredCompanies": "Registered companies",
     "adminController": "Admin Controller",
     "usersController": "Users Controller",
     "countriesController": "Countries Controller",

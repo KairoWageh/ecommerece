@@ -42,14 +42,14 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        $product = Product::create([
-            'title'   => '',
-            'photo'   => ''
-        ]);
-        if(!empty($product)){
-            return redirect(adminURL('admin/products/').$product->id.'/edit');
-        }
-        // return view('admin.products.product', ['title'=> trans("admin.add")]);
+//        $product = Product::create([
+//            'title'   => '',
+//            'photo'   => ''
+//        ]);
+//        if(!empty($product)){
+//            return redirect(adminURL('admin/products/').$product->id.'/edit');
+//        }
+        return view('admin.products.create', ['title' => trans("create_product")]);
     }
 
     /**

@@ -1,8 +1,6 @@
 @extends('site.index')
-
 @section('content')
 <div class="profile-widget">
-	<img src="{{ Storage::url('') }}" alt=" " />
 	<h2>{{ $user->name }}</h2>
 	<p>{{ $user->level }}</p>
 </div>
@@ -10,29 +8,19 @@
 	<!--/profile-inner-->
 	<div class="profile-section-inner">
 	    <div class="col-md-6 profile-info">
-			<h3 class="inner-tittle">{{ __('user.personal_information') }} </h3>
+			<h3 class="inner-tittle">{{ __('personal_information') }} </h3>
 			<div class="main-grid3">
 			    <div class="p-20">
 					<div class="about-info-p">
-						<strong>{{__('user.full_name')}}</strong>
+						<strong>{{__('full_name')}}</strong>
 						<br>
 						<p class="text-muted">{{ $user->name }}</p>
 					</div>
-	<!-- <div class="about-info-p">
-			<strong>Mobile</strong>
-			<br>
-			<p class="text-muted">(123) 123 1234</p>
-		</div> -->
-		<div class="about-info-p">
-			<strong>{{ __('user.email') }}</strong>
-			<br>
-			<p class="text-muted"><a href="mailto:info@example.com">{{ $user->email }}</a></p>
-		</div>
-	<!-- 				<div class="about-info-p m-b-0">
-						<strong>Location</strong>
-						<br>
-						<p class="text-muted">London, UK</p>
-					</div> -->
+                    <div class="about-info-p">
+                        <strong>{{ __('email') }}</strong>
+                        <br>
+                        <p class="text-muted"><a href="mailto:{{ $user->email }}">{{ $user->email }}</a></p>
+                    </div>
 				</div>
 			</div>
 			<h3 class="inner-tittle">Biography </h3>
@@ -47,29 +35,29 @@
 					<p>UI/UX</p>
 				</div>
 				<div class="skills">
-					<div class="skill1" style="width:100%"> 
-					</div>							
+					<div class="skill1" style="width:100%">
+					</div>
 				</div>
 				<div class="bar">
 					<p>HTML / CSS3 / SASS</p>
 				</div>
 				<div class="skills">
-					<div class="skill2" style="width:90%"> 
-					</div>					
+					<div class="skill2" style="width:90%">
+					</div>
 				</div>
 				<div class="bar">
 					<p>Javascript</p>
 				</div>
 				<div class="skills">
-					<div class="skill3" style="width:75%"> 
+					<div class="skill3" style="width:75%">
 					</div>
 				</div>
 				<div class="bar">
 					<p>Wordpress</p>
 				</div>
 				<div class="skills">
-					<div class="skill4" style="width:85%"> 
-					</div>						
+					<div class="skill4" style="width:85%">
+					</div>
 				</div>
 			</div>
 		</div>
@@ -144,7 +132,7 @@
 						</div>
 					</li>
 				</ul>
-				<div class="clearfix"></div>		
+				<div class="clearfix"></div>
 			</div>
 		</div>
 			<!--/map-->
@@ -154,7 +142,7 @@
 				<iframe src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Purwokerto,+Central+Java,+Indonesia&amp;aq=0&amp;oq=purwo&amp;sll=37.0625,-95.677068&amp;sspn=50.291089,104.238281&amp;ie=UTF8&amp;hq=&amp;hnear=Purwokerto,+Banyumas,+Central+Java,+Indonesia&amp;ll=-7.431391,109.24783&amp;spn=0.031022,0.050898&amp;t=m&amp;z=14&amp;output=embed">
 				</iframe>
 				<div class="gmap-info">
-					<h4> 
+					<h4>
 						<i class="fa fa-map-marker"></i> <b>
 							<a href="#" class="text-dark">Augment Pvt. Ltd</a>
 						</b>
@@ -163,7 +151,7 @@
 					<p>E 3rd, 4th, and 5th Floors</p>
 					<p>London, UK</p>
 				</div>
-				
+
 			</div>
 			<!--//map-->
 		</div>

@@ -1,227 +1,166 @@
+<!-- Navbar -->
+<nav class="main-header navbar navbar-expand navbar-dark">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="index3.html" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="#" class="nav-link">Contact</a>
+        </li>
+    </ul>
 
-<body>
-<div class="page-container">
-   <div class="left-content">
-	   <div class="mother-grid-inner">
-            <!--header start here-->
-				<div class="header-main">
-					<div class="header-left">
-							<div class="logo-name">
-									 <a href="{{adminURL()}}"> <h1>Shoppy</h1>
-									<!--<img id="logo" src="" alt="Logo"/>-->
-								  </a>
-							</div>
-							<!--search-box-->
-								<!-- <div class="search-box">
-									<form>
-										<input type="text" placeholder="Search..." required="">
-										<input type="submit" value="">
-									</form>
-								</div> --><!--//end-search-box-->
-							<div class="clearfix"> </div>
-						 </div>
-						 <div class="header-right">
-							<div class="profile_details_left"><!--notifications of menu start -->
-								<ul class="nofitications-dropdown">
-									<li class="dropdown head-dpdn">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-envelope"></i><span class="badge">3</span></a>
-										<ul class="dropdown-menu">
-											<li>
-												<div class="notification_header">
-													<h3>You have 3 new messages</h3>
-												</div>
-											</li>
-											<li><a href="#">
-											   <div class="user_img"><img src="" alt=""></div>
-											   <div class="notification_desc">
-												<p>Lorem ipsum dolor</p>
-												<p><span>1 hour ago</span></p>
-												</div>
-											   <div class="clearfix"></div>
-											</a></li>
-											<li class="odd"><a href="#">
-												<div class="user_img"><img src="" alt=""></div>
-											   <div class="notification_desc">
-												<p>Lorem ipsum dolor </p>
-												<p><span>1 hour ago</span></p>
-												</div>
-											  <div class="clearfix"></div>
-											</a></li>
-											<li><a href="#">
-											   <div class="user_img"><img src="" alt=""></div>
-											   <div class="notification_desc">
-												<p>Lorem ipsum dolor</p>
-												<p><span>1 hour ago</span></p>
-												</div>
-											   <div class="clearfix"></div>
-											</a></li>
-											<li>
-												<div class="notification_bottom">
-													<a href="#">See all messages</a>
-												</div>
-											</li>
-										</ul>
-									</li>
-									<li class="dropdown head-dpdn">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell"></i><span class="badge blue">3</span></a>
-										<ul class="dropdown-menu">
-											<li>
-												<div class="notification_header">
-													<h3>You have 3 new notification</h3>
-												</div>
-											</li>
-											<li><a href="#">
-												<div class="user_img"><img src="" alt=""></div>
-											   <div class="notification_desc">
-												<p>Lorem ipsum dolor</p>
-												<p><span>1 hour ago</span></p>
-												</div>
-											  <div class="clearfix"></div>
-											 </a></li>
-											 <li class="odd"><a href="#">
-												<div class="user_img"><img src="" alt=""></div>
-											   <div class="notification_desc">
-												<p>Lorem ipsum dolor</p>
-												<p><span>1 hour ago</span></p>
-												</div>
-											   <div class="clearfix"></div>
-											 </a></li>
-											 <li><a href="#">
-												<div class="user_img"><img src="" alt=""></div>
-											   <div class="notification_desc">
-												<p>Lorem ipsum dolor</p>
-												<p><span>1 hour ago</span></p>
-												</div>
-											   <div class="clearfix"></div>
-											 </a></li>
-											 <li>
-												<div class="notification_bottom">
-													<a href="#">See all notifications</a>
-												</div>
-											</li>
-										</ul>
-									</li>
-									<li class="dropdown head-dpdn">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-tasks"></i><span class="badge blue1">9</span></a>
-										<ul class="dropdown-menu">
-											<li>
-												<div class="notification_header">
-													<h3>You have 8 pending task</h3>
-												</div>
-											</li>
-											<li><a href="#">
-												<div class="task-info">
-													<span class="task-desc">Database update</span><span class="percentage">40%</span>
-													<div class="clearfix"></div>
-												</div>
-												<div class="progress progress-striped active">
-													<div class="bar yellow" style="width:40%;"></div>
-												</div>
-											</a></li>
-											<li><a href="#">
-												<div class="task-info">
-													<span class="task-desc">Dashboard done</span><span class="percentage">90%</span>
-												   <div class="clearfix"></div>
-												</div>
-												<div class="progress progress-striped active">
-													 <div class="bar green" style="width:90%;"></div>
-												</div>
-											</a></li>
-											<li><a href="#">
-												<div class="task-info">
-													<span class="task-desc">Mobile App</span><span class="percentage">33%</span>
-													<div class="clearfix"></div>
-												</div>
-											   <div class="progress progress-striped active">
-													 <div class="bar red" style="width: 33%;"></div>
-												</div>
-											</a></li>
-											<li><a href="#">
-												<div class="task-info">
-													<span class="task-desc">Issues fixed</span><span class="percentage">80%</span>
-												   <div class="clearfix"></div>
-												</div>
-												<div class="progress progress-striped active">
-													 <div class="bar  blue" style="width: 80%;"></div>
-												</div>
-											</a></li>
-											<li>
-												<div class="notification_bottom">
-													<a href="#">See all pending tasks</a>
-												</div>
-											</li>
-										</ul>
-									</li>
-									<li class="dropdown head-dpdn">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-globe"></i></a>
-										<ul class="dropdown-menu">
-											<li>
-												<a href="{{url(adminURL('admin/lang/ar'))}}">
-													<div class="user_img"><img src="" alt=""></div>
-											   		<div class="notification_desc">
-														<p><span class="fa fa-flag"></span> العربية</p>
-													</div>
-											  		<div class="clearfix"></div>
-											 	</a>
-											</li>
-											<li>
-												<a href="{{url(adminURL('admin/lang/en'))}}">
-													<div class="user_img"><img src="" alt=""></div>
-											   		<div class="notification_desc">
-											   			<p><span class="fa fa-flag"></span> English</p>
-													</div>
-											  		<div class="clearfix"></div>
-												</a>
-											</li>
-										</ul>
-									</li>
-								</ul>
-								<div class="clearfix"> </div>
-							</div>
-							<!--notification menu end -->
-							<div class="profile_details">
-								<ul>
-									<li class="dropdown profile_details_drop">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-											<div class="profile_img">
-												<span class="prfil-img"><img src="" alt=""> </span>
-												<div class="user-name">
-													<p>{{admin()->user()->name}}</p>
-													<span>{{__('admin')}}</span>
-												</div>
-												<i class="fa fa-angle-down lnr"></i>
-												<i class="fa fa-angle-up lnr"></i>
-												<div class="clearfix"></div>
-											</div>
-										</a>
-										<ul class="dropdown-menu drp-mnu">
-											<li> <a href="{{route('admin.settings')}}"><i class="fa fa-cog"></i> {{__('settings')}}</a> </li>
-											<li> <a href="#"><i class="fa fa-user"></i> {{__('profile')}}</a> </li>
-											<li> <a href="{{adminURL('admin/logout')}}"><i class="fa fa-sign-out"></i> {{__('logout')}}</a> </li>
-										</ul>
-									</li>
-								</ul>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-				     <div class="clearfix"> </div>
-				</div>
-<!--heder end here-->
-<!-- script-for sticky-nav -->
-<script>
-$(document).ready(function() {
-	 var navoffeset=$(".header-main").offset().top;
-	 $(window).scroll(function(){
-		var scrollpos=$(window).scrollTop();
-		if(scrollpos >=navoffeset){
-			$(".header-main").addClass("fixed");
-		}else{
-			$(".header-main").removeClass("fixed");
-		}
-	 });
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+        <!-- Language Dropdown Menu-->
+        <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+                <p><i class="fa fa-angle-down lnr"></i>{{__('language')}}</p>
 
-});
-</script>
-		<!-- /script-for sticky-nav -->
-		<!--inner block start here-->
-<div class="inner-block">
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                <a href="{{ url('lang/en') }}" class="dropdown-item">
+                     English
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="{{ url('lang/ar') }}" class="dropdown-item">
+                    العربية
+                </a>
+            </div>
+        </li>
+        <!-- Navbar Search -->
+        <li class="nav-item">
+            <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+                <i class="fas fa-search"></i>
+            </a>
+            <div class="navbar-search-block">
+                <form class="form-inline">
+                    <div class="input-group input-group-sm">
+                        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="btn btn-navbar" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                            <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </li>
+
+        <!-- Messages Dropdown Menu -->
+        <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+                <i class="far fa-comments"></i>
+                <span class="badge badge-danger navbar-badge">3</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                <a href="#" class="dropdown-item">
+                    <!-- Message Start -->
+                    <div class="media">
+                        <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                        <div class="media-body">
+                            <h3 class="dropdown-item-title">
+                                Brad Diesel
+                                <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                            </h3>
+                            <p class="text-sm">Call me whenever you can...</p>
+                            <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                        </div>
+                    </div>
+                    <!-- Message End -->
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">
+                    <!-- Message Start -->
+                    <div class="media">
+                        <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                        <div class="media-body">
+                            <h3 class="dropdown-item-title">
+                                John Pierce
+                                <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
+                            </h3>
+                            <p class="text-sm">I got your message bro</p>
+                            <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                        </div>
+                    </div>
+                    <!-- Message End -->
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">
+                    <!-- Message Start -->
+                    <div class="media">
+                        <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                        <div class="media-body">
+                            <h3 class="dropdown-item-title">
+                                Nora Silvester
+                                <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
+                            </h3>
+                            <p class="text-sm">The subject goes here</p>
+                            <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                        </div>
+                    </div>
+                    <!-- Message End -->
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+            </div>
+        </li>
+        <!-- Notifications Dropdown Menu -->
+        <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+                <i class="far fa-bell"></i>
+                <span class="badge badge-warning navbar-badge">15</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                <span class="dropdown-item dropdown-header">15 Notifications</span>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">
+                    <i class="fas fa-envelope mr-2"></i> 4 new messages
+                    <span class="float-right text-muted text-sm">3 mins</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">
+                    <i class="fas fa-users mr-2"></i> 8 friend requests
+                    <span class="float-right text-muted text-sm">12 hours</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">
+                    <i class="fas fa-file mr-2"></i> 3 new reports
+                    <span class="float-right text-muted text-sm">2 days</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+            </div>
+        </li>
+        <!-- Admin Dropdown Menu-->
+        <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+                <p><i class="fa fa-angle-down lnr"></i>{{admin()->user()->name}}</p>
+
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                <span class="dropdown-item dropdown-header">{{__('admin')}}</span>
+                <div class="dropdown-divider"></div>
+                <a href="{{route('admin.settings')}}" class="dropdown-item">
+                    <i class="fas fa-cog mr-2"></i> {{__('settings')}}
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">
+                    <i class="fas fa-user mr-2"></i> {{__('profile')}}
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="{{adminURL('logout')}}" class="dropdown-item">
+                    <i class="fas fa-sign-out mr-2"></i> {{__('logout')}}
+                </a>
+            </div>
+        </li>
+    </ul>
+</nav>
+<!-- /.navbar -->
+<div style="clear:both;"> </div>

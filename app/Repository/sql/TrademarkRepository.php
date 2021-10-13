@@ -11,22 +11,16 @@ class TrademarkRepository extends BaseRepository implements TrademarkRepositoryI
      * @return mixed|void
      */
     public function store($attributes, $model){
-        $tradeMark = $model->create($attributes);
-        if($tradeMark != null){
-            $tradeMark->created_at = date('Y-m-d H:i', strtotime($tradeMark->created_at) );
-            $tradeMark->updated_at = date('Y-m-d H:i', strtotime($tradeMark->updated_at) );
-            $data = [
-                'tradeMark'  => $tradeMark,
-                'toast'    => 'success',
-                'message'  => __('created')
-            ] ;
-        }else{
-            $data = [
-                'toast'    => 'error',
-                'message'  => __('not_created')
-            ] ;
+        if($attributes['trademarkIcon']) {
+            $attributes['trademarkIcon'] = up()->upload([
+                'file' => 'trademarkIcon',
+                'path' => 'tradeMarks',
+                'upload_type' => 'single',
+                'delete_file' => '',
+            ]);
         }
-        return $data;
+        $tradeMark = $model->create($attributes);
+        return $tradeMark;
     }
 
     /**

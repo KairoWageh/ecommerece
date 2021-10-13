@@ -1,0 +1,50 @@
+body{
+	direction: rtl;
+}
+.sidebar-menu {
+	float: right !important;
+	right: 0px !important;
+	left: unset !important;
+	/*position: absolute !important;*/
+}
+.logo-name{
+	float: right;
+}
+.header-left{
+	float: right;
+}
+.header-right{
+	float: left;
+}
+.left-content{
+	float: left !important;
+}
+.market-update-gd{
+	float: right ;
+}
+/*.fixed{
+	width: 86% !important;
+}*/
+.profile_details_left{
+	float: right;
+}
+li.dropdown.head-dpdn{
+	float: right;
+}
+.user-name {
+    float: right;
+    margin-top: 0px;
+    margin-left: 11px;
+}
+.profile_details li a i.fa.lnr{
+	position: relative;
+}
+
+#menu li ul {
+    right: 100% !important;
+    width: 68%;
+}
+
+.dt-buttons{
+    margin-right: 61px;
+}

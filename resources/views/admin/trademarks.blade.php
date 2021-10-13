@@ -77,34 +77,32 @@
                 processData: false,
                 success:function(response){
                     if(response.tradeMark){
-                        alert('succes');
-                        users_table.prepend('<tr id ="'+response.user.id+'">'+
-                            '<td><input type="checkbox" class="item_checkbox" name="item[]" value="'+response.user.id+'"></td>'+
-                            '<td class="text-center sorting_1">'+response.user.name+'</td>'+
-                            '<td class=" text-center">'+response.user.email+'</td>'+
-                            '<td class=" text-center">'+response.user.level+'</td>'+
-                            '<td class=" text-center">'+response.user.created_at+'</td>'+
-                            '<td class=" text-center">'+response.user.updated_at+'</td>'+
-                            '<td class=" text-center edit_'+response.user.id+'">'+
-                            '<td class=" text-center delete_'+response.user.id+'">'
+                        tradeMarks_table.prepend('<tr id ="'+response.tradeMark.id+'">'+
+                            '<td><input type="checkbox" class="item_checkbox" name="item[]" value="'+response.tradeMark.id+'"></td>'+
+                            '<td class="text-center sorting_1">'+response.tradeMark.name_ar+'</td>'+
+                            '<td class=" text-center">'+response.tradeMark.name_en+'</td>'+
+                            '<td class=" text-center">'+response.tradeMark.created_at+'</td>'+
+                            '<td class=" text-center">'+response.tradeMark.updated_at+'</td>'+
+                            '<td class=" text-center edit_'+response.tradeMark.id+'">'+
+                            '<td class=" text-center delete_'+response.tradeMark.id+'">'
                         );
                         var edit_btn = $('<button/>')
-                            .attr('data-id', response.user.id)
-                            .addClass('btn btn-info edit_user')
+                            .attr('data-id', response.tradeMark.id)
+                            .addClass('btn btn-info edit_tradeMark')
                             // .attr('onclick', 'edit_user('+response.admin.id+')')
                             .attr('type', 'button')
                             .html('<i class="fa fa-edit" style="color: #fff"></i>');
-                        $('.edit_'+response.user.id).append(edit_btn);
+                        $('.edit_'+response.tradeMark.id).append(edit_btn);
                         var delete_btn = $('<button/>')
-                            .attr('data-id', response.user.id)
-                            .addClass('btn btn-danger delete_user')
+                            .attr('data-id', response.tradeMark.id)
+                            .addClass('btn btn-danger delete_tradeMark')
                             // .attr('onclick', 'delete_user('+response.admin.id+')')
                             .attr('type', 'button')
                             .html('<i class="fa fa-trash"></i>');;
-                        $('.delete_'+response.user.id).append(delete_btn);
+                        $('.delete_'+response.tradeMark.id).append(delete_btn);
                         toastr.success(response.message);
-                        $('#add_user_modal').modal('hide');
-                        document.getElementById('add_user_form').reset();
+                        $('#add_tradeMark_modal').modal('hide');
+                        document.getElementById('add_tradeMark_form').reset();
                     }else{
                         toastr.error(response.message);
                     }

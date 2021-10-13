@@ -1,5 +1,5 @@
 {
-    "login": "تسجيل الدخول",
+    "login": "دخول",
     "logout": "تسجيل الخروج",
     "language": "اللغة",
     "email": "البريد الإلكتروني",
@@ -76,7 +76,9 @@
     "message_maintenance": "رسالة الصيانة",
     "profile": "الملف الشخصي",
     "admin": "مشرف الموقع",
-    "registeredUsers": "المستخدمين  المسجلين",
+    "registeredUsers": "الأعضاء  المسجلين",
+    "registeredVendors": "المتاجر المسجلة",
+    "registeredCompanies": "الشركات المسجلة",
     "adminController": "التحكم بالمشرفين",
     "usersController": "التحكم بالأعضاء",
     "countriesController": "التحكم بالدول",

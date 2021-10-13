@@ -114,7 +114,7 @@
 			              </div>
 			            </div>
 			          </li>
-                        <li><a href="{{route('user_home')}}">{{__('back')}}</a></li>
+{{--                        <li><a href="{{route('user_home')}}">{{__('back')}}</a></li>--}}
 			        </ul>
 			      </nav><!-- .nav-menu -->
 			    </div>

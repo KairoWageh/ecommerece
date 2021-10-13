@@ -1,185 +1,269 @@
-</div>
-<!--inner block end here-->
-<!--copy rights start here-->
-<div class="copyrights">
-	<?php
-        use App\Setting;
-        $app = Setting::first();
-    ?>	<p>&copy; 2020
-        @if(session('lang') == 'en')
-            {{ $app->sitename_en }}
-        @elseif(session('lang') == 'ar')
-            {{ $app->sitename_ar }}
-        @endif. {{ __('all_rights_reserved') }} | {{ __('design_by') }}
-        <a href="https://www.linkedin.com/in/kairo-wageh-591811b5/" target="_blank">Kairo Wageh</a>
-    </p>
-</div>
-<!--COPY rights end here-->
-</div>
-</div>
-<!--slider menu-->
-    <div class="sidebar-menu">
-		  	<div class="logo"> <a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span> </a> <a href="#"> <span id="logo" ></span>
-			      <!--<img id="logo" src="" alt="Logo"/>-->
-			  </a> </div>
-		    <div class="menu">
-		      <ul id="menu" >
-		        <li id="menu-home" >
-		        	<a href="{{ route('home') }}">
-		        		<i class="fa fa-tachometer"></i>
-		        		<span>{{__('dashboard')}}</span>
-		        		@if(Session::get('lang') == 'en')
-		        			<span class="fa fa-angle-right" style="float: right"></span>
-		        		@else
-		        			<span class="fa fa-angle-left" style="float: left"></span>
-		        		@endif
-		        	</a>
-		        </li>
-		        <li>
-		        	<a href="{{ route('admins.index') }}">
-		        		<i class="fa fa-users"></i>
-		        		<span>{{__('adminsAccounts')}}</span>
-		        	</a>
-		        </li>
-		        <li>
-                    <a href="#">
-		        		<i class="fa fa-users"></i>
-		        		<span>{{__('usersAccounts')}}</span>
-		        		@if(Session::get('lang') == 'en')
-		        			<span class="fa fa-angle-right" style="float: right"></span>
-		        		@else
-		        			<span class="fa fa-angle-left" style="float: left"></span>
-		        		@endif
-		        	</a>
-                      <ul>
-                        <li><a href="{{ route('users.index') }}">{{__('usersAccounts')}}</a></li>
-                        <li><a href="{{ route('users.index', ['level' => 'user']) }}">{{__('user')}}</a></li>
-                        <li><a href="{{ route('users.index', ['level' => 'vendor']) }}">{{__('vendor')}}</a></li>
-                        <li><a href="{{ route('users.index', ['level' => 'company']) }}">{{__('company')}}</a></li>
-                        <li><a href="{{ route('users.create') }}">{{__('addNewUser')}}</a></li>
-                      </ul>
-		        </li>
-		        <!-- countries li -->
-		        <li>
-		        	<a href="{{ route('countries.index') }}">
-		        		<i class="fa fa-flag"></i>
-		        		<span>{{__('countries')}}</span>
-		        	</a>
-		        </li>
-		        <!--// countries li -->
-		        <!-- cities li -->
-		        <li>
-		        	<a href="{{ route('cities.index') }}">
-		        		<i class="fa fa-flag"></i>
-		        		<span>{{__('cities')}}</span>
-		        	</a>
-		        </li>
-		        <!--// cities li -->
-		        <!-- states li -->
-		        <li>
-		        	<a href="{{ route('states.index') }}">
-		        		<i class="fa fa-flag"></i>
-		        		<span>{{__('states')}}</span>
-		        	</a>
-		        </li>
-		        <!--// states li -->
-		        <!-- departments li -->
-		        <li>
-{{--		        	<a href="{{ route('departments.index') }}">--}}
-{{--		        		<i class="fa fa-list-alt"></i>--}}
-{{--		        		<span>{{__('departments')}}</span>--}}
-{{--		        	</a>--}}
-                    <a href="#">
-                        <i class="fa fa-list-alt"></i>
-                        <span>{{__('departments')}}</span>
-                        @if(Session::get('lang') == 'en')
-                            <span class="fa fa-angle-right" style="float: right"></span>
-                        @else
-                            <span class="fa fa-angle-left" style="float: left"></span>
-                        @endif
-                    </a>
-                    <ul>
-                        <li><a href="{{ route('departments.index') }}">{{__('departments')}}</a></li>
-                        <li><a href="{{ route('departments.create') }}">{{__('add')}}</a></li>
-                    </ul>
-		        </li>
-		        <!--// departments li -->
-		        <!-- trademarks li -->
-		        <li>
-		        	<a href="{{ route('trademarks.index') }}">
-		        		<i class="fa fa-cube"></i>
-		        		<span>{{__('trademarks')}}</span>
-		        	</a>
-		        </li>
-		        <!--// trademarks li -->
-		        <!-- manufacturers li -->
-		        <li>
-		        	<a href="{{ route('manufacturers.index') }}">
-		        		<i class="fa fa-user"></i>
-		        		<span>{{__('manufacturers')}}</span>
-		        	</a>
-		          <ul>
-		            <li><a href="{{ route('manufacturers.index') }}">{{__('manufacturers')}}</a></li>
-		            <li><a href="{{ route('manufacturers.create') }}">{{__('add')}}</a></li>
-		          </ul>
-		        </li>
-		        <!--// manufacturers li -->
-		        <!-- shippingCompanies li -->
-		        <li>
-		        	<a href="{{ route('shippingCompanies.index') }}">
-		        		<i class="fa fa-truck"></i>
-		        		<span>{{__('shippingCompanies')}}</span>
-		        	</a>
-		        </li>
-		        <!--// shippingCompanies li -->
-
-		        <!-- malls li -->
-		        <li>
-		        	<a href="{{ route('malls.index') }}">
-		        		<i class="fa fa-building"></i>
-		        		<span>{{__('malls')}}</span>
-		        	</a>
-		        </li>
-		        <!--// malls li -->
-
-		        <!-- colors li -->
-		        <li>
-		        	<a href="{{ route('colors.index') }}">
-		        		<i class="fa fa-paint-brush"></i>
-		        		<span>{{__('colors')}}</span>
-		        	</a>
-		        </li>
-		        <!--// colors li -->
-		        <!-- sizes li -->
-		        <li>
-		        	<a href="{{ route('sizes.index') }}">
-		        		<i class="fa fa-info-circle"></i>
-		        		<span>{{__('sizes')}}</span>
-		        	</a>
-		        </li>
-		        <!--// sizes li -->
-
-		        <!-- weights li -->
-		        <li>
-		        	<a href="{{ route('weights.index') }}">
-		        		<i class="fa fa-balance-scale"></i>
-		        		<span>{{__('weights')}}</span>
-		        	</a>
-		        </li>
-		        <!--// weights li -->
-
-		        <!-- products li -->
-		        <li>
-		        	<a href="{{ route('products.index') }}">
-		        		<i class="fa fa-tag"></i>
-		        		<span>{{__('products')}}</span>
-		        	</a>
-		        </li>
-		        <!--// products li -->
-
-		      </ul>
-		    </div>
-	 </div>
-	<div class="clearfix"> </div>
-<!-- </div> -->
 <!--slide bar menu end here-->
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="{{ route('home') }}" class="brand-link">
+        <img src="{{ asset('public/design/admin/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <?php $site_name = 'sitename_'.Config::get('app.locale')?>
+        <span class="brand-text font-weight-light">{{setting()->$site_name}}</span>
+    </a>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="info">
+                <a href="#" class="d-block">{{admin()->user()->name}}</a>
+            </div>
+        </div>
+        <!-- SidebarSearch Form -->
+        <div class="form-inline">
+            <div class="input-group" data-widget="sidebar-search">
+                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-sidebar">
+                        <i class="fas fa-search fa-fw"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- home li -->
+                <li class="nav-item menu-open">
+                    <a href="{{ route('home') }}" class="nav-link active">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            {{__('dashboard')}}
+                        </p>
+                    </a>
+                </li>
+                <!--// home li -->
+                <!-- admins li -->
+                <li class="nav-item">
+                    <a href="{{ route('admins.index') }}" class="nav-link">
+                        <i class="fa fa-users"></i>
+                        <p>
+                            {{__('adminsAccounts')}}
+                        </p>
+                    </a>
+                </li>
+                <!--// admins li -->
+                <!-- users li -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fa fa-users"></i>
+                        <p>
+                            {{__('usersAccounts')}}
+                            @if(Session::get('lang') == 'en')
+                                <span class="fa fa-angle-right" style="float: right"></span>
+                            @else
+                                <span class="fa fa-angle-left" style="float: left"></span>
+                            @endif
+                            <span class="badge badge-info right">6</span>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('users.index', ['level' => 'user']) }}" class="nav-link">
+                                <p>{{__('user')}}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('users.index', ['level' => 'vendor']) }}" class="nav-link">
+                                <p>{{__('vendor')}}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('users.index', ['level' => 'company']) }}l" class="nav-link">
+                                <p>{{__('company')}}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('users.create') }}" class="nav-link">
+                                <p>{{__('addNewUser')}}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!--// users li -->
+                <!-- countries li -->
+                <li class="nav-item">
+                    <a href="{{ route('countries.index') }}" class="nav-link">
+                        <i class="nav-icon fa fa-flag"></i>
+                        <p>
+                            {{__('countries')}}
+                        </p>
+                    </a>
+                </li>
+                <!--// countries li -->
+                <!-- cities li -->
+                <li class="nav-item">
+                    <a href="{{ route('cities.index') }}" class="nav-link">
+                        <i class="nav-icon fa fa-flag"></i>
+                        <p>
+                            {{__('cities')}}
+                        </p>
+                    </a>
+                </li>
+                <!--// cities li -->
+                <!-- states li -->
+                <li class="nav-item">
+                    <a href="{{ route('states.index') }}" class="nav-link">
+                        <i class="nav-icon fa fa-flag"></i>
+                        <p>
+                            {{__('states')}}
+                        </p>
+                    </a>
+                </li>
+                <!--// states li -->
+                <!-- departments li -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fa fa-list-alt"></i>
+                        <p>
+                            {{__('departments')}}
+                            @if(Session::get('lang') == 'en')
+                                <span class="fa fa-angle-right" style="float: right"></span>
+                            @else
+                                <span class="fa fa-angle-left" style="float: left"></span>
+                                <span class="badge badge-info right">6</span>    @endif
+
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('departments.index') }}" class="nav-link">
+                                <p>{{__('departments')}}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('departments.create') }}" class="nav-link">
+                                <p>{{__('add')}}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!--// departments li -->
+                <!-- trademarks li -->
+                <li class="nav-item">
+                    <a href="{{ route('trademarks.index') }}" class="nav-link">
+                        <i class="nav-icon fa fa-cube"></i>
+                        <p>
+                            {{__('trademarks')}}
+                        </p>
+                    </a>
+                </li>
+                <!--// trademarks li -->
+                <!-- manufacturers li -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fa fa fa-user"></i>
+                        <p>
+                            {{__('manufacturers')}}
+                            @if(Session::get('lang') == 'en')
+                                <span class="fa fa-angle-right" style="float: right"></span>
+                            @else
+                                <span class="fa fa-angle-left" style="float: left"></span>
+                                <span class="badge badge-info right">6</span>    @endif
+
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('manufacturers.index') }}" class="nav-link">
+                                <p>{{__('manufacturers')}}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('manufacturers.create') }}" class="nav-link">
+                                <p>{{__('add')}}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!--// manufacturers li -->
+                <!-- shippingCompanies li -->
+                <li class="nav-item">
+                    <a href="{{ route('shippingCompanies.index') }}" class="nav-link">
+                        <i class="nav-icon fa fa-truck"></i>
+                        <p>
+                            {{__('shippingCompanies')}}
+                        </p>
+                    </a>
+                </li>
+                <!--// shippingCompanies li -->
+                <!-- malls li -->
+                <li class="nav-item">
+                    <a href="{{ route('malls.index') }}" class="nav-link">
+                        <i class="nav-icon fa fa-building"></i>
+                        <p>
+                            {{__('malls')}}
+                        </p>
+                    </a>
+                </li>
+                <!--// malls li -->
+                <!-- colors li -->
+                <li class="nav-item">
+                    <a href="{{ route('colors.index') }}" class="nav-link">
+                        <i class="nav-icon fa fa-paint-brush"></i>
+                        <p>
+                            {{__('colors')}}
+                        </p>
+                    </a>
+                </li>
+                <!--// colors li -->
+                <!-- sizes li -->
+                <li class="nav-item">
+                    <a href="{{ route('sizes.index') }}" class="nav-link">
+                        <i class="nav-icon fa fa-info-circle"></i>
+                        <p>
+                            {{__('sizes')}}
+                        </p>
+                    </a>
+                </li>
+                <!--// sizes li -->
+                <!-- weights li -->
+                <li class="nav-item">
+                    <a href="{{ route('weights.index') }}" class="nav-link">
+                        <i class="nav-icon fa fa-balance-scale"></i>
+                        <p>
+                            {{__('weights')}}
+                        </p>
+                    </a>
+                </li>
+                <!--// weights li -->
+                <!-- products li -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fa fa-tag"></i>
+                        <p>
+                            {{__('products')}}
+                            @if(Session::get('lang') == 'en')
+                                <span class="fa fa-angle-right" style="float: right"></span>
+                            @else
+                                <span class="fa fa-angle-left" style="float: left"></span>
+                            @endif
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('products.index') }}" class="nav-link">
+                                <p>{{__('products')}}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('products.create') }}" class="nav-link">
+                                <p>{{__('add')}}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!--// products li -->
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+<!-- /.sidebar -->
+</aside>
+<div style="clear:both;"> </div>
