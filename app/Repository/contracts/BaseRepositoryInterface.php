@@ -18,4 +18,10 @@ interface BaseRepositoryInterface{
      * @return mixed
      */
     public function find($model, $id);
+
+    /**
+     * @param $model
+     * @return mixed
+     */
+    public function get_count($model);
 }

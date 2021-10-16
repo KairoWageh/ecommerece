@@ -22,6 +22,12 @@ class CountriesController extends Controller
     }
 
     /**
+     * @return mixed
+     */
+    public function countries_count(){
+        return $this->country->get_count($this->model);
+    }
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -121,25 +127,6 @@ class CountriesController extends Controller
         }
         return $data;
     }
-
-    // Remove the specified country and its cities and states from storage.
-
-    public function delete_country($id){
-        $country = Country::find($id);
-        Storage::delete($country->country_flag);
-        $cities = $country->cities;
-        $states = $country->states;
-        foreach ($cities as $city) {
-            $city->status = -1;
-            $city->save();
-        }
-        foreach ($states as $state) {
-            $state->status = -1;
-            $state->save();
-        }
-        return $this->country->delete($this->model, $id);
-    }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -148,7 +135,20 @@ class CountriesController extends Controller
      */
     public function destroy($id)
     {
-        return $this->country->delete($this->model, $id);
+        $country = $this->country->delete($this->model, $id);
+        $deleted = $country->delete();
+        if($deleted == 1){
+            $data = [
+                'toast'    => 'success',
+                'message'  => __('deleted')
+            ] ;
+        }else{
+            $data = [
+                'toast'    => 'error',
+                'message'  => __('not_deleted')
+            ] ;
+        }
+        return $data;
     }
 
     /**
@@ -159,7 +159,7 @@ class CountriesController extends Controller
     public function multi_delete(Request $request){
         $countriesIDs = $request->item;
         foreach ($countriesIDs as $key => $countryID) {
-            self::delete_country($countryID);
+            self::destroy($countryID);
         }
         session()->flash('seccess', __('delete_successfully'));
         return back();

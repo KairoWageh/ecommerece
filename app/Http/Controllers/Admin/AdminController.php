@@ -86,9 +86,9 @@ class AdminController extends Controller
      *
      * @param Request $request
      * @param  int  $id
-     * @return Response
+     * @return array
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id): array
     {
         $attributes = [
             'name'                  => $request->edit_name,
@@ -118,9 +118,22 @@ class AdminController extends Controller
      * @param  int  $id
      * @return array
      */
-    public function destroy($id)
+    public function destroy($id): array
     {
-        return $this->admin->delete($this->model, $id);
+        $admin = $this->admin->delete($this->model, $id);
+        $deleted = $admin->delete();
+        if($deleted == 1){
+            $data = [
+                'toast'    => 'success',
+                'message'  => __('deleted')
+            ] ;
+        }else{
+            $data = [
+                'toast'    => 'error',
+                'message'  => __('not_deleted')
+            ] ;
+        }
+        return $data;
     }
 
     /**

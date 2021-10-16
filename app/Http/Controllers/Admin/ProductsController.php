@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Repository\contracts\ProductRepositoryInterface;
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Request;
 use App\Product;
 use App\ProductMall;
@@ -20,6 +22,17 @@ use App\CartStorageModel;
 
 class ProductsController extends Controller
 {
+    protected $product;
+    protected $model;
+
+    /**
+     * @param ProductRepositoryInterface $productRepository
+     * @param Product $productModel
+     */
+    public function __construct(ProductRepositoryInterface $productRepository, Product $productModel){
+        $this->product = $productRepository;
+        $this->model = $productModel;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -37,18 +50,10 @@ class ProductsController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|void
+     * @return Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
-//        $product = Product::create([
-//            'title'   => '',
-//            'photo'   => ''
-//        ]);
-//        if(!empty($product)){
-//            return redirect(adminURL('admin/products/').$product->id.'/edit');
-//        }
         return view('admin.products.create', ['title' => trans("create_product")]);
     }
 
@@ -58,31 +63,28 @@ class ProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return Response
      */
-    // public function store(Request $request)
-    // {
-    //     $validatedData = $request->validate([
-    //         'country_name_ar'     => 'required|min:3|max:50',
-    //         'country_name_en'     => 'required|min:3|max:50',
-    //         'country_code'        => 'required',
-    //         'country_iso_code'    => 'required',
-    //         'country_flag'        => 'required|max:10000|'.validate_image(),
-    //     ]);
-    //     //return $request;
-    //     if($validatedData){
-    //         if($request->hasFile('country_flag')){
-    //             $validatedData['country_flag'] = up()->upload([
-    //                 'file'        => 'country_flag',
-    //                 'path'        => 'countries_flags',
-    //                 'upload_type' => 'single',
-    //                 'delete_file' => '',
-    //             ]);
-    //         }
-    //         $validatedData['status'] = 1;
-    //         Country::create($validatedData);
-    //         session()->flash('success', __('admin.record_added_successfully'));
-    //         return redirect(adminURL('admin/countries'));
-    //     }
-    // }
+     public function store(Request $request)
+     {
+         $attributes = [
+             'title'    => $request->data['title'],
+             'content'  => $request->data['content'],
+
+         ];
+         $product = $this->product->store($attributes, $this->model);
+         if($product == true){
+             $data = [
+                 'product'  => $product,
+                 'toast'    => 'success',
+                 'message'  => __('created')
+             ] ;
+         }else{
+             $data = [
+                 'toast'    => 'error',
+                 'message'  => __('not_created')
+             ] ;
+         }
+         return $data;
+     }
 
     /**
      * Display the specified resource.

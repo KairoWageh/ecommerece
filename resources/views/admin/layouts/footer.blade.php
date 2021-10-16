@@ -1,7 +1,7 @@
 <!-- Main Footer -->
 <footer class="main-footer">
 <?php
-        use App\Setting;
+    use App\Setting;
             $app = Setting::first();
         ?>	<p>&copy; 2020
             @if(session('lang') == 'en')
@@ -17,11 +17,12 @@
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-<script src="{{ asset('public/design/admin/js/jquery-3.6.0.min.js') }}"></script>
-{{--<script src="{{ asset('public/design/admin/plugins/jquery/jquery.min.js') }}"></script>--}}
+<script src="{{ asset('public/design/admin/plugins/jquery/jquery.min.js') }}"></script>
+{{--<script src="{{ asset('public/design/admin/js/jquery-3.6.0.min.js') }}"></script>--}}
+<script src="{{ asset('public/design/admin/jstree/jstree.js') }}"></script>
 
 <!-- Bootstrap -->
-<script src="{{asset('public/design/admin/js/bootstrap.js')}}"> </script>
+<script src="{{asset('public/design/admin/js/bootstrap.min.js')}}"> </script>
 <script src="{{ asset('public/design/admin/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- overlayScrollbars -->
 <script src="{{ asset('public/design/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
@@ -49,6 +50,8 @@
 
 <script src="{{asset('public/design/admin/js/dataTables.buttons.min.js')}}"> </script>
 <script src="{{asset('public/vendor/datatables/buttons.server-side.js')}}"> </script>
+<!-- datepicker -->
+<script src="{{asset('public/design/admin/js/bootstrap-datepicker.min.js')}}"> </script>
 <!-- Toastr -->
 <script src="{{ asset('public/design/admin/js/toastr.min.js') }}"></script>
 @stack('js')

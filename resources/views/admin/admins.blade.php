@@ -150,14 +150,11 @@
     // edit admin form submition
     $('#edit_admin_form').on('submit',function(event){
         event.preventDefault();
-
         // get form submitted data
         var admin_id = $(".admin_id_to_edit").attr("value");
         let formData = new FormData(this);
-
         var url = "{{url('admin/admins/:admin_id')}}";
         url = url.replace(":admin_id", admin_id);
-
         $.ajax({
             url: url,
             type:"POST",

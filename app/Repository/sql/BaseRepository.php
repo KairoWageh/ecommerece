@@ -24,4 +24,9 @@ class BaseRepository implements BaseRepositoryInterface
     public function find($model, $id){
         return $model->find($id);
     }
+
+    public function get_count($model)
+    {
+        return $model->count();
+    }
 }

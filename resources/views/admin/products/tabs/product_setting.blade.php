@@ -19,7 +19,10 @@
 </script>
 @endpush
 <div id="product_setting" class="tab-pane fade">
-	<h3>{{__('product_setting')}}</h3>
+    <div class="tab_title">
+	    <h3 >{{__('product_setting')}}</h3>
+    </div>
+    <div class="clearfix"></div>
     @if(isset($product))
 	<div class="form-group col-md-6 col-lg-3 col-sm-6 col-xs-12">
 		{!! Form::label('price', __('price')) !!}
@@ -27,7 +30,7 @@
 	</div>
 
 	<div class="form-group col-md-6 col-lg-3 col-sm-6 col-xs-12">
-		{!! Form::label('stock', __('admin.stock')) !!}
+		{!! Form::label('stock', __('stock')) !!}
  		{!! Form::text('stock', $product->stock, ['class' => 'form-control', 'placeholder' => __('stock')]) !!}
 	</div>
 
@@ -62,7 +65,7 @@
 	<hr>
 	<div class="form-group">
 		{!! Form::label('product_status', __('product_status')) !!}
- 		{!! Form::select('product_status', ['pending' => __('pending'), 'refused' => __('refused'), 'active' => __('active')], $product->product_status, ['class' => 'form-control status', 'placeholder' => __('admin.product_status')]) !!}
+ 		{!! Form::select('product_status', ['pending' => __('pending'), 'refused' => __('refused'), 'active' => __('active')], $product->product_status, ['class' => 'form-control status', 'placeholder' => __('product_status')]) !!}
 	</div>
 
 	<div class="form-group reason {{ $product->status != 'refused'?'hidden':'' }}">
@@ -76,7 +79,7 @@
         </div>
 
         <div class="form-group col-md-6 col-lg-3 col-sm-6 col-xs-12">
-            {!! Form::label('stock', __('admin.stock')) !!}
+            {!! Form::label('stock', __('stock')) !!}
             {!! Form::text('stock', '', ['class' => 'form-control', 'placeholder' => __('stock')]) !!}
         </div>
 
@@ -111,7 +114,7 @@
         <hr>
         <div class="form-group">
             {!! Form::label('product_status', __('product_status')) !!}
-            {!! Form::select('product_status', ['pending' => __('pending'), 'refused' => __('refused'), 'active' => __('active')], '', ['class' => 'form-control status', 'placeholder' => __('admin.product_status')]) !!}
+            {!! Form::select('product_status', ['pending' => __('pending'), 'refused' => __('refused'), 'active' => __('active')], '', ['class' => 'form-control status', 'placeholder' => __('product_status')]) !!}
         </div>
 
 {{--        <div class="form-group reason {{ $product->status != 'refused'?'hidden':'' }}">--}}

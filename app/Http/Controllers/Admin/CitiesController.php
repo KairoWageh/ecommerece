@@ -26,6 +26,13 @@ class CitiesController extends Controller
     }
 
     /**
+     * @return mixed
+     */
+    public function cities_count(){
+        return $this->city->get_count($this->model);
+    }
+
+    /**
      * Display a listing of the resource.
      * @param CitiesDataTable $city
      * @return mixed

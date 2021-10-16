@@ -53,169 +53,188 @@
 
       </div>
     </div>
+    @include('admin.cities._no_countries')
     @include('admin.cities._create')
     @include('admin.cities._edit')
     @include('admin.cities._delete')
 @push('js')
 {{ $dataTable->scripts() }}
-@endpush
-    <script>
-        var cities_table = $('#cities_table');
-        $(document).on('click', 'button.add_city',function(event) {
-            $('.validation-errors').html('');
-            $('#add_city_modal').modal('show');
-        });
-        // add city form submition
-        $('#add_city_form').on('submit',function(event){
-            event.preventDefault();
-            // get form submitted data
-            let formData = new FormData(this);
-            $.ajax({
-                url: "cities",
-                type:"POST",
-                data: formData,
-                contentType: false,
-                processData: false,
-                success:function(response){
-
-                    if(response.city){
-                        cities_table.prepend('<tr id ="'+response.city.id+'">'+
-                            '<td><input type="checkbox" class="item_checkbox" name="item[]" value="'+response.city.id+'"></td>'+
-                            '<td class="text-center sorting_1">'+response.city.city_name_ar+'</td>'+
-                            '<td class=" text-center">'+response.city.city_name_en+'</td>'+
-                            '<td class=" text-center">'+response.city.country_name+'</td>'+
-                            '<td class=" text-center">'+response.city.created_at+'</td>'+
-                            '<td class=" text-center">'+response.city.updated_at+'</td>'+
-                            '<td class=" text-center edit_'+response.city.id+'">'+
-                            '<td class=" text-center delete_'+response.city.id+'">'
-                        );
-                        var edit_btn = $('<button/>')
-                            .attr('data-id', response.city.id)
-                            .addClass('btn btn-info edit_city')
-                            .attr('type', 'button')
-                            .html('<i class="fa fa-edit" style="color: #fff"></i>');
-                        $('.edit_'+response.city.id).append(edit_btn);
-                        var delete_btn = $('<button/>')
-                            .attr('data-id', response.city.id)
-                            .addClass('btn btn-danger delete_city')
-                            .attr('type', 'button')
-                            .html('<i class="fa fa-trash"></i>');;
-                        $('.delete_'+response.city.id).append(delete_btn);
-                        toastr.success(response.message);
-                        $('#add_city_modal').modal('hide');
-                        document.getElementById('add_city_form').reset();
-                    }else{
-                        toastr.error(response.message);
-                    }
-                },
-                error: function (xhr) {
+<script>
+    var cities_table = $('#cities_table');
+    $(document).on('click', 'button.add_city',function(event) {
+        $.ajax({
+            url: "countries_count",
+            type:"GET",
+            contentType: false,
+            processData: false,
+            success:function(response){
+                if(response == 0){
+                    $('#no_countries_modal').modal('show');
+                }else{
                     $('.validation-errors').html('');
-                    $.each(xhr.responseJSON.errors, function(key,value) {
-                        $('.validation-errors').append('<p style="color: red">'+value+'</p');
-                    });
-                },
-            });
-        });
-
-
-        $(document).on('click', 'button.edit_city',function(event) {
-            $('.validation-errors').html('');
-            var city_id = parseInt($(this).attr("data-id"));
-            var url = "{{url('admin/cities/:city/edit')}}";
-            url = url.replace(':city', city_id);
-            $.ajax({
-                url: url,
-                type:"GET",
-                data: {city_id: city_id},
-                contentType: 'application/json; charset=utf-8',
-                //dataType: 'json',
-                success:function(response){
-                    $('#city_id').val(response.id);
-                    $('#edit_city_name_ar').val(response.city_name_ar);
-                    $('#edit_city_name_en').val(response.city_name_en);
-                    $('#edit_country_id').val(response.country_id);
-
-                    // show edit city modal
-                    $('#edit_city_modal').modal('show');
-                }, error: function(xhr, status, error){
-                    var errorMessage = xhr.status + ': ' + xhr.statusText
-                    console.log('Error - ' + errorMessage);
+                    $('#add_city_modal').modal('show');
                 }
-            });
+            },
+            error: function (xhr) {
+                $('.validation-errors').html('');
+                $.each(xhr.responseJSON.errors, function(key,value) {
+                    $('.validation-errors').append('<p style="color: red">'+value+'</p');
+                });
+            },
         });
+    });
+    // add city form submition
+    $('#add_city_form').on('submit',function(event){
+        event.preventDefault();
+        // get form submitted data
+        let formData = new FormData(this);
+        $.ajax({
+            url: "cities",
+            type:"POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success:function(response){
+                if(response.city){
+                    cities_table.prepend('<tr id ="'+response.city.id+'">'+
+                        '<td><input type="checkbox" class="item_checkbox" name="item[]" value="'+response.city.id+'"></td>'+
+                        '<td class="text-center sorting_1">'+response.city.city_name_ar+'</td>'+
+                        '<td class=" text-center">'+response.city.city_name_en+'</td>'+
+                        '<td class=" text-center">'+response.city.country_name+'</td>'+
+                        '<td class=" text-center">'+response.city.created_at+'</td>'+
+                        '<td class=" text-center">'+response.city.updated_at+'</td>'+
+                        '<td class=" text-center edit_'+response.city.id+'">'+
+                        '<td class=" text-center delete_'+response.city.id+'">'
+                    );
+                    var edit_btn = $('<button/>')
+                        .attr('data-id', response.city.id)
+                        .addClass('btn btn-info edit_city')
+                        .attr('type', 'button')
+                        .html('<i class="fa fa-edit" style="color: #fff"></i>');
+                    $('.edit_'+response.city.id).append(edit_btn);
+                    var delete_btn = $('<button/>')
+                        .attr('data-id', response.city.id)
+                        .addClass('btn btn-danger delete_city')
+                        .attr('type', 'button')
+                        .html('<i class="fa fa-trash"></i>');;
+                    $('.delete_'+response.city.id).append(delete_btn);
+                    toastr.success(response.message);
+                    $('#add_city_modal').modal('hide');
+                    document.getElementById('add_city_form').reset();
+                }else{
+                    toastr.error(response.message);
+                }
+            },
+            error: function (xhr) {
+                $('.validation-errors').html('');
+                $.each(xhr.responseJSON.errors, function(key,value) {
+                    $('.validation-errors').append('<p style="color: red">'+value+'</p');
+                });
+            },
+        });
+    });
 
-        // edit city form submition
-        $('#edit_city_form').on('submit',function(event){
-            event.preventDefault();
-            // get form submitted data
-            var city_id = $(".city_id_to_edit").attr("value");
-            let formData = new FormData(this);
-            var url = "{{url('admin/cities/:city_id')}}";
-            url = url.replace(":city_id", city_id);
-            $.ajax({
-                url: url,
-                type:"POST",
-                data: formData,
-                contentType: false,
-                processData: false,
-                success:function(response){
-                    if(response.city){
-                        toastr.success(response.message);
-                        $('#edit_city_modal').modal('hide');
-                        // get tr by id and refresh
-                        cities_table.find('tr').each(function(){
-                            if($(this).attr('id') == city_id){
-                                $(this).find('td').each (function(index, tr) {
-                                    if(index == 1){
-                                        $(this).html(response.city.city_name_ar);
-                                    }
-                                    if(index == 2){
-                                        $(this).html(response.city.city_name_en);
-                                    }
-                                    if(index == 3){
-                                        $(this).html(response.city.country_name);
-                                    }
-                                });
-                            }
-                        });
-                    }else{
-                        toastr.error(response.message);
-                    }
-                },
-                error: function (xhr) {
-                    $('.validation-errors').html('');
-                    $.each(xhr.responseJSON.errors, function(key,value) {
-                        $('.validation-errors').append('<p style="color: red">'+value+'</p');
+
+    $(document).on('click', 'button.edit_city',function(event) {
+        $('.validation-errors').html('');
+        var city_id = parseInt($(this).attr("data-id"));
+        var url = "{{url('admin/cities/:city/edit')}}";
+        url = url.replace(':city', city_id);
+        $.ajax({
+            url: url,
+            type:"GET",
+            data: {city_id: city_id},
+            contentType: 'application/json; charset=utf-8',
+            //dataType: 'json',
+            success:function(response){
+                $('#city_id').val(response.id);
+                $('#edit_city_name_ar').val(response.city_name_ar);
+                $('#edit_city_name_en').val(response.city_name_en);
+                $('#edit_country_id').val(response.country_id);
+
+                // show edit city modal
+                $('#edit_city_modal').modal('show');
+            }, error: function(xhr, status, error){
+                var errorMessage = xhr.status + ': ' + xhr.statusText
+                console.log('Error - ' + errorMessage);
+            }
+        });
+    });
+
+    // edit city form submition
+    $('#edit_city_form').on('submit',function(event){
+        event.preventDefault();
+        // get form submitted data
+        var city_id = $(".city_id_to_edit").attr("value");
+        let formData = new FormData(this);
+        var url = "{{url('admin/cities/:city_id')}}";
+        url = url.replace(":city_id", city_id);
+        $.ajax({
+            url: url,
+            type:"POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success:function(response){
+                if(response.city){
+                    toastr.success(response.message);
+                    $('#edit_city_modal').modal('hide');
+                    // get tr by id and refresh
+                    cities_table.find('tr').each(function(){
+                        if($(this).attr('id') == city_id){
+                            $(this).find('td').each (function(index, tr) {
+                                if(index == 1){
+                                    $(this).html(response.city.city_name_ar);
+                                }
+                                if(index == 2){
+                                    $(this).html(response.city.city_name_en);
+                                }
+                                if(index == 3){
+                                    $(this).html(response.city.country_name);
+                                }
+                            });
+                        }
                     });
-                },
-            });
+                }else{
+                    toastr.error(response.message);
+                }
+            },
+            error: function (xhr) {
+                $('.validation-errors').html('');
+                $.each(xhr.responseJSON.errors, function(key,value) {
+                    $('.validation-errors').append('<p style="color: red">'+value+'</p');
+                });
+            },
         });
+    });
 
-        $(document).on('click', 'button.delete_city',function(event) {
-            var city_id = parseInt($(this).attr("data-id"));
-            $('#delete_city_modal').modal('show');
-            $(".city_id_to_delete").attr("value", city_id);
-        });
+    $(document).on('click', 'button.delete_city',function(event) {
+        var city_id = parseInt($(this).attr("data-id"));
+        $('#delete_city_modal').modal('show');
+        $(".city_id_to_delete").attr("value", city_id);
+    });
 
-        // confirm delete city
-        $('.delete_city_confirm').click(function(){
-            var city_id = $(".city_id_to_delete").attr("value");
-            var url = "{{url('admin/cities/:city')}}";
-            url = url.replace(':city', city_id);
-            $.ajax({
-                url: url,
-                type: "DELETE",
-                data: {"_token": "{{ csrf_token() }}"},
-                success:function(response){
-                    if(response.toast == 'success'){
-                        toastr.success(response.message);
-                    }else if(response.toast == 'error'){
-                        toastr.error(response.message);
-                    }
-                    $('#delete_city_modal').modal('hide');
-                    $('table#cities_table tr#'+city_id).remove();
-                },
-            });
+    // confirm delete city
+    $('.delete_city_confirm').click(function(){
+        var city_id = $(".city_id_to_delete").attr("value");
+        var url = "{{url('admin/cities/:city')}}";
+        url = url.replace(':city', city_id);
+        $.ajax({
+            url: url,
+            type: "DELETE",
+            data: {"_token": "{{ csrf_token() }}"},
+            success:function(response){
+                if(response.toast == 'success'){
+                    toastr.success(response.message);
+                }else if(response.toast == 'error'){
+                    toastr.error(response.message);
+                }
+                $('#delete_city_modal').modal('hide');
+                $('table#cities_table tr#'+city_id).remove();
+            },
         });
-    </script>
+    });
+</script>
+@endpush
+
 @endsection

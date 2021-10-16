@@ -50,189 +50,211 @@
         </div>
       </div>
     </div>
+    @include('admin.cities._no_countries')
 @include('admin.states._create')
 @include('admin.states._no_cities')
 @push('js')
 {{ $dataTable->scripts() }}
-@endpush
-    <script>
-        var states_table = $('#states_table');
-        $(document).on('click', 'button.add_state',function(event) {
-            $('.validation-errors').html('');
-            $('#add_state_modal').modal('show');
-            $(document).on("change", '#country_id', function () {
-                var country_id = $(this).val();
-                var url = "{{url('admin/country_cities/:country')}}";
-                url = url.replace(':country', country_id);
-                var city_select = $('#city_id');
-                $.ajax({
-                    url: url,
-                    type:"GET",
-                    data: {country_id: country_id},
-                    contentType: 'application/json; charset=utf-8',
-                    success:function(response){
-                        if(response.cities != 'no cities'){
-                            city_select.empty();
-                            $.each(response, function (index, element) {
-                                $.each(element, function (key, value) {
-                                    city_select.append("<option value='" + value.id + "'>" + value.city_name + "</option>");
-                                });
-                            });
-                        }else{
-                            city_select.empty();
-                            $('#no_cities_modal').modal('show');
-                        }
-                    }
-                });
-            });
-        });
-
-        // add state form submition
-        $('#add_state_form').on('submit',function(event){
-            event.preventDefault();
-            // get form submitted data
-            let formData = new FormData(this);
-            $.ajax({
-                url: "states",
-                type:"POST",
-                data: formData,
-                contentType: false,
-                processData: false,
-                success:function(response){
-                    if(response.state){
-                        alert('succes');
-                        users_table.prepend('<tr id ="'+response.user.id+'">'+
-                            '<td><input type="checkbox" class="item_checkbox" name="item[]" value="'+response.user.id+'"></td>'+
-                            '<td class="text-center sorting_1">'+response.user.name+'</td>'+
-                            '<td class=" text-center">'+response.user.email+'</td>'+
-                            '<td class=" text-center">'+response.user.level+'</td>'+
-                            '<td class=" text-center">'+response.user.created_at+'</td>'+
-                            '<td class=" text-center">'+response.user.updated_at+'</td>'+
-                            '<td class=" text-center edit_'+response.user.id+'">'+
-                            '<td class=" text-center delete_'+response.user.id+'">'
-                        );
-                        var edit_btn = $('<button/>')
-                            .attr('data-id', response.user.id)
-                            .addClass('btn btn-info edit_user')
-                            // .attr('onclick', 'edit_user('+response.admin.id+')')
-                            .attr('type', 'button')
-                            .html('<i class="fa fa-edit" style="color: #fff"></i>');
-                        $('.edit_'+response.user.id).append(edit_btn);
-                        var delete_btn = $('<button/>')
-                            .attr('data-id', response.user.id)
-                            .addClass('btn btn-danger delete_user')
-                            // .attr('onclick', 'delete_user('+response.admin.id+')')
-                            .attr('type', 'button')
-                            .html('<i class="fa fa-trash"></i>');
-                        $('.delete_'+response.user.id).append(delete_btn);
-                        toastr.success(response.message);
-                        $('#add_user_modal').modal('hide');
-                        document.getElementById('add_user_form').reset();
-                    }else{
-                        toastr.error(response.message);
-                    }
-                },
-                error: function (xhr) {
+<script>
+    var states_table = $('#states_table');
+    $(document).on('click', 'button.add_state',function(event) {
+        $.ajax({
+            url: "countries_count",
+            type:"GET",
+            contentType: false,
+            processData: false,
+            success:function(response){
+                if(response == 0){
+                    $('#no_countries_modal').modal('show');
+                }else{
                     $('.validation-errors').html('');
-                    $.each(xhr.responseJSON.errors, function(key,value) {
-                        $('.validation-errors').append('<p style="color: red">'+value+'</p');
-                    });
-                },
-            });
+                    $('#add_state_modal').modal('show');
+                }
+            },
+            error: function (xhr) {
+                $('.validation-errors').html('');
+                $.each(xhr.responseJSON.errors, function(key,value) {
+                    $('.validation-errors').append('<p style="color: red">'+value+'</p');
+                });
+            },
         });
 
-        $(document).on('click', 'button.edit_user',function() {
-            $('.validation-errors').html('');
-            var user_id = parseInt($(this).attr("data-id"));
-            var url = "{{url('admin/users/:user/edit')}}";
-            url = url.replace(':user', user_id);
+
+        $(document).on("change", '#country_id', function () {
+            var country_id = $(this).val();
+            var url = "{{url('admin/country_cities/:country')}}";
+            url = url.replace(':country', country_id);
+            var city_select = $('#city_id');
             $.ajax({
                 url: url,
                 type:"GET",
-                data: {user_id: user_id},
+                data: {country_id: country_id},
                 contentType: 'application/json; charset=utf-8',
                 success:function(response){
-                    $('#user_id').val(response.id);
-                    $('#edit_name').val(response.name);
-                    $('#edit_email').val(response.email);
-                    // show edit user modal
-                    $('#edit_user_modal').modal('show');
-                }, error: function(xhr, status, error){
-                    var errorMessage = xhr.status + ': ' + xhr.statusText
-                    console.log('Error - ' + errorMessage);
+                    if(response.cities != 'no cities'){
+                        city_select.empty();
+                        $.each(response, function (index, element) {
+                            $.each(element, function (key, value) {
+                                city_select.append("<option value='" + value.id + "'>" + value.city_name + "</option>");
+                            });
+                        });
+                    }else{
+                        city_select.empty();
+                        $('#no_cities_modal').modal('show');
+                    }
                 }
             });
         });
-        // edit user form submition
-        $('#edit_user_form').on('submit',function(event){
-            event.preventDefault();
-            // get form submitted data
-            var user_id = $(".user_id_to_edit").attr("value");
-            let formData = new FormData(this);
-            var url = "{{url('admin/users/:user_id')}}";
-            url = url.replace(":user_id", user_id);
-            $.ajax({
-                url: url,
-                type:"POST",
-                data: formData,
-                contentType: false,
-                processData: false,
-                success:function(response){
-                    if(response.user){
-                        toastr.success(response.message);
-                        $('#edit_user_modal').modal('hide');
-                        // get tr by id and refresh
-                        users_table.find('tr').each(function(){
-                            if($(this).attr('id') == user_id){
-                                // $(this).remove();
-                                $(this).find('td').each (function(index, tr) {
-                                    if(index == 1){
-                                        $(this).html(response.user.name);
-                                    }
-                                    if(index == 2){
-                                        $(this).html(response.user.email);
-                                    }
-                                });
-                            }
-                        });
-                    }else{
-                        toastr.error(response.message);
-                    }
-                },
-                error: function (xhr) {
-                    $('.validation-errors').html('');
-                    $.each(xhr.responseJSON.errors, function(key,value) {
-                        $('.validation-errors').append('<p style="color: red">'+value+'</p');
+    });
+
+    // add state form submition
+    $('#add_state_form').on('submit',function(event){
+        event.preventDefault();
+        // get form submitted data
+        let formData = new FormData(this);
+        $.ajax({
+            url: "states",
+            type:"POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success:function(response){
+                if(response.state){
+                    alert('succes');
+                    users_table.prepend('<tr id ="'+response.user.id+'">'+
+                        '<td><input type="checkbox" class="item_checkbox" name="item[]" value="'+response.user.id+'"></td>'+
+                        '<td class="text-center sorting_1">'+response.user.name+'</td>'+
+                        '<td class=" text-center">'+response.user.email+'</td>'+
+                        '<td class=" text-center">'+response.user.level+'</td>'+
+                        '<td class=" text-center">'+response.user.created_at+'</td>'+
+                        '<td class=" text-center">'+response.user.updated_at+'</td>'+
+                        '<td class=" text-center edit_'+response.user.id+'">'+
+                        '<td class=" text-center delete_'+response.user.id+'">'
+                    );
+                    var edit_btn = $('<button/>')
+                        .attr('data-id', response.user.id)
+                        .addClass('btn btn-info edit_user')
+                        // .attr('onclick', 'edit_user('+response.admin.id+')')
+                        .attr('type', 'button')
+                        .html('<i class="fa fa-edit" style="color: #fff"></i>');
+                    $('.edit_'+response.user.id).append(edit_btn);
+                    var delete_btn = $('<button/>')
+                        .attr('data-id', response.user.id)
+                        .addClass('btn btn-danger delete_user')
+                        // .attr('onclick', 'delete_user('+response.admin.id+')')
+                        .attr('type', 'button')
+                        .html('<i class="fa fa-trash"></i>');
+                    $('.delete_'+response.user.id).append(delete_btn);
+                    toastr.success(response.message);
+                    $('#add_user_modal').modal('hide');
+                    document.getElementById('add_user_form').reset();
+                }else{
+                    toastr.error(response.message);
+                }
+            },
+            error: function (xhr) {
+                $('.validation-errors').html('');
+                $.each(xhr.responseJSON.errors, function(key,value) {
+                    $('.validation-errors').append('<p style="color: red">'+value+'</p');
+                });
+            },
+        });
+    });
+
+    $(document).on('click', 'button.edit_user',function() {
+        $('.validation-errors').html('');
+        var user_id = parseInt($(this).attr("data-id"));
+        var url = "{{url('admin/users/:user/edit')}}";
+        url = url.replace(':user', user_id);
+        $.ajax({
+            url: url,
+            type:"GET",
+            data: {user_id: user_id},
+            contentType: 'application/json; charset=utf-8',
+            success:function(response){
+                $('#user_id').val(response.id);
+                $('#edit_name').val(response.name);
+                $('#edit_email').val(response.email);
+                // show edit user modal
+                $('#edit_user_modal').modal('show');
+            }, error: function(xhr, status, error){
+                var errorMessage = xhr.status + ': ' + xhr.statusText
+                console.log('Error - ' + errorMessage);
+            }
+        });
+    });
+    // edit user form submition
+    $('#edit_user_form').on('submit',function(event){
+        event.preventDefault();
+        // get form submitted data
+        var user_id = $(".user_id_to_edit").attr("value");
+        let formData = new FormData(this);
+        var url = "{{url('admin/users/:user_id')}}";
+        url = url.replace(":user_id", user_id);
+        $.ajax({
+            url: url,
+            type:"POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success:function(response){
+                if(response.user){
+                    toastr.success(response.message);
+                    $('#edit_user_modal').modal('hide');
+                    // get tr by id and refresh
+                    users_table.find('tr').each(function(){
+                        if($(this).attr('id') == user_id){
+                            // $(this).remove();
+                            $(this).find('td').each (function(index, tr) {
+                                if(index == 1){
+                                    $(this).html(response.user.name);
+                                }
+                                if(index == 2){
+                                    $(this).html(response.user.email);
+                                }
+                            });
+                        }
                     });
-                },
-            });
+                }else{
+                    toastr.error(response.message);
+                }
+            },
+            error: function (xhr) {
+                $('.validation-errors').html('');
+                $.each(xhr.responseJSON.errors, function(key,value) {
+                    $('.validation-errors').append('<p style="color: red">'+value+'</p');
+                });
+            },
         });
+    });
 
-        $(document).on('click', 'button.delete_user',function(event) {
-            var user_id = parseInt($(this).attr("data-id"));
-            $('#delete_user_modal').modal('show');
-            $(".user_id_to_delete").attr("value", user_id);
-        });
+    $(document).on('click', 'button.delete_user',function(event) {
+        var user_id = parseInt($(this).attr("data-id"));
+        $('#delete_user_modal').modal('show');
+        $(".user_id_to_delete").attr("value", user_id);
+    });
 
-        // confirm delete user
-        $('.delete_user_confirm').click(function(){
-            var user_id = $(".user_id_to_delete").attr("value");
-            var url = "{{url('admin/users/:user')}}";
-            url = url.replace(':user', user_id);
-            $.ajax({
-                url: url,
-                type: "DELETE",
-                data: {"_token": "{{ csrf_token() }}"},
-                success:function(response){
-                    if(response.toast == 'success'){
-                        toastr.success(response.message);
-                    }else if(response.toast == 'error'){
-                        toastr.error(response.message);
-                    }
-                    $('#delete_user_modal').modal('hide');
-                    $('table#users_table tr#'+user_id).remove();
-                },
-            });
+    // confirm delete user
+    $('.delete_user_confirm').click(function(){
+        var user_id = $(".user_id_to_delete").attr("value");
+        var url = "{{url('admin/users/:user')}}";
+        url = url.replace(':user', user_id);
+        $.ajax({
+            url: url,
+            type: "DELETE",
+            data: {"_token": "{{ csrf_token() }}"},
+            success:function(response){
+                if(response.toast == 'success'){
+                    toastr.success(response.message);
+                }else if(response.toast == 'error'){
+                    toastr.error(response.message);
+                }
+                $('#delete_user_modal').modal('hide');
+                $('table#users_table tr#'+user_id).remove();
+            },
         });
-    </script>
+    });
+</script>
+@endpush
+
 @endsection

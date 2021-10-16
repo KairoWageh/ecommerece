@@ -119,20 +119,9 @@ class CountryRepository extends BaseRepository implements CountryRepositoryInter
             ]);
         }
         $updated = Country::where('id', $id)->update($update_country_data);
-        if($updated == 1){
-            $country = self::find($model, $id);
-            $data = [
-                'country'  => $country,
-                'toast'    => 'success',
-                'message'  => __('updated')
-            ] ;
-        }else{
-            $data = [
-                'toast'    => 'error',
-                'message'  => __('not_updated')
-            ] ;
-        }
-        return $data;
+        $country = self::find($model, $id);
+        return $country;
+
     }
 
     /**
@@ -143,18 +132,6 @@ class CountryRepository extends BaseRepository implements CountryRepositoryInter
     public function delete($model, $id)
     {
         $country = self::find($model, $id);
-        $deleted = $country->delete();
-        if($deleted == 1){
-            $data = [
-                'toast'    => 'success',
-                'message'  => __('deleted')
-            ] ;
-        }else{
-            $data = [
-                'toast'    => 'error',
-                'message'  => __('not_deleted')
-            ] ;
-        }
-        return $data;
+        return $country;
     }
 }

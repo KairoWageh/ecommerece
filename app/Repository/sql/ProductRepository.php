@@ -3,11 +3,12 @@
 namespace App\Repository\sql;
 
 use App\Admin;
-use App\Http\Requests\AdminRequest;
-use App\Repository\contracts\AdminRepositoryInterface;
+use App\Http\Requests\ProductRequest;
+use App\Product;
+use App\Repository\contracts\ProductRepositoryInterface;
 use Illuminate\Support\Facades\Validator;
 
-class AdminRepository extends BaseRepository implements AdminRepositoryInterface {
+class ProductRepository extends BaseRepository implements ProductRepositoryInterface {
     /**
      * @param $attributes
      * @param $model
@@ -16,29 +17,24 @@ class AdminRepository extends BaseRepository implements AdminRepositoryInterface
     public function store($attributes, $model)
     {
         $messages = [
-            'name.required'      => __('name_required'),
-            'name.min'           => __('name_min'),
-            'email.required'     => __('email_required'),
-            'email.email'        => __('email_email'),
-            'email.unique'       => __('email_unique'),
-            'password.required'  => __('password_required'),
-            'password.min'       => __('password_min'),
-            'password_confirmation.required' => __('password_confirmation_required'),
-            'password_confirmation.same' => __('password_confirmation_same'),
+            'title.required'   => __('title_required'),
+            'title.min'        => __('title_min'),
+            'title.max'        => __('title_max'),
+            'content.required' => __('content_required'),
+            'content.min'      => __('content_min'),
+            'content.max'      => __('content_max'),
         ];
-        $adminRequest = new AdminRequest(null, 'store');
-        $validator = Validator::make($attributes, $adminRequest->rules(), $messages)->validate();
-        $attributes['password'] = bcrypt($attributes['password']);
-        $admin = $model->create([
-            'name'     => $attributes['name'],
-            'email'    => $attributes['email'],
-            'password' => $attributes['password'],
+        $productRequest = new ProductRequest();
+        $validator = Validator::make($attributes, $productRequest->rules(), $messages)->validate();
+        $product = $model->create([
+            'title'     => $attributes['title'],
+            'content'   => $attributes['content'],
         ]);
-        if(isset($admin)){
-            $admin->created_at = date('H:i Y-m-d', strtotime($admin->created_at) );
-            $admin->updated_at = date('H:i Y-m-d', strtotime($admin->updated_at) );
+        if(isset($product)){
+            $product->created_at = date('H:i Y-m-d', strtotime($product->created_at) );
+            $product->updated_at = date('H:i Y-m-d', strtotime($product->updated_at) );
         }
-        return $admin;
+        return $product;
     }
     /**
      * @param $attributes

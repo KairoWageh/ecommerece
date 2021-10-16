@@ -79,11 +79,6 @@
                                 <p>{{__('company')}}</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('users.create') }}" class="nav-link">
-                                <p>{{__('addNewUser')}}</p>
-                            </a>
-                        </li>
                     </ul>
                 </li>
                 <!--// users li -->

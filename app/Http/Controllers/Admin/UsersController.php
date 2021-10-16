@@ -121,7 +121,20 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        return $this->user->delete($this->model, $id);
+        $user = $this->user->delete($this->model, $id);
+        if($user != null){
+            $user->delete();
+            $data = [
+                'toast'    => 'success',
+                'message' => __('deleted')
+            ];
+        }else{
+            $data = [
+                'toast'    => 'error',
+                'message' => __('admin.not_deleted')
+            ];
+        }
+        return $data;
     }
 
     /**

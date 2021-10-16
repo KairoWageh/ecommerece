@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Department;
 use App\DataTables\DepartmentsDataTable;
 use Storage;
+use function Sodium\compare;
 
 class DepartmentsController extends Controller
 {
@@ -104,12 +105,9 @@ class DepartmentsController extends Controller
      */
     public function edit($id)
     {
-        $department = Department::find($id);
-
+        $department = $this->department->find($this->model, $id);
         $title = __('edit');
-        //return $country_id;
-        return view('admin.departments.edit',
-                    ['department' => $department, 'title' => $title]);
+        return view('admin.departments._edit', compact('department', 'title'));
     }
 
     /**

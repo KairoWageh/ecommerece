@@ -38,6 +38,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
 
 		// control cities from admin panel
 		Route::resource('cities', 'CitiesController');
+        Route::get('countries_count', 'CountriesController@countries_count');
+        Route::get('cities_count', 'CitiesController@cities_count');
 		Route::delete('cities/destroy/all', 'CitiesController@multi_delete');
 
 		// control states from admin panel
