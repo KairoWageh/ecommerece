@@ -5,38 +5,51 @@
         <script type="text/javascript" src="{{ asset('public/design/admin/js/select2.min.js') }}"></script>
         <script type="text/javascript">
             $(document).ready(function() {
+                // remove id from hidden input
+                $('.saved_product_id').val('');
                 $('.js-example-basic-single').select2();
             });
-            // save product into db
-            function save_product(data){
-                $.ajax({
-                    url: "{{url('admin/products')}}",
-                    type: "POST",
-                    data: {_token: '{{ csrf_token() }}', data: data},
-                    success:function(response){
-                        if(response.toast == 'success'){
-                            toastr.success(response.message);
-                            var tabs = document.getElementById("nav-tabs");
-                            for(var i=0; i< tabs.getElementsByClassName("icon").length; i++){
-                                var icons = document.getElementsByClassName("icon");
-                                icons[i].style.display = "block";
-                            }
-                        }else if(response.toast == 'error'){
-                            toastr.error(response.message);
-                        }
-                    },
-                });
-            }
-            $('.save_product').click(function(){
-                var title = $('.title').val();
-                var content = $('.content').val();
-                var data = {title, content};
-                save_product(data);
-                return $.ajax({
-                    url: "{{url('admin/products')}}",
-                    type: "GET",
-                });
-            });
+            {{--// save product into db--}}
+            {{--function save_product(data){--}}
+            {{--    $.ajax({--}}
+            {{--        url: "{{url('admin/products')}}",--}}
+            {{--        type: "POST",--}}
+            {{--        data: {_token: '{{ csrf_token() }}', data: data},--}}
+            {{--        success:function(response){--}}
+            {{--            // the new product which has been added recently--}}
+            {{--            var product = response.product;--}}
+            {{--            if(response.toast === 'success'){--}}
+            {{--                toastr.success(response.message);--}}
+            {{--                var tabs = document.getElementById("nav-tabs");--}}
+            {{--                for(var i=0; i< tabs.getElementsByClassName("icon").length; i++){--}}
+            {{--                    var icons = document.getElementsByClassName("icon");--}}
+            {{--                    icons[i].style.display = "block";--}}
+            {{--                }--}}
+            {{--                $('.saved_product_id').val(product.id);--}}
+            {{--            }else if(response.toast === 'error'){--}}
+            {{--                toastr.error(response.message);--}}
+            {{--            }--}}
+            {{--        }, error(response){--}}
+            {{--            var error_li = '';--}}
+            {{--            $.each(response.responseJSON.errors, function(index, value){--}}
+            {{--                error_li += '<li>' + value + '</li>';--}}
+            {{--            });--}}
+            {{--            $('.validate_message').html(error_li);--}}
+            {{--            $('.error_message').removeAttr('style');--}}
+            {{--        }--}}
+            {{--    });--}}
+            {{--}--}}
+            {{--// saving data from product info tab--}}
+            {{--$('.save_product').click(function(){--}}
+            {{--    var title = $('.title').val();--}}
+            {{--    var content = $('.content').val();--}}
+            {{--    var data = {title, content};--}}
+            {{--    save_product(data);--}}
+            {{--    return $.ajax({--}}
+            {{--        url: "{{url('admin/products')}}",--}}
+            {{--        type: "GET",--}}
+            {{--    });--}}
+            {{--});--}}
         </script>
     @endpush
     <div class="box">
@@ -52,11 +65,9 @@
                 <ul class="validate_message">
                 </ul>
             </div>
-            <div class="alert alert-success success_message hidden" style="visibility: hidden">
-            </div>
             <ul id="nav-tabs" class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#product_info">{{__('product_info')}}<i class="fa fa-info"></i></a></li>
-                <li class="icon" style="display: none"><a data-toggle="tab" href="#department">{{__('department')}}<i class="fa fa-list"></i></a></li>
+{{--                <li class="icon" style="display: none"><a data-toggle="tab" href="#department">{{__('department')}}<i class="fa fa-list"></i></a></li>--}}
                 <li class="icon" style="display: none"><a data-toggle="tab" href="#product_setting">{{__('product_setting')}}<i class="fa fa-cog"></i></a></li>
                 <li class="icon" style="display: none"><a data-toggle="tab" href="#product_media">{{__('product_media')}}<i class="fa fa-photo"></i></a></li>
                 <li class="icon" style="display: none"><a data-toggle="tab" href="#product_size_weight">{{__('shippingInfo')}}<i class="fa fa-info-circle"></i></a></li>
@@ -64,8 +75,9 @@
                 <li class="icon" style="display: none"><a data-toggle="tab" href="#related_products">{{__('related_products')}}<i class="fa fa-list"></i></a></li>
             </ul>
             <div class="tab-content">
+                <input type="hidden" value="" class="saved_product_id"/>
                 @include('admin.products.tabs.product_info')
-                @include('admin.products.tabs.department')
+{{--                @include('admin.products.tabs.department')--}}
                 @include('admin.products.tabs.product_setting')
                 @include('admin.products.tabs.product_media')
 {{--                @include('admin.products.tabs.product_size_weight')--}}
@@ -73,7 +85,7 @@
 {{--                @include('admin.products.tabs.related_products')--}}
             </div>
             <hr />
-            <a href="#" class="btn btn-primary save_product">{{__('save')}}<i class="fa fa-floppy-o"></i></a>
+
         <!-- <div class="form-group">
                     {!! Form::label('name_ar', __('name_ar')) !!}
         {!! Form::text('name_ar', old('name_ar'), ['class' => 'form-control']) !!}

@@ -18,10 +18,8 @@
             <link href="{{asset('public/design/admin/css/style-ar.css')}}" rel="stylesheet" type="text/css" media="all">
         @endif
     <!-- jQuery -->
-
 {{--        <script src="{{ asset('public/design/admin/plugins/jquery/jquery.min.js') }}"></script>--}}
         <link type="text/css" href="{{asset('public/design/admin/css/dataTables.bootstrap.min.css')}}">
-
         <!-- Toastr -->
         <link rel="stylesheet" href="{{ asset('public/design/admin/css/toastr.min.css') }}">
         <!-- Jstree -->

@@ -66,8 +66,9 @@ class ProductsController extends Controller
      public function store(Request $request)
      {
          $attributes = [
-             'title'    => $request->data['title'],
-             'content'  => $request->data['content'],
+             'title'         => $request->data['title'],
+             'department_id' => $request->data['department_id'],
+             'content'       => $request->data['content'],
 
          ];
          $product = $this->product->store($attributes, $this->model);
@@ -371,8 +372,6 @@ class ProductsController extends Controller
         session()->flash('seccess', __('admin.delete_successfully'));
         return back();
     }
-
-
 
     /**
     * product images

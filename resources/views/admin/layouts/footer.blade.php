@@ -15,12 +15,10 @@
 </footer>
 </div>
 <!-- ./wrapper -->
-
 <!-- REQUIRED SCRIPTS -->
 <script src="{{ asset('public/design/admin/plugins/jquery/jquery.min.js') }}"></script>
 {{--<script src="{{ asset('public/design/admin/js/jquery-3.6.0.min.js') }}"></script>--}}
 <script src="{{ asset('public/design/admin/jstree/jstree.js') }}"></script>
-
 <!-- Bootstrap -->
 <script src="{{asset('public/design/admin/js/bootstrap.min.js')}}"> </script>
 <script src="{{ asset('public/design/admin/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -28,7 +26,6 @@
 <script src="{{ asset('public/design/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('public/design/admin/dist/js/adminlte.js') }}"></script>
-
 <!-- PAGE PLUGINS -->
 <!-- jQuery Mapael -->
 <script src="{{ asset('public/design/admin/plugins/jquery-mousewheel/jquery.mousewheel.js') }}"></script>

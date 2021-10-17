@@ -24,8 +24,9 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         return [
-                'title'   => 'required|min:3|max:50',
-                'content' => 'required|min:10|max:500',
+                'title'         => 'required|min:3|max:50',
+                'department_id' => 'required',
+                'content'       => 'required|min:10|max:500',
             ];
     }
 }

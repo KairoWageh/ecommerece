@@ -17,18 +17,20 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     public function store($attributes, $model)
     {
         $messages = [
-            'title.required'   => __('title_required'),
-            'title.min'        => __('title_min'),
-            'title.max'        => __('title_max'),
-            'content.required' => __('content_required'),
-            'content.min'      => __('content_min'),
-            'content.max'      => __('content_max'),
+            'title.required'         => __('title_required'),
+            'title.min'              => __('title_min'),
+            'title.max'              => __('title_max'),
+            'department_id.required' => __('department_id_required'),
+            'content.required'       => __('content_required'),
+            'content.min'            => __('content_min'),
+            'content.max'            => __('content_max'),
         ];
         $productRequest = new ProductRequest();
         $validator = Validator::make($attributes, $productRequest->rules(), $messages)->validate();
         $product = $model->create([
-            'title'     => $attributes['title'],
-            'content'   => $attributes['content'],
+            'title'         => $attributes['title'],
+            'department_id' => $attributes['department_id'],
+            'content'       => $attributes['content'],
         ]);
         if(isset($product)){
             $product->created_at = date('H:i Y-m-d', strtotime($product->created_at) );
