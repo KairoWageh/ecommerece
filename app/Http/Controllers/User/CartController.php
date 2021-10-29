@@ -42,9 +42,9 @@ class CartController extends Controller
                 'quantity' => +1,
                 'attributes' => array(
                     'photo' => $product->photo,
-                    'total_price' => $found->attributes->total_price + $found->price 
+                    'total_price' => $found->attributes->total_price + $found->price
                 )
-            ]);    
+            ]);
         }else{
             // if not found create new record for product into user cart
             \Cart::add(array(
@@ -54,13 +54,12 @@ class CartController extends Controller
                 'quantity'   => 1,
                 'attributes' => array(
                     'photo' => $product->photo,
-                    'total_price' => $product->price 
+                    'total_price' => $product->price
                 )
             ));
         }
-	    session()->flash('success', __('admin.record_added_successfully'));
+	    session()->flash('success', __('record_added_successfully'));
         return redirect()->back();
-	    // return redirect()->back()->with('message', 'Item added to cart successfully.');
 	}
 
     public function checkOut(){
@@ -78,14 +77,14 @@ class CartController extends Controller
             'phone_number'       => 'sometimes|nullable',
             'notes'              => 'sometimes|nullable'
         ], [], [
-            'first_name'         => __('user.first_name'),
-            'last_name'          => __('user.last_name'),
-            'address'            => __('user.address'),
-            'city'               => __('user.city'),
-            'country'            => __('user.country'),
-            'post_code'          => __('user.post_code'),
-            'phone_number'       => __('user.phone_number'),
-            'notes'              => __('user.notes')
+            'first_name'         => __('first_name'),
+            'last_name'          => __('last_name'),
+            'address'            => __('address'),
+            'city'               => __('city'),
+            'country'            => __('country'),
+            'post_code'          => __('post_code'),
+            'phone_number'       => __('phone_number'),
+            'notes'              => __('notes')
         ]);
         $order = Order::create([
             'order_number'      =>  'ORD-'.strtoupper(uniqid()),
@@ -119,9 +118,9 @@ class CartController extends Controller
                         'product_id'    =>  $product->id,
                         'quantity'      =>  $item->quantity,
                         'price'         =>  $item->getPriceSum()
-                    ]);  
-                    $order->items()->save($orderItem);  
-                }   
+                    ]);
+                    $order->items()->save($orderItem);
+                }
             }
         }
 
@@ -137,7 +136,7 @@ class CartController extends Controller
         //             "amount" => 300 * 100,
         //             "currency" => "usd",
         //             "source" => $_POST['stripeToken'], // obtained with Stripe.js
-        //             "description" => "Test payment." 
+        //             "description" => "Test payment."
         //     ) );
         //     session()->flash('success', __('Payment done successfully !'));
         //     return redirect('cart');
@@ -180,5 +179,5 @@ class CartController extends Controller
 
         return redirect('/');
     }
-    
+
 }

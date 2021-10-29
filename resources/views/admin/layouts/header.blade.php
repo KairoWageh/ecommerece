@@ -26,6 +26,7 @@
         <link rel="stylesheet" href="{{ asset('public/design/admin/jstree/themes/default/style.css') }}" />
 {{--        <link href="{{asset('public/design/admin/css/bootstrap.css')}}" rel="stylesheet" type="text/css" media="all">--}}
         <link type="text/css" href="{{asset('public/design/admin/css/bootstrap-datepicker.min.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('public/design/admin/css/dropzone.min.css')}}">
     </head>
     <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
         <div class="wrapper">

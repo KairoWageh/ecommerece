@@ -9,7 +9,7 @@ use App\Product;
 class ShopController extends Controller
 {
     public function index(){
-    	$products = Product::all()->where('status', 1)->where('product_status', 'active');
+    	$products = Product::all()->where('product_status', 'active');
     	return view('site.shop', compact('products'));
     }
 }

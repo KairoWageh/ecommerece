@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 class Admin extends Authenticatable
 {
     use Notifiable;
-    
+
 	protected $table = 'admins';
 
     /**
@@ -18,7 +18,7 @@ class Admin extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','status'
+        'name', 'email', 'password', 'linkedin_id', 'google_id', 'status'
     ];
 
     /**

@@ -86,7 +86,20 @@ class ProductsController extends Controller
          }
          return $data;
      }
+     public function save_product_settings(Request $request, $id){
+         $attributes = [
+             'price'          => $request->data['price'],
+             'stock'          => $request->data['stock'],
+             'start_at'       => $request->data['start_at'],
+             'end_at'         => $request->data['end_at'],
+//             'offer_price'    => $request->data['offer_price'],
+//             'start_offer_at' => $request->data['start_offer_at'],
+//             'end_offer_at'   => $request->data['end_offer_at'],
+             'product_status' => $request->data['product_status'],
 
+         ];
+         $product = $this->product->save_product_settings($this->model, $id, $attributes);
+     }
     /**
      * Display the specified resource.
      *
@@ -109,7 +122,7 @@ class ProductsController extends Controller
         $product = Product::find($id);
         // $title = __('admin.edit');
         // return view('admin.countries.edit', compact('country', 'title'));
-        return view('admin.products.product', ['title' => trans("create_or_edit_product", ['title' => $product->title]), 'product' => $product]);
+        return view('admin.products.edit', ['title' => trans("create_or_edit_product", ['title' => $product->title]), 'product' => $product]);
     }
 
 

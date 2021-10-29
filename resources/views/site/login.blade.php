@@ -36,6 +36,14 @@
 			</button>
 		</form>
 		<a href="#" class="bottom-text-w3ls">{{__('forgot_password')}}</a>
+        <div class="social-auth-links text-center mt-2 mb-3">
+            <a href="{{ url('facebook') }}" class="btn btn-block btn-primary">
+                <i class="fa fa-facebook-square mr-2"></i> {{__('sign_in_using_facebook')}}
+            </a>
+            <a href="#" class="btn btn-block btn-info">
+                <i class="fa fa-twitter-square mr-2"></i> {{__('sign_in_using_twitter')}}
+            </a>
+        </div>
 	</div>
 </div>
 <!-- //content -->

@@ -1,23 +1,36 @@
 @push('js')
-<link rel="stylesheet" type="text/css" href="{{asset('public/design/admin/css/dropzone.min.css')}}">
-<script type="text/javascript" src="{{asset('public/design/admin/js/dropzone.min.js')}}"></script>
+<?php if(isset($_COOKIE['product_id'])){
+ $product_id = ($_COOKIE['product_id']);
+ dd("0///////////".$product_id);
+ }else{
+ $product_id = 0;
+ }
+ ?>
+{{--<link rel="stylesheet" type="text/css" href="{{asset('public/design/admin/css/dropzone.min.css')}}">--}}
+{{--<script type="text/javascript" src="{{asset('public/design/admin/js/dropzone.min.js')}}"></script>--}}
 <script type="text/javascript">
     //Dropzone Configuration
     Dropzone.autoDiscover = false;
-	$(document).ready(function(){
+    var product_id = $('.saved_product_id').val();
+    $(document).ready(function(){
        <?php
         if(isset($product)){?>
-            var main_edit_url = {{'/ecommerce/public/admin/update/image/'.$product->id}};
+        // main image's upload url
+            var main_edit_url = {{asset('/ecommerce/public/admin/update/image/'.$product->id)}};
             var main_delete_url = {{ adminURL('/ecommerce/public/admin/delete/product/image/'.$product->id) }};
             var edit_url = {{ adminURL('/ecommerce/public/admin/upload/image/'.$product->id) }};
         <?php }else{?>
-            var main_edit_url = '/ecommerce/public/admin/update/image/';
-            var main_delete_url = '/ecommerce/public/admin/delete/product/image/';
+            var main_edit_url = "{{url('/public/admin/update/image/:product_id')}}";
+            main_edit_url = main_edit_url.replace(":product_id", product_id);
 
-            var edit_url = '/ecommerce/public/admin/update/image/';
+            var main_delete_url = "{{url('/public/admin/delete/product/image/:product_id')}}";
+            main_delete_url = main_delete_url.replace(":product_id", product_id);
+
+            var edit_url = "{{ url('/public/admin/update/image/:product_id') }}";
+        edit_url = edit_url.replace(':product_id', product_id);
 
         <?php }?>
-        var delete_url = '/ecommerce/public/admin/delete/product/image/';
+        var delete_url = 'ecommerce/public/admin/delete/product/image/';
 		$('#mainPhoto').dropzone({
 			url: main_edit_url,
 			paramName: 'file',
@@ -118,4 +131,6 @@
 	<hr />
 	<center><h3>{{__('photos')}}</h3></center>
 	<div class="dropzone" id="dropzonefileupload"></div>
+    <hr />
+    <a href="#" class="btn btn-primary save_product_media">{{__('save')}}<i class="fa fa-floppy-o"></i></a>
 </div>

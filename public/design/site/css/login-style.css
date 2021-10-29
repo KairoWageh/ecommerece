@@ -355,6 +355,9 @@ a.bottom-text-w3ls {
     letter-spacing: 1px;
 }
 
+div.social-auth-links{
+    padding: 2%;
+}
 /* //content */
 
 /* copyright */
@@ -501,3 +504,4 @@ a.bottom-text-w3ls {
 }
 
 /* //responsive */
+

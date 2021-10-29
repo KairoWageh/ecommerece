@@ -35,4 +35,9 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+    'facebook' => [
+        'client_id' => '604610517363151',
+        'client_secret' => '839c8af0bd0e99c03c2f3d0f8fcae6c6',
+        'redirect' => 'http://localhost/ecommerce/facebook/callback',
+    ],
 ];

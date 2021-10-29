@@ -21,6 +21,9 @@ Route::group(['prefix' => '', 'namespace' => 'User'], function(){
 	Route::post('/login', 'UserAuth@doLogin');
 	Route::get('/logout', 'UserAuth@logout')->name('logout');
 
+    // social login
+    Route::get('facebook', 'SocialController@facebookRedirect');
+    Route::get('facebook/callback', 'SocialController@loginWithFacebook');
 
 	 // change language of site using url
 	Route::get('/lang/{lang}', function($lang){

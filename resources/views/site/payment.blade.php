@@ -28,9 +28,9 @@
 				              <label for="example1-phone" data-tid="elements_examples.form.phone_label">Phone</label>
 				              <input id="example1-phone" data-tid="elements_examples.form.phone_placeholder" type="tel" placeholder="(941) 555-0123" required="" autocomplete="tel">
 				            </div>
-				        </fieldset>	
+				        </fieldset>
 			        </div> -->
-			          
+
 			          <!-- <fieldset>
 			            <div class="row">
 			              <div id="example1-card"></div>
@@ -71,7 +71,7 @@
 
 	  	<!-- <button>Submit Payment</button> -->
 	<!-- </form> -->
-<!-- </div> --> 
+<!-- </div> -->
 <div class="clearfix"></div>
 <!-- <div class="cell example example1" id="example-1"> -->
 	<!-- <form accept-charset="UTF-8" class="require-validation"
@@ -147,7 +147,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="product-bit-title text-center">
-                        <h2>{{__('user.checkout')}}</h2>
+                        <h2>{{__('checkout')}}</h2>
                     </div>
                 </div>
             </div>
@@ -173,45 +173,45 @@
                             <article class="card-body">
                                 <div class="form-row">
                                     <div class="col form-group">
-                                        <label>{{__('user.first_name')}}</label>
+                                        <label>{{__('first_name')}}</label>
                                         <input type="text" class="form-control" name="first_name">
                                     </div>
                                     <div class="col form-group">
-                                        <label>{{__('user.last_name')}}</label>
+                                        <label>{{__('last_name')}}</label>
                                         <input type="text" class="form-control" name="last_name">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>{{__('user.address')}}</label>
+                                    <label>{{__('address')}}</label>
                                     <input type="text" class="form-control" name="address">
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <label>{{__('user.city')}}</label>
+                                        <label>{{__('city')}}</label>
                                         <input type="text" class="form-control" name="city">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label>{{__('user.country')}}</label>
+                                        <label>{{__('country')}}</label>
                                         <input type="text" class="form-control" name="country">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group  col-md-6">
-                                        <label>{{__('user.post_code')}}</label>
+                                        <label>{{__('post_code')}}</label>
                                         <input type="text" class="form-control" name="post_code">
                                     </div>
                                     <div class="form-group  col-md-6">
-                                        <label>{{__('user.phone_number')}}</label>
+                                        <label>{{__('phone_number')}}</label>
                                         <input type="text" class="form-control" name="phone_number">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>{{__('user.email')}}</label>
+                                    <label>{{__('email')}}</label>
                                     <input type="email" class="form-control" name="email" value="{{ auth()->user()->email }}" disabled>
-                                    <small class="form-text text-muted">{{__('user.never_share')}}</small>
+                                    <small class="form-text text-muted">{{__('never_share')}}</small>
                                 </div>
                                 <div class="form-group">
-                                    <label>{{__('user.other_notes')}}</label>
+                                    <label>{{__('other_notes')}}</label>
                                     <textarea class="form-control" name="notes" rows="6"></textarea>
                                 </div>
                             </article>
@@ -331,7 +331,7 @@
  //     });
 
  //     // Handle form submission
-     
+
  //     var form = document.getElementById('payment-form');
  //     form.addEventListener('submit', function(event) {
  //           event.preventDefault();
@@ -381,7 +381,7 @@
 		        .removeClass('hide')
 		        .find('.alert')
 		        .text(response.error.message);
-		    } 
+		    }
 		else {
 	    	// token contains id, last4, and card type
 	      	var token = response['id'];
@@ -421,14 +421,14 @@
 	    	console.log('not cccccccccccccccccccc')
 	    }
 	  });
-	  
+
 	})
 </script> -->
 
 
 
 <!-- <script type="text/javascript">
-	
+
 	$(function() {
 		$('form.require-validation').bind('submit', function(e) {
 		    var $form         = $(e.target).closest('form'),
@@ -440,7 +440,7 @@
 		        valid         = true;
 
 		        console.log('form:::'+$form);
- 
+
 			    $errorMessage.addClass('hide');
 			    $('.has-error').removeClass('has-error');
 			    $inputs.each(function(i, el) {
@@ -466,7 +466,7 @@
 			});
 		});
 	});
-	
+
 	function stripeResponseHandler(status, response) {
 		//console.log('response here::::'+response)
 	    if (response.error) {

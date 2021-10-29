@@ -6,14 +6,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="product-bit-title text-center">
-                        <h2>{{ __('user.shop') }}</h2>
+                        <h2>{{ __('shop') }}</h2>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
-    
+
+
     <div class="single-product-area">
         <div class="zigzag-bottom"></div>
         <div class="container">
@@ -32,21 +32,21 @@
 							@else
 								<ins>${{$product->price}}</ins>
 							@endif
-                        </div>  
-                        
+                        </div>
+
                         <div class="product-option-shop">
                             <!-- <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="/canvas/shop/?add-to-cart=70">{{ __('user.add_to_cart') }}</a> -->
 
 	                        <a href="{{route('cart.add', $product->id)}}" class="add_to_cart_button">
-	                        	<i class="fa fa-shopping-cart"></i> 
-								{{__('user.add_to_cart')}}
+	                        	<i class="fa fa-shopping-cart"></i>
+								{{__('add_to_cart')}}
 							</a>
-                        </div>                       
+                        </div>
                     </div>
                 </div>
                 @endforeach
             </div>
-            
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="product-pagination text-center">
@@ -68,7 +68,7 @@
                               </a>
                             </li>
                           </ul>
-                        </nav>                        
+                        </nav>
                     </div>
                 </div>
             </div>

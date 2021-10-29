@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repository\contracts;
+namespace App\Repository\contracts\User;
 
-interface ProductRepositoryInterface{
+interface UserRepositoryInterface{
 
     /**
      * @param $attributes
@@ -12,12 +12,12 @@ interface ProductRepositoryInterface{
     public function store($attributes, $model);
 
     /**
-     * @param $model
-     * @param $id
+     * @param $type
      * @param $attributes
+     * @param $model
      * @return mixed
      */
-    public function save_product_settings($model, $id, $attributes);
+    public function social_login($type, $attributes, $model);
 
     /**
      * @param $attributes

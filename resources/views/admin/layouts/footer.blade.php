@@ -51,6 +51,7 @@
 <script src="{{asset('public/design/admin/js/bootstrap-datepicker.min.js')}}"> </script>
 <!-- Toastr -->
 <script src="{{ asset('public/design/admin/js/toastr.min.js') }}"></script>
+<script type="text/javascript" src="{{asset('public/design/admin/js/dropzone.min.js')}}"></script>
 @stack('js')
 @stack('css')
 </body>

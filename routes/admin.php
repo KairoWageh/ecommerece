@@ -12,6 +12,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
 	Route::get('reset/password/{token}', 'AdminAuth@resetPassword');
 	Route::post('reset/password/{token}', 'AdminAuth@resetPasswordPost');
 
+
+
 	// change language of site using url
 	Route::get('lang/{lang}', function($lang){
 		session()->has('lang')? session()->forget('lang'): '';
@@ -89,6 +91,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
 		Route::post('delete/image', 'ProductsController@delete_file');
 		Route::post('products/{id}/load/shippingInfo', 'ProductsController@loadShippingInfo');
 		Route::post('products/search', 'ProductsController@search_product');
+        Route::post('products/{id}/saveProductSettings', 'ProductsController@save_product_settings');
 
 		// site settings
 		Route::get('settings', 'SettingsController@settings')->name('admin.settings');

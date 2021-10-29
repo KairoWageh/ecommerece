@@ -40,6 +40,25 @@ class AdminRepository extends BaseRepository implements AdminRepositoryInterface
         }
         return $admin;
     }
+
+    /**
+     * @param $type
+     * @param $attributes
+     * @param $model
+     * @return mixed|void
+     */
+    public function social_login($type, $attributes, $model)
+    {
+        $attributes['password'] = bcrypt($attributes['password']);
+        $admin = $model->create([
+            'name'     => $attributes['name'],
+            'email'    => $attributes['email'],
+            $type      => $attributes[$type],
+            'password' => $attributes['password'],
+        ]);
+        return $admin;
+    }
+
     /**
      * @param $attributes
      * @param $model

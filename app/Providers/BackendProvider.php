@@ -53,6 +53,11 @@ class BackendProvider extends ServiceProvider
             'App\Repository\contracts\UserRepositoryInterface',
             'App\Repository\sql\UserRepository'
         );
+
+        $this->app->bind(
+            'App\Repository\contracts\User\UserRepositoryInterface',
+            'App\Repository\sql\User\UserRepository'
+        );
     }
 
     /**
